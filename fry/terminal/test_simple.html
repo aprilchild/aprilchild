@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>AC Fry - Terminal component</title>
+	<link href="../mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+
+	<script type='text/javascript' src="../ac.fry.js"></script>
+	<script type='text/javascript' src="../ac.fry.keyboard.js"></script>
+	<script type='text/javascript' src="ac.terminal.js"></script>
+	<script type='text/javascript'>
+		function main()
+		{
+			var terminal = $new(ac.terminal.Window);
+			terminal.show($('terminal'));
+			terminal.setInputPrefix('Terminal Fry$ ');
+			terminal.setSnippets({sc:'script/console', sg:'script/generate ', sgc:'script/generate controller ', sgm:'script/generate model ', sgs:'script/generate scaffold ', sgr:'script/generate resource ', sgsr:'script/generate scaffold_resource ', rdm:'rake db:migrate', rdmv:'rake db:migrate VERSION='});
+			
+			terminal.addReadListener(function(component, code, mask, callback)
+			{
+				if (1 == (mask & 1))
+				{
+					switch (code)
+					{
+						case 13:
+						{
+							component.setInputPrefix(new Date() + ' $: ');
+							var line = component.readLine();
+							if (/\^MARKUP\^/.test(line))
+							{
+								component.writeLine(line, true);
+							}
+							else
+							{
+								output_line = '^SX-2^' + line + '^/SX^';
+								component.writeLine(output_line, true);
+								var result = "Error evaluating: ?".embed(line);
+								try
+								{
+									eval('result=?'.embed(line));
+								}
+								catch (e)
+								{
+									result += ' [?]'.embed(e.message);
+								}
+								component.writeLine(''+result, true);
+							}
+							component.addToHistory(line);
+						};break;
+						case 9:
+						{
+							if ('' == component.readLine())
+							{
+								component.writeSnippetsHelp();
+							}
+						}
+					}
+				}
+				callback(0);
+			});
+			terminal.addSpecialCommandsListener(function(component, command)
+			{
+				if (ac.terminal.SPECIAL_COMMAND_INTERRUPT == command)
+				{
+					component.writeLine("(Ctrl+C) pressed. Interruption will follow.");
+				}
+			});
+			terminal.writeLine("Hello from Terminal! How are you today?");
+		}
+		
+	</script>
+	<style type="text/css">
+	.ac-terminal
+	{
+		background:#4872A6;
+		color:#fff;
+	}
+	.ac-terminal .output pre, .ac-terminal .output pre span, .ac-terminal pre.input, .ac-terminal pre.input span
+	{
+		font: 11px Consolas, Monaco, 'Courier New';
+		line-height:13px;
+		margin:0;
+		margin-top:1px;
+		white-space: pre-wrap;       /* css-3 */
+		white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+		white-space: -pre-wrap;      /* Opera 4-6 */
+		white-space: -o-pre-wrap;    /* Opera 7 */
+		word-wrap: break-word;       /* Internet Explorer 5.5+ */		
+	}
+	.ac-terminal pre.input span span.selection
+	{
+		background:lime;
+		color:#333;
+	}
+	.ac-terminal .caret
+	{
+		background:#000;
+		opacity:0.4;
+		filter:Alpha(opacity=40);
+	}
+	/* highlighting output */
+	.ac-terminal .output pre span.sx_1
+	{
+		color:red;
+	}
+	.ac-terminal .output pre span.sx_2
+	{
+		color:yellow;
+	}
+	</style>
+</head>
+
+<body onload="main()" onclick="ac.terminal.setActiveComponent(null)">
+	<h1 class="logo"><a href="../test/index.html">Back to index page</a>AC Fry - JavaScript Framework - Terminal Component</h1>
+	
+	<p class="description">
+		The terminal evaluates JavaScript code. This is just an example of usage, you would probably call external services and receive responses in actual application. Just for fun, if you have no idea what to enter, write <strong>1+1</strong> and see the result :-).
+	</p>
+	
+	<p class="description">
+		In order to start typing, focus the terminal by clicking on it. Click anywhere outside to stop processing.
+	</p>
+	
+	<div id="terminal" style="margin:70px;width:700px;height:300px;border:1px solid black"></div>
+
+	<p class="description">
+		When sending commands back to rendering using <strong>component.writeLine</strong>, you can use built-in capabilities for highlighting. You can have unlimited number of highlighting options, simply send <strong>^SX-N^text^/SX^</strong> which will translate on output to <strong>&lt;span class="sx_N"&gt;text&lt;/span&gt;</strong>. Of course you should style these constructs using declaration: <strong>.ac-terminal .output pre span.sx_1{...}</strong>. Try entering this: <strong>^SX-1^Hello^/SX^</strong> and you should see Hello in red. Obviously this highlighting addition is done by your application code on behalf of normal user. If you want to output pure HTML code to the output area, put <strong>^MARKUP^</strong> in the beginning of your message (eg. <strong>component.writeLine('^MARKUP^&lt;p&gt;Hello world! &lt;a href="link"&gt;Click here&lt;/a&gt;&lt;/p&gt;'</strong>).
+	</p>
+	
+	<p class="description">
+		Terminal also supports snippets - or command shortcuts if you will. You import your snippets using <strong>setSnippets({})</strong> method. See the source of this page for definition of parameters. Snippets help is auto-generated when user presses <strong>Tab key</strong> on empty line. To use a snippet, simply enter its shortcut code and press <strong>Tab</strong>. Try to enter: <strong>sc</strong> and press Tab to see it for yourself.
+	</p>
+
+</body>
+</html>

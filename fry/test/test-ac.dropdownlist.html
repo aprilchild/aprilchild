@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+			/*
+			 * AC Fry - JavaScript Framework v1.0
+			 * DropDownList widget - Test/Example file
+			 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+			 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - Test/Example - DropDownList widget</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/test/test.ac.dropdownlist.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		
+        
+        <script type="text/javascript">
+
+        	var client =
+        	{
+        		conf:
+        		{
+					locale:'cs',
+        			progid:'test-ac.dropdownlist',
+        			fry:
+        			{
+        				backendURL : '',
+						theme:'apple'
+        			}
+        		},
+        		
+        		onload:function()
+        		{
+        			$include('test/test-locale-common.js');
+        			$include('widget/ac.dropdownlist.js');
+
+					$include('test/test-mvc-ac.dropdownlist.js');
+        		},
+
+				onstart:function()
+				{
+					// creating a widget, we use it for color selection
+					var items = 
+					[
+						{value:'Red', key:'#f00'},
+						{value:'White', key:'white'},
+						{value:'Pink', key:'pink'},
+						{value:'Blue', key:'#00f'},
+						{value:'Magenta', key:'magenta'},
+						{value:'Yellow', key:'yellow'},
+						{value:'Teal', key:'teal'},
+						{value:'Green', key:'#0f0'}
+					];
+					var widget = $new
+					(
+						ac.DropDownListWidget,
+						$new(ExampleModel, items),
+						$new(ExampleView, {isWritable:false, width:200}),
+						$new(ExampleController)
+					);
+					widget.show($('pane-1').t(''));
+					
+					// creating a widget, we use it for font families selection
+					var items = 
+					[
+						{value:'Lucida Grande, 18px', key:'18px \'Lucida Grande\''},
+						{value:'Times, 11px', key:'11px Times'},
+						{value:'Courier, 14px', key:'14px Courier'}
+					];
+					// note different view object - the rendering slightly differs for color and fonts lists
+					var widget = $new
+					(
+						ac.DropDownListWidget,
+						$new(ExampleModel, items),
+						$new(ExampleFontView, {isWritable:false, width:250}),
+						$new(ExampleController)
+					);
+					// showing the drop-down list
+					widget.show($('pane-2').t(''));
+					
+					// creating `classic` writable drop-down list
+					var items = 
+					[
+						'smaller', 'small', 'medium', 'large', 'extra-large'
+					];
+					// note different view object - the rendering slightly differs for color and fonts lists
+					var widget = $new
+					(
+						ac.DropDownListWidget,
+						$new(ExampleModel, items),
+						$new(ExampleFontView, {isWritable:true, width:200}),
+						$new(ExampleController)
+					);
+					// showing the drop-down list
+					widget.show($('pane-3').t(''));
+					
+				}
+        		
+        	};
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+
+	</head>
+	<body>
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> DropDownList widget</h1>
+		
+		<p class="description">
+			This is a DropDownList widget. It allows more than classic combo box implemented in current browsers.
+		</p>
+		
+		<a class="redraw" href="javascript:client.onstart()">Redraw</a>
+		
+		<div class="example">
+			<div class="test" id="pane-1" style="position:absolute;top:20px;left:50px;width:200px;height:19px;"></div>
+			<div class="test" id="pane-2" style="position:absolute;top:20px;left:300px;width:250px;height:19px;"></div>
+			<div class="test" id="pane-3" style="position:absolute;top:20px;left:600px;width:200px;height:19px;"></div>
+			<div id="result" style="width:auto;border:1px solid #888;margin-top:80px;padding:8px;border-right:0;border-left:0">
+		</div>
+	
+	</body>
+</html>

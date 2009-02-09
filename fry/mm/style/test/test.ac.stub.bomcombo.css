@@ -1,0 +1,205 @@
+/*
+	UI CSS Declaration
+
+	AC Fry - BrowserOutlineViewMapGraphCombo stub widget customization
+*/
+
+
+
+.rbox
+{
+	background:#DFDFDF;
+}
+.rbox .inner
+{
+	width:auto;
+	margin:0 9px 0 9px;
+}
+.rbox .up-left
+{
+	width:auto;
+	height:9px;
+	background-image:url(../../i/theme/apple/rbox.up-left.gif);
+	background-repeat:no-repeat;
+	background-color:white;
+	font:1px arial;
+}
+.rbox .up
+{
+	background-color:#dfdfdf;
+	height:9px;
+	float:right;
+	font:1px arial;
+}
+.rbox .up-right
+{
+	background-image:url(../../i/theme/apple/rbox.up-right.gif);
+	height:9px;
+	width:10px;
+	float:right;
+	font:1px arial;
+}
+.rbox .down-left
+{
+	width:auto;
+	height:9px;
+	background-image:url(../../i/theme/apple/rbox.down-left.gif);
+	background-repeat:no-repeat;
+	background-color:white;
+	font:1px arial;
+}
+.rbox .down
+{
+	background-color:#dfdfdf;
+	height:9px;
+	float:right;
+	font:1px arial;
+}
+.rbox .down-right
+{
+	background-image:url(../../i/theme/apple/rbox.down-right.gif);
+	height:9px;
+	width:10px;
+	background-color:white;
+	float:right;
+	font:1px arial;		
+}
+
+.rbox .inner strong
+{
+	color:#000;
+	font-size:10px;
+}
+.rbox .inner span
+{
+	font-size:9px;
+}
+
+.rbox-active
+{
+	background:#82A0F7;
+}
+.rbox-active .inner
+{
+	background:#82A0F7
+}
+.rbox-active .up-left
+{
+	width:auto;
+	height:9px;
+	background-image:url(../../i/theme/apple/rbox-active.up-left.gif);
+	background-repeat:no-repeat;
+	background-color:white;
+}
+.rbox-active .up
+{
+	background-color:#82A0F7;
+	height:9px;
+	float:right;
+}
+.rbox-active .up-right
+{
+	background-image:url(../../i/theme/apple/rbox-active.up-right.gif);
+	height:9px;
+	width:10px;
+	background-color:white;
+	float:right;
+}
+.rbox-active .down-left
+{
+	width:auto;
+	height:9px;
+	background-image:url(../../i/theme/apple/rbox-active.down-left.gif);
+	background-repeat:no-repeat;
+	background-color:white;
+}
+.rbox-active .down
+{
+	background-color:#82A0F7;
+	height:9px;
+	float:right;
+}
+.rbox-active .down-right
+{
+	background-image:url(../../i/theme/apple/rbox-active.down-right.gif);
+	height:9px;
+	width:10px;
+	background-color:white;
+	float:right;
+}
+.rbox-active strong
+{
+	color:#fff;
+	font-size:10px;
+}
+.rbox-active span
+{
+	color:#555;
+	font-size:9px;
+}
+
+
+.rbox-midactive
+{
+	background:#8D8D8D;
+}
+.rbox-midactive .inner
+{
+	background:#8D8D8D;
+}
+.rbox-midactive .up-left
+{
+	width:auto;
+	height:9px;
+	background-image:url(../../i/theme/apple/rbox-midactive.up-left.gif);
+	background-repeat:no-repeat;
+	background-color:white;
+}
+.rbox-midactive .up
+{
+	background-color:#8D8D8D;
+	height:9px;
+	float:right;
+}
+.rbox-midactive .up-right
+{
+	background-image:url(../../i/theme/apple/rbox-midactive.up-right.gif);
+	height:9px;
+	width:10px;
+	background-color:white;
+	float:right;
+}
+.rbox-midactive .down-left
+{
+	width:auto;
+	height:9px;
+	background-image:url(../../i/theme/apple/rbox-midactive.down-left.gif);
+	background-repeat:no-repeat;
+	background-color:white;
+}
+.rbox-midactive .down
+{
+	background-color:#8D8D8D;
+	height:9px;
+	float:right;
+}
+.rbox-midactive .down-right
+{
+	background-image:url(../../i/theme/apple/rbox-midactive.down-right.gif);
+	height:9px;
+	width:10px;
+	background-color:white;
+	float:right;
+}
+.rbox-midactive strong
+{
+	color:#444;
+	font-size:10px;
+}
+.rbox-midactive span
+{
+	color:#ddd;
+	font-size:9px;
+}
+
+

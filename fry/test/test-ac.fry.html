@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * Test/Example Page
+		 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>Fry 1.0 - The Colorful JavaScript Library - Core features overview</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		
+		<script type="text/javascript" src="test.js"></script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+        <script type="text/javascript">
+
+		tests = 
+		[
+			{
+				title:'Simple 01',
+				note:'Setting up coordinates + dimension + adding some styles.',
+				keepPrevious:false,
+				code:function()
+				{
+					with ( $('test-div-node').x(100).y(400).w(400).h(130).s() )
+					{
+						color = 'red';
+						background = 'yellow';
+						border = '1px solid red';
+					}
+				}
+			},
+			{
+				title:'Simple 02',
+				note:'Another way of setting node properties, example of String.embed method.',
+				keepPrevious:true,
+				code:function()
+				{
+					$('test-div-node').o(0.5);
+					$('test-div-node').s('color:green; text-decoration:underline');
+					$('test-div-node').t('Example of ? embed mechanism for ? using ?.'.embed('anonymous', 'strings', 'rich @lib @some'.embed({lib:'AC Fry', some:'Library'})));
+				}
+			},
+			{
+				title:'Simple animation',
+				note:'This example is `made-up`. Normally you would be using much more convenient Fry animation API. Also the timing is deliberately slowed down so that you can view the action in slow-motion.',
+				keepPrevious:false,
+				code:function()
+				{
+					$runinterval(1, 10, 300, function(step)
+					{
+						$('test-div-node').x(step*40).y(400-step*10).w(step*40).s('background:white;border:?px solid red;padding:?px;font-size:?px'.embed(2*step, 4*step, 10+step)).t('Currently in step: ?'.embed($_(step).surroundTag('strong'))).o(0.5+step/20);						
+					})
+				}
+			},
+			{
+				title:'Node concatenation',
+				note:'Simple appending a node in one pipe line.',
+				keepPrevious:false,
+				code:function()
+				{
+					$('test-div-node').a($$()).t('Inner DIV').s('border:3px dashed blue;background:green;margin:10px;color:cyan');
+				}				
+			},
+			{
+				title:'More of the node concatenation',
+				note:'Appending several nodes.',
+				keepPrevious:false,
+				code:function()
+				{
+					$('test-div-node').a($$()).t('Inner DIV').s('border:1px dashed magenta;');
+					var node = $$('strong');
+					node.p($('test-div-node').fc()).t('This is a STRONG node appended into first Inner DIV.');
+				}				
+			},
+			{
+				title:'Node filter/traverse',
+				note:'Shows various ways of traversing and accessing nodes in a tree.',
+				keepPrevious:false,
+				code:function()
+				{
+					// let's create some hierarchy first, table is a fine example
+					$('test-div-node').a($$('table')).s('border:2px solid black').a($$('tbody'));
+					$dotimes( 10, function(row)
+					{
+						with ( $('test-div-node').g('tbody').a($$('tr')) )
+						{
+							$dotimes( 5, function(col)
+							{
+								a($$('td')).t('cell at row: ? and col: ?'.embed(row, col));
+							});
+						}
+					});
+					// let's access second TDs in all rows
+					$foreach ( $('test-div-node').g('table/tr/td:1'), function(node)
+					{
+						node.s('font-weight:bold;background:gray');
+					});
+					// now for the single TD lookup
+					$('test-div-node').g('tr:3/td:4').s('background:yellow');
+					// if we have the query in array (sometimes more convenient), we can use it as parameter too
+					$('test-div-node').g([['table'],['tr', 6]]).s('background:red').g([['td',3]]).t('Found IT!');
+					// now let's try something combined
+					$foreach ( $('test-div-node').g('table:0/tr'), function(node, counter)
+					{
+						if ( 2 < counter && 6 > counter )
+						{
+							$foreach ( node.g('td'), function(node)
+							{
+								node.t('changed').s('color:magenta');
+							});
+						}
+					});
+					// using `gp` (getparent) method. while `p` returns direct parent, using `gp` one can lookup any parent back to document element using query path
+					var child = $('test-div-node').g('tr:3/td:4');
+					var table = child.gp('tr/table');
+					table.s('border:10px solid magenta');
+					
+					// let's test it a little bit more
+					var node = $('test-div-node').a($$()).t('Outer container.');
+					$dotimes( 10, function(counter)
+					{
+						node = node.s('margin:10px;border:1px solid blue').t('level: ?'.embed(1+counter)).a($$());
+					});
+					node.t('TOP').s('background:red;margin:20px');
+					
+					// 4 levels below (using short syntax instead of div/div/div/div) will render yellow
+					node.gp('div:4').s('background:yellow');
+					// 6 levels below (1+3+2) will render cyan
+					node.gp('div/div:3/div:2').s('background:cyan');
+					// 8 levels below will render magenta - we can specify asterisk which will mean ANY node
+					node.gp('*:8').s('background:magenta');
+					
+				}
+			},
+			{
+				title:'Lang - combo operations',
+				note:'Manipulation with combo boxes.',
+				keepPrevious:false,
+				code:function()
+				{
+					$dotimes( 4, function(i)
+					{
+						$combofill( $('test-div-node').a($$('select')).i('combo-?'.embed(i)), function(counter)
+						{
+							return 60 <= counter ? false : [counter, 'Item: ?'.embed(counter)];
+						
+							}).e('change', function(evt)
+							{
+								evt.$.p().a($$().t('Selected option with value: ? for ?'.embed(evt.$.$.value, evt.$.i())));
+								
+							}).s('border:2px solid red;background:yellow').p().
+								a($$()).t('resulting width: ?, number of items: ?'.embed( $('test-div-node').fc().w(), $('test-div-node').fc().$.options.length));
+					});
+				}
+			},
+			{
+				title:'Lang - dotimes, table renderer, events',
+				note:'Using dotimes language construct we render table rows and cells. Each cell has a listener attached that might be dynamically removed.',
+				keepPrevious:false,
+				code:function()
+				{
+					$('test-div-node').a($$('table')).s('border:2px solid black').a($$('tbody'));
+					$dotimes( 10, function(row)
+					{
+						with ( $('test-div-node').g([['tbody',0]]).a($$('tr')) )
+						{
+							$dotimes( 5, function(col)
+							{
+								a($$('td')).t('cell at row: ? and col: ?'.embed(row, col)).s('color:red;border:1px solid red').e('click',function(evt)
+								{
+									evt.$.o( 1.0 == evt.$.o() ? 0.6 : 1.0).
+										s({
+											color:('red'==evt.$.s().color ? 'cyan':'red'),
+											border:'1px solid green'
+										});
+									if ( 0.2 > Math.random() )
+									{
+										evt.$.t('Listener removed');
+										evt.removeListener();
+									}
+									evt.stop();
+								});
+							});
+						}
+					});
+				}
+			}
+		];
+
+
+		
+        </script>
+
+	</head>
+	<body onload="main()">
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> Core features overview</h1>
+		
+		<p class="description">
+			Fry uses simplistic notation attempting to ease the most tedious language constructs. The usual DOM element node is wrapped inside the extensible ACNode object providing interface to most common node operation techniques. Calls to such operations result in the original object, therefore 
+			you can use multiple calls on one line. Each operation comes with the minimalistic name inherited from its original purpose. Even though it may seem a 
+			little bit difficult at first, it's actually very easy to learn and use. Shortcuts such as <strong>a</strong>(ppend node), <strong>p</strong>(arent node), <strong>s</strong>(tyle), <strong>w</strong>(idth) and so on work in two accessor modes. If you call the method 
+			without parameters, it's usually a <strong>getter</strong>, while passing arguments results in <strong>setter</strong> being called. 
+			The sweet thing is that in both cases the object is returned for another pipe method to call (eg. <strong>var node = $('node-id').w(200).h(100)</strong> would result in the contens of the node object being stored in the variable <strong>node</strong> while concurrently resizing the node width and height). Since it's implemented using the open ACNode interface, one can easily extend it and add any number of convenient methods to the node and use it as some kind of macro language of its own. In Fry this is how the drag and drop interfaces are bundled into default nodes, resulting in comfort way of working with draggable/droppable nodes.
+		</p>
+		
+		<div style="width:600px;margin-left:300px">
+		
+		<form style="margin:20px">
+			<input id="button-prev" type="button" value="Previous test" /> 
+			<input id="button-run" type="button" value="Run test" /> 
+			<input id="button-next" type="button" value="Next test" /> 
+			Jump to: <select id="combo-tests" onchange='initTest(this.options[this.selectedIndex].value)'></select>
+		</form>
+		
+		<h2 id="title"></h2>
+		<p id="note"></p>
+		
+		<pre id="code" ></pre>
+
+		<div id="test-area">
+			<div id="test-div-node" style="position:absolute">A test DIV node...</div>
+		</div>
+		
+		</div>
+		
+	
+	</body>
+</html>

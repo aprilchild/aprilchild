@@ -1,0 +1,14 @@
+/*
+	UI CSS Declaration
+
+	AC Fry - Tree widget customization
+*/
+
+.acw-tree .header strong
+{
+	color:#666;
+}
+.acw-tree .header.active strong
+{
+	color:#ddd;
+}

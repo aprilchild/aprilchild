@@ -1,0 +1,29 @@
+/*
+	UI CSS Declaration
+
+	AC Fry - TabPane widget customization
+*/
+
+.acw-tabpane.tabpane-example .titles
+{
+	background:#f0f0f0;
+}
+
+.acw-tabpane.tabpane-example .titles .inner td .button-close
+{
+	background-image:url(../../i/theme/ac/button-round.close.gif);
+	background-repeat:no-repeat;
+}
+
+.acw-tabpane.tabpane-example .titles .active 
+{
+	background:#fff;
+	color:#a00;
+}
+
+.acw-tabpane.tabpane-example .titles .inactive
+{
+	background:#fff;
+	color:#999;
+	border-color:#fff;
+}

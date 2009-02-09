@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+			/*
+			 * AC Fry - JavaScript Framework v1.0
+			 * Browser widget - Test/Example file
+			 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+			 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - Advanced Keyboard Handler Features</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+
+
+		<script type="text/javascript" src="../ac.fry.js"></script>
+		<script type="text/javascript" src="../ac.fry.keyboard.js"></script>
+		<!--<script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>-->
+	
+		<script type="text/javascript">
+
+
+
+		var tx_processing = null;
+
+		function clear_processing()
+		{
+			tx_processing.value = '';
+		}
+		
+		function allow_editation()
+		{
+			fry.keyboard.allowTextfieldsEditation();
+		}
+
+		function disable_editation()
+		{
+			fry.keyboard.disableTextfieldsEditation();
+		}
+		
+		function main()
+		{
+			tx_processing = document.getElementById('processing');
+			fry.keyboard.initialize();			
+			
+			setInterval(function()
+			{
+				while (true && 'undefined' != typeof fry['keyboard'])
+				{
+					var key = fry.keyboard.popKey();
+					if (key)
+					{
+						var value = '';
+						if (fry.keyboard.CONTROL_CODE == (key[1] & fry.keyboard.CONTROL_CODE))
+						{
+							// control code
+							if (fry.keyboard.PASTE == (key[1] & fry.keyboard.PASTE))
+							{
+								// clipboard paste
+								value = '*CB*Paste: ' + fry.keyboard.clipboard.pastedContent;
+							}
+							else
+							{
+								value = '*CC*: ' + key[0];
+							}
+						}
+						else
+						{
+							value = String.fromCharCode(key[0]);
+						}
+						value = tx_processing.innerHTML + ' … ' + value;
+						tx_processing.innerHTML = value;
+					}
+					else
+					{
+						break;
+					}
+				}
+			}, 50);			
+			
+		}
+
+		</script>
+	</head>
+	<body onload="main()">
+
+		<h1 class="logo"><a href="index.html">Back to index page</a> Advanced Keyboard Handler Features</h1>
+	
+		<p class="description">
+			Fry provides universal (works accross any browser) API for handling keyboard events. However it's not always desirable to use global keyboard handling all the time.
+		</p>
+		<p class="description">
+			Fry provides way how to adjust the keyboard handling programmatically. You can use two methods <strong>fry.keyboard.stop()</strong> and <strong>fry.keyboard.start()</strong> to change the support on the fly. Along with starting and stopping it manually, there's also a useful helper method called <strong>fry.keyboard.allowTextfieldsEditation()</strong> that needs to be triggerd only if you'are creating new text field boxes (input type="text|password" and textarea). For those fields, normal text input behaviour will be restored. See the code for more.
+		</p>
+
+		<div id="processing" style="width:80%;height:120px;padding:4px;border:1px solid #888;margin-left:40px;margin-top:20px"></div>
+		<hr/>
+		<a style="margin-left:40px" href="javascript:clear_processing()">Clear output</a>
+		
+		<div style="margin:40px;">
+			Now let's create 3 text fields.
+			
+			<br/>
+			<form>
+			Enter username: <input type="text" value="" />, password: <input type="password" />
+			<br/>And the reason being here ;)
+			<br/>
+			<textarea rows="8" cols="60"></textarea>
+			</form>
+			
+			<br/>
+			Right now you can't edit the form. The reason is any key event is handled by Fry globally.
+			<br/>
+			<br/>
+			You can <a href="javascript:fry.keyboard.stop()">stop it</a> and you'll be back in normal page mode. However, you probably don't want to bother with manual stopping and restarting, so <a href="javascript:fry.keyboard.start()">start it</a> again and use the following links.
+			<br/>
+			<br/>
+			<a href="javascript:allow_editation()">Allow fields editation</a> | <a href="javascript:disable_editation()">Disable fields editation</a>
+			
+		</div>
+		
+	</body>
+</html>

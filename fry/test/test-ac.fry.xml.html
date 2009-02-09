@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * Test/Example Page for XML extension
+		 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - JavaScript Framework</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		
+		<script type="text/javascript" src="test.js"></script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.xml.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+        <script type="text/javascript">
+
+		tests = 
+		[
+			{
+				title:'Create document',
+				note:'Creating simple XML document and adding some nodes into it. Show various ways of creating new document.',
+				keepPrevious:false,
+				code:function()
+				{
+					var m_number = 1;
+					var output = function(m)
+					{
+						$('output').a($$()).t('?: ?'.embed(m_number++, $_(m).encodeMarkup()));
+					}
+
+					var xd = null;
+					// empty default document, will contain <root/> document element
+					xd = $new(fry.xml.Document);
+					output( xd.innerXML() ); //1
+					$delete(xd);
+
+					// creating document with source
+					xd = $new(fry.xml.Document, '<changed><doc/></changed>');
+					output( xd.innerXML() ); //2
+					$delete(xd);
+
+					// using emtpy document and setting up its content later using innerXML
+					xd = $new(fry.xml.Document);
+					xd.innerXML('<changed><doc attr="some"/></changed>');
+					output( xd.innerXML() ); //3
+					$delete(xd);
+					
+					// using simplified language constructs
+					xd = $xmlcreate();
+					output( $xmlinner(xd) ); //4
+					$delete(xd);
+
+					xd = $xmlcreate('<simplified><syntax is="true">Hello World</syntax></simplified>');
+					output( $xmlinner(xd) ); //5
+					// showing simple query and display text content of the node
+					output( $xmltext(xd.g('syntax:0')) ); //6
+					// setting text
+					$xmltext(xd.g('syntax:0'), 'Changed');
+					output( '?'.embed($xmltext(xd.g('syntax:0'))) ); //7
+					// adding node
+					xd.g('syntax:0').appendChild(xd.createElement('another')).appendChild(xd.createTextNode('Node'));
+					output( $xmlinner(xd) ); //8
+					// setting innerXML
+					$xmlinner(xd.g('another'), '<inserted>using innerXML</inserted>');
+					output( $xmlinner(xd) ); //9
+					$delete(xd);
+				}
+			},
+			{
+				title:'Traverse document',
+				note:'Show various example of traversing of an XML tree.',
+				keepPrevious:false,
+				code:function()
+				{
+					var m_number = 1;
+					var output = function(m)
+					{
+						$('output').a($$()).t('?: ?'.embed(m_number++, $_(m).encodeMarkup()));
+					}
+
+					var xd = $xmlcreate('<doc>'
+											+'<item-1></item-1>'
+											+'<item-2>'
+												+'<inner>Heee</inner>'
+											+'</item-2>'
+											+'<basket>'
+												+'<item id="2" quantity="8">Product 1</item>'
+												+'<item id="4" quantity="3">Another 2</item>'
+												+'<item id="5" quantity="7">Third product</item>'
+											+'</basket>'
+										+'</doc>');
+					output( $xmlinner(xd) ); //1
+					// getting documentElement (root)
+					output( $xmlinner(xd.root().firstChild) ); //2
+					
+					// showing all items in the basket
+					$foreach ( xd.g('basket/item'), function(node, counter)
+					{
+						output( '?> Item ?, quantity: ?, ID#?'.embed(counter+1, $xmltext(node).surroundTag('strong'), node.getAttribute('quantity'), node.getAttribute('id')) );
+					});
+				
+					$delete(xd);
+				}
+			},
+			{
+				title:'De/Serialization',
+				note:'Any object can be serialized into XML source, such source can be deserialized into object. Let\s see how it works.',
+				keepPrevious:false,
+				code:function()
+				{
+					var m_number = 1;
+					var output = function(m)
+					{
+						$('output').a($$()).t('?: ?'.embed(m_number++, $_(m).encodeMarkup()));
+					}
+
+					// creating an document
+					var xml_source = (	'<doc>'
+											+'<greetings>Hello</greetings>'
+											+'<item-2>'
+												+'<inner>Heee</inner>'
+											+'</item-2>'
+											+'<basket>'
+												+'<item id="2" quantity="8">Product 1</item>'
+												+'<item id="4" quantity="3">Another 2</item>'
+												+'<item id="5" quantity="7">Third product</item>'
+											+'</basket>'
+										+'</doc>');
+					// serializing xml source into object
+					var obj = $xmlserialize(xml_source);
+
+					// traversing basket
+					var basket = obj.basket;
+					$foreach ( basket, function(item, counter)
+					{
+						output( '?> Item ?, quantity: ?, ID#?'.embed(counter+1, item._.surroundTag('strong'), item.$.quantity, item.$.id) );
+					});
+					// now let's see what serialized node WITHOUT attributes looks like...
+					// basic rule is - if node has attributes, object will have `$` property filled with attribute names and values
+					// if node has any text nodes (TEXT_NODE, CDATA_SECTION), they will accessible through `_` property (and concatenated)
+					// if node has no attributes and no children, `_` property disappears and object is simple string.
+					output( 'Simple node value: ? ?!'.embed(obj.greetings, obj['item-2'].inner));
+					
+					// now let's try some deserialization
+					// first setting some new object property
+					obj.basket.push('Fourth product, has no attributes...');
+					var xd = $xmldeserialize(obj);
+					output( '?'.embed($xmlinner(xd.root())) );
+					
+					// now let's deserialized xml object and serialize it again, this time passing document to $xmlserialize (before the source string was used)				
+					var obj2 = $xmlserialize(xd);
+					output( 'Added product: ?'.embed(obj2.basket[3]) );
+					
+					
+					// you should always clean if possible to avoid memory overhead
+					$delete(obj);
+					$delete(obj2);
+					$delete(xd);
+				}
+			}			
+		];
+
+		
+        </script>
+
+	</head>
+	<body onload="main()">
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> XML manipulation</h1>
+		
+		<p class="description">
+			XML extension
+		</p>
+		
+		<form style="margin:20px">
+			<input id="button-prev" type="button" value="Previous test" /> 
+			<input id="button-run" type="button" value="Run test" /> 
+			<input id="button-next" type="button" value="Next test" /> 
+			Jump to: <select id="combo-tests" onchange='initTest(this.options[this.selectedIndex].value)'></select>
+		</form>
+		
+		<h2 id="title"></h2>
+		<p id="note"></p>
+		
+		<pre id="code" ></pre>
+
+		<div id="test-area">
+			<pre id="output" style="position:absolute"></pre>
+		</div>
+		
+	
+	</body>
+</html>

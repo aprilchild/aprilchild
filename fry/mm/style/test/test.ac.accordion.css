@@ -1,0 +1,52 @@
+/*
+	UI CSS Declaration
+
+	AC Fry - Accordion widget customization
+*/
+
+.acw-accordion.accordion-example-2 .title
+{
+	background:#fff;
+	height:21px;
+	cursor:default;
+}
+.acw-accordion.accordion-example-2 .title td.arrow
+{
+	border-top:1px solid #f0f0f0;
+}
+.acw-accordion.accordion-example-2 .title td.label
+{
+	border-top:1px solid #f0f0f0;
+	color:#888;
+}
+.acw-accordion.accordion-example-2 .content-inner
+{
+	color:#000;
+	font-size:9px;
+}
+
+
+.acw-accordion.accordion-example-3 .title
+{
+	background:#C3CFE1;
+	height:21px;
+	cursor:default;
+}
+.acw-accordion.accordion-example-3 .title td.arrow
+{
+	border-top:1px solid #f0f0f0;
+}
+.acw-accordion.accordion-example-3 .title td.label
+{
+	border-top:1px solid #f0f0f0;
+	color:#fff;
+}
+.acw-accordion.accordion-example-3 .content
+{
+	border-color:#C3CFE1;
+}
+.acw-accordion.accordion-example-3 .content-inner
+{
+	color:#888;
+	font-size:11px;
+}

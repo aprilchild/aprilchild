@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+			/*
+			 * AC Fry - JavaScript Framework v1.0
+			 * Window widget - Test/Example file
+			 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+			 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - Test/Example - Window widget</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/test/test.ac.browser.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		
+        
+        <script type="text/javascript">
+
+        	var client =
+        	{
+        		conf:
+        		{
+					locale:'cs',
+        			progid:'test-ac.window',
+        			fry:
+        			{
+        				backendURL : '',
+						theme:'apple'
+        			}
+        		},
+        		
+        		onload:function()
+        		{
+        			$include('test/test-locale-common.js');
+					$include('ac.fry.ui.support.js');
+        			$include('widget/ac.window.js');
+
+					$include('test/test-mvc-ac.window.js');
+        		},
+
+				onstart:function()
+				{
+					// creating couple of window widgets
+					
+					$dotimes( 7, function(counter)
+					{
+						var widget = $new
+						(
+							ac.WindowWidget,
+							$new(ac.WindowWidgetModel),
+							$new(ExampleView, 
+							{
+								defaultPosition:
+								{
+									x:100+40*counter,
+									y:100+60*counter
+								},
+								defaultSize:
+								{
+									width:200+Math.floor(500*Math.random()),
+									height:50+Math.floor(500*Math.random())
+								},
+								isScrollable:0.5<Math.random(),
+								hasMinimizeButton:0.2<Math.random(),
+								hasMaximizeButton:0.2<Math.random(),
+								hasStatus:0.5<Math.random()
+							}),
+							$new(ExampleController)
+						);
+						widget.show();
+					});					
+				}
+        		
+        	};
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+
+	</head>
+	<body>
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> Window widget</h1>
+		
+		<p class="description">
+			This is a window widget.
+		</p>
+		
+		<div class="example">
+			<div class="test" id="pane">
+			</div>
+		</div>
+
+	</body>
+</html>

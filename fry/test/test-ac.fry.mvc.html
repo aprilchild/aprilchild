@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * Test/Example Page for MVC extension
+		 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - JavaScript Framework</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		
+		<script type="text/javascript" src="test.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+        <script type="text/javascript">
+
+		var fry = {};
+		tests = 
+		[
+			{
+				title:'The simplest widget',
+				note:'Creating the simplest widget possible. Using ac.Widget. It disappears in two seconds. Since we test the default widget, you won\'t actually see anything :) (the widget has the render method empty)',
+				keepPrevious:false,
+				code:function()
+				{
+					$dotimes(5, function(counter)
+					{
+						var widget = $new
+						(
+							ac.Widget,
+							$new(ac.WidgetModel),
+							$new(ac.WidgetView),
+							$new(ac.WidgetController)
+						);
+						widget.show($('test-div-001'));
+						$runafter(1000+500*counter, function()
+						{
+							widget.hide();
+						});
+					});
+				}
+			},
+			{
+				title:'Container widgets',
+				note:'Appart from simple ac.Widget, there is second basic type of widgets called <strong>Container</strong>. Containers hold child widgets placed in <strong>panes</strong>. Base container is implemented in the ac.ContainerWidget class. Typical example of container is the tabpane widget.',
+				keepPrevious:false,
+				code:function()
+				{
+					var panes = 
+					[
+						{
+							adapter:
+							{
+								onOpen:function(pane, index, node)
+								{
+									node.t('This is the pane #A.').s('border:1px solid red');
+									// clicking will switch to B
+									node.e('click', function(evt)
+									{
+										pane.widget.switchPane(1);
+									})
+								}
+							}
+						},
+						{
+							adapter:
+							{
+								onOpen:function(pane, index, node)
+								{
+									node.t('This is the pane #B.').s('border:1px solid blue');;
+									// clicking will switch to A
+									node.e('click', function(evt)
+									{
+										pane.widget.switchPane(0);
+									})
+								}
+							}
+						}
+					];
+					var widget = $new
+					(
+						ac.ContainerWidget,
+						$new(ac.ContainerWidgetModel, panes),
+						$new(ac.ContainerWidgetView),
+						$new(ac.ContainerWidgetController)
+					);
+					widget.show($('test-div-001'));
+				}
+			}
+		];
+
+		
+		var client =
+		{
+			conf:{fry:{}},
+			onstart:main
+		}
+
+		
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="test-locale-common.js"></script>
+
+	</head>
+	<body>
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> Widgets and MVC pattern</h1>
+		
+		<p class="description">
+			MVC &amp; Widget extension
+		</p>
+		
+		<form style="margin:20px">
+			<input id="button-prev" type="button" value="Previous test" /> 
+			<input id="button-run" type="button" value="Run test" /> 
+			<input id="button-next" type="button" value="Next test" /> 
+			Jump to: <select id="combo-tests" onchange='initTest(this.options[this.selectedIndex].value)'></select>
+		</form>
+		
+		<h2 id="title"></h2>
+		<p id="note"></p>
+		
+		<pre id="code" ></pre>
+
+		<div id="test-area">
+			<div id="test-div-001" style="position:absolute;width:400px;height:120px"></div>
+		</div>
+		
+	
+	</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+			/*
+			 * AC Fry - JavaScript Framework v1.0
+			 * Browser widget - Test/Example file
+			 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+			 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - Test/Example - TableView widget</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/test/test.ac.tableview.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		
+        
+        <script type="text/javascript">
+
+			var widget = null;
+
+        	var client =
+        	{
+        		conf:
+        		{
+					locale:'cs',
+        			progid:'test-ac.browser',
+        			fry:
+        			{
+        				backendURL : '',
+						theme:'apple'
+        			}
+        		},
+        		
+        		onload:function()
+        		{
+					// we'll need some calendar support
+					$include('ac.fry.data.calendar.js');
+        			$include('test/test-locale-ac.tableview.js');
+					// let's include window widget - we'll need it for simulating clipboard operation alerts
+					$include('ac.fry.ui.support.js');
+					$include('widget/ac.window.js');
+
+        			$include('widget/ac.tableview.js');
+
+					$include('test/test-mvc-ac.tableview.js');
+        		},
+
+				onstart:function()
+				{
+					// creating tableview widget
+					
+					// creating model, please note: in real application, you would put some existing `ACElement` instance as a constructor parameter
+					var rootElement = $new(ACElement);
+					rootElement.setState(rootElement.STATE_WILL_LOAD);
+					rootElement.isCollection = true;
+					widget = $new
+					(
+						ac.TableViewWidget,
+						$new(ExampleModel, rootElement),
+						$new(ExampleView),
+						$new(ExampleController)
+					);
+					// now the widget is created using our example MVC, let's set it up
+					// adding of a column consists of defining its ID, label part, width (can be specified using absolute values or percents) and sort callback, which is a function returning transformed data for sorting algorithm (imagine date value that you may display using various syntax (eg. `Today`, `Tomorrow`, 'Week old`, 'Thu 16`) which might be properly unsortable, the sorting callback function would return timestamp value that can be easily sorted).
+					widget.addColumn( 'label', client.lc.get('h_label'), '40%', function(acElem)
+					{
+						return acElem.properties.label.toLowerCase().trim();
+					}, false, true); // last tag - isEditable is set to true, we can inline edit the label - editing mode is specified in controller class
+					
+					// if global namespace import is not disabled (you can set the client.conf.disableGlobalNamespaceImport:true for disabling), let's use handy shortcut for locale value $loc = client.lc.get
+					widget.addColumn( 'size', $loc('h_size'), '20%', function(acElem)
+					{
+						return parseInt(acElem.properties.size);
+					});
+					widget.addColumn( 'dateCreated', $loc('h_date_created'), '20%', function(acElem)
+					{
+						return parseInt(acElem.properties.dateCreated);
+					});
+					// let's make the version editable as well
+					widget.addColumn( 'version', $loc('h_version'), '15%', function(acElem)
+					{
+						// we may skip the `parseInt` cast used in previous column due javascript nature, it was used just for educational purposes
+						return acElem.properties.version;
+					}, false, true);
+					// there's one special column named used for preview expansion - it's marked as `info`. let's add it (last parameter). there's no need to add sorting callback since the column is not sortable
+					widget.addColumn( 'info', $loc('h_info'), '5%', null, true);
+					
+					// our columns are added, let's show it already :)
+					widget.show($('pane').t(''));				
+				}
+        		
+        	};
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+
+	</head>
+	<body>
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> TableView widget</h1>
+		
+		<p class="description">
+			This is an tableview widget. It's a classical row-based data view. TableView can also serve as a datagrid widget allowing any column value to be edited. You can easily create your own column editors. As an example, label and version columns are editable using default widget text editor (with different value setter methods, one is set using remote backend, the other directly).
+			Please note, that the browser data are randomly generated, you might experience `bad` set of data in which case simply hit the `Redraw` link.			
+		</p>
+		
+		<a class="redraw" href="javascript:client.onstart()">Redraw</a>
+		
+		<div class="example">
+			<div class="test" id="pane">
+			</div>
+		</div>
+	
+	</body>
+</html>

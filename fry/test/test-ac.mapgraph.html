@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * MapGraph widget - Test/Example file
+		 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>Fry 1.0 - Test/Example - MapGraph widget</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/test/test.ac.mapgraph.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		
+        
+        <script type="text/javascript">
+
+        	var client =
+        	{
+        		conf:
+        		{
+					locale:'cs',
+        			progid:'test-ac.mapgraph',
+        			fry:
+        			{
+        				backendURL : '',
+						theme:'apple'
+        			}
+        		},
+        		
+        		onload:function()
+        		{        			
+        			$include('test/test-locale-common.js');
+					$include('ac.fry.ui.support.js');
+					$include('widget/ac.window.js');
+        			$include('widget/ac.mapgraph.js');
+
+					$include('test/test-mvc-ac.mapgraph.js');
+        		},
+
+				onstart:function()
+				{
+					// creating first mapgraph widget
+					// the widget will be without explicit relations, that is it will represent tree graph (relations are mapped to tree hierarchy )
+					
+					// creating model, please note: in real application, you would put some existing `ACElement` instance as a constructor parameter
+					var rootElement = $new(ACElement);
+					rootElement.properties.label = 'Map A';
+					rootElement.setState(rootElement.STATE_WILL_LOAD);
+					rootElement.isCollection = true;
+					widget_tree = $new
+					(
+						ac.MapGraphWidget,
+						$new(ExampleModel, null, rootElement),
+						$new(ExampleView,
+							{
+								boxDimension:
+								{
+									width:50,
+									height:30,
+									marginRight:4,
+									marginBottom:8
+								}
+							}),
+						$new(ExampleController)
+					);
+					// now the widget is created using our example MVC definition, let's show it up
+					widget_tree.show($('pane-1').t(''));
+					
+					
+					// creating second tree widget, this time with relations defined. All elements must be loaded prior rendering, additional information
+					// regarding elements relations is required (relations parameter as second argument to constructor)
+					var elements = [];
+					var relations = [];
+					// creating some testing data, elements first
+					var num_elements = 11;
+					$dotimes(num_elements, function(i)
+					{
+						var elem = $new(ACElement);
+						elem.properties.label = 'Element ?'.embed(i);
+						// adding items to element - these serve as connector from which relation starts
+						elem.properties.items = [];
+						$dotimes(Math.floor(1+5*Math.random()), function(ii)
+						{
+							elem.properties.items[ii] = {name:'Item ?'.embed(ii)};
+						});
+						elements[i] = elem;
+					});
+					// creating relations
+					var num_relations = 15;
+					$dotimes(Math.floor(num_relations*Math.random()), function(i)
+					{
+						var relation = $new(ACRelation);
+						var sourceElement = elements[Math.floor((num_elements)*Math.random())];
+						var itemIndex = Math.floor((sourceElement.properties.items.length-1)*Math.random());
+						relation.addSourceElement(sourceElement, itemIndex);
+						var targetElement = elements[Math.floor((num_elements)*Math.random())];
+						relation.addTargetElement(targetElement);
+						relations[i] = relation;
+					});
+					// creating widget
+					widget_graph = $new
+					(
+						ac.MapGraphWidget,
+						$new(ExampleModel, null, elements, relations),
+						$new(ExampleView),
+						$new(ExampleController)
+					);
+					// now the widget is created using our example MVC definition, let's show it up
+					widget_graph.show($('pane-2').t(''));
+				}
+        		
+        	};
+
+			var widget_tree  = null;
+			var widget_graph = null;
+
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+
+	</head>
+	<body>
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> MapGraph widget</h1>
+		
+		<p class="description">
+			This is a map graph widget. It has two modus operandi, first mode renders as tree structure, second one allows creating number of elements connected using relations among them. Please note, the model data are randomly generated, you might experience `bad` set of data in which case simply hit the `Redraw` link.
+		</p>
+		
+		<a class="redraw" href="javascript:client.onstart()">Redraw</a>
+		
+		<div class="example" style="height:526px;margin-bottom:20px">
+			<div class="test" id="pane-1" style="position:absolute;width:470px;height:500px">
+			</div>
+			<div class="toolbar" style="width:18px;position:absolute;left:490px;height:496px;background:#f0f0f0;top:14px;padding:2px;border:1px solid #ccc">
+				<a href="javascript:widget_tree.showTreeMap(true)">sm</a>
+				<a href="javascript:widget_tree.hideTreeMap()">hm</a>
+			</div>
+			
+			<div class="test" id="pane-2" style="position:absolute;left:520px;width:434px;height:500px">
+			</div>
+			<div class="toolbar" style="width:18px;position:absolute;left:960px;height:496px;background:#f0f0f0;top:14px;padding:2px;border:1px solid #ccc">
+				<a href="javascript:widget_graph.toggleGrid()"><img src="mm/i/test/grid.gif" style="margin-bottom:2px"></a>
+				<a href="javascript:widget_graph.zoomIn()"><img src="mm/i/test/zoom_in.gif" style="margin-bottom:2px"></a>
+				<a href="javascript:widget_graph.zoomOut()"><img src="mm/i/test/zoom_out.gif" style="margin-bottom:2px"></a>
+				<a href="javascript:widget_graph.animateGraphRelation(widget_graph.model.relations[Math.floor(widget_graph.model.relations.length*Math.random())])">aaa</a>
+			</div>
+		</div>
+	
+	</body>
+</html>

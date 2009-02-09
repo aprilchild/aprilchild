@@ -1,0 +1,74 @@
+/*
+ * AC Fry - JavaScript Framework v1.0
+ *
+ * Theme CSS definition.
+ *
+ * (c)2006 Petr Krontorad, April-Child.com
+ * Portions of code based on WHOA Bender Framework, (c)2002-2005 Petr Krontorad, WHOA Group.
+ * http://www.april-child.com. All rights reserved.
+ * See the license/license.txt for additional details regarding the license.
+ * Special thanks to Matt Groening and David X. Cohen for all the robots.
+ *
+ * Theme.name: ac
+ */
+
+
+
+/* TabbedDocHolder */
+.acw-tabbed-docholder .sidebar
+{
+	background-image: url(../../../i/theme/ac/tabbed-doc-bg.gif);
+	background-repeat: repeat-x;
+	border-bottom:1px solid #6F6E6E;
+}
+.acw-tabbed-docholder .sidebar
+{
+	border-bottom:0
+}
+
+
+/* Browser */
+.acw-browser .resizer
+{
+	background-image:url(../../../i/theme/ac/browser.resizer.gif);
+}
+
+/* Window */
+.acw-window .head td.buttons, .acw-window .head td.title
+{
+	background-image: url(../../../i/theme/ac/win-head-bg.gif);
+}
+.acw-window .wbody
+{
+	background-image: url(../../../i/theme/ac/win-body-bg.gif);
+}
+
+
+/* OutlineView */
+.acw-outlineview tr.header th
+{
+	background-image:url(../../../i/theme/ac/outlineview-header-bg.gif);
+}
+.acw-outlineview tr.header th.selected
+{
+	background-image:url(../../../i/theme/ac/outlineview-header-selected-bg.gif);
+}
+
+		
+/* Graph */        	
+.acw-graph-new-relation-pointer
+{
+	background:url(../../../i/theme/ac/rel.new.gif);
+}
+
+
+/* List */
+.acw-list .toolbar
+{
+	background-image:url(../../../i/theme/ac/bg-list.toolbar.gif);
+}
+
+
+/* Tree */
+
+

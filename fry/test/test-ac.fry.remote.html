@@ -1,0 +1,317 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * Test/Example Page for remote capabilities
+		 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - JavaScript Framework</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		
+		<script type="text/javascript" src="test.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+        <script type="text/javascript">
+
+		
+		tests = 
+		[
+			{
+				title:'The simple call',
+				note:'Calls remote side and displays result. Put any value into box and hit the `Call` button. Value that you entered is sent to remote-side and after some processing (in this case string reverse) returned back to the client. You basically only handle success and failure events.',
+				keepPrevious:false,
+				code:function()
+				{
+					var input = $('output').t('Enter a value to be reversed').a($$('input')).sa('type', 'text').i('par').sa('value','initial value').p().a($$('span')).t('<input type="button" value="Call"/>').fc().e('click', function(evt)
+					{
+						$rpost(
+							{
+								// this is the name of the action on remote side (see remote.php `on_reverse_string`)
+								a:'reverse_string',
+								// these are additional parameters, any number is allowed
+								str:$('par').$.value
+							},
+							function(r)
+							{
+								// this is called upon successful result, r contains resulting data
+								$('output').a($$()).t('Returned: <strong>?</strong>'.embed(r));
+							},
+							function(e)
+							{
+								// this is called when remote execution ended up with failure
+								$('output').a($$()).t('Error occured: <em>?</em>'.embed(e));
+							}
+						);
+					});
+				}
+			},
+			{
+				title:'Call with complex results',
+				note:'Shows complex return types and how to access them.',
+				keepPrevious:false,
+				code:function()
+				{
+					// first let's call for a simple array
+					$rpost(
+						{
+							a:'get_array'
+						},
+						function(r)
+						{
+							$foreach ( r, function(item, index)
+							{
+								$('output').a($$()).t('array item index#? value:?'.embed(index, item));
+							});
+						},
+						function(e)
+						{
+							$('output').a($$()).t('Error occured: <em>?</em>'.embed(e));
+						}
+					);
+					// let's try some nested structure array
+					$rpost(
+						{
+							a:'get_nested_array'
+						},
+						function(r)
+						{
+							console.log('%o', r);
+							$foreach ( r, function(item, index)
+							{
+								$('output').a($$()).t('nested array item index#? value:?'.embed(index, item));
+							});
+							// now getting the real nested array items
+							$foreach ( r.nested, function(item, index)
+							{
+								$('output').a($$()).t(' * real nested array item index#? value:?'.embed(index, item));
+							});
+						},
+						function(e)
+						{
+							$('output').a($$()).t('Error occured: <em>?</em>'.embed(e));
+						}
+					);					
+					// now, let's call for an associative array, which is practically the same as object
+					$rpost(
+						{
+							a:'get_assoc_array'
+						},
+						function(r)
+						{
+							// you can iterate
+							$foreach ( r, function(item, key)
+							{
+								$('output').a($$()).t('assoc array item key:? value:?'.embed(key, item));								
+							});
+							// or access each item directly if you know the structure
+							$('output').a($$()).t('direct access of `second`: ?'.embed(r.second));
+						},
+						function(e)
+						{
+							$('output').a($$()).t('Error occured: <em>?</em>'.embed(e));
+						}
+					);
+					// now, let's call for an object
+					$rpost(
+						{
+							a:'get_object'
+						},
+						function(r)
+						{
+							// you can iterate
+							$foreach ( r, function(item, propertyName)
+							{
+								$('output').a($$()).t('object property:? value:?'.embed(propertyName, item));
+							});
+							// or access each item directly if you know the structure
+							$('output').a($$()).t('Object says `?`.'.embed(r.greetings));
+						},
+						function(e)
+						{
+							$('output').a($$()).t('Error occured: <em>?</em>'.embed(e));
+						}
+					);
+				}
+			},
+			{
+				title:'Calling with more complex input parameters',
+				note:'We are passing array as input parameters for remote call.',
+				keepPrevious:false,
+				code:function()
+				{
+					$rpost(
+						{
+							a:'set_array', my_array:['first', 'second', 'third']
+						},
+						function(r)
+						{
+							$foreach ( r, function(item, index)
+							{
+								$('output').a($$()).t('array item index#? value:?'.embed(index, item));
+							});
+						},
+						function(e)
+						{
+							$('output').a($$()).t('Error occured: <em>?</em>'.embed(e));
+						}
+					);
+					$rpost(
+						{
+							a:'set_object', myself:{name:'Petr', lastName:'Krontorad', email:'petr at krontorad dot coma'}
+						},
+						function(person)
+						{
+							// you can iterate
+							$foreach ( person, function(item, propertyName)
+							{
+								$('output').a($$()).t('object property:? value:?'.embed(propertyName, item));
+							});
+							// or access each item directly if you know the structure
+							$('output').a($$()).t('Person has email `?`.'.embed(person.email));
+						},
+						function(e)
+						{
+							$('output').a($$()).t('Error occured: <em>?</em>'.embed(e));
+						}
+					);
+				}
+			},			
+			{
+				title:'Basket example',
+				note:'Let\'s see how to handle real remote-side object.',
+				keepPrevious:false,
+				code:function()
+				{
+					// first let's call for the basket object
+					$rpost(
+						{
+							a:'get_basket'
+						},
+						function(basket)
+						{
+							// helper function for displaying contents of the basket
+							var showBasket = function()
+							{
+								$('output').a($$()).t('Basket for order #?'.embed(basket.orderId));
+								$foreach ( basket.products, function(product)
+								{
+									$('output').a($$()).t('Product #?, <strong>?</strong> - quantity:?'.embed(product.productId, product.name, product.quantity));
+								});								
+							}
+							
+							// see the basket
+							showBasket();
+
+							// now let's show example of dynamic removing products using $foreach control mechanism
+							// we'll remove anything with quantity over 50
+							$foreach ( basket.products, function(product, index, control)
+							{
+								if ( 50 < product.quantity )
+								{
+									control.remove();
+								}
+							});
+							// and display changed basket
+							$('output').a($$()).t('Changed basket with products with quantity over 50 removed:')
+							showBasket();
+						},
+						function(e)
+						{
+							$('output').a($$()).t('Error occured: <em>?</em>'.embed(e));
+						}
+					);
+				}
+			},
+			
+			{
+				title:'Call with error results',
+				note:'Shows some examples of calls returning errors.',
+				keepPrevious:false,
+				code:function()
+				{
+					// we will call:
+					// non-existent action
+					// action that is not returning any result (will yield in error)
+					// action that raises error programatically
+					$foreach ( ['XFDF', 'no_data', 'invalid_action'], function(action)
+					{
+						$rpost(
+							{
+								a:action,
+								str:'some string'
+							},
+							function(r)
+							{
+								$('output').a($$()).t('This should never occur: `?`.'.embed(r));
+							},
+							function(e)
+							{
+								$('output').a($$()).t('An error occured: <em>?</em>'.embed(e));
+							}
+						);						
+					})
+				}
+			}
+		];
+
+		var client =
+		{
+			conf:
+			{
+				fry:
+				{
+					backendURL:'fry_remote_example_controller.php'
+				}
+			},
+			onstart:main
+		}
+
+		
+		function setBackend(type)
+		{
+			client.conf.fry.backendURL = {php:'fry_remote_example_controller.php', ror:'/fry_remote_example/?/'}[type];
+		}
+		
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+
+	</head>
+	<body>
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> Remote capabilites, AJAX</h1>
+		
+		<p class="description">
+			Testing remote capabilities (AJAX) - support for external action calls.
+		</p>
+		
+		<form style="margin:20px">
+			<input id="button-prev" type="button" value="Previous test" /> 
+			<input id="button-run" type="button" value="Run test" /> 
+			<input id="button-next" type="button" value="Next test" /> 
+			Jump to: <select id="combo-tests" onchange='initTest(this.options[this.selectedIndex].value)'></select>
+			use backend handler type: <select id="backend-selection" onchange='setBackend(this.options[this.selectedIndex].value)'><option value="php">PHP</option><option value="ror">Ruby On Rails</option></select>
+		</form>
+		
+		<h2 id="title"></h2>
+		<p id="note"></p>
+		
+		<pre id="code" ></pre>
+
+		<div id="test-area">
+			<div id="output" style="position:absolute"></div>
+		</div>
+		
+	
+	</body>
+</html>

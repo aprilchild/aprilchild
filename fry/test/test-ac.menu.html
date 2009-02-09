@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+			/*
+			 * AC Fry - JavaScript Framework v1.0
+			 * Menu widget - Test/Example file
+			 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+			 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - Test/Example - Menu widget</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/test/test.ac.menu.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		
+        
+        <script type="text/javascript">
+
+        	var client =
+        	{
+        		conf:
+        		{
+					locale:'cs',
+        			progid:'test-ac.menu',
+        			fry:
+        			{
+        				backendURL : '',
+						theme:'apple'
+        			}
+        		},
+        		
+        		onload:function()
+        		{
+        			$include('test/test-locale-common.js');
+					$include('ac.fry.ui.support.js');
+        			$include('widget/ac.menu.js');
+
+					$include('test/test-mvc-ac.menu.js');
+        		},
+
+				onstart:function()
+				{
+					// creating first widget - this will be menu with top bar
+					
+					// creating model
+					var rootMenuItem = $new(ACElement);
+					// will let model to load data
+					rootMenuItem.setState(rootMenuItem.STATE_WILL_LOAD);
+					rootMenuItem.properties.isVisible = true;
+					rootMenuItem.properties.isActive = true;
+					rootMenuItem.properties.isSeparator = false;
+					var widget = $new
+					(
+						ac.MenuWidget,
+						$new(ExampleModel, rootMenuItem),
+						$new(ExampleView, {startsWithTopMenuBar:true}),
+						$new(ExampleController)
+					);
+					// now the widget is created using our example MVC, there's not additional setup required
+					// so we can show it right away :)
+					widget.show($('pane-1').t(''));
+
+					
+					// creating second widget, this this a pop-up menu (contextual) - there's no topbar included			
+
+					// creating model
+					rootMenuItem = $new(ACElement);
+					// will let model to load data
+					rootMenuItem.setState(rootMenuItem.STATE_WILL_LOAD);
+					rootMenuItem.properties.isVisible = true;
+					rootMenuItem.properties.isActive = true;
+					rootMenuItem.properties.isSeparator = false;
+					var widget = $new
+					(
+						ac.MenuWidget,
+						$new(ExampleModel, rootMenuItem),
+						$new(ExampleView, {startsWithTopMenuBar:false}),
+						$new(ExampleController)
+					);
+					// now the widget is created using our example MVC, there's not additional setup required
+					// so we can show it right away :)
+					widget.show($('pane-2').t(''));
+
+				}
+        		
+        	};
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+
+	</head>
+	<body style="overflow:hidden">
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> Menu widget</h1>
+		
+		<p class="description">
+			This is a menu widget. It allows elements' tree crossing/manipulation in a way found in Mac OS X Finder. Please note, that the menu data are randomly generated, you might experience `bad` set of data in which case simply hit the `Redraw` link.
+		</p>
+		
+		<a class="redraw" href="javascript:client.onstart()">Redraw</a>
+		
+		<div class="example">
+			<div class="test" id="pane-1" style="width:500px;height:19px">
+			</div>
+			<div class="test" id="pane-2" style="left:200px;top:100px;background:transparent">
+			</div>
+		</div>
+	
+	</body>
+</html>

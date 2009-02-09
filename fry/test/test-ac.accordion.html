@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * Accordion widget - Test/Example file
+		 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - Test/Example - Accordion widget</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/test/test.ac.accordion.css" rel="stylesheet" type="text/css" />
+		
+        
+        <script type="text/javascript">
+
+        	var client =
+        	{
+        		conf:
+        		{
+					locale:'cs',
+        			progid:'test-ac.accordion',
+        			fry:
+        			{
+        				backendURL : '',
+						theme:'apple'
+        			}
+        		},
+        		
+        		onload:function()
+        		{
+        			$include('test/test-locale-common.js');
+        			$include('widget/ac.accordion.js');
+
+					$include('test/test-mvc-ac.accordion.js');
+        		},
+
+				onstart:function()
+				{
+					// creating first widget with default view options
+					
+					// creating model, note, there is no global widget controller, each pane has its own instead.
+					var panes = [];
+					$foreach ( ['Pane 1', 'Pane Two', 'Third pane'], function(label,i)
+					{
+						panes[i] = {label:label, adapter:$new(ExampleController)};
+					});
+					var widget = $new
+					(
+						ac.AccordionWidget,
+						$new(ac.AccordionWidgetModel, panes),
+						$new(ExampleView)
+					);
+					// now the widget is created using our example MVC definition, let's show it up
+					widget.show($('pane-1').t(''));
+					
+					// creating second widget with modified view options (non-animated)
+					
+					// creating model
+					panes = [];
+					$foreach ( ['Documents', 'Smart folders', 'Options', 'Help', 'About'], function(label,i)
+					{
+						panes[i] = {label:label, adapter:$new(ExampleController)};
+					});
+					widget = $new
+					(
+						ac.AccordionWidget,
+						$new(ac.AccordionWidgetModel, panes),
+						$new(ExampleView, {animate:false, onlyOneOpened:false})
+					);
+					// now the widget is created using our example MVC definition, let's show it up, we use second argument to show method to
+					// specify custom CSS class name, which is used in mm/style/test/test.ac.tabpane.css to further customize look&feel
+					widget.show($('pane-2').t(''), 'accordion-example-2');
+
+					// creating third widget with modified view options (true accordion)
+					
+					// creating model
+					panes = [];
+					$foreach ( ['This', 'Is A', 'Real', 'Accordion', 'Example'], function(label,i)
+					{
+						panes[i] = {label:label, adapter:$new(ExampleController)};
+					});
+//					alert(panes3.length)
+					widget = $new
+					(
+						ac.AccordionWidget,
+						$new(ac.AccordionWidgetModel, panes),
+						$new(ExampleView, {animate:true, onlyOneOpened:true})
+					);
+					// now the widget is created using our example MVC definition, let's show it up, we use second argument to show method to
+					// specify custom CSS class name, which is used in mm/style/test/test.ac.tabpane.css to further customize look&feel
+					widget.show($('pane-3').t(''), 'accordion-example-3');
+
+					// creating fourth widget with modified view options (true accordion without animation)
+
+					// creating model
+					panes = [];
+					$foreach ( ['This', 'Is A', 'Non-Animated', 'Accordion', 'Example'], function(label,i)
+					{
+						panes[i] = {label:label, adapter:$new(ExampleController)};
+					});
+		//			alert(panes3.length)
+					widget = $new
+					(
+						ac.AccordionWidget,
+						$new(ac.AccordionWidgetModel, panes),
+						$new(ExampleView, {animate:false, onlyOneOpened:true})
+					);
+					widget.show($('pane-4').t(''));
+
+				}
+        		
+        	};
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+
+	</head>
+	<body>
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> Accordion widget</h1>
+		
+		<p class="description">
+			This is one of the container widgets.
+		</p>
+		
+		<a class="redraw" href="javascript:client.onstart()">Redraw</a>
+		
+		<div class="example" style="width:960px;background:#fff">
+			<div id="pane-1" style="position:absolute;left:20px;top:20px;width:200px;height:300px;">
+			</div>
+			<div id="pane-2" style="position:absolute;left:260px;top:20px;width:200px;height:300px;">
+			</div>
+			<div id="pane-3" style="position:absolute;left:500px;top:20px;width:200px;height:300px;">
+			</div>
+			<div id="pane-4" style="position:absolute;left:740px;top:20px;width:200px;height:300px;">
+			</div>
+		</div>
+
+	
+	</body>
+</html>

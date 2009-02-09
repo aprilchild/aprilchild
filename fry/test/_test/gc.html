@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" debug="true">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * Test/Example Page
+		 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - JavaScript Framework</title>
+		
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.ui.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+        
+        <script type="text/javascript">
+		
+			function main()
+			{
+				
+			}
+			
+			
+			function test1()
+			{
+				var cn = function(counter)
+				{
+					var n = $().a($$()).pos(true).i('e'+counter).x(1).y(100*counter).w(200).h(20).s('background:cyan').t(counter).e('click', function(evt)
+					{
+						n.rs();
+//						n = null;
+//						evt.$().rs();
+//						evt.stop();
+//						delete $('e'+counter).rs();
+//						n.rs();
+//						n = null;
+					}, true);
+				}
+				for ( var i=1; i<=3; i++ )
+				{
+					cn(i);
+				}
+				cn = null;
+				i = null;
+			}
+
+			function test2()
+			{
+				var cn = function(counter)
+				{
+					var el = document.body.appendChild(document.createElement('div'));
+					el.style.position = 'absolute';
+					el.style.id = 'e'+counter;
+					el.style.left = '1px';
+					el.style.top = (20 + 100*counter)+'px';
+					el.style.width = '200px';
+					el.style.height = '20px';
+					el.style.background = 'yellow';
+					el.innerHTML = counter;
+					el.addEventListener('click', function(evt)
+					{
+						evt.target.parentNode.removeChild(evt.target);
+					}, false);
+				}
+				for ( var i=1; i<=3; i++ )
+				{
+					cn(i);
+				}
+			}
+			
+			function test3()
+			{
+				if ( $('drag') )
+				{
+					$('drag').rs();
+				}
+				$().a($$()).i('drag').t('drag me').s('background:green;padding:8px').pos(true).x(400).y(200).addDrag(fry.ui.drag.MODE_STANDARD, {});
+			}
+			
+			function test4()
+			{
+				$('drag').removeDrag();
+			}
+			
+			function test5()
+			{
+				$('drag').rs();
+			}
+			
+        </script>
+
+	</head>
+	<body onload="main()">
+	
+		GC
+		<ul>
+			<li><a href="javascript:test1()">test 1 - fry event closures</a></li>
+			<li><a href="javascript:test2()">test 2 - standard event closures</a></li>
+			<li><a href="javascript:test3()">test 3 - start drag</a></li>
+			<li><a href="javascript:test4()">test 4 - stop drag</a></li>
+			<li><a href="javascript:test5()">test 5 - delete dragged node</a></li>
+		</ul>
+	
+	</body>
+</html>

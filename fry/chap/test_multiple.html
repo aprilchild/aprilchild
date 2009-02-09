@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * Chap Text Editing Component
+		 * (c)2007 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - JavaScript Framework - CHAP</title>
+		<link href="../mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="../mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="../mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		
+        
+        <script type="text/javascript">
+			
+	    	var client =
+	    	{
+	    		conf:
+	    		{
+					locale:'cs',
+	    			progid:'test-ac.chap-multiple',
+	    			fry:
+	    			{
+	    				backendURL : '',
+						theme:'apple'
+	    			}
+	    		},
+    		
+	    		onload:function()
+	    		{
+	    			$include('test/test-locale-common.js');
+	    			$include('widget/ac.tabpane.js');
+	
+					$include('chap/ac.chap.js');
+					$include('chap/ac.chap.view.js');
+					$include('chap/ac.chap.settings.js');
+					$include('chap/ac.chap.settings-standalone.js');
+
+					$include('chap/multiple.mvc.js');
+	    		},			
+				onstart:function()
+				{
+					showEditor();
+				}
+			}
+
+
+			var num_views = 1;
+		
+			function splitIntoViews(num)
+			{
+				num_views = num;
+				showEditor();
+			}
+		
+			function showEditor()
+			{
+
+				// creating model, note, there is no global widget controller, each pane has its own instead.
+				// we are also adding key shortcuts. in order to quickly see all shortcuts, simply pres CTRL+ALT+K
+				var panes = [];
+				$foreach ( ['source-small.js', 'source.js', 'source.rb', 'source.html'], function(label,i)
+				{
+					panes[i] = {label:label, source:label, adapter:$new(ExampleController), key:{code:'ctrl+alt+?'.embed(i+1), text:'Press it to switch...'} };
+				});
+				var widget = $new
+				(
+					ac.TabPaneWidget,
+					$new(ac.TabPaneWidgetModel, panes),
+					$new(ExampleView, {position:'top', startingTabOffset:20})
+				);
+				// now the widget is created using our example MVC definition, let's show it up
+				widget.show($('editor').t(''));
+			}
+
+
+
+			
+			
+
+        </script>
+
+		<style type="text/css">
+			.acw-chap pre, .acw-chap pre span,  span.acw-char-check, .acw-chap .selection-area div
+			{
+				/* Win *//
+				font:11px 'Courier New', 'Courier', monospaced;
+				/* Mac */
+				font:11px 'Courier', monospaced;
+				line-height:11px;
+				margin:0;
+				padding:0;
+				border:0;
+			}
+			.acw-chap .wrapped-row
+			{
+				background-image:url('../mm/i/theme/apple/chap-wrapped-row.gif');
+				background-repeat:no-repeat;
+				background-position:25px 4px;
+			}
+			.acw-chap .caret
+			{
+				background-image:url('../mm/i/theme/apple/chap-caret.gif');
+				background-repeat:repeat-y;
+				background-position:0px 0px;
+				width:7px;
+				height:11px;
+				sbackground-color:red;
+			}
+			.acw-chap .caret.black
+			{
+				background-image:url('../mm/i/theme/apple/chap-caret-black.gif');
+				background-repeat:repeat-y;
+				background-position:0px 0px;
+				width:7px;
+				height:11px;
+			}
+			.acw-chap .sidebar
+			{
+				background-image:url('../mm/i/theme/apple/chap-bg-sidebar.gif');
+			}
+			.acw-chap .sidebar .row-number
+			{
+				text-align:right;
+				font-size:9px;
+				color:#999;
+			}
+			.acw-chap .folding-expand-inner
+			{
+				width:14px;
+				height:10px;
+				margin-left:2px;
+				display:inline;
+				background-image:url('../mm/i/theme/apple/chap-folding-expand-inner.gif');
+			}
+			.acw-chap .folding-expand
+			{
+				background-image:url('../mm/i/theme/apple/chap-folding-expand.gif');
+			}
+			.acw-chap .folding-start
+			{
+				background-image:url('../mm/i/theme/apple/chap-folding-start.gif');
+			}
+			.acw-chap .folding-stop
+			{
+				background-image:url('../mm/i/theme/apple/chap-folding-stop.gif');
+			}
+			.acw-chap .bookmark-default
+			{
+				background-image:url('../mm/i/theme/apple/chap-bookmark-default.gif');
+			}
+			.acw-chap .void
+			{
+				background-image:url('../mm/i/theme/void.gif');	
+			}
+		</style>
+
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+	</head>
+	<body>
+
+		<h1 class="logo">AC Fry - JavaScript Framework - Chap Text Editing Component, multiple instances</h1>
+
+		<div id="menu" style="position:absolute;top:79px;left:730px;border:1px solid #999;padding:10px;width:200px">
+			<a href="javascript:console.open()">Open console</a>
+			<br/>
+			<a href="javascript:splitIntoViews(1)">One view</a>
+			<br/>
+			<a href="javascript:splitIntoViews(2)">Two views</a>
+			<br/>
+			<a href="javascript:splitIntoViews(3)">Three views</a>
+			
+		</div>
+		
+		<div id="editor" style="margin-left:20px;margin-top:20px;width:700px;height:500px">
+		</div>
+		
+	</body>
+</html>

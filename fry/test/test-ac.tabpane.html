@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * TabPane widget - Test/Example file
+		 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - Test/Example - TabPane widget</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/test/test.ac.tabpane.css" rel="stylesheet" type="text/css" />
+		
+        
+        <script type="text/javascript">
+
+        	var client =
+        	{
+        		conf:
+        		{
+					locale:'cs',
+        			progid:'test-ac.tabpane',
+        			fry:
+        			{
+        				backendURL : '',
+						theme:'apple'
+        			}
+        		},
+        		
+        		onload:function()
+        		{
+        			$include('test/test-locale-common.js');
+					// we must include menu widget if we want to allow invisible tabs selection (as a popup menu)
+					$include('ac.fry.ui.support.js');
+        			$include('widget/ac.menu.js');
+        			$include('widget/ac.tabpane.js');
+
+					$include('test/test-mvc-ac.tabpane.js');
+        		},
+
+				onstart:function()
+				{
+					// creating first widget with default view options
+					
+					// creating model, note, there is no global widget controller, each pane has its own instead.
+					// we are also adding key shortcuts. in order to quickly see all shortcuts, simply pres CTRL+SHIFT+ALT+K
+					var panes = [];
+					$foreach ( ['Pane 1', 'Pane Two', 'Third pane'], function(label,i)
+					{
+						// key shortcuts will be ctrl+alt+1 .. +n
+						panes[i] = {label:label, adapter:$new(ExampleController), key:{string:'?+ctrl+alt'.embed(49+i), scope:'global', text:'Press it to switch...'} };
+					});
+					var widget = $new
+					(
+						ac.TabPaneWidget,
+						$new(ac.TabPaneWidgetModel, panes),
+						$new(ExampleView, {startingTabOffset:0})
+					);
+					// now the widget is created using our example MVC definition, let's show it up
+					widget.show($('pane-1').t(''));
+					
+					// creating second widget with modified view options
+					
+					// creating model
+					panes = [];
+					$foreach ( ['Documents', 'Smart folders', 'Options', 'Help', 'About'], function(label,i)
+					{
+						// key shortcuts will be shift+D, shift+S ... and will be LOCAL - that is you must focus the tabpane by clicking on it first
+						panes[i] = {label:label, adapter:$new(ExampleController), key:{string:'?+shift'.embed(label.charCodeAt(0)), scope:'local', text:'Switch to ?'.embed(label)}};
+					});
+					widget = $new
+					(
+						ac.TabPaneWidget,
+						$new(ac.TabPaneWidgetModel, panes),
+						$new(ExampleView, {position:'top', startingTabOffset:20})
+					);
+					// now the widget is created using our example MVC definition, let's show it up, we use second argument to show method to
+					// specify custom CSS class name, which is used in mm/style/test/test.ac.tabpane.css to further customize look&feel
+					widget.show($('pane-2').t(''), 'tabpane-example');
+					
+					// creating third widget without tab-closing buttons
+					
+					// creating model
+					panes = [];
+					$foreach ( ['Fry', 'JavaScript', 'Library'], function(label,i)
+					{
+						// key shortcuts will be shift+r, shift+a ...
+						panes[i] = {label:label, adapter:$new(ExampleController), key:{string:'?+shift'.embed(label.charCodeAt(1)), scope:'parent', text:'Switch to ?'.embed(label)}};
+					});
+					widget = $new
+					(
+						ac.TabPaneWidget,
+						$new(ac.TabPaneWidgetModel, panes),
+						$new(ExampleView, {position:'top', startingTabOffset:8, tabSpacing:5, hasTabClosingButtons:false})
+					);
+					widget.show($('pane-3').t(''));
+					
+				}
+        		
+        	};
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+
+	</head>
+	<body>
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> TabPane widget</h1>
+		
+		<p class="description">
+			This is one of the container widgets. In general, there's a keyboard shortcuts support throughout the widgets, simply pressing <strong>CTRL+SHIFT+ALT+K</strong> will popup the keyboard map. Also, the widgets are usually controllable using keyboard (where it makes sense - check the <a href="test-ac.browser.html">ac.Browser</a> widget with support for keyboard control and clipboard operations - just like the native Apple component). There are three ways for developers to add own key shortcuts. You always specify key code (defined by code and mask - see <a href="test-ac.fry.keyboard.html">ac.fry.keyboard</a> for more), text (used by tooltips) and a scope. Scope may vary from <strong>global</strong> (pressing key combination will always launch it no matter what widget is focused), <strong>local</strong> - applies only if widget is focused and <strong>parent</strong> which applies if widget or its parent (or parent of parent and so on) is focused.
+		</p>
+		
+		<a class="redraw" href="javascript:client.onstart()">Redraw</a>
+		
+		<div class="example" style="width:1020px">
+			<div id="pane-1" style="position:absolute;left:20px;top:20px;width:250px;height:300px;">
+			</div>
+			<div id="pane-2" style="position:absolute;left:290px;top:40px;width:400px;height:350px;">
+			</div>
+			<div id="pane-3" style="position:absolute;left:710px;top:100px;width:290px;height:200px;">
+			</div>
+		</div>
+	
+	</body>
+</html>

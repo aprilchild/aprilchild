@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+			/*
+			 * AC Fry - JavaScript Framework v1.0
+			 * Browser widget - Test/Example file
+			 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+			 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - Advanced Keyboard Handler Features</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+
+
+		<script type="text/javascript" src="../ac.fry.js"></script>
+		<script type="text/javascript" src="../ac.fry.keyboard.js"></script>
+		<!--<script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>-->
+	
+		<script type="text/javascript">
+
+
+		function render_key(id, code, value)
+		{
+			var fg_color = '#aaa';
+			var bg_color = '#eee';
+			if (code == (value & code))
+			{
+				fg_color = '#000';
+				bg_color = '#fff'
+			}
+			$(id).s('color:?;border-color:?;background:?'.embed(fg_color, fg_color, bg_color));
+		}
+
+		var tx_processing = null;
+
+		function clear_processing()
+		{
+			tx_processing.value = '';
+		}
+		
+		function main()
+		{
+			tx_processing = document.getElementById('processing');
+			fry.keyboard.initialize();			
+			
+			setInterval(function()
+			{
+				while (true && 'undefined' != typeof fry['keyboard'])
+				{
+					var key = fry.keyboard.popKey();
+					if (key)
+					{
+						var value = '';
+						if (fry.keyboard.CONTROL_CODE == (key[1] & fry.keyboard.CONTROL_CODE))
+						{
+							// control code
+							if (fry.keyboard.PASTE == (key[1] & fry.keyboard.PASTE))
+							{
+								// clipboard paste
+								value = '*CB*Paste: ' + fry.keyboard.clipboard.pastedContent;
+							}
+							else
+							{
+								value = '*CC*: ' + key[0];
+							}
+						}
+						else
+						{
+							value = String.fromCharCode(key[0]);
+						}
+						render_key('alt', fry.keyboard.ALT_KEY, key[1]);
+						render_key('ctrl', fry.keyboard.CTRL_KEY, key[1]);
+						render_key('shift', fry.keyboard.SHIFT_KEY, key[1]);
+						render_key('meta', fry.keyboard.META_KEY, key[1]);
+						$('key_char').t(String.fromCharCode(key[0]));
+						$('key').t("[?, <strong style='font-size:15px'>?</strong>]".embed(key[0], key[1]));
+						value = tx_processing.value + ' … ' + value;
+						tx_processing.value = value;
+					}
+					else
+					{
+						break;
+					}
+				}
+			}, 50);			
+			
+		}
+
+		</script>
+	</head>
+	<body onload="main()">
+
+		<h1 class="logo"><a href="index.html">Back to index page</a> Advanced Keyboard Handler Features</h1>
+	
+		<p class="description">
+			Fry provides universal (works accross any browser) API for handling keyboard events.
+		</p>
+		<em style="margin-left:40px;">Just start pressing keys on your keyboard :-).</em>
+
+		
+		<textarea id="processing" style="width:80%;padding:4px;border:1px solid #888;margin-left:40px;margin-top:20px" cols="120" rows="10"></textarea>
+		<hr/>
+		<a style="margin-left:40px" href="javascript:clear_processing()">Clear output</a>
+		
+		<div style="margin:40px;">
+			<div style="margin:20px;margin-left:5px">
+				<span id="shift" style="color:#aaa;padding:4px;margin-right:6px;border:1px solid #aaa;-webkit-border-radius:3px;-moz-border-radius:3px">Shift  ⇧</span>
+				<span id="alt" style="color:#aaa;padding:4px;margin-right:6px;border:1px solid #aaa;-webkit-border-radius:3px;-moz-border-radius:3px">Alt ⌥</span>
+				<span id="ctrl" style="color:#aaa;padding:4px;margin-right:6px;border:1px solid #aaa;-webkit-border-radius:3px;-moz-border-radius:3px">Ctrl ⌃</span>
+				<span id="meta" style="color:#aaa;padding:4px;margin-right:6px;border:1px solid #aaa;-webkit-border-radius:3px;-moz-border-radius:3px">Command  ⌘</span>
+			</div>
+			<div id="key_char" style="margin-left:5px;width:30px;height:40px;padding:10px;font-size:34px;background:#fff;border:1px solid #ddd;-webkit-border-radius:3px;-moz-border-radius:3px"></div>
+			<div id="key" style="width:64px;height:70px;margin:5px;background:#bbb;padding:5px;-webkit-border-radius:3px;-moz-border-radius:3px"></div>
+		</div>
+
+		<p class="description">
+			Each keystroke is represented by two values. First contains character code, which you can transform to regular string using <strong>String.fromCharCode(code)</strong> method. Second value is a bit mask with bits in this order -> CONTROL_CODE => 1, ALT_KEY => 2, CTRL_KEY => 4, SHIFT_KEY => 8, META_KEY => 16, PASTE => 256. When paste keystroke is received, first code value is set to 0. Contents pasted from clipboard is accessible reading <strong>fry.keyboard.clipboard.pastedContent</strong> property. It's up to you to use it in your application.
+		</p>
+
+		<p class="description">
+			There are two ways of accessing keycodes generated by user input. First options is used in this example. We have an infinitive loop (using setInterval) where we regularly check for new keys in the buffer and process them sequentially. Another option is using listeners. Simply add your listener using <strong>ac.keyboard.addListener(function(code, mask){ /* here goes your handling code */ })</strong>.
+		</p>
+		
+	</body>
+</html>

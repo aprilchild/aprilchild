@@ -1,0 +1,1202 @@
+/*
+ * AC Fry - JavaScript Framework v1.0
+ *
+ * Widget CSS definition.
+ *
+ * (c)2006 Petr Krontorad, April-Child.com
+ * Portions of code based on WHOA Bender Framework, (c)2002-2005 Petr Krontorad, WHOA Group.
+ * http://www.april-child.com. All rights reserved.
+ * See the license/license.txt for additional details regarding the license.
+ * Special thanks to Matt Groening and David X. Cohen for all the robots.
+ */
+
+/*	____________________________________________________________________________________
+
+	General definition
+	________________________________________________________
+*/
+
+.acw-keymap-info
+{
+	border:1px solid #D2C02A;
+	background:#ff0;
+	z-index:9999999;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+}
+.acw-keymap-info.local
+{
+	background:#004;
+	border-color:#000;
+}
+.acw-keymap-info h3
+{
+	font-size:9px;
+	font-weight:bold;
+	margin:3px;
+	color:#9B8C13;
+}
+.acw-keymap-info.local h3
+{
+	color:#ff0;
+}
+.acw-keymap-info p
+{
+	font-size:10px;
+	margin:3px;
+	color:#aaa;	
+}
+
+.ac-fry-copyright
+{
+	position:absolute;
+	top:100px;
+	left:100px;
+	background:#ddd;
+	border:1px solid #bbb;
+	width:420px;
+	padding:20px;
+	color:#888;
+	font-size:10px;
+	z-index:10000000;
+}
+.ac-fry-copyright h1
+{
+	background:transparent;
+	border:0;
+	margin:0;
+	padding:0;
+	width:auto;
+	border-bottom:1px solid #aaa;
+	font-size:15px;
+	font-weight:bold;
+	color:#000;
+}
+.ac-fry-copyright h2
+{
+	border:0;
+	margin:5px 0 0 0;
+	padding:0;
+	width:auto;
+	font-size:12px;
+	font-weight:bold;
+	text-align:right;
+	color:#666;
+}
+.ac-fry-copyright p
+{
+	color:#aaa;
+}
+
+.insertion-point
+{	
+}
+.insertion-point .head
+{
+}
+
+.acw-generic-dnd-cursor
+{
+	color:#888;
+	cursor:default;
+}
+
+/*	____________________________________________________________________________________
+	
+	ACForm 
+	________________________________________________________
+*/
+table.acform
+{
+}
+
+table.acform td
+{
+	padding:1px 2px 1px 2px;
+	vertical-align:middle;
+}
+
+table.acform td span.label
+{
+}
+
+table.acform td input
+{
+	border:1px solid #bbb;
+	padding:1px 2px 1px 2px;
+	font-size:11px;
+	color:#000;
+	background:#fff;
+}
+
+table.acform td input.checkbox
+{
+	padding:0;
+	border:0;
+}
+
+table.acform td input.radio
+{
+	padding:0;
+	border:0;
+}
+
+table.acform td input.button
+{
+	border:1px solid #bbb;
+	border-top-color:#ddd;
+	border-left-color:#ddd;
+	font-weight:bold;
+	padding:1px 8px 1px 8px;
+	background:#ccc;
+	color:#444;
+}
+
+table.acform td select
+{
+	border:1px solid #bbb;
+	padding:0;
+	background:#fff;	
+}
+
+table.acform td select option
+{
+	padding:1px 2px 1px 2px;
+	font-size:11px;
+	color:#000;
+}
+
+/*	____________________________________________________________________________________
+	
+	Accordion
+	________________________________________________________
+*/
+.acw-accordion
+{
+	overflow:auto;
+}
+.acw-accordion .title
+{
+	background:#eee;
+	height:21px;
+	cursor:default;
+}
+.acw-accordion .title table
+{
+	width:100%;
+}
+.acw-accordion .title td.arrow
+{
+	width:20px;
+	border-top:1px solid #ccc;
+}
+.acw-accordion .title td.arrow img
+{
+	margin-left:4px;
+}
+.acw-accordion .title td.label
+{
+	border-top:1px solid #bbb;
+	padding:2px 10px 2px 2px;
+	font-weight:bold;
+}
+.acw-accordion .content
+{
+	width:auto;
+	background:#fff;
+	border:1px solid #eee;
+	border-top:1px solid #fff;
+	border-bottom:0;
+	padding:4px;
+}
+.acw-accordion .content .content-inner
+{
+	width:auto;
+	overflow:hidden;
+}
+
+
+/*	____________________________________________________________________________________
+	
+	Browser 
+	________________________________________________________
+*/
+.acw-browser
+{
+	font-size:11px;
+}
+.acw-browser td
+{
+	padding:0;
+	margin:0;
+}
+.acw-browser .container
+{
+	overflow:scroll;
+	position:absolute;
+}
+.acw-browser .column
+{
+	/*_position:relative; */
+	float:left;
+	overflow:hidden;
+	background:#fff;
+}
+.acw-browser .column .scroll
+{
+	overflow:scroll;
+}
+.acw-browser .browser-inner
+{
+	width:auto;
+}
+.acw-browser .browser-inner .loading
+{
+	margin:8px;
+	background-repeat:no-repeat;
+	width:30px;
+	height:30px;
+}
+.acw-browser .browser-inner .error
+{
+	background-repeat:no-repeat;	
+}
+.acw-browser .browser-inner .detail
+{
+	margin:4px;
+	width:auto;
+}
+.acw-browser .browser-inner table tr td
+{
+	padding:1px 4px 1px 2px;
+	cursor:default;
+	background:#fff;
+	color:#000;
+	border-bottom:1px solid #fff;
+}
+.acw-browser .browser-inner table tr td em
+{
+	font-style:normal;
+	color:#888;
+}
+.acw-browser .browser-inner table tr.active td
+{
+	background-color:#0064E6;
+	color:#fff;
+}
+.acw-browser .browser-inner table tr.midactive td
+{
+	background-color:#d0d0d0;
+}
+.acw-browser .browser-inner table tr td.first
+{
+	padding-right:0;
+}
+.acw-browser .browser-inner table tr td.last
+{
+	padding:1px 4px 1px 0;
+}
+.acw-browser .browser-inner table tr td.label input
+{
+	padding:0;
+}
+.acw-browser .browser-inner table tr.active td
+{
+	color:#fff;
+}
+/*	____________________________________________________________________________________
+	
+	DropDownList
+	________________________________________________________
+*/
+
+.acw-dropdownlist
+{
+	background-repeat:no-repeat;
+}
+.acw-dropdownlist .value
+{
+	background-repeat:repeat-x;
+}
+.acw-dropdownlist .value input
+{
+	border:0;
+	padding-top:2px;
+	font-size:11px;
+	color:#000;
+	height:13px;
+	background-color:transparent;
+	margin:1px 0 1px 0;
+}
+.acw-dropdownlist .value div
+{
+	width:auto;
+	margin:0 0 0 2px;
+	cursor:default;
+}
+.acw-dropdownlist .control
+{
+	background-repeat:no-repeat;
+	width:18px;
+	height:19px;
+}
+.acw-dropdownlist.options
+{
+	border:1px solid #ddd;
+	cursor:default;
+}
+.acw-dropdownlist.options .item
+{
+	width:auto;
+	background:#fff;
+	color:#000;
+}
+.acw-dropdownlist.options .item.selected
+{
+	background-color:#0064E6;
+	color:#fff;	
+}
+
+/*	____________________________________________________________________________________
+	
+	FileChooser
+	________________________________________________________
+*/
+
+.acw-filechooser
+{
+}
+.acw-filechooser.top-pane
+{
+	width:auto;
+	background:#ddd;
+	border-bottom:1px solid #ccc;
+}
+.acw-filechooser.top-pane .save-form
+{
+	width:auto;
+	text-align:center;
+	padding:8px;
+	border-bottom:1px solid #aaa;
+	background:#f0f0f0;
+}
+.acw-filechooser.top-pane .save-form table
+{
+	width:100%;
+}
+.acw-filechooser.top-pane .save-form td
+{
+	text-align:left;
+	vertical-align:middle;
+	width:70%;
+}
+.acw-filechooser.top-pane .save-form td.label
+{
+	padding-right:3px;
+	width:30%;
+	text-align:right;
+}
+.acw-filechooser.top-pane .save-form td input
+{
+	border:1px solid #ddd;
+	padding:2px 2px 2px 2px;
+	font-size:11px;
+	color:#000;
+	background:#fff;
+	width:60%;
+}
+.acw-filechooser.top-pane .buttons
+{
+	position:absolute;
+	width:auto;
+}
+.acw-filechooser.top-pane .left-arrow
+{
+	position:absolute;
+	top:9px;
+	left:9px;
+	width:27px;
+	height:22px;
+}
+.acw-filechooser.top-pane .right-arrow
+{
+	position:absolute;
+	top:9px;
+	left:36px;
+	width:28px;
+	height:22px;
+}
+.acw-filechooser.top-pane .switch
+{
+	position:absolute;
+	top:9px;
+	left:73px;
+	width:55px;
+	height:22px;
+}
+.acw-filechooser.top-pane .path-selection
+{
+	position:absolute;
+	top:9px;
+	left:137px;
+	width:250px;
+	height:16px;
+}
+.acw-filechooser.top-pane .path-selection select
+{
+	width:250px;
+	padding:0;
+	border:1px solid #ccc;
+}
+.acw-filechooser.top-pane .path-selection select option
+{
+	padding:1px 4px 1px 4px;
+	background:#fff;
+}
+.acw-filechooser.top-pane .search-box
+{
+	position:absolute;
+	top:9px;
+	width:150px;
+}
+.acw-filechooser.mid-pane
+{
+	background:#fff;
+	width:auto;
+}
+.acw-filechooser.mid-pane .left-pane
+{
+	width:120px;
+}
+.acw-filechooser.mid-pane .left-pane ul
+{
+	list-style:none;
+}
+.acw-filechooser.mid-pane .left-pane ul li
+{
+	width:auto;
+	cursor:default;
+}
+.acw-filechooser.mid-pane .left-pane ul li div
+{
+	width:auto;
+	padding:4px;
+	padding-left:8px;
+	font-size:12px;
+}
+.acw-filechooser.bottom-pane
+{
+	width:auto;
+	height:30px;
+	background:#ddd;
+}
+.acw-filechooser.bottom-pane input, .acw-window.filechooser-dialog-window .window-content-inner table td.buttons input.button
+{
+	position:absolute;
+	top:4px;
+	border:1px solid #ccc;
+	border-top-color:#eee;
+	border-left-color:#eee;
+	padding:2px 14px 2px 14px;
+	color:#000;
+	font-size:13px;
+	background:#fff;
+}
+
+.acw-window.filechooser-dialog-window .window-content-inner table
+{
+	margin:8px;
+	width:420px;
+}
+.acw-window.filechooser-dialog-window .window-content-inner table td.label
+{
+	width:156px;
+	text-align:right;
+	padding-right:4px;
+}
+.acw-window.filechooser-dialog-window .window-content-inner table td.input
+{
+	width:260px;
+	text-align:left;
+}
+.acw-window.filechooser-dialog-window .window-content-inner table td.input input
+{
+	width:256px;
+	font-size:11px;
+	padding:2px;
+	border:1px solid #ccc;
+	border-top-color:#eee;
+	border-left-color:#eee;
+}
+.acw-window.filechooser-dialog-window .window-content-inner table td.buttons
+{
+	text-align:right;
+	padding-top:8px;
+}
+ .acw-window.filechooser-dialog-window .window-content-inner table td.buttons input.button
+{
+	position:relative;
+	top:0;
+	left:0;
+}
+ .acw-window.filechooser-dialog-window .window-content-inner .info
+{
+	width:auto;
+	padding:8px;
+}
+/*	____________________________________________________________________________________
+	
+	MapGraph
+	________________________________________________________
+*/
+
+.acw-mapgraph
+{
+	cursor:default;
+}
+.acw-mapgraph td.error
+{
+}
+
+.acw-mapgraph-tree-map
+{
+	background:#555;
+}
+.acw-mapgraph-tree-drag-selection
+{
+	border:1px solid #00a;
+	background:#88a;
+}
+.acw-mapgraph-tree-map .inner
+{
+	background:#f0f0f0;
+}
+.acw-mapgraph-tree-map .inner .item
+{
+	border:1px solid #888;
+	background:#ccc;
+}
+.acw-mapgraph-tree-map .frame
+{
+	border:1px solid #004;
+	background:#fff;
+}
+
+.acw-mapgraph-tree-element
+{
+}
+
+.acw-mapgraph-tree-element .inner
+{
+	border:1px solid #c0c0c0;
+	background:#f0f0f0;
+}
+.acw-mapgraph-tree-element .inner.midactive
+{
+	border:1px solid #333;
+	background:#ddd;
+}
+.acw-mapgraph-tree-element .inner.drop-over
+{
+	border:1px solid #0064E6;
+	background:#a0f4ff;
+}
+.acw-mapgraph-tree-element .inner.active
+{
+	border:1px solid #0064E6;
+	background:#a0f4ff;
+}
+td.acw-mapgraph-tree-line-v
+{
+	border-right:1px solid #aaa;
+}
+td.acw-mapgraph-tree-line-h
+{
+	background:#aaa
+}
+.acw-mapgraph-graph-element
+{
+}
+.acw-mapgraph-graph-element .header
+{
+	width:auto;
+	border-left:1px solid #C0C0C0;
+	border-right:1px solid #C0C0C0;
+	background-color:#ddd;
+	color:#000;
+	font-weight:bold;
+}
+.acw-mapgraph-graph-element .header .inner
+{
+	margin:1px;
+}
+.acw-mapgraph-graph-element .body
+{
+	border-right:1px solid #c0c0c0;
+	border-left:1px solid #c0c0c0;
+	width:auto;
+	background:#f0f0f0;
+	color:#444;
+}
+.acw-mapgraph-graph-element .body .inner
+{
+	margin:1px;
+}
+.acw-mapgraph-graph-element .footer
+{
+	width:auto;
+	background:#d8d8d8;
+	border-right:1px solid #c0c0c0;
+	border-left:1px solid #c0c0c0;
+	border-bottom:1px solid #c0c0c0;
+}
+.acw-mapgraph-graph-element .footer .inner
+{
+	color:#999;
+	font-size:10px;
+	margin:1px;
+}
+.acw-mapgraph-relation-h
+{
+	border-top:1px dotted #000;
+}
+
+.acw-mapgraph-relation-v
+{
+	border-left:1px dotted #000;
+}
+
+.acw-mapgraph-relation-end-up, .acw-mapgraph-relation-end-down
+{
+	width:9px;
+	height:6px;
+}
+
+/*	____________________________________________________________________________________
+	
+	Menu
+	________________________________________________________
+*/
+.acw-menu
+{
+	font-size:11px;
+	z-index:5000;
+	opacity:0.95;
+	filter:alpha(opacity=95);
+}
+.acw-menu.top
+{
+}
+.acw-menu.top table
+{
+}
+.acw-menu.top td.item
+{
+	background:#fff;
+	cursor:default;
+	height:13px;
+	padding:3px 8px 3px 8px;
+}
+.acw-menu.top td.item.selected
+{
+	background-color:#0064E6;
+	color:#fff;	
+}
+.acw-menu.menu
+{
+	border:1px solid #ddd;
+	background-color:#f8f8f8;
+}
+.acw-menu.menu td
+{
+	height:13px;
+}
+.acw-menu.menu td.separator
+{
+	height:9px;
+	background-repeat:repeat-x;
+	background-position:0px 4px;
+}
+.acw-menu.menu td.item
+{
+	padding:2px 8px 2px 8px;
+	cursor:default;
+}
+.acw-menu.menu td.item.selected
+{
+	background-color:#0064E6;
+	color:#fff;
+}
+.acw-menu.menu td .menu-inner td.icon
+{
+	width:16px;
+}
+.acw-menu.menu td .menu-inner td.label
+{
+}
+.acw-menu.menu td .menu-inner td.label.inactive
+{
+	color:#999;
+}
+.acw-menu.menu td .menu-inner td.key
+{
+	text-align:right;
+}
+.acw-menu.menu td .menu-inner td.key span
+{
+	background-color:#ccc;
+	font-size:10px;
+	color:#444;
+	padding:1px 2px 1px 2px;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;
+}
+.acw-menu.menu td .menu-inner td.key.collection
+{
+	width:16px;
+	background-repeat:no-repeat;
+	background-position:9px 3px;
+}
+
+
+/*	____________________________________________________________________________________
+	
+	SearchBox
+	________________________________________________________
+*/
+
+.acw-searchbox
+{
+}
+.acw-searchbox .recent
+{
+	background-repeat:no-repeat;
+	width:24px;
+}
+.acw-searchbox .value
+{
+	background-repeat:repeat-x;
+}
+.acw-searchbox .value input
+{
+	border:0;
+	padding-top:2px;
+	font-size:11px;
+	color:#000;
+	height:13px;
+	background-color:transparent;
+	margin:1px 0 1px 0;
+}
+.acw-searchbox .clear
+{
+	background-repeat:no-repeat;
+	width:17px;
+}
+
+/*	____________________________________________________________________________________
+	
+	TableView & OutlineView
+	________________________________________________________
+*/
+
+.acw-tableview, .acw-outlineview
+{
+	width:auto;
+}
+
+.acw-tableview table, .acw-outlineview table
+{
+	margin:0;
+}
+.acw-tableview tr td, .acw-outlineview tr td
+{
+	margin:0;
+	padding:0;
+	background:#fff;
+	height:18px;
+	font-size:11px;
+	cursor:default;
+	border:1px solid #fff;
+	border-right:0;
+}
+.acw-tableview tr td div.tableview-inner, .acw-outlineview tr td div.tableview-inner
+{
+	width: auto;
+	margin:0px 8px 0px 4px;	
+	font-size:11px;
+	font-weight:normal;
+}
+table tr td div.tableview-inner blockquote em
+{
+	font-style:normal;
+	color:#888;
+}
+
+.acw-tableview tr.even td, .acw-outlineview tr.even td
+{
+	background:#f0f0f0;
+}
+
+.acw-tableview tr.active td, .acw-tableview tr.even.active td, .acw-outlineview tr.active td, .acw-outlineview tr.even.active td
+{
+	background-color:#0064E6;
+	border-color:#0064E6;
+	color:#fff;
+}
+
+.acw-tableview tr.midactive td, .acw-tableview tr.even.midactive td , .acw-outlineview tr.midactive td, .acw-outlineview tr.even.midactive td, .acw-outlineview tr.drop-over td, .acw-outlineview tr.even.drop-over td
+{
+	background-color:#d0d0d0;
+	border-color:#d0d0d0;
+	color:#000;
+}
+
+
+.acw-tableview tr.header td, .acw-outlineview tr.header td
+{
+	border:1px solid #9E9E9E;
+	border-left:1px solid #c7c7c7;
+	border-right:0;
+	cursor:default;
+	height:15px;
+}
+.acw-tableview tr.header td .label, .acw-outlineview tr.header td .label
+{
+	height:12px;
+	padding:1px 0 2px 8px;
+	float:left;
+}
+.acw-tableview tr.header td.selected, .acw-outlineview tr.header td.selected
+{
+	border-top-color:#000;
+	border-bottom-color:#000;
+}
+.acw-tableview tr.header td.selected .sort-asc, .acw-outlineview tr.header td.selected .sort-asc
+{
+	float:right;
+	width:15px;
+}
+.acw-tableview tr.header td.selected .sort-desc, .acw-outlineview tr.header td.selected .sort-desc
+{
+	float:right;
+	width:15px;
+}
+.acw-tableview .searching, .acw-outlineview .searching
+{
+	position:absolute;
+	top:50px;
+	left:70px;
+	font-size:17px;
+	color:#aaa;
+	width:500px;
+}
+.acw-tableview tr td.invisible, .acw-tableview tr.even td.invisible, .acw-outlineview tr td.invisible, .acw-outlineview tr.even td.invisible
+{
+	color:#ddd;
+	background:#ddd;
+	border-color:#ddd;
+}
+.acw-tableview-dnd, .acw-outlineview-dnd
+{
+	color:#888;
+	padding-left:40px;
+	cursor:default;
+}
+.tableview-loading-error
+{
+	background-color:#e4e4e4;
+	padding:2px;
+	color:#777;
+	font-size:10px;
+}
+
+.acw-tableview tr.info-detail td, .acw-outlineview tr.info-detail td
+{
+	border:1px solid #fff;
+	border-top:0;
+	border-color:#fff;
+	border-bottom-color:#d0d0d0;
+	padding:8px;
+	background:#fff;
+	color:#666;
+}
+
+.acw-tableview tr.info-detail.active td, .acw-outlineview tr.info-detail.active td
+{
+	border-color:#0064E6;
+}
+.acw-tableview tr.info-detail.midactive td, .acw-outlineview tr.info-detail.midactive td, .acw-outlineview tr.info-detail.drop-over td
+{
+	border-color:#d0d0d0;
+}
+
+/*	____________________________________________________________________________________
+	
+	OutlineView
+	________________________________________________________
+*/
+
+.acw-outlineview tr td .arrow-void
+{
+	margin-top:2px;
+	width:12px;
+	height:11px;
+	background-repeat:no-repeat;
+	float:left;	
+}
+.acw-outlineview tr td .arrow-right, .acw-outlineview tr td .arrow-down
+{
+	margin-top:2px;
+	width:12px;
+	height:11px;
+	background-repeat:no-repeat;
+	float:left;
+}
+
+
+/*	____________________________________________________________________________________
+	
+	TabPane 
+	________________________________________________________
+*/
+.acw-tabpane
+{
+	width:auto;
+}
+.acw-tabpane .titles
+{
+	background:#ddd;
+	height:21px;
+	cursor:default;
+}
+.acw-tabpane .titles .inner
+{
+	padding:2px 4px 2px 4px;
+}
+.acw-tabpane .titles .inner td .button-close
+{
+	width:14px;
+	height:14px;
+	background-color:#aaa;
+	margin-right:4px;
+}
+.acw-tabpane .titles .active, .acw-tabpane .titles .inactive
+{
+	text-align:center;
+	padding-top:2px;
+	border:1px solid #aaa;
+	background-color:#fff;
+	border-bottom-width:0;
+}
+.acw-tabpane .titles .inactive
+{
+	background:#ddd;
+	border:0;
+	border-left:1px solid #ddd;
+	border-right:1px solid #aaa;
+}
+.acw-tabpane .titles .bottom
+{
+	border-top-width:0;
+	border-bottom-width:1px;
+	padding-top:0;
+	padding-bottom:2px;
+}
+.acw-tabpane .hider
+{
+	border-top:1px solid #fff;
+}
+.acw-tabpane .contents
+{
+	background:#fff;
+	border:1px solid #aaa;
+}
+.acw-tabpane .contents.bottom
+{
+}
+
+
+/*	____________________________________________________________________________________
+	
+	Tree 
+	________________________________________________________
+*/
+.acw-tree
+{
+	overflow:hidden;
+}
+.acw-tree .tree-inner
+{
+	font-size:11px;
+	position:absolute;
+	overflow:auto;
+}
+.acw-tree .root
+{
+	background:transparent;
+}
+.acw-tree .absolute
+{
+	_margin-left:-15px;
+}			
+.acw-tree .elem-container
+{
+	margin-left:15px;
+/*	_position:relative; */
+}
+.acw-tree .lside img
+{
+	margin-top:1px;
+	margin-left:1px;
+}
+.acw-tree .header
+{
+	_margin-left:15px;
+	border:1px solid #fff;
+	padding-left:2px;
+	background:#fff;
+	color:#000;
+	cursor:default;
+	height:14px;
+}
+.acw-tree .header.active
+{
+	border-top-color:#0064E6;
+	background-color:#0064E6;
+	color:#fff;
+}
+.acw-tree .header.midactive
+{
+	border-top-color:#d0d0d0;
+	background-color:#d0d0d0;
+	color:#000;
+}
+.acw-tree .header-active-decor
+{
+	background-color:#0064E6;	
+}
+.acw-tree .header-midactive-decor
+{
+	background-color:#d0d0d0;	
+}
+.acw-tree .body
+{
+}
+.acw-tree .body .inner
+{
+	_margin-left:15px;
+}
+.acw-tree .header img
+{
+	width:16px;
+	height:16px;
+	vertical-align:middle;
+}
+
+
+/*	____________________________________________________________________________________
+	
+	Window 
+	________________________________________________________
+*/
+.acw-window
+{
+}
+
+.acw-window-modal-bg
+{
+	cursor:wait;
+}
+
+.acw-window .window-title
+{
+	width:auto;
+	padding:2px 0 2px 0;
+	height:18px;
+}
+
+.acw-window .window-title .window-buttons
+{
+	width:60px;
+	float:left;
+}
+
+.acw-window .window-title .window-label
+{
+	float:right;
+}
+
+.acw-window .window-content
+{
+	width:auto;
+	background:#fff;
+}
+.acw-window .window-content-inner
+{
+	width:auto;
+	overflow:hidden;
+}
+.acw-window .window-content-inner.scrollable
+{
+	overflow:auto;	
+}
+.acw-window .window-status
+{
+	background-color:#ddd;
+	height:14px;
+	font-size:10px;
+	color:#555;
+}
+.acw-window .resizer, .acw-window-resizer
+{
+	width:17px;
+	height:17px;
+	background-repeat:no-repeat;
+}
+
+/*	____________________________________________________________________________________
+	
+	View support 
+	________________________________________________________
+*/
+table.tab-pair-info
+{
+	border:0;
+	margin:0;
+	padding:0;
+	margin-bottom:20px;
+}
+table.tab-pair-info tr.title td
+{
+	border:0;
+	margin:0;
+	padding:0 0 6px 2px;
+	font-size:13px;
+	font-weight:bold;
+	color:#444;
+}
+table.tab-pair-info tr td
+{
+	height:12px;
+}
+table.tab-pair-info tr td.key
+{
+	text-align:right;
+	font-weight:bold;
+	color:#888;
+	border:0;
+	margin:0;
+	padding:0 4px 1px 2px;
+	font-size:11px;
+	vertical-align:top;
+}
+table.tab-pair-info tr td.value
+{
+	text-align:left;
+	color:#222;
+	border:0;
+	margin:0;
+	padding:0 1px 1px 2px;
+	font-size:11px;
+	vertical-align:top;
+}

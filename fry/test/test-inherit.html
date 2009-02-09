@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+			/*
+			 * AC Fry - JavaScript Framework v1.0
+			 * Browser widget - Test/Example file
+			 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+			 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - Core - OO Features</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+
+
+		<script type="text/javascript" src="../ac.fry.js"></script>
+		<script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+	
+		<script type="text/javascript">
+
+
+		/* Example code:
+
+			Let's define this structure of classes:
+	
+			A
+			B < A
+			C
+			D < B, C
+			E
+			F < D, E
+*/
+
+		$class('A',
+		{
+			construct:function(id)
+			{
+				this.id = id || 'no-id';
+			}
+		});
+
+		A.prototype.report = function(full)
+		{
+			var t = 'report for class `'+this.__class_name + '`\n----------------------\n';
+			for ( var i in this )
+			{
+				if ( !full && 'function' == typeof this[i] )
+				{
+					continue;
+				}
+				t += i+':'+this[i]+'\n';
+			}
+			return t;
+		}
+
+		$class('B < A',
+		{
+			construct:function(id, uri)
+			{
+				this.uri = uri || 'no-uri';
+			}
+		});
+
+		$class('C',
+		{
+			construct:function(c)
+			{
+				this.cProp = c || 'default C property';
+			}
+		});
+
+		C.prototype.report = function(full)
+		{
+			var t = '<span style="color:red">C-report for class `'+this.__class_name + '`\n----------------------\n';
+			for ( var i in this )
+			{
+				if ( !full && 'function' == typeof this[i] )
+				{
+					continue;
+				}
+				t += i+':'+this[i]+'\n';
+			}
+			return t+'</span>';	
+		}
+
+		$class('D < B, C');
+
+		D.prototype.report = function(full)
+		{
+			var t= '<span style="color:green">D-report - combined</span>\n';
+			t += $call(this, 'B.report', full);
+			t += $call(this, 'C.report', full);
+			return t;
+		}
+
+		$class('E',
+		{
+			construct:function(e)
+			{
+				this.error = e || 'No error message';
+			}
+		})
+
+		E.prototype.report = function(full)
+		{
+			var t = '<span style="color:blue">E-report for class `'+this.__class_name + '`\n----------------------\n';
+			for ( var i in this )
+			{
+				if ( !full && 'function' == typeof this[i] )
+				{
+					continue;
+				}
+				t += i+':'+this[i]+'\n';
+			}
+			return t+'</span>';	
+		}
+
+		$class('F < D, E',
+		{
+			construct:function(f)
+			{
+				this.fWord = f || '*uck';
+			}
+		})
+
+
+		function echo(str)
+		{
+			var node = document.getElementById('output').appendChild(document.createElement('div'));
+			node.innerHTML = '============================\n'+str;
+		}
+
+		function main()
+		{
+			// Safari BUG !!!
+			var ff = function()
+			{
+				var re = /ds/g;
+				this.p = {orde:'dsd', a:'dsad'};
+			}
+			//alert(ff); - won't return the original code :(
+	
+			var a = $new(A);
+			echo(a.report());
+			var b = $new(B, 'b-id', 'http://b');
+			echo(b.report());
+			var c = $new(C);
+			echo(c.report());
+			var d1 = $new(D);
+			echo(d1.report());
+			var d2 = $new(D, 'd2-id', 'http://d2', 'cprop-d2');
+			echo(d2.report());
+			var e = $new(E);
+			echo(e.report());
+			var f = $new(F, 'f-id', 'http://f', 'cprop-f', 'ERROR F', 'Be nice:)');
+			echo(f.report());
+	
+		}
+
+		</script>
+	</head>
+	<body onload="main()">
+
+		<h1 class="logo"><a href="index.html">Back to index page</a> Core OO Features</h1>
+	
+		<p class="description">
+			Fry supports multiple classes inheritance (that is, you can create new class from unlimited number of base classes). See the source code for more.
+		</p>
+
+		<pre id="output">Output</pre>
+
+	</body>
+</html>

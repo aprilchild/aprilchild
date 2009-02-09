@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * Test/Example Page for UI extension
+		 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - JavaScript Framework</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		
+		<script type="text/javascript" src="test.js"></script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.ui.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+        <script type="text/javascript">
+
+		tests = 
+		[
+			{
+				title:'Dragging',
+				note:'Creating couple of draggable nodes.',
+				keepPrevious:false,
+				code:function()
+				{
+					var container = $('test-div-001').t('Drag generated DIVs').p();
+					$dotimes(10, function(counter)
+					{
+						// some drag nodes are going to be vertical
+						var is_vertical = 0.4 > Math.random();
+						// some horizontal
+						var is_horizontal = 0.4 > Math.random();
+						// creating drag node
+						var drag_node = container.a($$()).pos(true).s('border:1px solid green;background:yellow').x(200+50*counter).y(300+30*counter).w(200).t('Drag Me No ?!'.embed(counter));
+						drag_node.addDrag(
+							is_vertical ? fry.ui.drag.MODE_VERTICAL : is_horizontal ? fry.ui.drag.MODE_HORIZONTAL : fry.ui.drag.MODE_STANDARD,
+							function() // onGetRenderingNode
+							{
+								return drag_node;
+							},
+							function() // onDragStart
+							{
+								drag_node.t($_(counter).surroundTag('h1')+('<br/>Drag mode: '+(is_vertical ? 'MODE_VERTICAL' : is_horizontal ? 'MODE_HORIZONTAL' : 'MODE_STANDARD')));
+							},
+							function(node, nx, ny, ox, oy) // onDragMove
+							{
+								return null;
+							},
+							function() // onDragStop
+							{
+
+							},
+							function() // onClick
+							{
+								alert('You have just clicked on '+counter+'\nNow removing drag.');
+								drag_node.removeDrag();
+							},
+							function() // onGetCursorNode
+							{
+								return null;
+							}
+						);	
+					});
+				}
+			},
+			{
+				title:'Limit drag movement',
+				note:'Showing how to limit drag movement area. Let\'s limit the drag area to [100,100][600,500]. <strong>Please note</strong>, the coordinates are page-absolute.',
+				keepPrevious:false,
+				code:function()
+				{
+					var container = $('test-div-001').t('Drag generated DIVs').p();
+					$dotimes(10, function(counter)
+					{
+						// some drag nodes are going to be vertical
+						var is_vertical = 0.4 > Math.random();
+						// some horizontal
+						var is_horizontal = 0.4 > Math.random();
+						// creating drag node
+						var drag_node = container.a($$()).pos(true).s('border:1px solid green;background:yellow').x(200+50*counter).y(300+30*counter).w(200).t('Drag Me No ?!'.embed(counter));
+						drag_node.addDrag(
+							is_vertical ? fry.ui.drag.MODE_VERTICAL : is_horizontal ? fry.ui.drag.MODE_HORIZONTAL : fry.ui.drag.MODE_STANDARD,
+							function() // onGetRenderingNode
+							{
+								return drag_node;
+							},
+							function() // onDragStart
+							{
+								drag_node.t($_(counter).surroundTag('h1')+('<br/>Drag mode: '+(is_vertical ? 'MODE_VERTICAL' : is_horizontal ? 'MODE_HORIZONTAL' : 'MODE_STANDARD')));
+							},
+							function(node, nx, ny, ox, oy) // onDragMove
+							{
+								if ( 100 > nx )
+								{
+									nx = 100;
+								}
+								if ( 600 < nx )
+								{
+									nx = 600;
+								}
+								if ( 100 > ny )
+								{
+									ny = 100;
+								}
+								if ( 500 < ny )
+								{
+									ny = 500;
+								}
+								return {x:nx, y:ny};
+							},
+							function() // onDragStop
+							{
+							},
+							function() // onClick
+							{
+								alert('You have just clicked on '+counter+'\nNow removing drag.');
+								drag_node.removeDrag();
+							},
+							function() // onGetCursorNode
+							{
+								return null;
+							}
+						);	
+					});
+				}
+			},			
+			{
+				title:'Dragging using cursor',
+				note:'Creating couple of draggable nodes, drag is performed using cursor and adapter argument (instead of methods).',
+				keepPrevious:false,
+				code:function()
+				{
+					var container = $('test-div-001').t('Drag generated DIVs').p();
+					$dotimes(10, function(counter)
+					{
+						// some drag nodes are going to be vertical
+						var is_vertical = 0.4 > Math.random();
+						// some horizontal
+						var is_horizontal = 0.4 > Math.random();
+						// creating drag node
+						var drag_node = container.a($$()).pos(true).s('border:1px solid green;background:yellow').x(200+50*counter).y(300+30*counter).t('Drag Me No ?!'.embed(counter));
+						drag_node.addDrag(
+							is_vertical ? fry.ui.drag.MODE_VERTICAL : is_horizontal ? fry.ui.drag.MODE_HORIZONTAL : fry.ui.drag.MODE_STANDARD,
+							{
+								onGetCursorNode:function()
+								{
+									return drag_node.dup().a($$()).t('Duplicated. Drag mode: '+(is_vertical ? 'MODE_VERTICAL' : is_horizontal ? 'MODE_HORIZONTAL' : 'MODE_STANDARD')).s('background:red;padding:4px');
+								},
+								onClick:function()
+								{
+									alert('You have just clicked on '+counter+'\nNow removing drag.');
+									drag_node.removeDrag();									
+								}
+							}
+						);	
+					});
+				}
+			},
+			{
+				title:'Simple Drag and Drop',
+				note:'This is the tiny code to handle data exchage between two nodes using drag and drop.',
+				keepPrevious:false,
+				code:function()
+				{
+					// let's create drop target
+					var drop = $().a($$()).pos(true).x(400).y(300).w(150).h(100).s('border:1px solid red;background:#a00;color:#fff').t('Drop me here...');
+					// let's create drag node
+					var drag = $().a($$()).pos(true).x(600).y(300).w(150).h(40).s('border:1px solid blue;background:yellow').t('Drag me...');
+					// adding DnD capablilites
+					drop.addDnD(fry.ui.dnd.MODE_DROP,
+					{
+						onDragEnter:function(firstEnter, offsetX, offsetY)
+						{
+							drop.t('Now drop it!<br/>Offset ?:?'.embed(offsetX, offsetY));
+						},
+						onDragLeave:function(lastLeave)
+						{
+							if ( !lastLeave )
+							{
+								drop.t('OK, do it later...');
+							}
+						},
+						onPutData:function(data)
+						{
+							drop.t('Thank you for ?'.embed(data.surroundTag('strong')));
+						}						
+					});
+					drag.addDnD(fry.ui.dnd.MODE_DRAG,
+					{
+						onGetData:function()
+						{
+							return 'my data...';
+						}
+					});
+					
+				}
+			},
+			{
+				title:'Simple Drag and Drop - pointer',
+				note:'This is the tiny code to handle data exchage between two nodes using drag and drop and pointer drag mode. This is different from default intersection drag mode - drop target is becoming active when mouse pointer is inside no matter what cursor node looks like.',
+				keepPrevious:false,
+				code:function()
+				{
+					// let's create drop target
+					var drop = $().a($$()).pos(true).x(200).y(300).w(150).h(100).s('border:1px solid red;background:#a00;color:#fff').t('Drop me here...<br/>Move mouse pointer above me.');
+					// let's create drag node
+					var drag = $().a($$()).pos(true).x(200).y(500).w(150).h(40).s('border:1px solid blue;background:yellow').t('Drag me...');
+					// adding DnD capablilites
+					drop.addDnD(fry.ui.dnd.MODE_DROP,
+					{
+						onDragEnter:function(firstEnter, offsetX, offsetY)
+						{
+							drop.t('Now drop it!<br/>Offset ?:?'.embed(offsetX, offsetY));
+						},
+						onDragLeave:function(lastLeave)
+						{
+							if ( !lastLeave )
+							{
+								drop.t('OK, do it later...');
+							}
+						},
+						onPutData:function(data)
+						{
+							drop.t('Thank you for ?'.embed(data.surroundTag('strong')));
+						}						
+					});
+					drag.addDnD(fry.ui.dnd.MODE_DRAG_POINTER,
+					{
+						onGetData:function()
+						{
+							return 'my data...';
+						}
+					});
+					
+				}
+			},			
+			{
+				title:'Complex Drag and Drop',
+				note:'Creating drag &amp; drop nodes. This is a complex example.',
+				keepPrevious:false,
+				code:function()
+				{
+					var container = $('test-div-001').t('Drag&amp;Drop DIVs').p();
+					$dotimes(10, function(counter)
+					{
+						// some nodes are draggable
+						var is_drag = 0.5 > Math.random();
+						// some drop targets
+						var is_drop = 0.5 > Math.random();
+						// some are going to be both draggable and drop targets
+						var is_both = is_drag == is_drop;
+						if ( is_both )
+						{
+							is_drag = is_drop = true;
+						}
+						
+						// creating node
+						var drag_node = container.a($$()).pos(true).s('border:1px solid green;background:yellow').x(50+100*counter).y(50+60*counter).w(90).h(50).t('No ? Drag: ? Drop: ?'.embed(counter, is_drag?'T':'F', is_drop?'T':'F'));
+
+						var default_text = $_(counter).surroundTag('strong')+('<br/>DnD mode: '+(is_both ? 'MODE_BOTH' : (is_drag ? 'MODE_DRAG':'MODE_DROP')));
+						drag_node.$.title = default_text;
+
+						// drag nodes may have intersection padding defined [top, right, bottom, left] which might be negative as well, let's simulate it
+						// drop targets don't need this feature, since you can control it via onGetCoords method
+						var cursor_padding = [Math.floor(-10+20*Math.random()), Math.floor(-20+40*Math.random()), Math.floor(-10+20*Math.random()), Math.floor(-20+40*Math.random())];
+						if ( is_drag )
+						{
+							// let's render padding to be visible
+							var padding_node = $$().pos(true).x(cursor_padding[3]).y(cursor_padding[0]);
+							padding_node.w(drag_node.w()-cursor_padding[1]-cursor_padding[3]).h(drag_node.h()-cursor_padding[0]-cursor_padding[2]);
+							padding_node.s('border:1px dotted black').t('');
+						}
+
+						// creating adapter object, first with initial shared method(s)
+						var adapter = 
+						{
+							onGetRenderingNode:function()
+							{
+								return drag_node;
+							}
+							
+						};
+						if ( is_drag )
+						{
+							// drag or both
+							adapter.onDragStart = function()
+							{
+								drag_node.t(default_text);
+								// randomly hide the node
+								if ( 0.3 > Math.random() )
+								{
+									drag_node.v(false);
+								}
+							};
+							adapter.onDragMove = function(dragNode, nx, ny, ox, oy)
+							{
+								dragNode.o(Math.random());
+								return null;
+							};
+							adapter.onDragStop = function()
+							{								
+								drag_node.v(true);
+							};
+							adapter.onGetData = function()
+							{
+								return 'Data from node '+counter;
+							};
+							adapter.onClick = function()
+							{
+								alert('You have just clicked on '+counter+'\nNow removing DnD.');
+								drag_node.removeDnD();
+							};
+							adapter.onGetCursorNode = function()
+							{
+								var cursor_node = drag_node.dup().v(true).s('background:#f0f0f0').o(0.5).a(padding_node);
+								return cursor_node.p();
+							};
+							adapter.onGetCursorPadding = function()
+							{
+								return cursor_padding;
+							};
+						}
+						if ( is_drop )
+						{
+							// drop or both
+							adapter.onGetCoords = function()
+							{
+								var pos = drag_node.abspos();
+								// now let's assume, we want extend the area of intersection randomly
+								pos.x += -30 + Math.floor(60*Math.random());
+								pos.y += -15 + Math.floor(30*Math.random());
+								// now let's draw it, so we can actually see it (this is for example purposes only)
+								$().a($$()).pos(true).x(pos.x).y(pos.y).w(drag_node.w()).h(drag_node.h()).s('border:1px dotted magenta').t('');
+								return {x:pos.x, y:pos.y, w:drag_node.w(), h:drag_node.h()};
+							};
+							adapter.onDragEnter = function(firstEnter, offsetX, offsetY, sourceNode, sourceAdapter)
+							{
+								drag_node.t(offsetX+','+offsetY);
+								drag_node.s('background:cyan');
+								drag_node.a($$()).pos(true).x(offsetX-1).y(0).w(1).h(drag_node.h()).s('border-left:1px dashed red');
+								drag_node.a($$()).pos(true).x(0).y(offsetY-1).h(1).w(drag_node.w()).s('border-top:1px dashed red');
+							};
+							adapter.onDragLeave = function(lastLeave)
+							{
+								drag_node.s('background:yellow');
+								$foreach ( drag_node.g('div'), function(n)
+								{
+									n.rs();
+								});
+							};
+							adapter.onPutData = function(data, sourceNode, sourceAdapter, offsetX, offsetY)
+							{
+								$(drag_node).t('Received : '+data.surroundTag('em')+'<br/>At offset ? x ?'.embed(offsetX, offsetY));
+								$runafter(2000, function()
+								{
+									drag_node.t(default_text);
+								});
+							};
+						}
+						// adding DnD capabilities
+						drag_node.addDnD(is_both ? fry.ui.dnd.MODE_BOTH : (is_drag ? fry.ui.dnd.MODE_DRAG : fry.ui.dnd.MODE_DROP), adapter);
+					});
+				}
+			}
+		];
+
+
+		
+        </script>
+
+	</head>
+	<body onload="main()">
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> UI extension</h1>
+		
+		<p class="description">
+			UI extension
+		</p>
+		
+		<form style="margin:20px">
+			<input id="button-prev" type="button" value="Previous test" /> 
+			<input id="button-run" type="button" value="Run test" /> 
+			<input id="button-next" type="button" value="Next test" /> 
+			Jump to: <select id="combo-tests" onchange='initTest(this.options[this.selectedIndex].value)'></select>
+		</form>
+		
+		<h2 id="title"></h2>
+		<p id="note"></p>
+		
+		<pre id="code" ></pre>
+
+		<div id="test-area">
+			<div id="test-div-001" style="position:absolute">Test DIV node.001</div>
+		</div>
+		
+	
+	</body>
+</html>

@@ -1,0 +1,8 @@
+Fry (backend support for remote operations for Ruby On Rails)
+=============================================================
+
+You are strongly encouraged to install the `output_compression' plugin available at svn://code.jeremyevans.net/rails/plugins/output_compression.
+
+Fry and the Rails plugin was created by Petr Krontorád (http://www.april-child.com/).
+
+

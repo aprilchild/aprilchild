@@ -1,0 +1,73 @@
+Data structure:
+
+
+Each of the arrays has keys corresponding to actual edited source text rows starting from 0.
+To get information for let's say 5-th row, we access it as char_map[4], row_id_map[4], syntax_map[4]...
+
+[window] char_map - array, item = row source
+=================
+
+example:
+--------
+hello
+world
+chap rules!
+
+char_map[0]: hello
+char_map[1]: world
+char_map[2]: chap rules!
+
+
+[view] row_id_map - array, item = [0:unique_row_id, 1:rendered, 2:state, 3:folding_params, 4:bookmark_params, 5:selection_params]
+=================
+                  unique_row_id : infinitive sequence starting from 1
+                  rendered      : tells whether row needs to be rendered (false) or is already rendered (true)
+                  state         : state bitmask
+                                  0   - ROWSTATE_NONE
+                                  1   - ROWSTATE_FOLD_START , 	folding_params: [0:col_index, 1:refered_end_row] - col_index: column index where folding begins
+                                  2   - ROWSTATE_FOLD_STOP	,   folding_params: [0:col_index, 1:refered_start_row] - col_index: column index where folding ends
+                                  4   - ROWSTATE_FOLD_EXPAND
+								  8   - ROWSTATE_FOLD_COLLAPSED folding_params: [2:refered_start_row] - set for rows inside the folding interval
+                                  16  - ROWSTATE_SELECTION          selection_params: [0:col_start_index, 1:col_end_index]
+                                  32  - ROWSTATE_BOOKMARK           bookmark_params: [0:type] - type: bookmark type
+                                                                                        1 - default bookmark
+                                                                                        2 - breakpoint
+                                                                                        4 - ...
+                  folding_params          : parameters for folding
+                  selection_params        : parameters for selection
+                  bookmark_params         : parameters for bookmarks
+
+
+
+[window] syntax_map - array, item = array of tokens [token0, token1, ... tokenN]
+===================
+					token		: token information [token_type, col_start_index, col_end_index, [token_marker]]
+												token_type 		:
+													TOKEN_MULTILINE_COMMENT:1
+													TOKEN_SINGLELINE_COMMENT:2
+													TOKEN_SINGLE_QUOTED:3
+													TOKEN_DOUBLE_QUOTED:4
+													TOKEN_WHITESPACE:5
+												col_start_index : column index where token begins, -1 if token always starts at the beginning of the row
+																  (column index is 0), meaning it continues from previous row
+												col_end_index	: column index where token ends, -1 if tokens always end at the end of the row 
+																  (column index is the actual length of the row), meaning it continues on next line
+												token_marker	: optionally holds the actual marker value used when creating token (in case of 
+																  various possibilities of creating given token in certain languages 
+																  (plpgsql allows for --, # for single line comments etc.))
+
+Transaction log
+---------------
+
+[window] transaction_log - array, item = array of character map operations, stored in triplets (linear) for each operation
+			
+					[n+0]	transaction_type	(INSERT|REMOVE)
+					[n+1]	positions array (INSERT: [atRow, atCol], REMOVE: [startRow, startCol, endRow, endCol])
+					[n+2]	source string
+					
+					
+Selection
+---------
+range is stored as ROW_INDEX, COL_INDEX, start_position, end_position where one char has the same start/end_position. eg. char at row 4, col 18 is stored as range [4,18] - [4,18]
+storing newline char is marked as [5, -1] on the next row range, when selecting first char on that row, range changes to [5, 0]
+

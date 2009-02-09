@@ -1,0 +1,517 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * Test/Example Page for UI extension
+		 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - JavaScript Framework</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+		.rbox
+		{
+			background:#DFDFDF;
+		}
+		.rbox .inner
+		{
+			width:auto;
+			margin:0 9px 0 9px;
+		}
+		.rbox .up-left
+		{
+			width:auto;
+			height:9px;
+			background-image:url(mm/i/theme/apple/rbox.up-left.gif);
+			background-repeat:no-repeat;
+			background-color:white;
+			font:1px arial;
+		}
+		.rbox .up
+		{
+			background-color:#dfdfdf;
+			height:9px;
+			float:right;
+			font:1px arial;
+		}
+		.rbox .up-right
+		{
+			background-image:url(mm/i/theme/apple/rbox.up-right.gif);
+			height:9px;
+			width:10px;
+			float:right;
+			font:1px arial;
+		}
+		.rbox .down-left
+		{
+			width:auto;
+			height:9px;
+			background-image:url(mm/i/theme/apple/rbox.down-left.gif);
+			background-repeat:no-repeat;
+			background-color:white;
+			font:1px arial;
+		}
+		.rbox .down
+		{
+			background-color:#dfdfdf;
+			height:9px;
+			float:right;
+			font:1px arial;
+		}
+		.rbox .down-right
+		{
+			background-image:url(mm/i/theme/apple/rbox.down-right.gif);
+			height:9px;
+			width:10px;
+			background-color:white;
+			float:right;
+			font:1px arial;		
+		}
+		</style>
+		
+		<script type="text/javascript" src="test.js"></script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.ui.js"></script>
+        <script type="text/javascript" src="../ac.fry.ui.support.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+        <script type="text/javascript">
+
+		tests = 
+		[
+			{
+				title:'Rounded boxes',
+				note:'Creating couple of rounded boxes. The boxes are draggable, just for fun\'s sake :-)',
+				keepPrevious:false,
+				code:function()
+				{
+					$('test-div-001').t('').pos(true).x(20).y(200).w(800).h(600);
+					$dotimes( 10, function(counter)
+					{
+						var x = Math.floor(600*Math.random());
+						var y = Math.floor(600*Math.random());
+						var w = 100 + Math.floor(200*Math.random());
+						var box = fry.ui.snippet.RoundBox(w, 10, 'rbox', function(node)
+						{
+							node.t('Hello from rounded box #? with width <strong>?</strong>.'.embed(counter, w));
+						});
+						$('test-div-001').a(box).pos(true).x(x).y(y).addDrag(fry.ui.drag.MODE_STANDARD,{});
+					});
+				}
+			},
+			{
+				title:'Rounded boxes with background',
+				note:'Creating couple of rounded boxes. In order to display above colored surface, let\'s specify background color. Please note, that only color similar to the original aliasing color (white in this case) is actually worth of adjusting this way. For other color variations you should consider creating new set of cornes and style it using custom CSS class. And yes, again, you can drag\'em... ;)',
+				keepPrevious:false,
+				code:function()
+				{
+					$('test-div-001').t('').s('background:#eee').pos(true).x(40).y(500).w(900).h(600);
+					$dotimes( 8, function(counter)
+					{
+						var x = Math.floor(600*Math.random());
+						var y = Math.floor(600*Math.random());
+						var w = 100 + Math.floor(200*Math.random());
+						var box = fry.ui.snippet.RoundBox(w, 10, 'rbox', function(node)
+						{
+							node.t('Hello from rounded box #? with width <strong>?</strong>.'.embed(counter, w));
+						}, '#eee');
+						$('test-div-001').a(box).pos(true).x(x).y(y).addDrag(fry.ui.drag.MODE_STANDARD,{});
+					});
+				}
+			},
+			{
+				title:'Shadowed boxes',
+				note:'Creating couple of shadowed boxes. Dragging is enabled, clicking on any box will force its resize. Double-clicking starts pulsing effect.',
+				keepPrevious:false,
+				code:function()
+				{
+					$('test-div-001').t('').pos(true).x(20).y(200).w(800).h(600);
+					$dotimes( 10, function(counter)
+					{
+						var x = Math.floor(600*Math.random());
+						var y = Math.floor(600*Math.random());
+						var w = 100 + Math.floor(200*Math.random());
+						var h = 100 + Math.floor(200*Math.random());
+						var box = fry.ui.snippet.ShadowedBox(w, h, 'shadow-box', function(node)
+						{
+							node.a($$()).s('padding:20px').t('Hello from shadowed box #? with original width <strong>?</strong> and height <strong>?</strong>.'.embed(counter, w, h));
+						});
+						var bg = 'rgb(?,?,?)'.embed(Math.floor(256*Math.random()), Math.floor(256*Math.random()), Math.floor(256*Math.random()));
+						box.s({background:bg});
+						box = $('test-div-001').a(box).pos(true).x(x).y(y).addDrag(fry.ui.drag.MODE_STANDARD,{}).e('click', function(evt)
+						{
+							fry.ui.snippet.ResizeShadowedBox(box, 100+Math.floor(600*Math.random()), 100+Math.floor(600*Math.random()));
+						}).e('dblclick', function(evt)
+						{
+							fry.ui.effect.Pulsing(box);
+						});
+					});
+				}
+			},
+			{
+				title:'Buttons',
+				note:'Helper for creating styled buttons.',
+				keepPrevious:false,
+				code:function()
+				{
+					$('test-div-001').t('').pos(true).x(20).y(200).w(800).h(600);
+					$dotimes( 10, function(counter)
+					{
+						var x = Math.floor(600*Math.random());
+						var y = Math.floor(600*Math.random());
+						var is_big = 0.5 < Math.random();
+						$('test-div-001').a(fry.ui.snippet.Button(is_big ? 'big' : 'small', 'Button ?'.embed(counter), function(evt)
+						{
+							alert('Clicked on ? button ?'.embed(is_big?'big':'small', counter));
+						})).pos(true).x(x).y(y);
+					});
+				}
+			},			
+			{
+				title:'Working with effects, Basic',
+				note:'Effects are the way of affecting standard node behavior. They can be combined. When one wants to stop any effects, there\'s an effect with name `Stop` that cancels all assigned effects.',
+				keepPrevious:false,
+				code:function()
+				{
+					$('test-div-001').t('').s('background:#eee').pos(true).x(40).y(570).w(900).h(600);
+					$dotimes( 8, function(counter)
+					{
+						var x = Math.floor(600*Math.random());
+						var y = Math.floor(300*Math.random());
+						var w = 100 + Math.floor(200*Math.random());
+						var box = fry.ui.snippet.RoundBox(w, 10, 'rbox', function(node)
+						{
+							node.t('Hello from rounded box #? with width <strong>?</strong>.'.embed(counter, w));
+						}, '#eee');
+						var node = $('test-div-001').a(box).pos(true).x(x).y(y).addDrag(fry.ui.drag.MODE_STANDARD,{});
+						// adding some effects
+						fry.ui.effect.Pulsing(node);
+						// stop it after some time
+						$runafter( 10000*Math.random(), function()
+						{
+							fry.ui.effect.Stop(node);
+						})
+					});
+				}
+			},
+			{
+				title:'Working with effects, Part II',
+				note:'You can check various node effects behaviors using the wizard. Please note, there are actually parameters for each of the effect that are not set by the wizard, so only default values are applied when performing each effect.',
+				keepPrevious:false,
+				code:function()
+				{
+					$('test-div-001').a($$()).w(300).h(40).s('padding:4px;background:#fff;border:1px solid #000').t('<select id="effect-wiz"></select><input type="button" value="Repeat"/>').pos(true).x(40).y(-350);
+					// preparing combo with effect selection
+					for ( var name in fry.ui.effect )
+					{
+						var effect = fry.ui.effect[name];
+						if ( 'function' == typeof effect )
+						{
+							if ( '_' != name.charAt(0) )
+							{
+								$combofill('effect-wiz', function(index)
+								{
+									return 0 == index ? [name, name] : false;
+								});
+							}
+						}
+					}
+					var restart = function()
+					{
+						var id = 'effect-div';
+						if ( $(id) )
+						{
+							$(id).rs();
+						}
+						return $('test-div-001').a($$()).i(id).t('Testing DIV area').pos(true).x(400).y(-400).w(200).h(200).s('background:#888;color:#fff;border:2px solid #ccc;padding:20px').addDrag(fry.ui.drag.MODE_BOTH,{});
+					}
+					var doEffect = function(effect)
+					{
+						var node = restart();
+						node.t('Performing effect <strong>?</strong>.'.embed(effect));
+						$('test-div-001').g('input:0').sa('effect', effect);
+						fry.ui.effect[effect](node);
+					}
+					$('effect-wiz').e('change', function(evt)
+					{
+						doEffect($comboget(evt.$));
+					});
+					$('test-div-001').e('click', function(evt)
+					{
+						effect = $('test-div-001').g('input:0').ga('effect');
+						if ( null != effect )
+						{
+							doEffect(effect);
+						}
+					});
+					
+					
+				}
+			},
+			{
+				title:'Animations, Part I.',
+				note:'Animations are repeated tasks performed on node during defined interval. Try to drag the animation pane while animating to test your DnD speed and how well your browser handles multi-threading.',
+				keepPrevious:false,
+				code:function()
+				{
+					$('anim-c').pos(true).x(100).y(230).a($$()).s('background:#fff;border:1px solid black;padding:8px;color:#bbb;font-weight:bold;font-size:14px;letter-spacing:7px').t('Animations').w(600).h(400);
+					var num_steps = 60;
+					var intervalMsec = 20;
+					// adding first animation - linear interval with `line` function f(x) = x;
+					$('anim-c').a($$()).pos(true).s('background:red').w(4).h(4).x(20).y(20).animByFunction($new(fry.ui.interval.Linear, num_steps), intervalMsec, function(dv)
+					{
+						return {x:20+5*dv}
+					}).a($$()).w(200).s('border:1px solid red;position:absolute;top:4px').t('f(x) = x');
+					
+					// animation [2] - slow-down interval with `line` function f(x) = x;
+					$('anim-c').a($$()).pos(true).s('background:green').w(4).h(4).x(20).y(40).animByFunction($new(fry.ui.interval.SlowDown, num_steps), intervalMsec, function(dv)
+					{
+						return {x:20+5*dv}
+					}).a($$()).w(200).s('border:1px solid green;position:absolute;top:4px').t('f(x) = x');
+					
+					// animation [3] - fast-slow-down interval with `line` function f(x) = x;
+					$('anim-c').a($$()).pos(true).s('background:blue').w(4).h(4).x(20).y(60).animByFunction($new(fry.ui.interval.FastSlowDown, num_steps), intervalMsec, function(dv)
+					{
+						return {x:20+5*dv};
+					}).a($$()).w(200).s('border:1px solid blue;position:absolute;top:4px').t('f(x) = x');
+					
+					// animation [4] - slow-down interval with `sin` function f(x) = sin(x);
+					$('anim-c').a($$()).pos(true).s('background:cyan').w(4).h(4).x(20).y(80).animByFunction($new(fry.ui.interval.SlowDown, num_steps), intervalMsec, function(dv)
+					{
+						return {x:20+5*dv, y:80+50*Math.sin(fry.ui.interval.hPI*(dv/15))};
+					}).a($$()).w(200).s('border:1px solid cyan;background:#ddd;position:absolute;top:4px').t('f(x) = sin(x)');
+					
+					// animation [5] - slow-down interval with `cos` function f(x) = cos(x);
+					$('anim-c').a($$()).pos(true).s('background:magenta').w(4).h(4).x(20).y(100).animByFunction($new(fry.ui.interval.SlowDown, num_steps), intervalMsec, function(dv)
+					{
+						return {x:20+5*dv, y:0+100*Math.cos(fry.ui.interval.hPI*(dv/15))};
+					}).a($$()).w(200).s('border:1px solid magenta;position:absolute;top:4px').t('f(x) = cos(x)');
+					
+					// animation [6] - slow-down interval with function f(x) = x^2;
+					$('anim-c').a($$()).pos(true).s('background:orange').w(4).h(4).x(20).y(120).animByFunction($new(fry.ui.interval.SlowDown, num_steps), intervalMsec, function(dv)
+					{
+						return {x:20+5*dv, y:480-(dv*dv/10)};
+					}).a($$()).w(200).s('border:1px solid orange;position:absolute;top:4px;background:yellow').t('f(x) = x^2');
+					
+					// animation [7] - linear interval with `sin` function f(x) = sin(x);
+					$('anim-c').a($$()).pos(true).s('background:brown').w(4).h(4).x(20).y(140).animByFunction($new(fry.ui.interval.Linear, num_steps), intervalMsec, function(dv)
+					{
+						return {x:20+5*dv, y:140+100*Math.sin(fry.ui.interval.hPI*(dv/15))};
+					}).a($$()).w(200).s('border:1px solid brown;position:absolute;top:4px').t('f(x) = sin(x)');
+					
+					// animation [8] - slow-down interval with `sin` function f(x) = sin(x);
+					$('anim-c').a($$()).pos(true).s('background:brown').w(4).h(4).x(20).y(160).animByFunction($new(fry.ui.interval.SlowUp, num_steps), intervalMsec, function(dv)
+					{
+						return {x:20+5*dv, y:160+100*Math.sin(fry.ui.interval.hPI*(dv/15))};
+					}).a($$()).w(200).s('border:1px solid brown;position:absolute;top:4px').t('<h1>image</h1>');
+					
+					// adding drag to test how fast your DnD is ...
+					$('anim-c').addDrag(fry.ui.drag.MODE_STANDARD, {});
+				}
+			},
+			{
+				title:'Drawings, Part I.',
+				note:'You can use drawing primitives for rendering geometrical objects. This test may take some time to complete depending on your processing speed... When the test is finished, try dragging the drawing pane to see how your browser handles repositioning of <strong>many elements</strong>. Btw. hands down to supersonic Safari, Opera is not so bad (when using DOM), apparently using some kind of direct rendering smartly combined with double-buffer, Firefox is very slow in DOM operations...',
+				keepPrevious:false,
+				code:function()
+				{
+					// drawing lines
+					$('draw-c').pos(true).x(100).y(230).a($$()).s('background:#fff;border:1px solid black;padding:8px;color:#bbb;font-weight:bold;font-size:14px;letter-spacing:7px').t('Drawings').w(600).h(400);
+					
+					
+					$('draw-c').drawLine(20, 20, 540, 360, 'red', 4);
+					$('draw-c').drawLine(520, 20, 54, 390, 'orange', 4);
+					$('draw-c').drawLine(520, 340, 40, 60, 'green', 4);
+					$('draw-c').drawLine(20, 360, 540, 20, 'blue', 4);
+					
+					$('draw-c').drawLine(20, 170, 540, 170, 'green', 4);
+
+					// drawing polygons					
+					var points = 
+					[
+						[40,20], [89,95], [300,80], [520,300], [178,345], [7,67]
+					];
+					// closed polygon
+					$('draw-c').drawPolygon(points, 'pink', 9);
+					// opened polygon, let's adjust original points a little first
+					$foreach ( points, function(point)
+					{
+						// moving polygon 40px left, 50px down
+						point[0] += 40;
+						point[1] += 50;
+					})
+					$('draw-c').drawPolygon(points, 'navy', 3, true);
+					
+					// now some funny stuff - drawing a sinusoid :)
+					
+					points = [];
+					for ( var i=0; i<360; i+=10 )
+					{
+						var rad = i*fry.ui.interval.hPI/90;
+						points.push([180+i, 250+100*Math.sin(rad)]);
+					}
+					$('draw-c').drawPolygon(points, 'teal', 3, true);
+					
+
+					// adding drag to test how fast your DnD is ...
+					$('draw-c').addDrag(fry.ui.drag.MODE_STANDARD, {});
+				}
+			},
+			{
+				title:'Drawings, Part II.',
+				note:'Appart from direct drawing, try to use the buffered draw. It may increase your drawing speed (well, it WILL certainly do, only Safari is fast enough that the difference is not high..). The use is very simple using drawBegin and drawEnd methods. The whole conclusion is, USE buffering when possible.',
+				keepPrevious:false,
+				code:function()
+				{
+					// creating reference to drawing container
+					var draw_c = $('draw-c').pos(true).x(100).y(230).a($$()).s('background:#fff;border:1px solid black;padding:8px;color:#bbb;font-weight:bold;font-size:14px;letter-spacing:7px').t('Drawings').w(600).h(400);
+					
+					// starting buffer
+					draw_c.drawBegin();
+					
+				
+					// drawing lines
+				
+					draw_c.drawLine(20, 20, 540, 360, 'red', 4);
+					draw_c.drawLine(520, 20, 54, 390, 'orange', 4);
+					draw_c.drawLine(520, 340, 40, 60, 'green', 4);
+					draw_c.drawLine(20, 360, 540, 20, 'blue', 4);
+				
+					draw_c.drawLine(20, 170, 540, 170, 'green', 4);
+					
+
+					// drawing polygons					
+					var points = 
+					[
+						[40,20], [89,95], [300,80], [520,300], [178,345], [7,67]
+					];
+					// closed polygon
+					draw_c.drawPolygon(points, 'pink', 9);
+					
+					// opened polygon, let's adjust original points a little first
+					$foreach ( points, function(point)
+					{
+						// moving polygon 40px left, 50px down
+						point[0] += 40;
+						point[1] += 50;
+					})
+					draw_c.drawPolygon(points, 'navy', 3, true);
+				
+					// now some funny stuff - drawing a sinusoid :)
+				
+					points = [];
+					for ( var i=0; i<360; i+=10 )
+					{
+						var rad = i*fry.ui.interval.hPI/90;
+						points.push([180+i, 250+100*Math.sin(rad)]);
+					}
+					draw_c.drawPolygon(points, 'teal', 3, true);
+				
+					// flushing the buffer
+					draw_c.drawEnd();
+					
+					
+				
+
+					// adding drag to test how fast your DnD is ...
+					$('draw-c').addDrag(fry.ui.drag.MODE_STANDARD, {});
+				}
+			},
+			{
+				title:'Drawings, Part III.',
+				note:'The Olympics :). Drawing circular shapes. Unfinished work, just a proof-of-concept code. Not quite optimized.',
+				keepPrevious:false,
+				code:function()
+				{
+					// creating reference to drawing container
+					var draw_c = $('draw-c').pos(true).x(100).y(230).a($$()).s('background:#fff;border:1px solid black;padding:8px;color:#bbb;font-weight:bold;font-size:14px;letter-spacing:7px').t('Drawings').w(600).h(400);
+					
+					// starting buffer
+					draw_c.drawBegin();
+				
+					// drawing circles
+					draw_c.drawCircle(100, 180, 30, 'blue', 'white', 2);
+					draw_c.drawCircle(140, 210, 30, 'yellow', 'white', 2);
+					draw_c.drawCircle(180, 180, 30, 'black', 'white', 2);
+					draw_c.drawCircle(220, 210, 30, 'red', 'white', 2);
+					draw_c.drawCircle(260, 180, 30, 'green', 'white', 2);
+					draw_c.drawEnd();
+
+					// adding drag to test how fast your DnD is ...
+					$('draw-c').addDrag(fry.ui.drag.MODE_STANDARD, {});
+				}
+			},
+			{
+				title:'CPU killer',
+				note:'Trivial example combining drawing, animation and effects. This really should heat your computer a little.. ;-)',
+				keepPrevious:false,
+				code:function()
+				{
+					// creating reference to drawing container
+					var draw_c = $('draw-c').pos(true).x(100).y(230).a($$()).s('background:#fff;border:1px solid black;padding:8px;color:#bbb;font-weight:bold;font-size:14px;letter-spacing:7px').t('Drawings').w(600).h(400);
+
+					// combining methods inline, note the drawBegin, drawEnd methods
+					var circle = draw_c.a($$()).pos(true).w(70).h(70).x(60).y(200).drawBegin();				
+					circle.drawCircle(35, 35, 30, 'magenta', 'white', 1).animByFunction($new(fry.ui.interval.SlowUp, 60), 20, function(dv)
+					{
+						return {x:20+7*dv, y:200+100*Math.sin(fry.ui.interval.hPI*(dv/15))};
+					}).drawEnd();
+
+					// even more `inline` way of writing Fry code ... use your own coding conventions, this is just an example
+					// let's add the Pulsing effect and Drag just for fun :)
+					fry.ui.effect.Pulsing
+					(
+						draw_c.a($$()).pos(true).w(70).h(70).x(60).y(260).drawBegin().drawPolygon([[35,5],[65,65],[5,55]], 'green', 3).animByFunction($new(fry.ui.interval.SlowDown, 60), 20, function(dv)
+						{
+							return {x:20+7*dv, y:200+100*Math.cos(fry.ui.interval.hPI*(dv/15))};
+						}).drawEnd().addDrag(fry.ui.drag.MODE_STANDARD, {}).at('I\'m perfectly draggable...').s('color:#444')
+					);
+
+					// adding drag to test how fast your DnD is ...
+					$('draw-c').addDrag(fry.ui.drag.MODE_STANDARD, {});
+				}
+			}						
+		];
+
+		
+        </script>
+
+	</head>
+	<body onload="main()">
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> UI support extensions</h1>
+		
+		<p class="description">
+			UI Support extensions - Snippets/Effects/Path/Mathematics/Animation
+		</p>
+		
+		<form style="margin:20px">
+			<input id="button-prev" type="button" value="Previous test" /> 
+			<input id="button-run" type="button" value="Run test" /> 
+			<input id="button-next" type="button" value="Next test" /> 
+			Jump to: <select id="combo-tests" onchange='initTest(this.options[this.selectedIndex].value)'></select>
+		</form>
+		
+		<h2 id="title"></h2>
+		<p id="note"></p>
+		
+		<pre id="code" ></pre>
+
+		<div id="test-area">
+			<div id="test-div-001" style="position:absolute"></div>
+			<div id="anim-c" style="position:absolute"></div>
+			<div id="draw-c" style="position:absolute"></div>
+		</div>
+		
+	</body>
+</html>

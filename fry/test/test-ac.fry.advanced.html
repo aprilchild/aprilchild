@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * Test/Example Page for remote capabilities
+		 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - JavaScript Framework</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		
+		<script type="text/javascript" src="test.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+        <script type="text/javascript">
+
+		
+		tests = 
+		[
+					
+			{
+				title:'Upload files',
+				note:'Shows how simple is to handle the upload of files (even multiple ones).',
+				keepPrevious:false,
+				code:function()
+				{
+					var custom_param = 'hello';
+					
+					// drawing primitive progress bar
+					$('output').a($$()).i('progress').pos(true).x(0).y(0).h(6).w(0).s('background:blue');
+					
+					// adding button for starting the upload
+					$('output').a($$()).t('Click for choosing some files before upload').s('border:1px solid blue;background:#ddf').e('click', function(evt)
+					{
+						// prepare the adapter
+						var adapter = $new(fry.remote.upload.Adapter, 40000, '*.*', ',custom_param=?'.embed(custom_param));
+						adapter.onStart = function(f)
+						{
+							$('progress').w(0);
+							$('output').a($$()).t('Started ? having ? bytes.'.embed(f.name, f.size));
+						}
+						adapter.onProgress = function(f, bytes)
+						{
+							var percentage = (0 != f.size) ? 100*bytes/f.size : 100;
+							$('progress').w(percentage*4);
+						}
+						adapter.onEnd = function(wasCanceled, wasError, result)
+						{
+							$('output').a($$()).t('Finished ?. Canceled: ?, Error: ?'.embed(wasError?result:result.name, wasCanceled, wasError));
+						}
+						adapter.onQueueEnd = function()
+						{
+							$('output').a($$()).t('All files finished uploading.')
+						}
+						// let's initiate the upload
+						$('progress').w(0);
+						$upload(adapter);
+						
+					});
+
+				}
+			}
+		];
+
+		var client =
+		{
+			conf:
+			{
+				fry:
+				{
+					backendURL:'/test/remote.php',
+					path:'../'
+				}
+			},
+			onstart:main
+		}
+
+		
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="../3rdparty/SWFUpload/mmSWFUpload.js"></script>
+
+	</head>
+	<body>
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> Advanced capabilities</h1>
+		
+		<p class="description">
+			Testing advanced capabilities - Upload &amp; other stuff.
+		</p>
+		
+		<form style="margin:20px">
+			<input id="button-prev" type="button" value="Previous test" /> 
+			<input id="button-run" type="button" value="Run test" /> 
+			<input id="button-next" type="button" value="Next test" /> 
+			Jump to: <select id="combo-tests" onchange='initTest(this.options[this.selectedIndex].value)'></select>
+		</form>
+		
+		<h2 id="title"></h2>
+		<p id="note"></p>
+		
+		<pre id="code" ></pre>
+
+		<div id="test-area">
+			<div id="output" style="position:absolute"></div>
+		</div>
+		
+	
+	</body>
+</html>

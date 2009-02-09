@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+			/*
+			 * AC Fry - JavaScript Framework v1.0
+			 * Browser widget - Test/Example file
+			 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+			 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - Test/Example - ac.stub.BrowserOutlinewViewMapGraphCombo</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/test/test.ac.stub.bomcombo.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		
+        
+        <script type="text/javascript">
+
+        	var client =
+        	{
+        		conf:
+        		{
+					locale:'cs',
+        			progid:'test-ac.browser',
+        			fry:
+        			{
+        				backendURL : '',
+						theme:'apple'
+        			}
+        		},
+        		
+        		onload:function()
+        		{
+        			$include('test/test-locale-ac.stub.bomcombo.js');
+					// let's include some additional widgets - dependencies
+					$include('ac.fry.data.calendar.js');
+					$include('ac.fry.ui.support.js');
+					$include('widget/ac.window.js');
+        			$include('widget/ac.browser.js');
+        			$include('widget/ac.tableview.js');
+        			$include('widget/ac.outlineview.js');
+        			$include('widget/ac.mapgraph.js');
+        			$include('widget/ac.stub.bocombo.js');
+        			$include('widget/ac.stub.bomcombo.js');
+
+					$include('test/test-mvc-ac.stub.bomcombo.js');
+        		},
+
+				toggleLocale:function()
+				{
+					client.conf.locale = 'cs' == client.conf.locale ? 'en' : 'cs';
+					client.onstart();
+				},
+
+				onstart:function()
+				{
+					// creating a widget
+					
+					// creating model, please note: in real application, you would put some existing `ACElement` instance as a constructor parameter
+					var rootElement = $new(ACElement);
+					rootElement.setState(rootElement.STATE_WILL_LOAD);
+					rootElement.isCollection = true;
+					rootElement.properties.label = 'Root';
+					rootElement.properties.size = 0;
+					rootElement.properties.version = 1;
+					rootElement.properties.date_created = 0;
+					var widget = $new
+					(
+						Lister,
+						$new(ListerModel, rootElement),
+						$new(ListerView,
+							{
+								mapgraph:
+								{
+									boxDimension:
+									{
+										width:105,
+										height:80,
+										marginRight:4,
+										marginBottom:20
+									}									
+								}
+							}),
+						$new(ListerController)
+					);
+					// now the widget is created using our example MVC
+					// we need to define columns for outlineview
+					widget.addColumn( 'label', client.lc.get('h_label'), '40%', function(acElem)
+					{
+						return acElem.properties.label;
+					}, false, true); // last tag - isEditable is set to true, we can inline edit the label - editing mode is specified in controller class
+					
+					// if global namespace import is not disabled (you can set the client.conf.disableGlobalNamespaceImport:true for disabling), let's use handy shortcut for locale value $loc = client.lc.get
+					widget.addColumn( 'size', $loc('h_size'), '20%', function(acElem)
+					{
+						return parseInt(acElem.properties.size);
+					});
+					widget.addColumn( 'date_created', $loc('h_date_created'), '20%', function(acElem)
+					{
+						return parseInt(acElem.properties.dateCreated);
+					});
+					widget.addColumn( 'version', $loc('h_version'), '15%', function(acElem)
+					{
+						// we may skip the `parseInt` cast used in previous column due javascript nature, it was used just for educational purposes
+						return acElem.properties.version;
+					});
+					// there's one special column named used for preview expansion - it's marked as `info`. let's add it (last parameter). there's no need to add sorting callback since the column is not sortable
+					widget.addColumn( 'info', $loc('h_info'), '5%', null, true);
+					// additionally we may setup default view by setting up the `viewMode` widget property
+					// let's set it to browser 0 (outlineview would have 1)
+					widget.viewMode = 0;
+					
+					
+					// now, finally, we can show it
+					widget.show($('pane').t(''));				
+				}
+        		
+        	};
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+
+	</head>
+	<body>
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> ac.stub.BOMCombo</h1>
+		
+		<p class="description">
+			This is the stub widget - combo of three widgets, Browser, OutlineView and MapGraph - typically used for hierarchy listing when you want to allow switching between different views.
+		</p>
+		
+		<a class="redraw" href="javascript:client.onstart()">Redraw</a> <a class="locale" href="javascript:client.toggleLocale()">Toggle locale (cs/en)</a>
+		
+		<div class="example" style="height:540px">
+			<div class="test" id="pane" style="height:520px">
+			</div>
+		</div>
+
+	
+	</body>
+</html>

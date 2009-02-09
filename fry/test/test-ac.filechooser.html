@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+			/*
+			 * AC Fry - JavaScript Framework v1.0
+			 * FileChooser widget - Test/Example file
+			 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+			 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - Test/Example - FileChooser widget</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/test/test.ac.filechooser.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		
+        
+        <script type="text/javascript">
+
+        	var client =
+        	{
+        		conf:
+        		{
+					locale:'en',
+        			progid:'test-ac.filechooser',
+        			fry:
+        			{
+        				backendURL : '',
+						theme:'apple'
+        			}
+        		},
+        		
+        		onload:function()
+        		{
+					$include('test/test-lib-filechooser.php');
+	       			// $include('test/test-locale-ac.filechooser.js');
+							// // we need to include some widgets (filechooser is a combined widget)
+							// $include('ac.fry.ui.support.js');
+							//         			$include('widget/ac.menu.js');
+							//         			$include('widget/ac.searchbox.js');
+							//         			$include('widget/ac.window.js');
+							//         			$include('widget/ac.browser.js');
+							//         			$include('widget/ac.tableview.js');
+							//         			$include('widget/ac.outlineview.js');
+							// $include('widget/ac.tree.js');
+							// $include('widget/ac.stub.bocombo.js');
+        			$include('widget/ac.filechooser.js?'+Math.random());
+							// // we'll need some calendar support
+							// $include('ac.fry.data.calendar.js');
+							// 
+					$include('test/test-mvc-ac.filechooser.js');
+        		},
+
+				onstart:function()
+				{
+					// creating a widget
+					var widget = $new
+					(
+						ac.FileChooserWidget,
+						$new(ExampleModel),
+						$new(ExampleView, {onlyFoldersVisible:false, window:{defaultSize:{width:800, height:450}}}),
+						$new(ExampleController)
+					);
+					// adding columns for tableview
+					widget.addColumn( 'label', client.lc.get('h_label'), '40%', function(acElem)
+					{
+						return acElem.properties.label;
+					});
+					// if global namespace import is not disabled (you can set the client.conf.disableGlobalNamespaceImport:true for disabling), let's use handy shortcut for locale value $loc = client.lc.get
+					widget.addColumn( 'size', $loc('h_size'), '20%', function(acElem)
+					{
+						return parseInt(acElem.properties.size);
+					});
+					widget.addColumn( 'dateCreated', $loc('h_date_created'), '20%', function(acElem)
+					{
+						return parseInt(acElem.properties.dateCreated);
+					});
+					client.widget = widget;
+					// showing test pane
+					$('pane').d(true);
+				},
+
+				show:function()
+				{
+					// let's show it, first parameter is optional css class name for look&feel customization, second one is the callback when 
+					// an element is selected for open, third one is called when filechooser is closed
+					client.widget.view.options.onlyFoldersVisible = false;
+					client.widget.view.options.actAsSaveDialog = false;
+					client.widget.show(
+						'',
+						function(acElem)
+						{
+							alert('Selected element: ?'.embed(acElem.properties.label));
+						},
+						function(wasSelected)
+						{
+							alert('Now closing, selection was ?performed.'.embed(wasSelected?'':'not '));
+						}
+					);
+				},
+
+				showFolder:function()
+				{
+					// let's show it, first parameter is optional css class name for look&feel customization, second one is the callback when 
+					// an element is selected for open, third one is called when filechooser is closed
+					client.widget.view.options.onlyFoldersVisible = true;
+					client.widget.view.options.actAsSaveDialog = false;
+					client.widget.show(
+						'',
+						function(acElem)
+						{
+							alert('Selected folder: ?'.embed(acElem.properties.label));
+						},
+						function(wasSelected)
+						{
+							alert('Now closing, selection was ?performed.'.embed(wasSelected?'':'not '));
+						}
+					);
+				},
+
+				showSave:function()
+				{
+					// let's show it, first parameter is optional css class name for look&feel customization, second one is the callback when 
+					// an element is selected for open, third one is called when filechooser is closed
+					client.widget.view.options.onlyFoldersVisible = false;
+					client.widget.view.options.actAsSaveDialog = true;
+					client.widget.show(
+						'',
+						function(selectedElem, parentElem, filename)
+						{
+							alert('Saving as: ?'.embed(filename));
+						},
+						function(wasSelected)
+						{
+							// alert('Now closing, selection was ?performed.'.embed(wasSelected?'':'not '));
+						},
+						function(label, parentElement, callbackOnSuccess, callbackOnError) // 'new folder' controller action callback
+						{
+							console.info('Creating new folder: %s', label);
+							if (0.2 < Math.random())
+							{
+								// let's pretend the result of creating new folder was successful
+								var elem = $new(ACElement);
+								elem.isCollection = true;
+								elem.properties = 
+								{
+									label: label,
+									size: 0,
+									dateCreated: 0
+								};
+								callbackOnSuccess(elem);
+							}
+							else
+							{
+								// failed with 20% chance
+								callbackOnError('Unknown error.');
+							}
+						}
+					);
+				}
+        		
+        	};
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+
+	</head>
+	<body style="overflow:hidden">
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> FileChooser widget</h1>
+		
+		<p class="description">
+			This is a filechooser widget.
+		</p>
+		
+		<div class="example">
+			<div id="pane" class="test" style="display:none">
+				<a href="javascript:client.show()">Show FileChooser</a>
+				<br/>
+				<a href="javascript:client.showFolder()">Show FileChooser (folders only)</a>
+				<br/>
+				<a href="javascript:client.showSave()">Show FileChooser (as Save dialog)</a>
+			</div>
+		</div>
+	
+	</body>
+</html>

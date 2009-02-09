@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+			/*
+			 * AC Fry - JavaScript Framework v1.0
+			 * SearchBox widget - Test/Example file
+			 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+			 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - Test/Example - SearchBox widget</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/test/test.ac.searchbox.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		
+        
+        <script type="text/javascript">
+
+        	var client =
+        	{
+        		conf:
+        		{
+					locale:'cs',
+        			progid:'test-ac.searchbox',
+        			fry:
+        			{
+        				backendURL : '',
+						theme:'apple'
+        			}
+        		},
+        		
+        		onload:function()
+        		{
+        			$include('test/test-locale-ac.searchbox.js');
+					// need to include widget/ac.menu.js
+					$include('ac.fry.ui.support.js');
+        			$include('widget/ac.menu.js');
+        			$include('widget/ac.searchbox.js');
+
+					$include('test/test-mvc-ac.searchbox.js');
+        		},
+
+				onstart:function()
+				{
+					// creating a widget
+					
+					// creating model
+					var widget = $new
+					(
+						ac.SearchBoxWidget,
+						$new(ExampleModel, ['fabulous', 'Fry', 'JavaScript', 'library', 'search box', 'example']),
+						$new(ExampleView),
+						$new(ExampleController)
+					);
+					// now the widget is created using our example MVC, there's not additional setup required
+					// so we can show it right away :)
+					widget.show($('pane-1').t(''));
+					
+					// let's create the second searchbox
+					
+					// creating model
+					widget = $new
+					(
+						ac.SearchBoxWidget,
+						$new(ExampleModel, ['this', 'is', 'another list']),
+						$new(ExampleView, {width:250, numRecentSearches:3}),
+						$new(ExampleController)
+					);
+					widget.show($('pane-2').t(''));
+				}
+        		
+        	};
+        </script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+
+	</head>
+	<body style="overflow:hidden">
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> SearchBox widget</h1>
+		
+		<p class="description">
+			This is a SearchBox widget. It allows some nice enhanced searching features such as listening, recent search history and others.
+		</p>
+		
+		<a class="redraw" href="javascript:client.onstart()">Redraw</a>
+		
+		<div class="example" style="background:white">
+			<div class="test" id="pane-1" style="width:160px;height:40px;padding:10px;position:absolute;top:10px;left:40px;background:#ddd"></div>
+			<div class="test" id="pane-2" style="width:auto;height:20px;position:absolute;top:10px;left:300px;"></div>
+			<div id="result" style="width:auto;border:1px solid #888;margin-top:80px;padding:8px;border-right:0;border-left:0">
+		</div>
+	
+	</body>
+</html>

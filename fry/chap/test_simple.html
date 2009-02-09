@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * Chap Text Editing Component
+		 * (c)2007 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - JavaScript Framework - CHAP</title>
+		<link href="../mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+        <!--<script type="text/javascript" src="../3rdparty/firebug/firebugx.js"></script>-->
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.keyboard.js"></script>
+        <script type="text/javascript" src="ac.chap.js"></script>
+        <script type="text/javascript" src="ac.chap.view.js"></script>
+        <script type="text/javascript" src="ac.chap.settings.js"></script>
+        <script type="text/javascript" src="test_ac.chap.settings.js"></script>
+        
+        <script type="text/javascript">
+			
+
+			var client = {conf:{fry:{backendURL:''}}};
+			var chap = null;
+			
+			function main()
+			{
+				var sources = ['test_data_source.txt', 'test_data_source_small.js', 'test_data_source.js', 'test_data_source.rb', 'test_data_source.html'];
+				$combofill('source', function(i)
+				{
+					return i==sources.length ? false : [sources[i], sources[i]];
+				});
+				$('source').e('change', function(evt)
+				{
+					showEditor();
+				});
+				
+				var themes = ['ac.chap.Theme', 'ac.chap.theme.SlushAndPoppies', 'ac.chap.theme.Black', 'ac.chap.theme.Cobalt'];
+				$combofill('theme', function(i)
+				{
+					return i==themes.length ? false : [themes[i], themes[i]];
+				});
+				$('theme').e('change', function(evt)
+				{
+					eval('var theme = ?;'.embed($comboget('theme')));
+					chap.setTheme(theme);
+					//showEditor();
+				});
+				
+				var languages = ['ac.chap.Language', 'ac.chap.lang.JavaScript', 'ac.chap.lang.Ruby', 'ac.chap.lang.Markup'];
+				$combofill('language', function(i)
+				{
+					return i==languages.length ? false : [languages[i], languages[i]];
+				});
+				$('language').e('change', function(evt)
+				{
+					eval('var language = ?;'.embed($comboget('language')));
+					chap.setLanguage(language);
+					chap.setSnippets(get_snippets());
+					//showEditor();
+				});
+				
+				var keymaps = ['ac.chap.KeyMap', 'ac.chap.keymap.JavaScript', 'ac.chap.keymap.Ruby', 'ac.chap.keymap.Markup'];
+				$combofill('keymap', function(i)
+				{
+					return i==keymaps.length ? false : [keymaps[i], keymaps[i]];
+				});
+				$('keymap').e('change', function(evt)
+				{
+					showEditor();
+				});
+				
+				showEditor();	
+			}
+			
+			var num_views = 1;
+			
+			function splitIntoViews(num)
+			{
+				num_views = num;
+				showEditor();
+			}
+			
+			function fontChange(toWhat)
+			{
+				chap.setRuntimeOption('font.size', toWhat);
+				ac.chap.setActiveComponent(chap);
+			}
+			
+			function showEditor()
+			{
+				if ( null != chap )
+				{
+					$delete(chap);
+				}
+
+				var source = $comboget('source');
+				eval('var language = ?;'.embed($comboget('language')));
+				eval('var theme = ?;'.embed($comboget('theme')));
+				eval('var keymap = ?;'.embed($comboget('keymap')));
+				
+
+				$('editor').t('');
+				var h_view = 600 / num_views;
+				for ( var i=0; i<num_views; i++ )
+				{
+					$('editor').a($$()).i('view-?'.embed(i+1)).h(h_view).s('width:auto');
+				}
+
+//				chap = $new(ac.chap.Window, {language:language, keymap:keymap, syntaxHighlightingEnabled:false});
+				chap = $new(ac.chap.Window, {language:language, keymap:keymap});
+				for ( i=0; i<num_views; i++ )
+				{
+					chap.addView($('view-?'.embed(i+1)), {theme:theme, wordWrap:0==i%2, tabelator:'    '});					
+				}
+				chap.setSnippets(get_snippets());
+				chap.show();
+
+				client.conf.fry.backendURL = source;
+
+				$rpost(
+					{a:'get'}
+					,
+					function(src)
+					{
+						chap.edit(src);
+					},
+					function(e)
+					{
+						alert('Error loading: ? (?).'.embed(source, e));
+					}
+				)	
+			}
+			
+			function runCommand(cmd)
+			{
+				var t = '';
+				/*
+				for ( var i=3; i<chap.transaction_log.length; i+=3 )
+				{
+					t += 1==chap.transaction_log[i] ? 'I:' : 'R:';
+					t += chap.transaction_log[i+2];
+					t += '\n';
+				}
+				*/
+				for ( var i=0; i<chap.redo_log.length; i+=3 )
+				{
+					t += 1==chap.redo_log[i] ? 'I:' : 'R:';
+					t += chap.redo_log[i+2];
+					t += '\n';
+				}
+				$('cmdl').t(t);
+//				alert(chap.transaction_log.slice(4).join('   |||   '));
+				//chap.runCommand
+			}
+			
+			function runTest()
+			{
+				var t = [];
+				t.push(['start', new Date()]);
+				chap.runAction(ac.chap.ACTION_SELECTION, {all:true});
+				chap.runAction(ac.chap.ACTION_INSERT, {character:true, keyCode:32});
+				chap.processActionResult(true, true);
+				t.push(['start_iteration', new Date()]);
+				for (var row=0; row<40; row++)
+				{
+					for (var col=65; col<91; col++)
+					{
+						chap.runAction(ac.chap.ACTION_INSERT, {character:true, keyCode:col});
+						chap.runAction(ac.chap.ACTION_INSERT, {character:true, keyCode:32+Math.floor(16*Math.random())});
+						chap.runAction(ac.chap.ACTION_CARET, {moveTo:[0, 0]});
+						chap.processActionResult(true, true);
+					}
+					chap.runAction(ac.chap.ACTION_INSERT, {row:true, keyCode:-13});
+					chap.processActionResult(true, true);
+				}
+				t.push(['end_iteration', new Date()]);
+				console.log(t);
+				
+				var sum_t = 0;
+				var report = 'Speed test report:';
+				for (var i=0; i<t.length; i++)
+				{
+					var dt = 0 == i ? 0 : t[i][1].getTime() - t[i-1][1].getTime();
+					report += '\n\n == ' + t[i][0] + '\n    ';
+					sum_t += dt;
+					report += dt + ' - ' + sum_t;
+				}
+				report += '\n\n--- total: ' + sum_t
+				console.info(report);
+				alert(report);
+			}
+
+        </script>
+
+		<style type="text/css">
+			.acw-chap .wrapped-row
+			{
+				background-image:url('../mm/i/theme/apple/chap-wrapped-row.gif');
+				background-repeat:no-repeat;
+				background-position:25px 4px;
+			}
+			.acw-chap .sidebar
+			{
+				background-image:url('../mm/i/theme/apple/chap-bg-sidebar.gif');
+			}
+			.acw-chap .folding-expand-inner
+			{
+				width:14px;
+				height:10px;
+				margin-left:2px;
+				display:inline;
+				background-image:url('../mm/i/theme/apple/chap-folding-expand-inner.gif');
+			}
+			.acw-chap .folding-expand
+			{
+				background-image:url('../mm/i/theme/apple/chap-folding-expand.gif');
+			}
+			.acw-chap .folding-start
+			{
+				background-image:url('../mm/i/theme/apple/chap-folding-start.gif');
+			}
+			.acw-chap .folding-stop
+			{
+				background-image:url('../mm/i/theme/apple/chap-folding-stop.gif');
+			}
+			.acw-chap .bookmark-default
+			{
+				background-image:url('../mm/i/theme/apple/chap-bookmark-default.gif');
+			}
+			.acw-chap .void
+			{
+				background-image:url('../mm/i/theme/void.gif');	
+			}
+		</style>
+
+	</head>
+	<body onload="main()">
+
+		<h1 class="logo"><a href="../test/index.html">Back to index page</a>AC Fry - JavaScript Framework - Chap Text Editing Component</h1>
+
+		<div id="menu" style="position:absolute;top:79px;left:730px;border:1px solid #999;padding:10px;width:200px">
+			Source: <select id="source"></select>
+			<br/>
+			Language: <select id="language"></select>
+			<br/>
+			Theme: <select id="theme"></select>
+			<br/>
+			Keymap: <select id="keymap"></select>
+			<br/>
+			<br/>
+			<a href="javascript:console.log(chap.getSyntaxHighlightingSource())">Export highlighing</a>
+			<br/>
+			<a href="javascript:console.open()">Open console</a>
+			<br/>
+			<a href="javascript:splitIntoViews(1)">One view</a>
+			<br/>
+			<a href="javascript:splitIntoViews(2)">Two views</a>
+			<br/>
+			<a href="javascript:splitIntoViews(3)">Three views</a>
+			<br/>
+			<a href="javascript:splitIntoViews(4)">Four views</a> (HC but you get the point)
+			<br/>
+			<a href="javascript:fontChange('bigger')">Font bigger (+)</a>
+			<br/>
+			<a href="javascript:fontChange('smaller')">Font smaller (+)</a>
+			
+			<br/><br/>
+			<textarea id="cmdl" style="width:190px;height:140px;color:black;border:1px solid #444;padding:2px"></textarea>
+			<br/>
+			<a href="javascript:runCommand($('cmdl').t())">Run command</a>
+			<br/>
+			<a href="javascript:runTest($('cmdl').t())">Run speed test</a>
+			<br/>
+			<a href="javascript:chap.setEditMode(1)">Normal edit mode</a>
+			<br/>
+			<a href="javascript:chap.setEditMode(2)">Overwrite edit mode</a>
+			
+		</div>
+		
+		<div id="editor" style="margin-left:20px;margin-top:20px;width:700px;height:600px;border:1px solid #aaa">
+		</div>
+		
+		<div id="debug" style="display:none;font-size:9px;font-family:monaco;position:absolute;top:0;left:760px;height:600px;width:260px;overflow:scroll">
+		</div>
+		
+		<div id="debug-cbuff" style="display:none; font-size:9px;font-family:monaco;position:absolute;top:0;left:0px;height:100px;width:960px;overflow:scroll">
+		</div>
+	
+	</body>
+</html>

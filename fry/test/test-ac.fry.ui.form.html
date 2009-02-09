@@ -1,0 +1,691 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<!--
+		
+		/*
+		 * AC Fry - JavaScript Framework v1.0
+		 * Test/Example Page for Form UI extension
+		 * (c)2006 Petr Krontorad, AprilChild. http://www.april-child.com. All rights reserved.
+		 */
+
+		-->
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>AC Fry - JavaScript Framework - Form UI extension</title>
+		<link href="mm/style/test/test.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+
+			table.acform.our-form td
+			{
+				padding:1px 2px 1px 2px;
+				vertical-align:middle;
+			}
+			
+			table.acform.our-form td span.label
+			{
+				color:#888;
+				font-weight:bold;
+			}
+
+			table.acform.our-form td input
+			{
+				color:yellow;
+				background:blue;
+			}
+
+			table.acform.our-form td input.button
+			{
+				color:#fff;
+				background:magenta;
+			}
+
+			table.acform td.key
+			{
+				border:2px dashed red;
+			}
+		
+		</style>
+		
+		<script type="text/javascript" src="test.js"></script>
+        <script type="text/javascript" src="../ac.fry.js"></script>
+        <script type="text/javascript" src="../ac.fry.ui.js"></script>
+        <script type="text/javascript" src="../ac.fry.ui.form.js"></script>
+        <script type="text/javascript" src="../ac.fry.ui.support.js"></script>
+        <script type="text/javascript" src="../3rdparty/firebug/firebug.js"></script>
+        <script type="text/javascript">
+
+		tests = 
+		[
+			{
+				title:'Basic form',
+				note:'Creating simple form with update handler.',
+				keepPrevious:false,
+				code:function()
+				{
+					// for positioning each form item/field just imagine a grid with row x column parameters starting with 1x1 position
+					var form = fry.ui.form.create(
+					{
+						label_1: 	{position:'1x1', type:'label'},
+						username:	{position:'1x2', type:'text'},
+						label_2:	{position:'2x1', type:'label'},
+						password:	{position:'2x2', type:'text', params:{subtype:'password'}},
+						butt_login:	{position:'3x2', type:'button', params:{}}
+					});
+					// creating handler on button activated
+					form.onButtLogin = function(values)
+					{
+						alert('Submitted username: ? and password: ?'.embed(values.username, values.password));
+					}
+					// showing form
+					form.show($('test-div'), 
+					{
+						label_1		:'Username',
+						label_2		:'Password',
+						butt_login	:'Login'
+					});
+				}
+			},
+			{
+				title:'More complex example',
+				note:'Creating advanced form.',
+				keepPrevious:false,
+				code:function()
+				{
+					// for positioning each form item/field just imagine a grid with row x column parameters starting with 1x1 position
+					var form = fry.ui.form.create(
+					{
+						label_1: 	{position:'1x1', type:'label'},
+						username:	{position:'1x2', type:'text'},
+						label_2:	{position:'2x1', type:'label'},
+						password:	{position:'2x2', type:'text', params:{subtype:'password'}},
+						// we will position two buttons into the same position in grid
+						butt_cancel:{position:'3x2', type:'button', params:{}},
+						butt_login:	{position:'3x2', type:'button', params:{}}
+					});
+					// creating handler on button activated
+					form.onButtLogin = function(values)
+					{
+						alert('Submitted username: ? and password: ?'.embed(values.username, values.password));
+					}
+					form.onButtCancel = function(values)
+					{
+						alert('Canceled.');
+					}
+					// showing form
+					form.show($('test-div'), 
+					{
+						label_1		:'Username',
+						label_2		:'Password',
+						butt_cancel	:'Cancel',
+						butt_login	:'Login'
+					});
+				}
+			},			
+			{
+				title:'Customized buttons',
+				note:'Creating form using predefined buttons from ui.support extension. You can easily create your own renderer, the rendererParams accepts any number of parameters, there are two important parameters called :label and :callback that are dynamically replaced by actual label and button activation handler. The order of parameters in renderParameters array must conform the actual order of parameters in you renderer function.',
+				keepPrevious:false,
+				code:function()
+				{
+					// for positioning each form item/field just imagine a grid with row x column parameters starting with 1x1 position
+					var form = fry.ui.form.create(
+					{
+						label_1: 	{position:'1x1', type:'label'},
+						username:	{position:'1x2', type:'text'},
+						label_2:	{position:'2x1', type:'label'},
+						password:	{position:'2x2', type:'text', params:{subtype:'password', width:'400px'}},
+						butt_cancel:{position:'3x2', type:'button', params:{renderer:fry.ui.snippet.Button, rendererParams:['big', ':label', ':callback']}},
+						butt_login:	{position:'3x2', type:'button', params:{renderer:fry.ui.snippet.Button, rendererParams:['big', ':label', ':callback']}}
+					});
+					// creating handler on button activated
+					form.onButtLogin = function(values)
+					{
+						alert('Submitted username: ? and password: ?'.embed(values.username, values.password));
+					}
+					form.onButtCancel = function(values)
+					{
+						alert('Canceled.');
+					}
+					// showing form
+					form.show($('test-div'), 
+					{
+						label_1		:'Username',
+						label_2		:'Password',
+						butt_cancel	:'Cancel',
+						butt_login	:'Login'
+					});
+				}
+			},
+			{
+				title:'Customized button renderers',
+				note:'In previous example we\'ve seen how to use customized buttons. We will show how to create our own in this example.',
+				keepPrevious:false,
+				code:function()
+				{
+					// first let's create our customized button. let it be a link.
+					OurRenderer = function(label, onClickCallback, color, fontSize)
+					{
+						var a = $$('a').s('cursor:default;color:?;font-size:?'.embed(color, fontSize)).t(label);
+						a.e('click', function(evt)
+						{
+							evt.stop();
+							onClickCallback(evt);
+						})
+						return a;
+					}
+					// now let's define some form
+					var form = fry.ui.form.create(
+					{
+						label_1: 	{position:'1x1', type:'label'},
+						username:	{position:'1x2', type:'text'},
+						// note how we order the parameters
+						butt_ok:	{position:'1x3', type:'button', params:{renderer:OurRenderer, rendererParams:[':label', ':callback', 'green', '14px']}}
+					});
+					// creating handler on button activated
+					form.onButtOk = function(values)
+					{
+						alert('Submitted username: ?'.embed(values.username));
+					}
+					// showing form
+					form.show($('test-div'), 
+					{
+						label_1		:'Username',
+						butt_ok		:'Submit it'
+					});
+				}
+			},
+			{
+				title:'Styling the form',
+				note:'Shows how to style your form. You basically provide a name of the class in your CSS definition. You can also tune each individual form item using the style property in the definition. The individual tuning should be avoided when possible though.',
+				keepPrevious:false,
+				code:function()
+				{
+					var form = fry.ui.form.create(
+					{
+						label_1: 	{position:'1x1', type:'label'},
+						// we can style each item, this however should be used only when really neccessary..
+						username:	{position:'1x2', type:'text', style:'color:red;border-color:cyan'},
+						label_2:	{position:'2x1', type:'label'},
+						password:	{position:'2x2', type:'text', params:{subtype:'password'}},
+						label_3:	{position:'3x1', type:'label'},
+						checkbox:	{position:'3x2', type:'checkbox'},
+						butt_cancel:{position:'4x2', type:'button', params:{}},
+						butt_login:	{position:'4x2', type:'button', params:{}}
+					});
+					form.onButtLogin = function(values)
+					{
+						alert('Submitted.');
+					}
+					form.onButtCancel = function(values)
+					{
+						alert('Canceled.');
+					}
+					// showing form, as the last parameter we provide CSS class name, view the <head> section of this page for CSS definition of the class.
+					form.show($('test-div'), 
+					{
+						label_1		:'Username',
+						label_2		:'Password',
+						label_3		:'Is active',
+						checkbox	:true,
+						butt_cancel	:'Cancel',
+						butt_login	:'Login'
+					}, null, 'our-form'); // please note, the cssClassName parameter is fourth, third is reserved for live-updated forms.
+				}
+			},
+			{
+				title:'Styling of form layout',
+				note:'Appart from styling form items, it\'s also possible to affect default underlying layout into which the form is formatted. It is accomplished by extending `position` syntax as shown in this example.',
+				keepPrevious:false,
+				code:function()
+				{
+					var form = fry.ui.form.create(
+					{
+						// specifying width and/or height of the grid cell, we set width to 300pixels
+						label_1: 	{position:'1x1{w:300}', type:'label'},
+						// let's set the height
+						username:	{position:'1x2{h:50}', type:'text'},
+						// let's set both width and height
+						label_2:	{position:'2x1{w:300,h:100,s:background:magenta}', type:'label'},
+						// we can also align horizontally and/or vertically item inside the cell
+						password:	{position:'2x2{w:400,ha:center,va:bottom,s:border:1px solid red}', type:'text', params:{subtype:'password'}},
+						// we can use whole style arsenal to be applied to the grid cell
+						label_3:	{position:'3x1{s:background:lime;color:yellow}', type:'label'},
+						// finally, we can simply provide the cell with CSS class name, see the `table.acform td.key` definition on this page
+						checkbox:	{position:'3x2{c:key}', type:'checkbox'},
+						butt_login:	{position:'4x2', type:'button', params:{}}
+					});
+					form.onButtLogin = function(values)
+					{
+						alert('Submitted.');
+					}
+					form.onButtCancel = function(values)
+					{
+						alert('Canceled.');
+					}
+					// showing form, as the last parameter we provide CSS class name, view the <head> section of this page for CSS definition of the class.
+					form.show($('test-div'), 
+					{
+						label_1		:'Username',
+						label_2		:'Password',
+						label_3		:'Is active',
+						checkbox	:true,
+						butt_cancel	:'Cancel',
+						butt_login	:'Login'
+					});
+				}
+			},
+			{
+				title:'Styling of form layout II.',
+				note:'You might also need to add span information for columns in the layout. It is accomplished by adding `|` in either row or column definition. Currently row span support is not enabled.',
+				keepPrevious:false,
+				code:function()
+				{
+					var form = fry.ui.form.create(
+					{
+						// specifying cell column spanning over two columns
+						label_1: 	{position:'1x1|2{w:300,s:background:cyan}', type:'label'},
+						// please note, that since the first cell is spanned over 2 columns, next column starts with 1+2 = 3 position
+						username:	{position:'1x3', type:'text'},
+						// let's set cell row spanning
+						label_2:	{position:'2|2x1', type:'label'},
+						password:	{position:'2x2|2', style:'width:300px;color:red;border-color:cyan', type:'text', params:{subtype:'password'}},
+						label_3:	{position:'3x2', type:'label'},
+						// finally, we can simply provide the cell with CSS class name, see the `table.acform td.key` definition on this page
+						checkbox:	{position:'3x3', type:'checkbox'},
+						butt_login:	{position:'4x3', type:'button', params:{}}
+					});
+					form.onButtLogin = function(values)
+					{
+						alert('Submitted.');
+					}
+					form.onButtCancel = function(values)
+					{
+						alert('Canceled.');
+					}
+					// showing form, as the last parameter we provide CSS class name, view the <head> section of this page for CSS definition of the class.
+					form.show($('test-div'), 
+					{
+						label_1		:'Username',
+						label_2		:'Password',
+						label_3		:'Is active',
+						checkbox	:true,
+						butt_cancel	:'Cancel',
+						butt_login	:'Login'
+					});
+				}
+			},					
+			{
+				title:'All field item types',
+				note:'Let\'s see all possible form items (extends over time...).',
+				keepPrevious:false,
+				code:function()
+				{
+					var form = fry.ui.form.create(
+					{
+						label_1		: 	{position:'1x1', type:'label'},
+						text_1		:	{position:'1x2', type:'text'},
+						// please note, the combo needs more than a value, we have to provide items list too using standard fill handler callback
+						combo_1		:	{position:'2x2', type:'combo', params:{
+							fillHandler:function(option)
+							{
+								if ( 0.2 < Math.random() )
+								{
+									var key = Math.random();
+									return [key, key];
+								}
+								return false;
+							}}
+						},
+						checkbox_1	:   {position:'3x2', type:'checkbox'},
+						// radio buttons must have collection of items specified
+						radio_1		:   {position:'4x2', type:'radio', params:{
+							items:
+							{
+								key1:'Value 1',
+								key2:'Value 2',
+								key3:'Value 3'								
+							}
+						}},
+						butt_ok		:	{position:'10x2', type:'button'}
+					});
+					form.onButtOk = function(values)
+					{
+						var t = '';
+						for ( var key in values )
+						{
+							t += '?: ?\n'.embed(key, values[key]);
+						}
+						alert('Done. Values:\n============================\n?'.embed(t));
+					}
+					// showing form
+					form.show($('test-div'), 
+					{
+						label_1		:'Some label',
+						text_1		:'Some default value',
+						checkbox_1	:true,
+						// radio buttons must have collection of items specified
+						radio_1		:'key2',
+						butt_ok		:'Submit the form'
+					});
+				}
+			},
+			{
+				title:'Live-updated forms',
+				note:'Live update serves its purpose if we already have an object that is going to be mapped to a form. Instead of creating list of edited values, we simply provide object and the mapping parameters. Any change in our form automatically updates the object itself. When this behavior is not acceptable, we can specify to update object only when submitting takes place (using a button). The change made to object during form editation can be discarded by simply calling the form.rollback() method - the object is then set to the state before editation.',
+				keepPrevious:false,
+				code:function()
+				{
+					// let's create some object for use in live-updated form, its structure does not have to be flat, we simply override default mapping
+					var obj = {
+						whatever_not_used_in_form:[1,2,3,4,5],
+						username:'helo',
+						nested:
+						{
+							checkbox:true
+						},
+						password:'oleh',
+						name:'Fry Form'
+					}
+					// let's create helper function for dumping the object
+					var dumpObject = function(o, tab)
+					{
+						var is_root = !tab;
+						if ( is_root )
+						{
+							o = obj;
+						}
+						tab = tab || '';
+						var t = '';
+						for ( var i in o )
+						{
+							t += tab+i+': ';
+							if ( 'object' == typeof o[i] )
+							{
+								t += '\n' + dumpObject(o[i], tab+'	');
+							}
+							else
+							{
+								t += o[i]+'\n';
+							}
+						}
+						if ( is_root )
+						{
+							alert(t);
+						}
+						return t;
+					}
+					var form = fry.ui.form.create(
+					{
+						label_1: 	{position:'1x1', type:'label'},
+						username:	{position:'1x2', type:'text'},
+						label_2:	{position:'2x1', type:'label'},
+						password:	{position:'2x2', type:'text', params:{subtype:'password'}},
+						label_3:	{position:'3x1', type:'label'},
+						checkbox:	{position:'3x2', type:'checkbox'},
+						label_4:	{position:'4x1', type:'label'},
+						name:	    {position:'4x2', type:'text'},
+						butt_cancel:{position:'5x2', type:'button', params:{}},
+						// we specify that live-update is fired when the login button is activated (clicked on)
+						butt_login:	{position:'5x2', type:'button', params:{liveUpdate:true}}
+					});
+					form.onButtLogin = function(values)
+					{
+						alert('Done. See the modified object properties.');
+						dumpObject();
+					}
+					form.onButtCancel = function(values)
+					{
+						// discard any changes
+						form.rollback();
+						alert('Canceled. You should now see original object intact.');
+						dumpObject();
+					}
+					// showing form, as the last parameter we provide CSS class name, view the <head> section of this page for CSS definition of the class.
+					form.show(
+						// a node
+						$('test-div'),
+						// our object
+						obj,
+						// adding mapping information
+						{
+							// when no mapping for property is specified, it is assumed it can be found at obj[key]
+							// we need to override mapping for `checkbox` property since it's nested and cannot be found at obj['checkbox']
+							map:
+							{
+								// to allow maximum flexibility, we define getter/setter pair of callbacks
+								// checkbox is nested (not a property in first level as username and password are) so we define mapping functions
+								checkbox:
+								{
+									get:function(obj)
+									{
+										return obj.nested.checkbox;
+									},
+									set:function(obj, value)
+									{
+										obj.nested.checkbox = value;
+									}
+								}
+							},
+							// defining default values for form items that are not available in the object (typically labels)
+							values:
+							{
+								label_1:'Username',
+								label_2:'Password',
+								label_3:'Is active',
+								label_4:'Name',
+								butt_cancel:'Cancel',
+								butt_login:'Login'
+							}
+						},
+						// css class name
+						 'our-form'
+					);
+				}
+			},
+			{
+				title:'Live-updated forms II.',
+				note:'In previous example, object was modified AFTER we have clicked on the button. This example shows, how to edit object properties without explicit activation. Any change fires the onChange listener which you can override and manipulate default form behavior. Just for fun, try to enter `fry` as username :).',
+				keepPrevious:false,
+				code:function()
+				{
+					// let's create some object for use in live-updated form, its structure does not have to be flat, we simply override default mapping
+					var obj = {
+						whatever_not_used_in_form:[1,2,3,4,5],
+						username:'helo',
+						nested:
+						{
+							checkbox:true,
+							media:'email'
+						},
+						password:'oleh',
+						name:'Fry Form',
+						num_rollbacks:0
+					}
+					// let's create helper function for dumping the object, this time without alert, will buffer directly to screen
+					var output = $('test-div').a($$('pre')).w(400).h(400).s('overflow:auto;border:1px solid black;background:#fff').pos(true).x(500).y(0);
+					var dumpObject = function(o, tab)
+					{
+						var is_root = !tab;
+						if ( is_root )
+						{
+							o = obj;
+						}
+						tab = tab || '';
+						var t = '';
+						for ( var i in o )
+						{
+							t += tab+i+': ';
+							if ( 'object' == typeof o[i] )
+							{
+								t += '\n' + dumpObject(o[i], tab+'	');
+							}
+							else
+							{
+								t += o[i]+'\n';
+							}
+						}
+						if ( is_root )
+						{
+							output.t(t);
+						}
+						return t;
+					}
+					var form = fry.ui.form.create(
+					{
+						label_1: 	{position:'1x1', type:'label'},
+						username:	{position:'1x2', type:'text'},
+						label_2:	{position:'2x1', type:'label'},
+						password:	{position:'2x2', type:'text', params:{subtype:'password'}},
+						label_3:	{position:'3x1', type:'label'},
+						checkbox:	{position:'3x2', type:'checkbox'},
+						media:{position:'3x2', type:'radio', params:{
+							items:{
+								tv:'TV',
+								fax:'Fax',
+								email:'E-mail',
+								blu_ray:'Blu-Ray',
+								dvd:'DVD'
+							}}},
+						label_4:	{position:'4x1', type:'label'},
+						name:	    {position:'4x2', type:'text'},
+						butt_show_dump:{position:'5x2', type:'button'},
+						// this button causes object to restore original set of properties
+						butt_rollback:{position:'5x2', type:'button', params:{}}
+					});
+					form.onButtShowDump = function()
+					{
+						dumpObject();
+					}
+					form.onButtRollback = function(values)
+					{
+						// discard any changes
+						form.rollback();
+						obj.num_rollbacks++;
+						dumpObject();
+						alert('Object restored. See the dump.');
+					}
+					// called when any value changes, item contains edited form item, simple API:
+					// item.id() - returns id of the item changed
+					// item.is(id) - tells, whether certain id was changed
+					// item.contains(value) - tells, whether value of the item is value
+					// item.value() - gets item value
+					// item.value(value) - sets value - the onChange listener is NOT called afterwards (could lead to recursive infinite calls)
+					// item.other(id) - gets value of other item in the form
+					// item.other(id, value) - sets other item's value
+					form.onChange = function(item)
+					{
+						// we simply call the dump display
+						dumpObject();
+						// now, add some hypothetical form update logic
+						if ( item.is('media') )
+						{
+							if ( item.contains('dvd') )
+							{
+								item.value('fax');
+								item.other('checkbox', false);
+							}
+						}
+						if ( item.is('username') )
+						{
+							// magic keyword :), try to enter it in the username field
+							if ( item.contains('fry') )
+							{
+								item.other('media', 'blu_ray');
+								item.other('name', 'Secret :-)');
+								item.other('checkbox', !item.other('checkbox'));
+								item.value('You got it!');
+							}
+						}
+					}
+					// showing form, as the last parameter we provide CSS class name, view the <head> section of this page for CSS definition of the class.
+					form.show(
+						// a node
+						$('test-div').a($$()),
+						// our object
+						obj,
+						// adding mapping information
+						{
+							// live-update fired inmplicitly while editing
+							auto:true,
+							// when no mapping for property is specified, it is assumed it can be found at obj[key]
+							// we need to override mapping for `checkbox` property since it's nested and cannot be found at obj['checkbox']
+							map:
+							{
+								// to allow maximum flexibility, we define getter/setter pair of callbacks
+								// checkbox and media are nested (not a property in first level as eg. username is) so we define mapping functions
+								checkbox:
+								{
+									get:function(obj)
+									{
+										return obj.nested.checkbox;
+									},
+									set:function(obj, value)
+									{
+										obj.nested.checkbox = value;
+									}
+								},
+								media:
+								{
+									get:function(obj)
+									{
+										return obj.nested.media;
+									},
+									set:function(obj, value)
+									{
+										obj.nested.media = value;
+									}
+								}
+							},
+							// defining default values for form items that are not available in the object (typically labels)
+							values:
+							{
+								label_1:'Username',
+								label_2:'Password',
+								label_3:'Is active',
+								label_4:'Name',
+								butt_show_dump:'Show dump',
+								butt_rollback:'Rollback'
+							}
+						}
+					);
+				}
+			}				
+		];
+
+		
+        </script>
+
+	</head>
+	<body onload="main()">
+	
+		<h1 class="logo"><a href="index.html">Back to index page</a> Form UI support extensions</h1>
+		
+		<p class="description">
+			Form UI Support extensions - easier form handling
+		</p>
+		
+		<form style="margin:20px">
+			<input id="button-prev" type="button" value="Previous test" /> 
+			<input id="button-run" type="button" value="Run test" /> 
+			<input id="button-next" type="button" value="Next test" /> 
+			Jump to: <select id="combo-tests" onchange='initTest(this.options[this.selectedIndex].value)'></select>
+		</form>
+		
+		<h2 id="title"></h2>
+		<p id="note"></p>
+		
+		<pre id="code" ></pre>
+
+		<div id="test-area">
+			<div id="test-div" style="position:absolute"></div>
+		</div>
+		
+	</body>
+</html>
