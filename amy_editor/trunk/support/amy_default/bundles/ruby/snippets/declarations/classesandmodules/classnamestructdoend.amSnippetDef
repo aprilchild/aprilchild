@@ -1,0 +1,7 @@
+${1:ClassName} = Struct.new(:${2:attr_names}) do
+	def ${3:method_name}
+		$0
+	end
+	
+	
+end

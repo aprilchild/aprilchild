@@ -1,0 +1,31 @@
+signature:
+  name: 'Default keymap'
+  author: 'Petr Krontorád, April-Child.com'
+  inherits: 
+    - 'default'
+
+definition: |
+  # enter
+  KEY: -13
+  	custom(action:'SmartIndent', split_line:true, indent_tab_when_ends:'{')
+
+  # meta + enter
+  KEY: -13+meta
+  	custom(action:'SmartIndent', split_line:false, indent_tab_when_ends:'{')
+
+  # meta + shift + enter
+  KEY: -13+meta+shift
+  	custom(action:'SmartIndent', split_line:false, set_char_at_end:';', indent_tab_when_ends:'{')
+
+  # e
+  KEY: 101
+  	custom(action:'SmartUnindent', match_from:'start', starts_with:'if', ends_with:'else')
+
+  # }
+  KEY: 125
+  	custom(action:'SmartUnindent', match_from:'end', starts_with:'{', ends_with:'}')
+
+  # '
+  KEY: 39
+  custom(action:'AutoComplete', use_selection:true, text:'\\'')
+

@@ -1,0 +1,106 @@
+<?php
+
+class DirUtils
+{
+
+    public static function remove_dir($path, $leave_root_dir = true)
+    {
+    	if (false !== $d = @opendir($path))
+    	{
+    		while (false !== $f = readdir($d))
+    		{
+    			if ('.' != $f && '..' != $f)
+    			{
+    				$new_path = $path.'/'.$f;
+    				if (is_dir($new_path))
+    				{
+    					self::remove_dir($new_path, false);
+    				}
+    				else
+    				{
+    					unlink($new_path);
+    				}
+    			}
+    		}
+    		closedir($d);
+    		if (!$leave_root_dir)
+    		{
+    			rmdir($path);
+    		}
+    	}
+    }
+
+    public static function make_dir($path, $permissions = 0755)
+    {
+    	$path_parts = explode( '/', str_replace('//', '/', $path) );
+    	$actual_path = '' != $path_parts[0] ? $path_parts[0] : '/';
+    	$num_parts = sizeof($path_parts);
+    	for ( $i=1; $i<=$num_parts; $i++ )
+    	{
+    		if ( !is_dir($actual_path) )
+    		{
+    			if ( false === @mkdir($actual_path) )
+    			{
+    				return false;
+    			}
+    			else
+    			{
+    				@chmod($actual_path, $permissions);
+    			}
+    		}
+    		if ( $i<$num_parts)
+    		{
+    			$actual_path .= '/'.$path_parts[$i];
+    		}
+    	}
+    	return true;
+    }
+    
+    public static function copy_dir($src_path, $target_path, $dir_permissions = 0755, $file_permission = 0644, $yield = null)
+    {
+    	if (false !== $d = @opendir($src_path))
+    	{
+    		while (false !== $f = readdir($d))
+    		{
+    			if (0 != strncmp($f, '.', 1))
+    			{
+    				$new_src_path = $src_path . '/' . $f;
+				    $new_target_path = $target_path . '/' . $f;
+    				if (is_dir($new_src_path))
+    				{
+    				    $actual_dir_permissions = $dir_permissions;
+    				    $actual_file_permissions = $file_permission;
+    				    if (false !== strpos($f, 'cache') || false !== strpos($f, 'log') || false !== strpos($f, 'role'))
+    				    {
+    				        $actual_dir_permissions = 0777;
+    				        $actual_file_permissions = 0666;
+    				    }
+    				    if (!self::make_dir($new_target_path, $actual_dir_permissions) || !self::copy_dir($new_src_path, $new_target_path, $actual_dir_permissions, $actual_file_permissions, $callback))
+    				    {
+    				        return false;
+    				    }
+    				}
+    				else
+    				{
+    					if (false === $content = @file_get_contents($new_src_path))
+    					{
+    					    return false;
+    					}
+    					if (null !== $yield)
+    					{
+    					    $content = $yield($content);
+    					}
+    					if (false === file_put_contents($new_target_path, $content))
+    					{
+    					    return false;
+    					}
+    					chmod($new_target_path, $file_permission);
+    				}
+    			}
+    		}
+    		closedir($d);
+    		return true;
+    	}
+    	return false;
+    }    
+}

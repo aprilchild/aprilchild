@@ -1,0 +1,6 @@
+${1:public }class ${2:${TM_FILENAME/(.*?)(\..+)/$1/}} extends ${3:Object}
+{
+	$2 (${4:arguments}) {
+		${0:// expression}
+	}
+}

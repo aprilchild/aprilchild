@@ -1,0 +1,18 @@
+signature:
+  name: 'JavaScript'
+  inherits: 
+    - 'c:default'
+
+definition:
+  foldingStartMarkers: '[/^.*\bfunction\s*(\w+\s*)?\([^\)]*\)(\s*\{[^\}]*)?\s*$/i]'
+  foldingParityMarkers: "[/\{[^\'\\\"]*$/i]"
+  foldingStopMarkers: "[/[^\'\"]*\}/i]"
+
+  chunkRules:
+    - '[/(([^\w]|^)(break|case|catch|continue|default|do|else|finally|for|goto|if|in|with|import|package|return|switch|throw|try|while)([^\w]|$))/i, 3, ac.chap.CHUNK_KEYWORD]'
+    - '[/(([^\w]|^)(function|var|prototype|this|instanceof)([^\w]|$))/i, 3, ac.chap.CHUNK_KEYWORD_CUSTOM]'
+    - '[/((prototype\.|function[ ]{1,})([\w]{1,}))/i, 3, ac.chap.CHUNK_FUNCTION_NAME]'
+    - '[/(([^\w]|^)(document|window|self|top|event|documentElement|write|close|open|status|alert|submit|prompt|console)([^\w]|$))/i, 3, ac.chap.CHUNK_LIBRARY]'
+
+  wordDelimiter: '/[\w\d]/'
+  indentIgnoreMarker: '/[\t ]/'

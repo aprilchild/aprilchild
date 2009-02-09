@@ -1,0 +1,23 @@
+signature:
+  name: 'Black'
+  author: 'Petr Krontorád, April-Child.com'
+
+definition:
+  cssId: 'black'
+  background: '#111'
+  textColor: '#fff'
+  caretColor: '#fff'
+  caretRowStyleActive: '#444'
+  selectionStyle: '#283a76'
+  TOKEN_MULTIROW_COMMENT: 'color:#888'
+  TOKEN_SINGLEROW_COMMENT: 'color:#888'
+  TOKEN_SINGLE_QUOTED: 'color:#8399D3'
+  TOKEN_DOUBLE_QUOTED: 'color:#8399D3'
+  CHUNK_KEYWORD: 'color:#66f'
+  CHUNK_NUMBER: 'color:#ff0'
+  CHUNK_OPERATOR: 'color:#7FC7EC;'
+  CHUNK_PARENTHESIS: 'font-weight:bold'
+  CHUNK_KEYWORD_CUSTOM: 'color:#C9C900'
+  CHUNK_FUNCTION_NAME: 'color:#DD3D2A'
+  CHUNK_LIBRARY: 'color:#08f'
+  CHUNK_LIBRARY_CUSTOM: 'color:#CC581D'

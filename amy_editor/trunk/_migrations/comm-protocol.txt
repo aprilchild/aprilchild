@@ -1,0 +1,17 @@
+Collaborative Communication Protocol
+====================================
+
+
+M[aster]
+U[ser]
+
+01: M - create(receiver_email, invitation_msg, expiration_interval)
+02: M - check_transaction(last_trans_id, trans_changes) --> 02:
+03: M - check_messages() --> 03:
+
+04: U - accept(invitation_id)
+05: U - broadcasting UPDATE_CONTENT message to all collaborators
+06: U - check_messages() --> 06:
+
+07: M or any active user - handle_message UPDATE_CONTENT(last_trans_id, content)
+08: U - handle_message START_CONTENT sent by first active user, acquiring its content for first render and using last_trans_id for changes since then

@@ -1,0 +1,12 @@
+signature:
+  name: 'Ruby on Rails'
+  author: 'Duane Johnson <canadaduane@gmail.com>'
+  url: ''
+  version: '1.0'
+  dependencies: 
+    - 'ruby'
+  
+  snippets_inherited:
+    - 'ruby'
+  
+  note: '<a href="http://www.rubyonrails.com/">Ruby on Rails</a> is a full-stack framework for developing database-backed web applications, in Ruby, according to the Model-View-Control pattern.'

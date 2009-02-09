@@ -1,0 +1,8 @@
+<?php
+
+function run_command($controller, $text, $params)
+{
+    $controller->ok('def ${1:ahoj}($0)');
+}
+
+?>

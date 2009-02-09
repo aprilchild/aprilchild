@@ -1,0 +1,1 @@
+var ${1:var_name} = ${2:expression};$0

@@ -1,0 +1,66 @@
+
+PHP Yadis
+---------
+
+This is the PHP Yadis library by JanRain, Inc.  You can visit our
+website for more information about this package and other Yadis
+implementations and tools:
+
+  http://www.openidenabled.com/yadis
+
+INSTALLATION
+============
+
+You will need PHP 4.3.0 or greater to use this library.  We have
+tested the library on PHP 4.3.0, 4.4.1, and 5.1.1.
+
+Follow these steps:
+
+1. Install and enable the CURL extension if possible.  This is
+   optional.
+
+2. Use the PEAR installer to install the package.  To use the PEAR
+   installer, run this command from the package directory:
+
+   # pear install package.xml
+
+   If your PEAR version is sufficiently new, you can run this instead:
+
+   # pear install package2.xml
+
+   If the PEAR installer isn't available, you can copy the Services/
+   directory into your PHP include path.
+
+USING THE API
+=============
+
+The best way to get started using the API is to take a look at the
+Services_Yadis_Yadis class documentation which can be found in
+Services/Yadis/Yadis.php.  The documentation found there details the
+Yadis discovery process using this API.
+
+GETTING HELP
+============
+
+If you have any questions, recommendations, or patches, please tell
+us!  Subscribe to our OpenID and Yadis development discussion list at:
+
+  http://lists.openidenabled.com/mailman/listinfo/dev
+
+If you want to learn more about Yadis, see the official Yadis website:
+
+  http://yadis.org
+
+DOCUMENTATION
+=============
+
+You can view the HTML library documentation in the doc/ directory.
+You can also find it on the web at
+
+  http://www.openidenabled.com/resources/docs/yadis/php/
+
+This package's documentation is in PhpDoc format.  To generate the
+documentation, install phpdoc and run the admin/makedoc.sh script.
+Phpdoc lives at:
+
+  http://www.phpdoc.org/

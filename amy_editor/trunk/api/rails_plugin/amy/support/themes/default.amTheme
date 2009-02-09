@@ -1,0 +1,23 @@
+signature:
+  name: 'No-Colored Theme'
+  author: 'Petr Krontorád, April-Child.com'
+
+definition:
+  cssId: ''
+  background: '#fff'
+  textColor: '#000'
+  caretColor: '#000'
+  caretRowStyleActive: '#ededed'
+  selectionStyle: '#c4dbff'
+  TOKEN_MULTIROW_COMMENT: 'color:#000'
+  TOKEN_SINGLEROW_COMMENT: 'color:#000'
+  TOKEN_SINGLE_QUOTED: 'color:#000'
+  TOKEN_DOUBLE_QUOTED: 'color:#000'
+  CHUNK_KEYWORD: 'color:#000'
+  CHUNK_NUMBER: 'color:#000'
+  CHUNK_OPERATOR: 'color:#000'
+  CHUNK_PARENTHESIS: 'color:#000'
+  CHUNK_KEYWORD_CUSTOM: 'color:#000'
+  CHUNK_FUNCTION_NAME: 'color:#000'
+  CHUNK_LIBRARY: 'color:#000'
+  CHUNK_LIBRARY_CUSTOM: 'color:#000'

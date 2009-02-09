@@ -1,0 +1,24 @@
+package `echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/.[A-Za-z]*.java//g'`;
+
+
+import junit.framework.TestCase;
+import `echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/Tests.java//'`;
+
+
+/**
+ * ${2:`echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/.*\.\([A-Za-z]*\).java/\1/g'`}
+ *
+ * @author ${4:`niutil -readprop / /users/$USER realname`}
+ * @since `date +%D`
+ */
+public class ${2:`echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/.*\.\([A-Za-z]*\).java/\1/g'`} extends TestCase {
+
+   private ${5:`echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/Tests.java//' | sed 's/.*\.\([A-Za-z]*\)$/\1/'`}  ${6:`echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/Tests.java//' | sed 's/.*\.\([A-Za-z]*\)$/\1/' | perl -e 'print lcfirst(<>)'`};
+
+   public ${5:`echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/Tests.java//' | sed 's/.*\.\([A-Za-z]*\)$/\1/'`} get${5:`echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/Tests.java//' | sed 's/.*\.\([A-Za-z]*\)$/\1/'`}() { return this.${6:`echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/Tests.java//' | sed 's/.*\.\([A-Za-z]*\)$/\1/' | perl -e 'print lcfirst(<>)'`}; }
+   public void set${5:`echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/Tests.java//' | sed 's/.*\.\([A-Za-z]*\)$/\1/'`}(${5:`echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/Tests.java//' | sed 's/.*\.\([A-Za-z]*\)$/\1/'`} ${6:`echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/Tests.java//' | sed 's/.*\.\([A-Za-z]*\)$/\1/' | perl -e 'print lcfirst(<>)'`}) { this.${6:`echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/Tests.java//' | sed 's/.*\.\([A-Za-z]*\)$/\1/' | perl -e 'print lcfirst(<>)'`} = ${6:`echo $TM_FILEPATH |  sed 's/\//./g' | sed 's/^.//' | sed 's/.*test.//' | sed 's/Tests.java//' | sed 's/.*\.\([A-Za-z]*\)$/\1/' | perl -e 'print lcfirst(<>)'`}; }
+ 
+   public void test$8() {
+      $0
+   }
+}

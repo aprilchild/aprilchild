@@ -1,0 +1,75 @@
+#!/usr/bin/php -q
+<?php
+    error_reporting(E_ALL ^ E_NOTICE);
+
+    $inf = explode('.', PHP_VERSION);
+    if ( 5 > intval($inf[0]) )
+    {
+        exit("--- Error: Dep must be run on PHP version 5 or later.\n");
+    }
+
+    define('GREETINGS_MESSAGE', "\nWelcome to the DEP, a simple deployment tasks tool.\nCopyright (c)2007 Petr Krontorád, April-Child.com [Type `dep help' for more.]\n");
+    define('GOODBYE_MESSAGE', "\n*** DEP has finished.");
+
+    include dirname(__FILE__).'/shared.cli.library';
+    include dirname(__FILE__).'/shared.dep.library';
+
+
+    cli_begin();
+    # start, reading general configuration
+    $dep_conf_path = dirname(__FILE__).'/../conf/Depfile';
+    if (!file_exists($dep_conf_path))
+    {
+        cli_end("--- Error: Could not find Defpfile at `$dep_conf_path'.");
+    }
+    $conf = array();
+    include $dep_conf_path;
+    $hostname = 'base';
+    if (isset($_ENV['HOSTNAME']))
+    {
+        $hostname = $_ENV['HOSTNAME'];
+    }
+    if (!isset($conf[$hostname]))
+    {
+        cli_end("--- Error: Could not find configuration section for hostname `$hostname'.");
+    }
+    $conf = $conf[$hostname];
+    
+    if (1 == sizeof($argv))
+    {
+        cli_end("    Usage: dep task_name [task_parameters]\n\nWhere `task_name' can use namespaces such as `dep maestro:deploy-web-client' and such.");
+    }
+    $task_name = $argv[1];
+    try
+    {
+        $paths = DEPTask::safely_parse_taskname_to_path($task_name);
+    }
+    catch(Exception $e)
+    {
+        cli_end($e);
+    }
+    $task_path = $paths['full_path'];
+    if (!file_exists($task_path))
+    {
+        cli_end("No task file found at `$task_path'.");
+    }
+    $content = file_get_contents($task_path);
+    $class_name = 'Task_'.implode('_', $paths['path_parts']);
+    if (false === strpos($content, "class $class_name extends DEPTask"))
+    {
+        cli_end("Wrong task definition inside the task file at `$task_path'.");
+    }
+    
+    include $task_path;
+    if (!class_exists($class_name))
+    {
+        cli_end("Missing task definition in the file `$task_path'. Task class `$class_name' not found.");
+    }
+    $time_start = microtime(true);
+    $task = new $class_name();
+    $task->run();
+    $time_stop = microtime(true);
+    $t_sec = round($time_stop - $time_start, 3);
+    cli_end("\n --- Task completed successfully in {$t_sec} second(s). ---");
+
+?>

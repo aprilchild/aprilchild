@@ -1,0 +1,3 @@
+  name: "sub(/../) { |match| .. }"
+  key_activation: ''
+  tab_activation: 'sub'

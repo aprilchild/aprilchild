@@ -1,0 +1,28 @@
+$AMY{name}.php;Common HTML/PHP document
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="" />
+		<meta name="Copyright" content="" />
+	
+		<title>$AMY{camelize:name}</title>
+
+		<link href=".css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+		</style>
+		
+        <script type="text/javascript" src=".js"></script>
+        <script type="text/javascript">
+
+        </script>
+
+	</head>
+	<body>
+		<?php
+			echo 'Hello.';
+		?>
+	</body>
+</html>

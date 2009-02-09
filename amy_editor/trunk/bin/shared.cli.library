@@ -1,0 +1,46 @@
+<?php
+/*
+
+	Shared simple CLI library toolkit.
+	Copyright(c)2007 Petr Krontorád, April-Child.com.
+
+*/
+
+function cli_in($message = false)
+{
+    if (false !== $message)
+    {
+        cli_out($message.': ', false);
+    }
+    $fp = fopen("/dev/stdin", "r");
+    $input = fgets($fp, 255);
+    fclose($fp);
+    $input = trim($input);
+    return '' == $input ? false : $input;
+}
+
+function cli_out($message, $new_line_afterwards = true)
+{
+    echo $message.($new_line_afterwards?"\n":'');
+}
+
+function cli_begin()
+{
+    cli_out(GREETINGS_MESSAGE);
+}
+
+function cli_ok()
+{
+    cli_out('OK');
+}
+
+function cli_end($message = false)
+{
+    if (false !== $message)
+    {
+        cli_out("$message");
+    }
+    cli_out(GOODBYE_MESSAGE);
+    exit();
+}
+?>

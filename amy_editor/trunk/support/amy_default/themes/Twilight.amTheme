@@ -1,0 +1,23 @@
+signature:
+  name: 'Twilight'
+  author: 'Adapted Twilight theme of TextMate'
+
+definition:
+  cssId: 'twilight'
+  background: '#141414'
+  textColor: '#F8F8F8'
+  caretColor: '#A7A7A7'
+  caretRowStyleActive: '#1B1B1B'
+  selectionStyle: '#3C4043'
+  TOKEN_MULTIROW_COMMENT: 'color:#605A60;font-style:italic'
+  TOKEN_SINGLEROW_COMMENT: 'color:#605A60;font-style:italic'
+  TOKEN_SINGLE_QUOTED: 'color:#8B9F67'
+  TOKEN_DOUBLE_QUOTED: 'color:#D4F29E'
+  CHUNK_KEYWORD: 'color:#D2A964'
+  CHUNK_NUMBER: 'color:#DE6848'
+  CHUNK_OPERATOR: 'color:#EFC25A;'
+  CHUNK_PARENTHESIS: 'color:#ABC4DC'
+  CHUNK_KEYWORD_CUSTOM: 'color:#A0849E'
+  CHUNK_FUNCTION_NAME: 'color:#DAD280'
+  CHUNK_LIBRARY: 'color:#7286A8'
+  CHUNK_LIBRARY_CUSTOM: 'color:#A55C29'

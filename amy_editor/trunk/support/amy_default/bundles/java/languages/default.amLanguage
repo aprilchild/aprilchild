@@ -1,0 +1,20 @@
+signature:
+  name: 'Java'
+  inherits: 
+    - 'c:default'
+  tabSize: '4'
+
+definition:
+	foldingStartMarkers: '[/^.*\b[A-Za-z_]*\s*[A-Za-z_]*\s*(\w+\s*)?\([^\)]*\)(\s*\{[^\}]*)?\s*$/i]'
+	foldingParityMarkers: '[/\{[^\'\"]*$/i]'
+	foldingStopMarkers: '[/[^\'\"]*\}/i]'
+
+  chunkRules:
+    - '[/\b(private|protected|public)\b/i, 1, ac.chap.CHUNK_LIBRARY]'
+    - '[/\b(abstract|final|native|static|transient|synchronized|volatile|strictfp|extends|implements)\b/i, 1, ac.chap.CHUNK_LIBRARY]'
+    - '[/\b(class|interface)\b/i, 1, ac.chap.CHUNK_LIBRARY]'
+    - '[/\b(try|catch|finally|throw|import)\b/i, 1, ac.chap.CHUNK_KEYWORD]'
+    - '[/\b(return|break|case|continue|default|do|while|for|switch|if|else)\b/i, 1, ac.chap.CHUNK_KEYWORD]'
+
+  wordDelimiter: '/[\w\d]/'
+  indentIgnoreMarker: '/[\t \s]/'

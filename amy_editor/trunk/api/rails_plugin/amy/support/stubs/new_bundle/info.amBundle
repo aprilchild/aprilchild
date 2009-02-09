@@ -1,0 +1,8 @@
+signature:
+  name: '@@bundle.name'
+  author: '@@bundle.author_name <@@bundle.author_email>'
+  url: ''
+  version: '1.0'
+  dependencies: 
+    - 'default'
+  note: '@@bundle.description'

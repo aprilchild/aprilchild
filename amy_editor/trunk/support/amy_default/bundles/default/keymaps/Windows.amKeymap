@@ -1,0 +1,102 @@
+signature:
+  name: 'Windows keymap'
+  author: 'Petr Krontorád, April-Child.com'
+
+definition: |
+  
+  # home
+  KEY: -36
+  	caret(move:'row_start')
+  KEY: -36+shift
+  	caret(move:'row_start')
+  	selection(add:true)
+
+  # end
+  KEY: -35
+  	caret(move:'row_end')
+  KEY: -35+shift
+  	caret(move:'row_end')
+  	selection(add:true)
+
+  # page_down
+  KEY: -34
+  	caret(move:'page_down')
+  KEY: -34+shift
+  	caret(move:'page_down')
+  	selection(add:true)
+
+  # page_up
+  KEY: -33
+  	caret(move:'page_up')
+  KEY: -33+shift
+  	caret(move:'page_down')
+  	selection(add:true)
+
+  # ctrl + c
+  KEY: 99+ctrl
+  	clipboard(copy:true)
+
+  # ctrl + x
+  KEY: 120+ctrl
+  	clipboard(cut:true)
+
+  # ctrl + z
+  KEY: 122+ctrl
+  	undo()
+
+  # ctrl + shift + z
+  KEY: 90+ctrl+shift
+  	redo()
+
+  # ctrl + a
+  KEY: 97+ctrl
+  	selection(all:true)
+
+  # F2
+  KEY: -113
+    custom(action:'GoToBookmark', direction:1)
+
+  # F2 shift
+  KEY: -113+shift
+    custom(action:'GoToBookmark', direction:-1)
+
+  # F2 + ctrl
+  KEY: -113+ctrl
+    custom(action:'ToggleBookmark')
+
+  # [ + ctrl
+  KEY: 91+ctrl
+    custom(action:'Indent', direction:'left')
+
+  # ] + ctrl
+  KEY: 93+ctrl
+    custom(action:'Indent', direction:'right')
+
+  # / + ctrl
+  KEY: 47+ctrl
+    custom(action:'Comment')
+
+  # + + ctrl
+  KEY: 43+ctrl
+    custom(action:'RuntimeOption', key:'font.size', value:'bigger')
+
+  # - + ctrl
+  KEY: 45+ctrl
+    custom(action:'RuntimeOption', key:'font.size', value:'smaller')
+
+  # e + ctrl
+  KEY: 101+ctrl
+    custom(action:'SetSearchKeyword')
+
+  # g + ctrl
+  KEY: 103+ctrl
+    custom(action:'SearchKeyword', direction:'down')
+
+  # g + shift + ctrl
+  KEY: 71+shift+ctrl
+    custom(action:'SearchKeyword', direction:'up')
+
+  # f + ctrl
+  KEY: 102+ctrl
+    custom(action:'SearchInteractive')
+

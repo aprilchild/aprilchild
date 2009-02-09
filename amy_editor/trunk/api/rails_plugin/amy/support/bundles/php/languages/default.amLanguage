@@ -1,0 +1,23 @@
+signature:
+  name: 'PHP'
+  inherits: 
+    - 'c:default'
+  tabSize: '4'
+
+definition:
+  foldingStartMarkers: "[/^.*\b(function|class)\s*(\w+\s*)?\([^\)]*\)(\s*\{[^\}]*)?\s*$/i]"
+  foldingParityMarkers: "[/\{[^'\"]*$/i]"
+  foldingStopMarkers: "[/[^'\"]*\}/i]"
+  singleRowCommentStartMarkers: "['//', '#']"
+
+  chunkRules:
+    - '[/\b(break|c(ase|ontinue)|d(e(clare|fault)|ie|o)|e(lse(if)?|nd(declare|for(each)?|if|switch|while)|xit)|for(each)?|if|return|switch|use|while)\b/i, 1, ac.chap.CHUNK_KEYWORD]'
+    - '[/\b(catch|try|throw|exception)|([a-zA-Z_]*Exception)\b/i, 0, ac.chap.CHUNK_KEYWORD]'
+    - '[/\b(real|double|float|int(eger)?|bool(ean)?|string|class|clone|var|function|interface|parent|self|__(autoload|c(all|lone|onstruct)|destruct|get|set|sleep|toString|wakeup))\b/i, 1, ac.chap.CHUNK_LIBRARY]'
+    - '[/\b(global|abstract|const|extends|implements|final|p(r(ivate|otected)|ublic)|static)\b/i, 1, ac.chap.CHUNK_LIBRARY]'
+    - '[/&(?=\s*(\$|new|[A-Za-z_][A-Za-z_0-9]+(?=\s*\()))/i, 1, ac.chap.CHUNK_LIBRARY]'
+    - '[/(\$[A-Za-z_]*)/i, 1, ac.chap.CHUNK_LIBRARY_CUSTOM]'
+
+  wordDelimiter: '/[\w\d]/'
+  indentIgnoreMarker: '/[\t \s]/'
+  stringInterpolation: "['(({|)\\$[\\w{\'\\.\\[\\]\\(\\)=>]+(}|))', 1]"

@@ -1,0 +1,23 @@
+signature:
+  name: '@@language.name'
+  inherits: 
+    - 'default:default'
+  tabSize: '2'
+
+definition:
+  singleQuoteStringMarker: "'"
+  singleQuoteStringMarkerException: '\\'
+  doubleQuoteStringMarker: '"'
+  doubleQuoteStringMarkerException: '\\'
+  foldingStartMarkers: '[@@language.foldingStartMarkers]'
+  foldingParityMarkers: '[@@language.foldingParityMarkers]'
+  foldingStopMarkers: '[@@language.foldingStartMarkers]'
+  singleRowCommentStartMarkers: "[@@language.singleRowCommentStartMarkers]"
+  multiRowCommentStartMarker: @@language.multiRowCommentStartMarker
+  multiRowCommentEndMarker: @@language.multiRowCommentEndMarker
+
+  chunkRules:
+    @@language.chunkRules
+
+  wordDelimiter: '/[\w\d]/'
+  indentIgnoreMarker: '/[\t \s]/'

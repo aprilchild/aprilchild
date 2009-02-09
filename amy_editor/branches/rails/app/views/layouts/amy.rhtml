@@ -1,0 +1,27 @@
+<%= fry_mvc_app @app_options %>
+	
+<div id="splash">
+	<h1>Amy Editor 1.0</h1>
+	<p>A Collaborative Text and Source Code Editor for Developers.</p>
+	<strong>.</strong>
+	<p style="text-align:right;font-size:0.9em;display:none">Written and designed by Petr Krontorád</p>
+</div>
+		
+<div id="no-js-notice">
+	If you see this message, your browser cannot run the editor at the moment. Please make sure your browser settings does not prohibit use of JavaScript.
+</div>
+<script type="text/javascript">
+	var notice = document.getElementById('no-js-notice');
+	notice.parentNode.removeChild(notice);
+</script>
+
+<div id="no-support-notice" style="display:none">
+	Your browser cannot run the editor. Please use one of the following: Safari, Firefox or any browser based on these (Camino, ...). If you are courageous though, you may <a href="javascript:client.onstart(true)">launch the editor here</a>, but please be warned, there are probably some unresolved issues in the various state of annoyance that might prevent using some parts of the editor...
+</div>
+		
+	<!-- serves only for saving files to disk -->
+	<iframe name="_download" style="visibility:hidden" id="_download" src="about:blank"></iframe>
+
+	<%= yield %>
+
+<%= fry_mvc_app :end => true %>

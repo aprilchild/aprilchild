@@ -1,0 +1,7 @@
+  name: 'Tag generator'
+  key_activation: '84+shift+ctrl'
+  tab_activation: ''
+  input_type: 'none'
+  input_type_or: 'nothing'
+  output_type: 'insert_as_snippet'
+  script_env: 'php'

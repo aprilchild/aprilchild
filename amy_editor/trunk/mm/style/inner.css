@@ -1,0 +1,202 @@
+/* 
+  *------------------------------------------------------------------------------------------
+	Amy - collaborative web text editor for developers
+
+	Built on the technologies developed and maintained by April-Child.com
+	Copyright (c)2007 Petr Krontorad, April-Child.com.
+	
+	Author: Petr Krontorad, petr@krontorad.com
+	
+	All rights reserved.
+  *------------------------------------------------------------------------------------------
+	
+	Amy CSS definition for standalone pages
+	
+  *------------------------------------------------------------------------------------------
+*/
+
+
+/* General
+   ------------------------------------------ */
+
+.htmldialog
+{
+	font-family:'Lucida Grande', 'Tahoma', 'Verdana', 'Arial', 'Helvetica', sans-serif;
+	background-color:#fff;
+	background-image:url(../i/diag-window-inner-bg.gif);
+	color:#000;
+	font-size:95%;
+	margin:0;
+	padding:0;
+}
+
+#content
+{
+    padding:14px;
+}
+.htmldialog .info
+{
+    float:right;
+    width:270px;
+}
+.htmldialog .info .top
+{
+	margin-top:14px;
+    width:260px;
+    height:22px;
+    background:url(../i/web/info_box-top.png);
+}
+
+.htmldialog .info .content
+{
+    width:260px;
+    height:256px;
+    background:url(../i/web/info_box-content.png);
+}
+
+.htmldialog .info .content .inner
+{
+    width:auto;
+    height:256px;
+    margin-right:1px;
+    padding:0 12px 0 12px;
+    overflow:auto;
+    font-size:11px;
+    color:#888;
+}
+.htmldialog .info .content .inner p.explanation
+{
+    border-top:1px solid #ddd;
+    padding-top:4px;
+    font-size:10px;
+}
+
+.htmldialog .info .content .inner h2
+{
+    font-size: 16px;
+    color: #444;
+    text-shadow: #fff 0px 0px 2px;
+    font-weight:bold;
+    margin:0;
+}
+
+.htmldialog .info .bottom
+{
+    width:260px;
+    height:22px;
+    background:url(../i/web/info_box-bottom.png);
+}
+
+.htmldialog .content
+{
+}
+
+
+.htmldialog .content h3
+{
+    font-size: 17px;
+    color: #000;
+    text-shadow: #fff 0px 0px 2px;
+    font-weight:bold;
+}
+
+
+.htmldialog .content p
+{
+    font-size:11px;
+}
+
+.htmldialog input.text
+{
+    font-size:11px;
+    font-weight:normal;
+    padding:2px;
+}
+
+.htmldialog input.button
+{
+    font-size:11px;
+    font-weight:bold;
+    padding-top:2px 6px 3px 6px;
+}
+
+.htmldialog ul.options
+{
+    list-style-type:none;
+    background:url(../i/web/help.gif);
+    background-repeat:no-repeat;
+    padding-left:27px;
+}
+
+.htmldialog ul.options li
+{
+    width:340px;
+    font-size:11px;
+    padding:4px;
+    color:#555;
+    border-top:1px solid #ddd;
+}
+
+.htmldialog ul.options li a
+{
+    color:#000;
+}
+
+.htmldialog .form-box
+{
+}
+
+
+.htmldialog .form-box .top
+{
+    width:394px;
+    height:8px;
+    background:url(../i/web/form_box-top.gif);
+}
+
+.htmldialog .form-box .content
+{
+    width:394px;
+    background:url(../i/web/form_box-content.gif);
+}
+
+.htmldialog .form-box .content .inner
+{
+    width:auto;
+    padding: 8px;
+	font-size:11px;
+}
+.htmldialog .form-box .content .inner h4
+{
+	font-size:13px;
+	font-weight:bold;
+	margin:0;
+	margin-bottom:11px;
+}
+
+.htmldialog .form-box .content .inner h3
+{
+    font-size: 18px;
+    color: #666;
+    text-shadow: #fff 0px 0px 2px;
+    font-weight:bold;
+	margin:8px;
+	margin-left:0px;
+	padding-bottom:3px;
+	border-bottom:1px solid #fff;
+}
+
+
+.htmldialog .form-box .bottom
+{
+    width:394px;
+    height:7px;
+    background:url(../i/web/form_box-bottom.gif);
+}
+.htmldialog .buttons
+{
+	margin:20px;
+	margin-bottom:0;
+	width:auto;
+	text-align:right;
+}

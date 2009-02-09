@@ -1,0 +1,1 @@
+render_component :controller => "${1:items}", :action => "${2:index}"

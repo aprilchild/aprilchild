@@ -1,0 +1,1 @@
+redirect_to :controller => "${1:items}"

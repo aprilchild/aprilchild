@@ -1,0 +1,20 @@
+signature:
+  name: 'HTML (Rails)'
+  inherits: 
+    - 'markup:html'
+  tabSize: '2'
+
+definition:
+  singleQuoteStringMarker: "'"
+  singleQuoteStringMarkerException: '\\'
+  doubleQuoteStringMarker: '"'
+  doubleQuoteStringMarkerException: '\\'
+  singleRowCommentStartMarkers: "['#']"
+  multiRowCommentStartMarker: '/*'
+  multiRowCommentEndMarker: '*/'
+
+  chunkRules:
+    -
+
+  wordDelimiter: '/[\w\d]/'
+  indentIgnoreMarker: '/[\t \s]/'

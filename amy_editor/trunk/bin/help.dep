@@ -1,0 +1,99 @@
+<?php
+class Task_help extends DEPTask
+{    
+    public static function get_author()
+    {
+        return 'Petr Krontorád, April-Child.com';
+    }
+    
+    public static function get_comment($short)
+    {
+        return 'Displays Dep help page.';
+    }
+    
+    public function run()
+    {
+        if ( '' != $this->pars[0] )
+        {
+            return $this->run_for($this->pars[0]);
+        }
+        $this->write(<<<EOD
+This is the help file for Dep. It is effectively a task as well.
+
+Common usage is:
+================
+
+    dep task_name [task_parameters]
+    
+Dep uses namespaces in task names for cleaner separations. Names are separated by `:'. You can easily write your own tasks simply by creating .dep file and locating it under designated namespace directory. The directory is mandatory and mapping scheme is as simple as possible. Say you want to create task `my:special:deploy' - the directory structure and the name of the dep files would be:
+
+    [root dir] # where dep executable is located]
+    |__ my
+         |__ special
+              |__ deploy.dep  (a file)
+
+For convenience, special task named `create' exists that will create stub code for your task and place it into correct location. Just use `dep create my:special:deploy' and you are set to go...
+             
+
+Examples:
+=========
+
+    dep help            # displays this file
+    dep version         # displays running Dep version
+    dep list            # displays all available tasks, together with their description if available
+    dep create          # creates new stub task code you can use to write your own task
+
+If you want to display a help page for specific task, simply enter
+
+    dep help task_name
+    
+    Example:
+    --------
+    
+    dep help my:special:deploy
+
+Dep was created and is maintained by Petr Krontorád (petr@krontorad.com), April-Child.com.
+http://dev.april-child.com/dep, http://www.april-child.com/dep
+
+EOD
+        );
+       cli_end();
+    }
+    
+    public function run_for($task_name)
+    {
+        try
+        {
+            $paths = self::safely_parse_taskname_to_path($task_name);
+        }
+        catch (Exception $e)
+        {
+            $this->fail($e);
+        }
+        if (!file_exists($paths['full_path']))
+        {
+            $this->fail("Task `$task_name' does not exist.");
+        }
+        include_once $paths['full_path'];
+        $class_name = 'Task_' . implode('_', $paths['path_parts']);
+        if (!class_exists($class_name))
+        {
+            $this->fail("Task `$task_name' is not properly defined.");
+        }
+        eval("\$author = $class_name::get_author(); \$comment = $class_name::get_comment(false); \$switches_mask = $class_name::get_switches_mask();");
+        $this->write("This is the help file for task: `$task_name'.\nAuthor: $author\n\n$comment");
+        if (0 == sizeof($switches_mask))
+        {
+            $this->write("\n\nThis task has no switches defined.");
+        }
+        else
+        {
+            $this->write("\n\nSwitches:\n");
+            foreach ($switches_mask as $name=>$switch)
+            {
+                $this->write("  -{$name}  " . ($switch[1] ? '<value>' : '') . " {$switch[0]}");
+            }
+        }
+    }
+}
+?>

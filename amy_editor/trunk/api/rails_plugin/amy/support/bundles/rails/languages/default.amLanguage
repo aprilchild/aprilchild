@@ -1,0 +1,12 @@
+signature:
+  name: 'Ruby on Rails'
+  inherits: 
+    - 'ruby:default'
+  tabSize: '2'
+
+definition:
+  chunkRules:
+    - "[/(([^\\w]|^)(ApplicationController|ActionController|Base|layout|before_filter|session|flash|render|respond_to|format|ApplicationHelper|ActiveRecord|Migration|find|validates_presence_of|validates_inclusion_of|validates_numericality_of|validates_format_of|validates_confirmation_of|has_many|has_one|has_and_belongs_to_many|belongs_to|errors)([^\\w]|$))/i, 3, ac.chap.CHUNK_LIBRARY]"
+
+  wordDelimiter: '/[\w\d]/'
+  indentIgnoreMarker: '/[\t \s]/'

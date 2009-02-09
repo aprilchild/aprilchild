@@ -1,0 +1,3 @@
+  name: "each_byte { |byte| .. }"
+  key_activation: ''
+  tab_activation: 'eab'

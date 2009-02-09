@@ -1,0 +1,44 @@
+<?php
+    include 'tm_bundle.library';
+
+    class Task_amy_list_tm_bundles extends DEPTask
+    {
+        public static function get_author()
+        {
+            return 'Petr Krontorád, April-Child.com';
+        }
+        public static function get_comment($short = true)
+        {
+            return 'Lists all bundles in the TM bundles directory.';
+        }
+        public function run()
+        {
+            $this->write("List of TM bundles:\n===================");
+            if (!is_dir($this->conf['tm_bundles_dir']))
+            {
+                $this->fail("Invalid TM bundles directory specified.");
+            }
+            try
+            {
+                if (false !== $d = opendir($this->conf['tm_bundles_dir']))
+                {
+                    while (false !== $f = readdir($d))
+                    {
+		                if ('.tmbundle' != substr($f, -9))
+		                {
+		                    continue;
+		                }
+		                $bundle_info = TMBundle::get_bundle_info($this->conf['tm_bundles_dir'] . '/' . $f);
+		                $this->write($bundle_info['id'] . str_repeat(' ', 25-strlen($bundle_info['id'])) . ' "' . $bundle_info['name'] . '"  ' . $bundle_info['author_name'] . ' <' . $bundle_info['author_email'] . ">\n   " . $bundle_info['description'] . "\n");
+                    }
+                    closedir($d);
+                }
+            }
+            catch (Eception $e)
+            {
+                $msg = $e->getMessage();
+                $this->fail("Listing failed: `{$msg}'.");
+            }
+        }
+    }
+?>

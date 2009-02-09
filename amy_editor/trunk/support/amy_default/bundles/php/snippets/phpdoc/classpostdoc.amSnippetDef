@@ -1,0 +1,6 @@
+/**
+ * ${1:undocumented class}
+ *
+ * @package ${2:default}
+ * @author ${PHPDOC_AUTHOR:`niutil -readprop / "/users/$USER" realname`}$3
+ **/$0

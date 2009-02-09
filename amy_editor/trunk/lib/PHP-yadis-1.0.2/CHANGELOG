@@ -1,0 +1,25 @@
+Fri Aug  4 13:56:20 PDT 2006  cygnus@janrain.com
+  * Improved handling when XML support is absent
+
+    M ./Services/Yadis/XML.php -4 +1
+    M ./Services/Yadis/XRDS.php -1 +1
+    M ./Services/Yadis/Yadis.php -1 +1
+
+Fri Aug  4 13:40:12 PDT 2006  cygnus@janrain.com
+  * Added stale flag to manager
+
+    M ./Services/Yadis/Manager.php -2 +5
+
+Fri Aug  4 13:24:51 PDT 2006  cygnus@janrain.com
+  * Removed unnecessary reference
+
+    M ./Services/Yadis/XML.php -1 +1
+
+Fri Aug  4 13:24:30 PDT 2006  cygnus@janrain.com
+  * Silenced XRDS XML parsing warnings
+
+    M ./Services/Yadis/Yadis.php -1 +1
+
+Fri Jun 23 09:58:44 PDT 2006  cygnus@janrain.com
+  tagged 1.0.1
+

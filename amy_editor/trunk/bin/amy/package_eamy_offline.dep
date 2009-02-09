@@ -1,0 +1,37 @@
+<?php
+
+    class Task_amy_package_eamy_offline extends DEPTask
+    {
+        public static function get_author()
+        {
+            return 'Petr Krontorád, April-Child.com';
+        }
+        public static function get_comment($short = true)
+        {
+            if ($short) {
+                return 'Package eAmy.Offline for distribution.';                
+            }
+            return <<<EIOD
+Takes the bundle name as first parameter.
+EIOD
+;
+        }
+        public function run()
+        {
+            if (!$this->pars[0])
+            {
+                $this->fail("Please specify bundle name as first parameter.");
+            }
+            $this->write("Creating package for eAmy.Offline:\n===================");
+            $this->create_package($this->pars[0]);
+        }
+        
+        private function create_package($bundleName) {
+            $base_dir = dirname(__FILE__) . '/../../';
+            // license stuff
+            $content = file_get_contents($base_dir . 'api/offline/package_templates/eamy_js-header.txt');
+            $this->write($content);
+            file_put_contents($base_dir . 'api/offline/eamy.js', $content);
+        }
+    }
+?>

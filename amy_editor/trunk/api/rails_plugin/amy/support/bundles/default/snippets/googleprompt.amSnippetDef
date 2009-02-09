@@ -1,0 +1,6 @@
+`/remote/post
+action = 'run';
+params.bundle = 'default';
+params.script = 'google_search';
+params.query = prompt('Enter a phrase to be found on Google:');
+`

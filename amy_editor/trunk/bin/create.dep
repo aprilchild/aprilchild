@@ -1,0 +1,99 @@
+<?php
+class Task_create extends DEPTask
+{    
+
+    public static function get_author()
+    {
+        return 'Petr Krontorád, April-Child.com';
+    }
+    
+    public static function get_comment($short)
+    {
+        return 'Creates new task stub code for your own use quickly and conveniently. Just put name of the task as parameter.';
+    }
+
+    
+    public function run()
+    {
+        $code_template = <<<EOD
+<?php
+    class Task@@name extends DEPTask
+    {
+        public static function get_author()
+        {
+            return 'Your name';
+        }
+        public static function get_comment(§short = true)
+        {
+            if (§short)
+            {
+                // write short descripton here
+                return 'This task does ...';
+            }
+            // and long here
+            return <<<EIOD
+This task serves as ...
+EIOD
+;
+        }
+
+        public static function get_switches_mask()
+        {
+            return array();
+            /* Examples of use for `task -p Value -n': 
+            array(
+                'p' => array('Specifies path to initial object.', true),
+                'n' => array("Non-interactive mode, you may specify unlimited number of commands including parameters separated by comma (,).", false)
+            )
+            */
+        }
+
+        public function run()
+        {
+            // write your code here:
+            §this->write("Hello from the `@@full-name' task.");
+            // use following construct to raise an error and end the task:
+            // §this->fail("Error when ...")
+        }
+    }
+?>
+EOD
+;
+
+        $name = strtolower(trim($this->pars[0]));
+        if ( '' == $name )
+        {
+            $this->fail("No task name to be created specified.");
+        }
+        try
+        {
+            $paths = self::safely_parse_taskname_to_path($name);
+        }
+        catch(Exception $e)
+        {
+            $this->fail($e);            
+        }
+        $path = $paths['full_path'];
+        if (file_exists($path))
+        {
+            cli_end("There already is task with the same name `$name' located at `$path'.");
+        }
+        $path_parts = explode('/', $paths['rel_path']);
+        $task_name = implode('_', $path_parts);
+        array_pop($path_parts);
+        $d_path = dirname(__FILE__);
+        foreach ($path_parts as $part)
+        {
+            $d_path .= "/$part";
+            if (!is_dir($d_path))
+            {
+                mkdir($d_path, 0755);
+            }
+        }
+        $code = str_replace('@@name', $task_name, str_replace('@@full-name', substr($task_name, 1), str_replace('§', '$', $code_template)));
+        file_put_contents($path, $code);
+        chmod($path, 0644);
+        $this->write("New task stub created at `$path'\n\nYou can now run `dep $name'.");
+    }
+}
+?>

@@ -1,0 +1,5 @@
+int main (int argc, char const${TM_C_POINTER: *}argv[])
+{
+	${0:/* code */}
+	return 0;
+}

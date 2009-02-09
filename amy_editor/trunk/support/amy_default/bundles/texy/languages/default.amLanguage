@@ -1,0 +1,36 @@
+signature:
+  name: 'Texy'
+  tabSize: '2'
+
+definition:
+  singleQuoteStringMarker: ''
+  singleQuoteStringMarkerException: ''
+  doubleQuoteStringMarker: ''
+  doubleQuoteStringMarkerException: ''
+	foldingStartMarkers: '[/^\s*={2,7}/i, /^\s*$/i]'
+	foldingParityMarkers: '[/^\s*=={2,7}/i, /^\s*$/i]'
+	foldingStopMarkers: '[/^\s*={2,6}/i, /^\s*$/i]'
+	multiRowCommentStartMarker: '/--'
+	multiRowCommentEndMarker: '\\--'
+	
+	chunkRules:
+		- '[/(\*\*[^\*]*\w[^\*]\*\*)/i, 0, ac.chap.CHUNK_KEYWORD]'
+		- '[/(\/\/[^\/]*\/\/)/i, 0, ac.chap.CHUNK_KEYWORD]'
+		- '[/>>[^<]*<</i, 0, ac.chap.CHUNK_NUMBER]'
+		- '[/^>[^>].*$/i, 0, ac.chap.CHUNK_KEYWORD_CUSTOM]'
+		- '[/`[^`]*`/i, 0, ac.chap.CHUNK_NUMBER]'
+		- '[/^\s*[#=-]{2,}\s*$/i, 0, ac.chap.CHUNK_NUMBER]'
+		- '[/\*{3,}/i, 0, ac.chap.CHUNK_NUMBER]'
+		- '[/\"([^\"]*)\"\:(\[|)[\w\d/:@\.-]*/i, 1, ac.chap.TOKEN_SINGLE_QUOTED]'
+		- '[/\"([^\"]*)\"\:(\[|)([\w\d/:@\.-]*)/i, 3, ac.chap.CHUNK_FUNCTION_NAME]'
+		- '[/^\s*(([\-\+][ ])|(\w{1,}\)))/i, 1, ac.chap.CHUNK_OPERATOR]'
+		- '[/\.(\(|\[|\{|<|>|=|\^|\-|_)[^ ]*\s*$/i, 0, ac.chap.CHUNK_FUNCTION_NAME]'
+		- '[/\"([^\"]* [^\"]*)\"\(\([^\)]*\)\)/i, 1, ac.chap.TOKEN_SINGLE_QUOTED]'
+		- '[/\"[^\"]* [^\"]*\"\(\(([^\)]*)\)\)/i, 1, ac.chap.CHUNK_FUNCTION_NAME]'
+		- '[/([^ \(\"]*)\(\([^\)]*\)\)/i, 1, ac.chap.TOKEN_SINGLE_QUOTED]'
+		- '[/[^ \(\"]*\(\(([^\)]*)\)\)/i, 1, ac.chap.CHUNK_FUNCTION_NAME]'
+		- '[/\[\*.*\*\]/i, 0, ac.chap.CHUNK_LIBRARY_CUSTOM]'
+
+
+	wordDelimiter: '/[\w\d]/'
+	indentIgnoreMarker: '/[\t \s]/'

@@ -1,0 +1,20 @@
+*
+{
+	margin:0; padding:0; border:0;
+	font-family:'Lucida Grande', 'Tahoma', 'Verdana', 'Arial', 'Helvetica', sans-serif;
+}
+body
+{
+	color:#000;
+	font-size:11px;
+	overflow:hidden;
+	overflow-y:hidden;
+}
+a
+{
+	color:#AA461D;
+}
+a:hover
+{
+	color:#000;
+}

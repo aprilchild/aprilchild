@@ -1,0 +1,273 @@
+<?php
+    include dirname(__FILE__).'/../../lib/amy/amy.php';
+    include 'tm_bundle.library';
+    include 'dir_utils.library';
+
+    class Task_amy_convert_tm_bundle extends DEPTask
+    {
+        public static function get_author()
+        {
+            return 'Petr Krontorád, April-Child.com';
+        }
+        public static function get_comment($short = true)
+        {
+            if ($short)
+            {
+                return 'Converts TextMate bundles into those used by Amy Editor.';
+            }
+            // and long here
+            return <<<EIOD
+Takes bundle directory name as first parameter.
+EIOD
+;
+        }
+
+        public static function get_switches_mask()
+        {
+            return array(
+                'a' => array('Converts all bundles in the TM bundle directory.', false)
+            );
+        }
+
+        public function run()
+        {
+            if ($this->switch['a'])
+            {
+                if (!is_dir($this->conf['tm_bundles_dir']))
+                {
+                    $this->fail("Invalid TM bundles directory specified.");
+                }
+                if (false !== $d = opendir($this->conf['tm_bundles_dir']))
+                {
+                    while (false !== $f = readdir($d))
+                    {
+		                if ('.tmbundle' != substr($f, -9))
+		                {
+		                    continue;
+		                }
+		                $this->convert_bundle($f, false);
+                    }
+                    closedir($d);
+                }                
+            }
+            else
+            {
+                if (!$this->pars[0])
+                {
+                    $this->fail("Please specify bundle name as first parameter.");
+                }
+                $this->convert_bundle($this->pars[0]);
+            }
+        }
+        
+        private function convert_bundle($bundle_id, $should_be_guessed = true)
+        {
+            $full_path = false;
+            if ($should_be_guessed)
+            {
+                if (!is_dir($this->conf['tm_bundles_dir']))
+                {
+                    $this->fail("Invalid TM bundles directory specified.");
+                }
+                try
+                {
+                    if (false !== $d = opendir($this->conf['tm_bundles_dir']))
+                    {
+                        while (false !== $f = readdir($d))
+                        {
+    		                if ('.tmbundle' != substr($f, -9))
+    		                {
+    		                    continue;
+    		                }
+    		                if (substr($f, 0, -9) == $bundle_id)
+    		                {
+    		                    $full_path = $this->conf['tm_bundles_dir'] . '/' . $f;
+    		                    break;
+    		                }
+    		                $bundle_info = TMBundle::get_bundle_info($this->conf['tm_bundles_dir'] . '/' . $f);
+    		                if ($bundle_id == $bundle_info['id'])
+    		                {
+    		                    $full_path = $this->conf['tm_bundles_dir'] . '/' . $f;
+    		                    break;
+    		                }
+                        }
+                        closedir($d);
+                    }
+                }
+                catch (Eception $e)
+                {
+                    $msg = $e->getMessage();
+                    $this->fail("Could not find bundle `$bundle_id': `{$msg}'.");
+                }
+            }
+            else
+            {
+                $full_path = $this->conf['tm_bundles_dir'] . '/' . $bundle_id;
+            }
+            if (false === $full_path)
+            {
+                $this->fail("Bundle `$bundle_id' not found.");
+            }
+            $this->convert_bundle_at_path($full_path);
+        }
+        
+        private function convert_bundle_at_path($path)
+        {
+            $this->write("\n* Converting bundle directory `$path'");
+            try
+            {
+                $tm_bundle = TMBundle::get_bundle_info($path);
+                $target_path = $this->conf['amy_support_dir'] . '/conversions/bundles/' . $tm_bundle['id'] . '/';
+                $this->write("Amy bundle will be created at `$target_path'.");
+                if (is_dir($target_path))
+                {
+                    DirUtils::remove_dir($target_path);
+                }
+                DirUtils::make_dir($target_path);
+                // copying bundle stub
+				$GLOBALS['TM_bundle'] = $tm_bundle;
+				DirUtils::copy_dir($this->conf['amy_support_dir'].'/stubs/new_bundle/', $target_path, 0777, 0666, create_function('$content', 'foreach($GLOBALS["TM_bundle"] as $n=>$v){$content=str_replace("@@bundle.$n",$v,$content);$content=str_replace("@@bundle.".strtoupper($n),strtoupper($v),$content);}return $content;'));
+                
+    			// getting languages info
+    			$languages = TMBundle::get_languages($path);
+    			$lang_template_path = $target_path . 'languages/default.amLanguage';
+    			$lang_template = file_get_contents($lang_template_path);
+    			unlink($lang_template_path);
+    			array_reverse($languages);
+    			$num_languages = sizeof($languages);
+    			for ($i=0; $i<$num_languages; $i++)
+    			{
+    			    $language = $languages[$i];
+    			    $lang_name = 0 == $i ? 'default' : str_replace(' ', '_', strtolower($language['name']));
+    			    $lang_content = $lang_template;
+    			    $lang_content = str_replace('@@language.name', $language['name'], $lang_content);
+    			    $markers = explode('|', substr(str_replace("\n", '', $language['foldingStartMarker']), 1, -1));
+    			    if ('(?x)' == substr($markers[0], 0, 4))
+    			    {
+    			        $markers[0] = substr($markers[0], 4);
+    			    }
+					for ($ii=0; $ii<sizeof($markers); $ii++)
+					{
+						$markers[$ii] = str_replace('/', '\\/', $markers[$ii]);
+					}
+    			    $lang_content = str_replace('@@language.foldingStartMarkers', "/" . implode("/i, /", $markers) . "/i", $lang_content);
+    			    $markers = explode('|', substr(str_replace("\n", '', $language['foldingStopMarker']), 1, -1));
+    			    if ('(?x)' == substr($markers[0], 0, 4))
+    			    {
+    			        $markers[0] = substr($markers[0], 4);
+    			    }
+					for ($ii=0; $ii<sizeof($markers); $ii++)
+					{
+						$markers[$ii] = str_replace('/', '\\/', $markers[$ii]);
+					}
+    			    $lang_content = str_replace('@@language.foldingStopMarkers', "/" . implode("/i, /", $markers) . "/i", $lang_content);
+    			    $lang_content = str_replace('@@language.foldingParityMarkers', "/" . implode("/i, /", $markers) . "/i", $lang_content);
+    			    // trying to acquire comments markers
+    			    $sq_markers = array('#');
+    			    $dq_markers = array('start'=>array('/*'), 'end'=>array('*/'));
+    			    if (is_dir($path . '/Preferences') && false !== $d = opendir($path . '/Preferences'))
+    			    {
+    			        while (false !== $f = readdir($d))
+    			        {
+    			            if (false !== strpos(strtolower($f), 'comment'))
+    			            {
+    			                $plist = TMBundle::get_plist($path . '/Preferences/' . $f);
+    			                if (isset($plist['settings']) && isset($plist['settings']['shellVariables']))
+    			                {
+    			                    $hash_arr = array();
+    			                    for ($ii=0; $ii<sizeof($plist['settings']['shellVariables']); $ii++)
+    			                    {
+    			                        $hash_arr[$plist['settings']['shellVariables'][$ii]['name']] = $plist['settings']['shellVariables'][$ii]['value'];
+    			                    }
+    			                    if (0 < sizeof($hash_arr))
+    			                    {
+    			                        $sq_markers = array();
+    			                        $dq_markers = array('start'=>array(), 'end'=>array());
+    			                    }
+    			                    foreach ($hash_arr as $name=>$value)
+    			                    {
+    			                        if (false !== strpos($name, 'START'))
+    			                        {
+    			                            if (!isset($hash_arr[str_replace('START', 'END', $name)]))
+    			                            {
+    			                                $sq_markers[] = trim($value);
+    			                            }
+    			                            else
+    			                            {
+    			                                $dq_markers['start'][] = trim($value);
+    			                                $dq_markers['end'][] = trim($hash_arr[str_replace('START', 'END', $name)]);
+    			                            }
+    			                        }
+    			                    }
+    			                }
+    			            }
+    			        }
+    			        closedir($d);
+    			    }
+    			    $lang_content = str_replace('@@language.singleRowCommentStartMarkers', "'" . implode("', '", $sq_markers) . "'", $lang_content);
+    			    $lang_content = str_replace('@@language.multiRowCommentStartMarker', "'" . implode("', '", $dq_markers['start']) . "'", $lang_content);
+    			    $lang_content = str_replace('@@language.multiRowCommentEndMarker', "'" . implode("', '", $dq_markers['end']) . "'", $lang_content);
+    			    // digging up chunk rules
+    			    $chunk_rules = array();
+    			    $patterns = $language['patterns'];
+    			    if (isset($language['repository']) && isset($language['repository']['language']) && is_array($language['repository']['language']['patterns']))
+    			    {
+    			        $patterns = is_array($patterns) ? array_merge($patterns, $language['repository']['language']['patterns']) : $language['repository']['language']['patterns'];
+    			    }
+    			    if (is_array($patterns))
+    			    {
+    			        foreach ($patterns as $pattern)
+    			        {
+    			            if ('(?i)' == substr($pattern['match'], 0, 4))
+    			            {
+    			                $pattern['match'] = substr($pattern['match'], 4);
+    			            }
+    			            if (false !== strpos($pattern['name'], 'keyword.control'))
+    			            {
+    			                $chunk_rules[] = "/" . trim($pattern['match']) . "/i, 1, ac.chap.CHUNK_KEYWORD";
+    			            }
+    			            else if (false !== strpos($pattern['name'], 'keyword.control.exception'))
+    			            {
+    			                $chunk_rules[] = "/" . trim($pattern['match']) . "/i, 1, ac.chap.CHUNK_KEYWORD_CUSTOM";
+    			            }
+    			            else if (false !== strpos($pattern['name'], 'storage.'))
+    			            {
+    			                $chunk_rules[] = "/" . trim($pattern['match']) . "/i, 1, ac.chap.CHUNK_LIBRARY";
+    			            }
+    			        }
+    			    }
+                    $lang_content = str_replace('@@language.chunkRules', 0 == sizeof($chunk_rules) ? '-' : ("- '[" . implode("]'\n    - '[", $chunk_rules)) . "]'", $lang_content);
+    			    file_put_contents($target_path . '/languages/' . $lang_name . '.amLanguage', $lang_content);
+    			}
+
+				// creating snippets
+				if (is_dir($path . '/Snippets') && false !== $d = opendir($path . '/Snippets'))
+				{
+					while (false !== $f = readdir($d))
+					{
+						if ('.tmSnippet' == substr($f, -10) || '.plist' == substr($f, -6))
+						{
+							if ( false !== $snippet = TMBundle::get_plist($path . '/Snippets/' . $f))
+							{
+								$snippet['name'] = trim($snippet['name']);
+								$file_name = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $snippet['name']));
+								$content = "  name: \"" . $snippet['name'] . '"';
+								$content .= "\n  key_activation: ''\n  tab_activation: '" . $snippet['tabTrigger'] . "'";
+								file_put_contents($target_path . 'snippets/' . $file_name . '.amSnippet', $content);
+								file_put_contents($target_path . 'snippets/' . $file_name . '.amSnippetDef', $snippet['content']);
+							}
+						}
+					}
+					closedir($d);
+				}
+
+                $this->write("Done.");
+            }
+            catch (Exception $e)
+            {
+                $msg = $e->getMessage();
+                $this->fail("Could not convert bundle at `$path': `{$msg}'.");
+            }
+        }
+    }
+?>

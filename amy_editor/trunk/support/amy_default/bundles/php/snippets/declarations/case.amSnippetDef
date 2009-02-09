@@ -1,0 +1,3 @@
+case '${1:variable}':
+	${0:# code...}
+	break;

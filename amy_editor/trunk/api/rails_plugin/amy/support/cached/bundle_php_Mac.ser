@@ -1,0 +1,337 @@
+a:2:{s:4:"time";i:1199380361;s:6:"bundle";a:7:{s:4:"info";a:1:{s:9:"signature";a:6:{s:4:"name";s:3:"PHP";s:6:"author";s:32:"Ciarán Walsh <ciawal@gmail.com>";s:3:"url";s:0:"";s:7:"version";s:3:"1.0";s:12:"dependencies";a:1:{i:0;s:7:"default";}s:4:"note";s:166:"<a href="http://www.php.net/">PHP</a> is a widely-used general-purpose scripting language that is especially suited for web development and can be embedded into HTML.";}}s:6:"keymap";s:3185:"
+	# default
+	KEY: 0
+		insert(character:true)
+
+	# arrow left
+	KEY: -37
+		caret(move:'left')
+	KEY: -37+shift
+		caret(move:'left')
+		selection(add:true)
+	KEY: -37+ctrl
+		caret(move:'prev_word')
+	KEY: -37+alt
+		caret(move:'prev_word')
+	KEY: -37+ctrl+shift
+		caret(move:'prev_word')
+		selection(add:true)
+	KEY: -37+alt+shift
+		caret(move:'prev_word')
+		selection(add:true)
+	KEY: -37+meta
+		caret(move:'row_start')
+	KEY: -37+meta+shift
+		caret(move:'row_start')
+		selection(add:true)
+
+	# arrow right
+	KEY: -39
+		caret(move:'right')
+	KEY: -39+shift
+		caret(move:'right')
+		selection(add:true)
+	KEY: -39+ctrl
+		caret(move:'next_word')
+	KEY: -39+alt
+		caret(move:'next_word')
+	KEY: -39+ctrl+shift
+		caret(move:'next_word')
+		selection(add:true)
+	KEY: -39+alt+shift
+		caret(move:'next_word')
+		selection(add:true)
+	KEY: -39+meta
+		caret(move:'row_end')
+	KEY: -39+meta+shift
+		caret(move:'row_end')
+		selection(add:true)
+
+	# arrow up
+	KEY: -38
+		caret(move:'up')
+	KEY: -38+shift
+		caret(move:'up')
+		selection(add:true)
+
+	# arrow down
+	KEY: -40
+		caret(move:'down')
+	KEY: -40+shift
+		caret(move:'down')
+		selection(add:true)
+		
+	# enter
+	KEY: -13
+		insert(row:true)
+
+	# delete
+	KEY: -8
+		delete(character:true)
+
+	# backspace
+	KEY: -46
+		delete(character:false)
+
+  # delete line ctrl+shift+k
+  KEY: 75+ctrl+shift
+    delete(row:true)
+
+	# escape
+	KEY: -27
+		custom(action:'WordComplete', direction:true)
+	KEY: -27+shift
+		custom(action:'WordComplete', direction:false)
+
+	# tab
+	KEY: -9
+		custom(action:'SnippetComplete')
+		
+	# auto-completes
+	# {
+	KEY: 123
+	custom(action:'AutoComplete', use_selection:true, text:'}')
+
+	# '
+	KEY: 39
+	custom(action:'AutoComplete', use_selection:true, text:'\\'')
+	
+	# "
+	KEY: 34
+	custom(action:'AutoComplete', use_selection:true, text:'\"')
+	
+	# [
+	KEY: 91
+	custom(action:'AutoComplete', use_selection:true, text:']')
+	
+	# (
+	KEY: 40
+	custom(action:'AutoComplete', use_selection:true, text:')')
+	
+
+
+	# home
+	KEY: -36
+		caret(move:'doc_start')
+	KEY: -36+shift
+		caret(move:'doc_start')
+		selection(add:true)
+
+	# end
+	KEY: -35
+		caret(move:'doc_end')
+	KEY: -35+shift
+		caret(move:'doc_end')
+		selection(add:true)
+
+	# meta + c
+	KEY: 99+meta
+		clipboard(copy:true)
+
+	# meta + x
+	KEY: 120+meta
+		clipboard(cut:true)
+
+	# meta + z
+	KEY: 122+meta
+		undo()
+
+	# meta + shift + z
+	KEY: 122+meta+shift
+		redo()
+
+	# meta + a
+	KEY: 97+meta
+		selection(all:true)
+
+	# ctrl + a
+	KEY: 97+ctrl
+		selection(all:true)
+		
+  # F2
+  KEY: -113
+    custom(action:'GoToBookmark', direction:1)
+
+  # F2 shift
+  KEY: -113+shift
+    custom(action:'GoToBookmark', direction:-1)
+
+  # F2 + meta
+  KEY: -113+meta
+    custom(action:'ToggleBookmark')
+
+
+	# enter
+	KEY: -13
+		custom(action:'SmartIndent', split_line:true, indent_tab_when_ends:'{')
+
+	# meta + enter
+	KEY: -13+meta
+		custom(action:'SmartIndent', split_line:false, indent_tab_when_ends:'{')
+
+	# meta + shift + enter
+	KEY: -13+meta+shift
+		custom(action:'SmartIndent', split_line:false, set_char_at_end:';', indent_tab_when_ends:'{')
+
+	# e
+	KEY: 101
+		custom(action:'SmartUnindent', match_from:'start', starts_with:'if', ends_with:'else')
+
+	# }
+	KEY: 125
+		custom(action:'SmartUnindent', match_from:'end', starts_with:'{', ends_with:'}')
+
+
+
+";s:9:"languages";a:1:{i:0;a:3:{s:9:"signature";a:4:{s:4:"name";s:3:"PHP";s:6:"author";s:32:"Petr Krontorád, April-Child.com";s:7:"tabSize";s:1:"4";s:8:"inherits";a:1:{i:0;s:9:"c:default";}}s:10:"definition";a:13:{s:10:"chunkRules";a:12:{i:0;s:66:"[/(([^\w]|^)(\d{1,}[\d\.Ee]*)([^w]|$))/i, 3, ac.chap.CHUNK_NUMBER]";i:1;s:69:"[/(\+|\-|\*|\/|\=|\!|\^|\%|\||\&|\<|\>)/i, 0, ac.chap.CHUNK_OPERATOR]";i:2;s:54:"[/(\(|\)|\[|\]|\{|\})/i, 0, ac.chap.CHUNK_PARENTHESIS]";i:3;s:112:"[/\b(break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while)\b/i, 1, ac.chap.CHUNK_KEYWORD]";i:4;s:164:"[/\b(asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\b/i, 1, ac.chap.CHUNK_LIBRARY]";i:5;s:90:"[/\b(const|extern|register|restrict|static|volatile|inline)\b/i, 1, ac.chap.CHUNK_LIBRARY]";i:6;s:173:"[/\b(break|c(ase|ontinue)|d(e(clare|fault)|ie|o)|e(lse(if)?|nd(declare|for(each)?|if|switch|while)|xit)|for(each)?|if|return|switch|use|while)\b/i, 1, ac.chap.CHUNK_KEYWORD]";i:7;s:84:"[/\b(catch|try|throw|exception)|([a-zA-Z_]*Exception)\b/i, 0, ac.chap.CHUNK_KEYWORD]";i:8;s:203:"[/\b(real|double|float|int(eger)?|bool(ean)?|string|class|clone|var|function|interface|parent|self|__(autoload|c(all|lone|onstruct)|destruct|get|set|sleep|toString|wakeup))\b/i, 1, ac.chap.CHUNK_LIBRARY]";i:9;s:116:"[/\b(global|abstract|const|extends|implements|final|p(r(ivate|otected)|ublic)|static)\b/i, 1, ac.chap.CHUNK_LIBRARY]";i:10;s:79:"[/&(?=\s*(\$|new|[A-Za-z_][A-Za-z_0-9]+(?=\s*\()))/i, 1, ac.chap.CHUNK_LIBRARY]";i:11;s:52:"[/(\$[A-Za-z_]*)/i, 1, ac.chap.CHUNK_LIBRARY_CUSTOM]";}s:23:"singleQuoteStringMarker";s:1:"'";s:32:"singleQuoteStringMarkerException";s:2:"\\";s:23:"doubleQuoteStringMarker";s:1:""";s:32:"doubleQuoteStringMarkerException";s:2:"\\";s:13:"wordDelimiter";s:8:"/[\w\d]/";s:18:"indentIgnoreMarker";s:9:"/[\t \s]/";s:19:"foldingStartMarkers";s:66:"[/^.*\b(function|class)\s*(\w+\s*)?\([^\)]*\)(\s*\{[^\}]*)?\s*$/i]";s:20:"foldingParityMarkers";s:16:"[/\{[^\'\"]*$/i]";s:18:"foldingStopMarkers";s:15:"[/[^\'\"]*\}/i]";s:28:"singleRowCommentStartMarkers";s:11:"['//', '#']";s:26:"multiRowCommentStartMarker";s:2:"/*";s:24:"multiRowCommentEndMarker";s:2:"*/";}s:2:"id";s:7:"default";}}s:8:"snippets";a:57:{i:0;a:6:{s:4:"name";s:18:"$… = array (…)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"array";s:4:"code";s:46:"\$${1:arrayName} = array('$2' => $3${4:,} $0);";s:8:"filename";s:5:"array";s:4:"path";s:0:"";}i:1;a:4:{s:4:"name";s:12:"Declarations";s:8:"filename";s:12:"declarations";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:2;a:6:{s:4:"name";s:8:"case …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"case";s:4:"code";s:45:"case '${1:variable}':
+	${0:# code...}
+	break;";s:8:"filename";s:4:"case";s:4:"path";s:13:"/declarations";}i:3;a:6:{s:4:"name";s:5:"Class";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"doc_c";s:4:"code";s:171:"/**
+ * ${3:undocumented class}
+ *
+ * @package ${4:default}
+ * @author ${PHPDOC_AUTHOR:`niutil -readprop / "/users/$USER" realname`}
+ **/
+$1class $2
+{$0
+} // END $1class $2";s:8:"filename";s:5:"class";s:4:"path";s:13:"/declarations";}i:4;a:6:{s:4:"name";s:16:"do … while …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"do";s:4:"code";s:45:"do {
+	${0:# code...}
+} while (${1:$a <= 10});";s:8:"filename";s:7:"dowhile";s:4:"path";s:13:"/declarations";}i:5;a:6:{s:4:"name";s:8:"else …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"else";s:4:"code";s:24:"else {
+	${0:# code...}
+}";s:8:"filename";s:4:"else";s:4:"path";s:13:"/declarations";}i:6;a:6:{s:4:"name";s:10:"elseif …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"elseif";s:4:"code";s:43:"elseif (${1:condition}) {
+	${0:# code...}
+}";s:8:"filename";s:6:"elseif";s:4:"path";s:13:"/declarations";}i:7;a:6:{s:4:"name";s:7:"for …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"for";s:4:"code";s:69:"for (\$${1:i}=${2:0}; \$${1:i} < $3; \$${1:i}++) { 
+	${0:# code...}
+}";s:8:"filename";s:3:"for";s:4:"path";s:13:"/declarations";}i:8;a:6:{s:4:"name";s:11:"foreach …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:7:"foreach";s:4:"code";s:80:"foreach (\$${1:variable} as \$${2:key}${3: => \$${4:value}}) {
+	${0:# code...}
+}";s:8:"filename";s:7:"foreach";s:4:"path";s:13:"/declarations";}i:9;a:6:{s:4:"name";s:8:"Function";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"doc_f";s:4:"code";s:161:"/**
+ * ${4:undocumented function}
+ *
+ * @return ${5:void}
+ * @author ${PHPDOC_AUTHOR:`niutil -readprop / "/users/$USER" realname`}$6
+ **/
+$1function $2($3)
+{$0
+}";s:8:"filename";s:8:"function";s:4:"path";s:13:"/declarations";}i:10;a:6:{s:4:"name";s:6:"if …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"if";s:4:"code";s:39:"if (${1:condition}) {
+	${0:# code...}
+}";s:8:"filename";s:2:"if";s:4:"path";s:13:"/declarations";}i:11;a:6:{s:4:"name";s:15:"if … else …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"ifelse";s:4:"code";s:67:"if (${1:condition}) {
+	${2:# code...}
+} else {
+	${3:# code...}
+}
+$0";s:8:"filename";s:6:"ifelse";s:4:"path";s:13:"/declarations";}i:12;a:6:{s:4:"name";s:10:"switch …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"switch";s:4:"code";s:112:"switch (${1:variable}) {
+	case '${2:value}':
+		${3:# code...}
+		break;
+	$0
+	default:
+		${4:# code...}
+		break;
+}";s:8:"filename";s:6:"switch";s:4:"path";s:13:"/declarations";}i:13;a:6:{s:4:"name";s:15:"Throw Exception";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"throw";s:4:"code";s:76:"throw new $1Exception(${2:"${3:Error Processing Request}"}${4:, ${5:1}});
+$0";s:8:"filename";s:14:"throwexception";s:4:"path";s:13:"/declarations";}i:14;a:6:{s:4:"name";s:9:"while …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"while";s:4:"code";s:41:"while (${1:$a <= 10}) {
+	${0:# code...}
+}";s:8:"filename";s:5:"while";s:4:"path";s:13:"/declarations";}i:15;a:6:{s:4:"name";s:39:"Wrap in try { … } catch (…) { … }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"try";s:4:"code";s:250:"${TM_SELECTED_TEXT/([\t ]*).*/$1/m}try {
+	${3:${TM_SELECTED_TEXT/(\A.*)|(.+)|\n\z/(?1:$0:(?2:\t$0))/g}}
+${TM_SELECTED_TEXT/([\t ]*).*/$1/m}} catch (${1:Exception} ${2:\$e}) {
+${TM_SELECTED_TEXT/([\t ]*).*/$1/m}	$0
+${TM_SELECTED_TEXT/([\t ]*).*/$1/m}}";s:8:"filename";s:14:"wrapintrycatch";s:4:"path";s:13:"/declarations";}i:16;a:4:{s:4:"name";s:21:"Wrapped in <?php ..?>";s:8:"filename";s:10:"wrapped_in";s:13:"is_collection";s:1:"1";s:4:"path";s:13:"/declarations";}i:17;a:6:{s:4:"name";s:10:"?>…<?php";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"php";s:4:"code";s:9:"?>$0<?php";s:8:"filename";s:3:"php";s:4:"path";s:24:"/declarations/wrapped_in";}i:18;a:6:{s:4:"name";s:17:"<?php echo … ?>";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"echo";s:4:"code";s:26:"<?php echo ${1:\$var} ?>$0";s:8:"filename";s:7:"phpecho";s:4:"path";s:24:"/declarations/wrapped_in";}i:19;a:6:{s:4:"name";s:31:"<?php echo htmlentities(…) ?>";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"echoh";s:4:"code";s:61:"<?php echo htmlentities(${1:\$var}, ENT_QUOTES, 'utf-8') ?>$0";s:8:"filename";s:19:"phpechohtmlentities";s:4:"path";s:24:"/declarations/wrapped_in";}i:20;a:6:{s:4:"name";s:29:"PHP Error Catching JavaScript";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"phperr";s:4:"code";s:163:"`cat "$TM_BUNDLE_SUPPORT/textmate_error_handler.html" | grep -E -v '^[ \t\s]*\/\/' | sed 's/\(.*\)[ \t]*--.*/\1/' | tr -s ' \n\t' ' ' | sed 's/.\{80\}[{};]/&\
+/g'`";s:8:"filename";s:26:"phperrorcatchingjavascript";s:4:"path";s:24:"/declarations/wrapped_in";}i:21;a:6:{s:4:"name";s:43:"<?php foreach (…) … <?php endforeach ?>";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:7:"foreach";s:4:"code";s:96:"<?php foreach (\$${1:variable} as \$${2:key}${3: => \$${4:value}}): ?>
+	${0}
+<?php endforeach ?>";s:8:"filename";s:23:"phpforeachphpendforeach";s:4:"path";s:24:"/declarations/wrapped_in";}i:22;a:6:{s:4:"name";s:54:"<?php if (…) ?> … <?php else ?> … <?php endif ?>";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"ifelse";s:4:"code";s:67:"<?php if (${1:condition}): ?>
+	$2
+<?php else: ?>
+	$0
+<?php endif ?>";s:8:"filename";s:20:"phpifphpelsephpendif";s:4:"path";s:24:"/declarations/wrapped_in";}i:23;a:6:{s:4:"name";s:36:"<?php if (…) ?> … <?php endif ?>";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"if";s:4:"code";s:48:"<?php if (${1:condition}): ?>
+	$0
+<?php endif ?>";s:8:"filename";s:13:"phpifphpendif";s:4:"path";s:24:"/declarations/wrapped_in";}i:24;a:6:{s:4:"name";s:16:"define(…, …)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"def";s:4:"code";s:27:"define('$1', ${2:'$3'});
+$0";s:8:"filename";s:6:"define";s:4:"path";s:0:"";}i:25;a:6:{s:4:"name";s:12:"defined(…)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"def?";s:4:"code";s:17:"$1defined('$2')$0";s:8:"filename";s:7:"defined";s:4:"path";s:0:"";}i:26;a:6:{s:4:"name";s:10:"echo "…"";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"echo";s:4:"code";s:23:"echo "${1:string}"${0};";s:8:"filename";s:4:"echo";s:4:"path";s:0:"";}i:27;a:4:{s:4:"name";s:7:"Globals";s:8:"filename";s:7:"globals";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:28;a:6:{s:4:"name";s:13:"COOKIE['…']";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"$_";s:4:"code";s:26:"\$_COOKIE['${1:variable}']";s:8:"filename";s:6:"cookie";s:4:"path";s:8:"/globals";}i:29;a:6:{s:4:"name";s:10:"ENV['…']";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"$_";s:4:"code";s:23:"\$_ENV['${1:variable}']";s:8:"filename";s:3:"env";s:4:"path";s:8:"/globals";}i:30;a:6:{s:4:"name";s:12:"FILES['…']";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"$_";s:4:"code";s:25:"\$_FILES['${1:variable}']";s:8:"filename";s:5:"files";s:4:"path";s:8:"/globals";}i:31;a:6:{s:4:"name";s:10:"GET['…']";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"$_";s:4:"code";s:23:"\$_GET['${1:variable}']";s:8:"filename";s:3:"get";s:4:"path";s:8:"/globals";}i:32;a:6:{s:4:"name";s:15:"$GLOBALS['…']";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:7:"globals";s:4:"code";s:56:"\$GLOBALS['${1:variable}']${2: = }${3:something}${4:;}$0";s:8:"filename";s:7:"globals";s:4:"path";s:8:"/globals";}i:33;a:6:{s:4:"name";s:11:"POST['…']";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"$_";s:4:"code";s:24:"\$_POST['${1:variable}']";s:8:"filename";s:4:"post";s:4:"path";s:8:"/globals";}i:34;a:6:{s:4:"name";s:14:"REQUEST['…']";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"$_";s:4:"code";s:27:"\$_REQUEST['${1:variable}']";s:8:"filename";s:7:"request";s:4:"path";s:8:"/globals";}i:35;a:6:{s:4:"name";s:13:"SERVER['…']";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"$_";s:4:"code";s:26:"\$_SERVER['${1:variable}']";s:8:"filename";s:6:"server";s:4:"path";s:8:"/globals";}i:36;a:6:{s:4:"name";s:14:"SESSION['…']";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"$_";s:4:"code";s:27:"\$_SESSION['${1:variable}']";s:8:"filename";s:7:"session";s:4:"path";s:8:"/globals";}i:37;a:6:{s:4:"name";s:11:"include …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"incl";s:4:"code";s:22:"include '${1:file}';$0";s:8:"filename";s:7:"include";s:4:"path";s:0:"";}i:38;a:6:{s:4:"name";s:16:"include_once …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"incl1";s:4:"code";s:27:"include_once '${1:file}';$0";s:8:"filename";s:11:"includeonce";s:4:"path";s:0:"";}i:39;a:6:{s:4:"name";s:31:"Include TextMate Support Script";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"tmphp";s:4:"code";s:450:"// === TextMate error handling ===
+`if [[ "$TM_BUNDLE_SUPPORT" == "$HOME"* ]]; then
+  echo "// NOTE: Your PHP bundle is checked out to your home directory."
+  echo "// If the webserver process does not have permission to access"
+  echo "// the included file, you can replace"
+  echo "// ‘${TM_BUNDLE_SUPPORT%Bundles*}’ with"
+  echo "// ‘$(find_app TextMate.app)/Contents/SharedSupport/’."
+fi`
+@include_once '$TM_BUNDLE_SUPPORT/textmate.php';
+";s:8:"filename";s:28:"includetextmatesupportscript";s:4:"path";s:0:"";}i:40;a:4:{s:4:"name";s:6:"PHPDoc";s:8:"filename";s:6:"phpdoc";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:41;a:6:{s:4:"name";s:16:"Class - post doc";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"doc_cp";s:4:"code";s:140:"/**
+ * ${1:undocumented class}
+ *
+ * @package ${2:default}
+ * @author ${PHPDOC_AUTHOR:`niutil -readprop / "/users/$USER" realname`}$3
+ **/$0";s:8:"filename";s:12:"classpostdoc";s:4:"path";s:7:"/phpdoc";}i:42;a:6:{s:4:"name";s:14:"Class Variable";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"doc_v";s:4:"code";s:84:"/**
+ * ${3:undocumented class variable}
+ *
+ * @var ${4:string}
+ **/
+${1:var} \$$2;$0";s:8:"filename";s:13:"classvariable";s:4:"path";s:7:"/phpdoc";}i:43;a:6:{s:4:"name";s:25:"Class Variable - post doc";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"doc_vp";s:4:"code";s:71:"/**
+ * ${1:undocumented class variable}
+ *
+ * @var ${2:string}$3
+ **/$0";s:8:"filename";s:20:"classvariablepostdoc";s:4:"path";s:7:"/phpdoc";}i:44;a:6:{s:4:"name";s:19:"Constant Definition";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"doc_d";s:4:"code";s:56:"/**
+ * ${3:undocumented constant}
+ **/
+define($1, $2);$0";s:8:"filename";s:18:"constantdefinition";s:4:"path";s:7:"/phpdoc";}i:45;a:6:{s:4:"name";s:30:"Constant Definition - post doc";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"doc_dp";s:4:"code";s:42:"/**
+ * ${1:undocumented constant}$2
+ **/$0";s:8:"filename";s:25:"constantdefinitionpostdoc";s:4:"path";s:7:"/phpdoc";}i:46;a:6:{s:4:"name";s:19:"Function - post doc";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"doc_fp";s:4:"code";s:139:"/**
+ * ${1:undocumented function}
+ *
+ * @return ${2:void}
+ * @author ${PHPDOC_AUTHOR:`niutil -readprop / "/users/$USER" realname`}$3
+ **/$0";s:8:"filename";s:15:"functionpostdoc";s:4:"path";s:7:"/phpdoc";}i:47;a:6:{s:4:"name";s:18:"Function Signature";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"doc_s";s:4:"code";s:158:"/**
+ * ${4:undocumented function}
+ *
+ * @return ${5:void}
+ * @author ${PHPDOC_AUTHOR:`niutil -readprop / "/users/$USER" realname`}$6
+ **/
+$1function $2($3);$0";s:8:"filename";s:17:"functionsignature";s:4:"path";s:7:"/phpdoc";}i:48;a:6:{s:4:"name";s:6:"Header";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"doc_h";s:4:"code";s:228:"/**
+ * $1
+ *
+ * @author ${PHPDOC_AUTHOR:`niutil -readprop / "/users/$USER" realname`}
+ * @version \$Id\$
+ * @copyright `echo $TM_ORGANIZATION_NAME`, `date +"%e %B, %Y"`
+ * @package ${3:default}
+ **/
+
+/**
+ * Define DocBlock
+ **/
+";s:8:"filename";s:6:"header";s:4:"path";s:7:"/phpdoc";}i:49;a:6:{s:4:"name";s:9:"Interface";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"doc_i";s:4:"code";s:175:"/**
+ * ${2:undocumented class}
+ *
+ * @package ${3:default}
+ * @author ${PHPDOC_AUTHOR:`niutil -readprop / "/users/$USER" realname`}
+ **/
+interface $1
+{$0
+} // END interface $1";s:8:"filename";s:9:"interface";s:4:"path";s:7:"/phpdoc";}i:50;a:6:{s:4:"name";s:14:"Start Docblock";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"/**";s:4:"code";s:13:"/**
+ * $0
+ */";s:8:"filename";s:13:"startdocblock";s:4:"path";s:7:"/phpdoc";}i:51;a:6:{s:4:"name";s:11:"require …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"req";s:4:"code";s:22:"require '${1:file}';$0";s:8:"filename";s:7:"require";s:4:"path";s:0:"";}i:52;a:6:{s:4:"name";s:16:"require_once …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"req1";s:4:"code";s:27:"require_once '${1:file}';$0";s:8:"filename";s:11:"requireonce";s:4:"path";s:0:"";}i:53;a:4:{s:4:"name";s:6:"Return";s:8:"filename";s:6:"return";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:54;a:6:{s:4:"name";s:6:"return";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"ret";s:4:"code";s:11:"return$1;$0";s:8:"filename";s:6:"return";s:4:"path";s:7:"/return";}i:55;a:6:{s:4:"name";s:12:"return false";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"ret0";s:4:"code";s:15:"return false;$0";s:8:"filename";s:11:"returnfalse";s:4:"path";s:7:"/return";}i:56;a:6:{s:4:"name";s:11:"return true";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"ret1";s:4:"code";s:14:"return true;$0";s:8:"filename";s:10:"returntrue";s:4:"path";s:7:"/return";}}s:8:"commands";a:0:{}s:9:"templates";a:2:{i:0;a:3:{s:8:"filename";s:14:"$AMY{name}.php";s:4:"name";s:15:"Common document";s:7:"content";s:73:"<?php
+	/* 
+		Created on $AMY{date_created} by $AMY{user_nickname} 
+	*/
+?>";}i:1;a:3:{s:8:"filename";s:14:"$AMY{name}.php";s:4:"name";s:24:"Common HTML/PHP document";s:7:"content";s:687:"<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="" />
+		<meta name="Copyright" content="" />
+	
+		<title>$AMY{camelize:name}</title>
+
+		<link href=".css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+		</style>
+		
+        <script type="text/javascript" src=".js"></script>
+        <script type="text/javascript">
+
+        </script>
+
+	</head>
+	<body>
+		<?php
+			echo 'Hello.';
+		?>
+	</body>
+</html>";}}s:2:"id";s:3:"php";}}

@@ -1,0 +1,3 @@
+  name: "for (…) {…} (Improved Native For-Loop)"
+  key_activation: ''
+  tab_activation: 'for'

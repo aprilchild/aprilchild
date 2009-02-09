@@ -1,0 +1,12 @@
+signature:
+  name: 'JavaScript (Fry)'
+  inherits: 
+    - 'javascript:default'
+
+definition:
+	
+	chunkRules:
+    - '[/(([^\w]|^)(\$class|\$new|\$delete|\$rpost|\$upload|\$combofill|\$comboget|\$comboset|\$call|\$loc|\$runafter|\$runinterval|\$foreach|\$dotimes|\$isset|\$notset|\$getdef|construct|destruct|\$)([^\w]|$))/i, 3, ac.chap.CHUNK_LIBRARY_CUSTOM]'
+
+	wordDelimiter: '/[\w\d]/'
+	indentIgnoreMarker: '/[\t ]/'

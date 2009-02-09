@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<package version="2.0" xmlns="http://pear.php.net/dtd/package-2.0"
+    xmlns:tasks="http://pear.php.net/dtd/tasks-1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+http://pear.php.net/dtd/tasks-1.0.xsd
+http://pear.php.net/dtd/package-2.0
+http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Services_Yadis</name>
+ <uri>http://www.openidenabled.com/resources/downloads/php-yadis/pear/Services_Yadis-1.0.2.tgz</uri>
+ <summary>PHP Yadis</summary>
+ <description>
+   An implementation of the Yadis service discovery protocol
+ </description>
+ 
+<lead>
+  <name>Jonathan Daugherty</name>
+  <user>cygnus</user>
+  <email>cygnus@janrain.com</email>
+  <active>yes</active>
+</lead>
+    
+ <date>2006-08-07</date>
+ <version>
+   <release>1.0.2</release>
+   <api>1.0.2</api>
+ </version>
+ <stability>
+   <release>stable</release>
+   <api>stable</api>
+ </stability>
+ <license uri="http://www.gnu.org/copyleft/lesser.txt">LGPL</license>
+ <notes>
+ Fri Aug  4 13:56:20 PDT 2006  cygnus@janrain.com
+  * Improved handling when XML support is absent
+
+    M ./Services/Yadis/XML.php -4 +1
+    M ./Services/Yadis/XRDS.php -1 +1
+    M ./Services/Yadis/Yadis.php -1 +1
+
+Fri Aug  4 13:40:12 PDT 2006  cygnus@janrain.com
+  * Added stale flag to manager
+
+    M ./Services/Yadis/Manager.php -2 +5
+
+Fri Aug  4 13:24:51 PDT 2006  cygnus@janrain.com
+  * Removed unnecessary reference
+
+    M ./Services/Yadis/XML.php -1 +1
+
+Fri Aug  4 13:24:30 PDT 2006  cygnus@janrain.com
+  * Silenced XRDS XML parsing warnings
+
+    M ./Services/Yadis/Yadis.php -1 +1
+
+Fri Jun 23 09:58:44 PDT 2006  cygnus@janrain.com
+  tagged 1.0.1
+ </notes>
+ <contents>
+ <dir name="/">
+  <dir name="Services">
+    <dir name="Yadis">
+      <file name="ParanoidHTTPFetcher.php" role="php" />
+      <file name="Yadis.php" role="php" />
+      <file name="ParseHTML.php" role="php" />
+      <file name="HTTPFetcher.php" role="php" />
+      <file name="PlainHTTPFetcher.php" role="php" />
+      <file name="XRDS.php" role="php" />
+      <file name="XML.php" role="php" />
+      <file name="Manager.php" role="php" />
+    </dir>
+  </dir>
+  <dir name="doc" role="doc">
+    <file name="MPL-1.1.txt" role="doc" />
+    <dir name="media" role="doc">
+      <file name="banner.css" role="doc" />
+      <file name="stylesheet.css" role="doc" />
+    </dir>
+    <dir name="Yadis" role="doc">
+      <file name="tutorial_Yadis.pkg.html" role="doc" />
+      <file name="Services_Yadis_Discovery.html" role="doc" />
+      <file name="Services_Yadis_Manager.html" role="doc" />
+      <file name="Services_Yadis_PHPSession.html" role="doc" />
+      <file name="_Yadis_Manager_php.html" role="doc" />
+      <file name="Services_Yadis_dom.html" role="doc" />
+      <file name="Services_Yadis_domxml.html" role="doc" />
+      <file name="Services_Yadis_XMLParser.html" role="doc" />
+      <file name="_Yadis_XML_php.html" role="doc" />
+      <file name="Services_Yadis_Service.html" role="doc" />
+      <file name="Services_Yadis_XRDS.html" role="doc" />
+      <file name="_Yadis_XRDS_php.html" role="doc" />
+      <file name="Services_Yadis_Yadis.html" role="doc" />
+      <file name="_Yadis_Yadis_php.html" role="doc" />
+    </dir>
+    <file name="elementindex_Yadis.html" role="doc" />
+    <file name="elementindex.html" role="doc" />
+    <file name="index.html" role="doc" />
+    <file name="packages.html" role="doc" />
+    <file name="li_Yadis.html" role="doc" />
+    <file name="classtrees_Yadis.html" role="doc" />
+    <file name="errors.html" role="doc" />
+  </dir>
+  </dir>
+ </contents>
+ <dependencies>
+   <required>
+     <php>
+       <min>4.3.0</min>
+     </php>
+     <pearinstaller>
+       <min>1.4.5</min>
+     </pearinstaller>
+   </required>
+   <optional>
+     <package>
+       <name>PHPUnit</name>
+       <channel>pear.php.net</channel>
+       <min>1.1.1</min>
+     </package>
+     <extension>
+       <name>curl</name>
+     </extension>
+     <extension>
+       <name>domxml</name>
+     </extension>
+     <extension>
+       <name>dom</name>
+     </extension>
+   </optional>
+ </dependencies>
+ <!-- There really isn't much we should put in the phprelease tag,
+ although we should probably make a windows-specific release tag. -->
+ <phprelease/>
+</package>
+

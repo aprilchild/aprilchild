@@ -1,0 +1,12 @@
+/**
+ * $1
+ *
+ * @author ${PHPDOC_AUTHOR:`niutil -readprop / "/users/$USER" realname`}
+ * @version \$Id\$
+ * @copyright `echo $TM_ORGANIZATION_NAME`, `date +"%e %B, %Y"`
+ * @package ${3:default}
+ **/
+
+/**
+ * Define DocBlock
+ **/

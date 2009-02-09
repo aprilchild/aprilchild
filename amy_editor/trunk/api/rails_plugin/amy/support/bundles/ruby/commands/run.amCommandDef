@@ -1,0 +1,16 @@
+def run_command(controller, text, params)
+  @@output = ''
+  def puts(txt)
+    @@output << txt.to_s
+  end
+  ruby_info = `ruby -v`
+  res = "<strong>Running #{ruby_info} script</strong><pre style='display:block;margin-right:14px;padding:4px;margin-top:10px;background:#000;color:#fff'>"
+  begin
+    eval(text)
+  rescue => e
+    # backtrace = e.backtrace.join("\n")
+    # puts "\n\n== <strong style='color:red'>Error while executing:</strong>\n\t#{e}\n\tbacktrace: #{backtrace}</pre>"
+    puts "\n\n== <strong style='color:red'>Error while executing:</strong>\n\t#{e}\n\n"
+  end
+  controller.ok(res + @@output + "</pre>")
+end

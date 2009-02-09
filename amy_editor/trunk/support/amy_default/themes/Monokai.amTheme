@@ -1,0 +1,23 @@
+signature:
+  name: 'Monokai'
+  author: 'Original by Monokai.nl custom by DieNeueModern.com'
+
+definition:
+  cssId: ''
+  background: '#272822'
+  textColor: '#f8f8f2'
+  caretColor: '#dd3180'
+  caretRowStyleActive: '#241619'
+  selectionStyle: '#c583ef'
+  TOKEN_MULTIROW_COMMENT: 'background-color:dd3180;color:#fff'
+  TOKEN_SINGLEROW_COMMENT: 'background-color:dd3180;color:#fff'
+  TOKEN_SINGLE_QUOTED: 'color:#e4dc74'
+  TOKEN_DOUBLE_QUOTED: 'color:#e4dc74'
+  CHUNK_KEYWORD: 'color:#f82e73'
+  CHUNK_NUMBER: 'color:#b181ff'
+  CHUNK_OPERATOR: 'color:#baea9b;'
+  CHUNK_PARENTHESIS: 'color:#7ff723;background-color:#0d280a'
+  CHUNK_KEYWORD_CUSTOM: 'color:#a3e22c'
+  CHUNK_FUNCTION_NAME: 'color:#a3e22c'
+  CHUNK_LIBRARY: 'color:#f69407'
+  CHUNK_LIBRARY_CUSTOM: 'color:#69d8ef'

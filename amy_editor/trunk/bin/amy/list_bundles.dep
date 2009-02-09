@@ -1,0 +1,48 @@
+<?php
+    include dirname(__FILE__).'/../../lib/amy/amy.php';
+
+    class Task_amy_list_bundles extends DEPTask
+    {
+        public static function get_author()
+        {
+            return 'Petr Krontorád, April-Child.com';
+        }
+        public static function get_comment($short = true)
+        {
+            return 'Lists all bundles in the Amy bundles directory.';
+        }
+        public function run()
+        {
+            $this->write("List of current Amy bundles:\n============================");
+            $bundles_dir = $this->conf['amy_support_dir'] . '/bundles/';
+            if (!is_dir($bundles_dir))
+            {
+                $this->fail("Invalid Amy bundles directory specified.");
+            }
+            try
+            {
+                if (false !== $d = opendir($bundles_dir))
+                {
+    				while ( false !== $f = readdir($d) )
+    				{
+    					if ( 0 == strncmp('.', $f, 1) || !is_dir($bundles_dir.$f) )
+    					{
+    						continue;
+    					}
+    					$bundle_info = YAML::load($bundles_dir.$f.'/info.amBundle');
+    					$bundle_info['id'] = $f;
+    					$signature = $bundle_info['signature'];
+//    					print_r($bundle_info);die();
+		                $this->write($bundle_info['id'] . str_repeat(' ', 25-strlen($bundle_info['id'])) . ' "' . $signature['name'] . '" v.' . $signature['version'] . '  ' . $signature['author'] . ', ' . $signature['url'] . "\n   " . $signature['note'] . "\n");
+    				}
+    				closedir($d);
+                }
+            }
+            catch (Eception $e)
+            {
+                $msg = $e->getMessage();
+                $this->fail("Listing failed: `{$msg}'.");
+            }
+        }
+    }
+?>

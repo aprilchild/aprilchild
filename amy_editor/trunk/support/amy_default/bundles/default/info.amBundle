@@ -1,0 +1,8 @@
+signature:
+    
+  name: 'Amy Editor'
+  author: 'Petr Krontorád, April-Child.com'
+  url: 'http://www.april-child.com'
+  version: '1.0'
+  dependencies: -
+  note: 'This is the Amy Editor main bundle.'

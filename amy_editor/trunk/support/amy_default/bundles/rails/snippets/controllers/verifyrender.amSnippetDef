@@ -1,0 +1,1 @@
+verify :only => [:$1], :method => :post, :render => {:status => 500, :text => "use HTTP-POST"}

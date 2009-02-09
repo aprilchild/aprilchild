@@ -1,0 +1,3 @@
+`/local/javascript
+output = 'Num rows: ?, num characters: ?'.embed(component.getNumRows(), component.getText().length);
+`

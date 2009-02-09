@@ -1,0 +1,8 @@
+signature:
+  name: 'JavaScript'
+  author: 'Petr Krontorád, April-Child.com'
+  url: 'http://www.april-child.com'
+  version: '1.0'
+  dependencies: 
+    - 'default'
+  note: 'This is the JavaScript bundle.'

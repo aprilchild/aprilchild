@@ -1,0 +1,3 @@
+  name: "each_value { |val| .. }"
+  key_activation: ''
+  tab_activation: 'eav'

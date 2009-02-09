@@ -1,0 +1,111 @@
+signature:
+  name: 'Default keymap'
+  author: 'Petr Krontorád, April-Child.com'
+
+definition: |
+  
+  # default
+  KEY: 0
+  	insert(character:true)
+
+  # arrow left
+  KEY: -37
+  	caret(move:'left')
+  KEY: -37+shift
+  	caret(move:'left')
+  	selection(add:true)
+  KEY: -37+ctrl
+  	caret(move:'prev_regexp', re:'[^|._A-Z ,|(|);]*$')
+  KEY: -37+alt
+  	caret(move:'prev_word')
+  KEY: -37+ctrl+shift
+  	caret(move:'prev_regexp', re:'[^|._A-Z ,|(|);]*$')
+  	selection(add:true)
+  KEY: -37+alt+shift
+  	caret(move:'prev_word')
+  	selection(add:true)
+  KEY: -37+meta
+  	caret(move:'row_start')
+  KEY: -37+meta+shift
+  	caret(move:'row_start')
+  	selection(add:true)
+
+  # arrow right
+  KEY: -39
+  	caret(move:'right')
+  KEY: -39+shift
+  	caret(move:'right')
+  	selection(add:true)
+  KEY: -39+ctrl
+  	caret(move:'next_regexp', re:'^[^|._A-Z ,|(|);]*')
+  KEY: -39+alt
+  	caret(move:'next_word')
+  KEY: -39+ctrl+shift
+  	caret(move:'next_regexp', re:'^[^|._A-Z ,|(|);]*')
+  	selection(add:true)
+  KEY: -39+alt+shift
+  	caret(move:'next_word')
+  	selection(add:true)
+  KEY: -39+meta
+  	caret(move:'row_end')
+  KEY: -39+meta+shift
+  	caret(move:'row_end')
+  	selection(add:true)
+
+  # arrow up
+  KEY: -38
+  	caret(move:'up')
+  KEY: -38+shift
+  	caret(move:'up')
+  	selection(add:true)
+
+  # arrow down
+  KEY: -40
+  	caret(move:'down')
+  KEY: -40+shift
+  	caret(move:'down')
+  	selection(add:true)
+  
+  # enter
+  KEY: -13
+     insert(row:true)
+
+  # delete
+  KEY: -8
+  	delete(character:true)
+
+  # backspace
+  KEY: -46
+  	delete(character:false)
+
+  # delete line ctrl+shift+k
+  KEY: 75+ctrl+shift
+    delete(row:true)
+
+  # escape
+  KEY: -27
+  	custom(action:'WordComplete', direction:true)
+  KEY: -27+shift
+  	custom(action:'WordComplete', direction:false)
+
+  # tab
+  KEY: -9
+  	custom(action:'SnippetComplete')
+  
+  # auto-completes
+  # {
+  KEY: 123
+  custom(action:'AutoComplete', use_selection:true, text:'}')
+
+  # "
+  KEY: 34
+  custom(action:'AutoComplete', use_selection:true, text:'\"')
+
+  # [
+  KEY: 91
+  custom(action:'AutoComplete', use_selection:true, text:']')
+
+  # (
+  KEY: 40
+  custom(action:'AutoComplete', use_selection:true, text:')')
+	

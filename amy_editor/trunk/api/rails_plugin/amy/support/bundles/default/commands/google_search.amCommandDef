@@ -1,0 +1,16 @@
+<?php
+	
+	
+	function run_command($controller, $text = '', $params = array())
+	{
+	    $output = array();
+	    $results = Google::search($text);
+        foreach ( $results as $result )
+        {
+            $output[] = '<h4 style="font-size:12px;margin:0;margin-top:1px;padding:2px;border-top:1px solid #aa0">'.$result['title'].'</h4>'. "<a target='external' href=".$result['url'].">".$result['url']."</a>".CR.$result['note'];
+        }
+	    $controller->ok(implode(CR.CR, $output));
+	}
+
+
+?>

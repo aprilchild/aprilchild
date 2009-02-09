@@ -1,0 +1,20 @@
+<%=	render_amy_editing_component @editor %>
+
+<script type="text/javascript">
+client.onstart = function()
+{
+	init_chap_component();
+	var source = 'class Hello\n\tdef world\n\t\tputs "Say hello!"\n\tend\nend';
+	
+	var chap = $new(ac.chap.Window, {language:ac.chap.lang.RubyDefault, keymap:ac.chap.RubyKeyMap});
+	$('editor').t('');
+	<%= render_amy_addview @editor, :node => 'editor', :tabelator => '  ' %>
+	chap.setSnippets(ac.chap.getRubySnippets());
+	chap.show();
+	chap.edit(source);
+	// console.log(chap);
+}
+</script>
+
+<div id="editor" style="width:700px;height:600px;border:1px solid black">
+</div>

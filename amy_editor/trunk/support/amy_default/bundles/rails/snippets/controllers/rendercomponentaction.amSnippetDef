@@ -1,0 +1,1 @@
+render_component :action => "${1:index}"

@@ -1,0 +1,17 @@
+<script type="text/javascript">
+client.conf.user = {
+	id: '<%= @amy_user.user_id %>',
+	username: '<%= @amy_user.username %>',
+	service: '<%= @amy_user.service %>',
+	credentials: {
+		<% @amy_user.credentials.each do |key, value| %>
+			<%= key + ":'#{value}'," %>
+		<% end %>
+	_void:true},	
+}
+client.conf.defaultProjectUrl = '<%= @default_project_url %>';
+client.conf.masquerade = '<%= @masquerade %>';
+client.conf.collaboration = {
+	hash: '<%= @collaboration_hash %>'
+}
+</script>

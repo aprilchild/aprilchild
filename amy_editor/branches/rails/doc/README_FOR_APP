@@ -1,0 +1,23 @@
+Amy Editor
+==========
+
+Installation
+------------
+
+Edit config/database.yml file, you can leave your definition, Amy Editor will use its own section:
+
+amy_editor:
+  adapter: postgresql
+  database: amy_editor_development
+  encoding: unicode
+  username: p
+  password: 
+
+In order to create new database, enter: createdb amy_editor_development -E UTF8, where amy_editor_development will be replaced with your name (if needed).
+
+You can see, Amy Editor can use different database, you don't have to integrate it into existing schema. But you can, Amy tables and stored procedures all reside in its own `amy' schema, it's very unlikely you have already used this. Amy also doesn't use any Rails ActiveRecord features, it has its own simple PostgreSQL adapter and attempts to NOT clash with your existing application in any way. It's not that I don't like AR or Rails, it's designed this way solely for smooth integration purposes.
+
+Run rake db:migrate, this will create new `amy' scheme in your database (specified in amy_editor section of database.yml file).
+
+You are set. Start mongrel `mongrel_rails start' or any server you use and point your browser at the http://localhost:3000/amy location (by default).
+

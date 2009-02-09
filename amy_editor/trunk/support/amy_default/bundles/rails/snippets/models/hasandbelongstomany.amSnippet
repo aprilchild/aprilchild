@@ -1,0 +1,3 @@
+  name: "has_and_belongs_to_many"
+  key_activation: ''
+  tab_activation: 'habtm'

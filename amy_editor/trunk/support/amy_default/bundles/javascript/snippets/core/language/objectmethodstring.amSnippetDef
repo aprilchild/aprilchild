@@ -1,0 +1,3 @@
+'${1:${2:#thing}:${3:click}}': function(element){
+	$0
+}${10:,}

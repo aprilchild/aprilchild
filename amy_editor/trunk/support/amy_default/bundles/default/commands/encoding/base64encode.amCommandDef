@@ -1,0 +1,7 @@
+<?php
+function run_command($controller, $text, $params)
+{
+    $controller->import('default', 'text');
+    $controller->ok(base64_encode($text));
+}
+?>

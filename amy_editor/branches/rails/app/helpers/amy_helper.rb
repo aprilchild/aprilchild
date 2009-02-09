@@ -1,0 +1,2 @@
+module AmyHelper
+end

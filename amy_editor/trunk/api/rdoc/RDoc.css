@@ -1,0 +1,491 @@
+body {
+  font-family: Optima;
+  font-size: 10pt;
+}
+
+#leftPane {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  margin: 0;
+  padding: 0;
+  /*width: 200px;*/
+}
+
+#rightPane {
+  position: absolute;
+  top: 0px;
+  /*left: 200px;*/
+  bottom: 0px;
+  right: 0px;
+  margin: 0;
+  padding: 0;
+}
+
+#navTopLeft {
+  position: absolute;
+  width: 20px;
+  height: 55px;
+  top: 0px;
+  left: 0px;
+  background: url(Images/NavTopLeft.png);
+}
+
+#navTop {
+	position:absolute;
+  top: 0px;
+  left: 20px;
+  /*width: 188px;*/
+  height: 55px;
+  right: 15px;
+  background: url(Images/NavTop.png);
+  background-repeat: repeat-x;
+  /*z-index: 10;*/
+}
+
+#navTopRight {
+  position: absolute;
+  width: 15px;
+  height: 55px;
+  right: 0px;
+  top: 0px;
+  background: url(Images/NavTopRight.png);
+}
+
+#navLeft {
+  position: absolute;
+  left: 0px;
+  top: 55px;
+  bottom: 42px;
+  width: 20px;
+  background: url(Images/NavLeft.png);
+  background-repeat: repeat-y;
+}
+
+#navRight {
+  position: absolute;
+  right: 0px;
+  top: 55px;
+  bottom: 42px;
+  width: 15px;
+  background: url(Images/NavRight.png);
+  background-repeat: repeat-y;
+}
+
+#navMiddle {
+	position:absolute;
+  top: 55px;
+  bottom: 42px;
+  left: 20px;
+  right: 15px;
+  background: #fff;
+}
+
+#navBottomLeft {
+  position: absolute;
+  width: 20px;
+  height: 42px;
+  left: 0px;
+  bottom: 0px;
+  background: url(Images/NavBottomLeft.png);
+}
+
+#navBottom {
+	position:absolute;
+  bottom: 0px;
+  left: 20px;
+  right: 15px;
+  height: 42px;
+  background: url(Images/NavBottom.png);
+  background-repeat: repeat-x;
+}
+
+#navBottomRight {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  width:15px;
+  height: 42px;
+  background: url(Images/NavBottomRight.png);
+}
+
+#docTopLeft {
+	position:absolute;
+  top: 0px;
+  left: 0px;
+  height: 55px;
+  width: 20px;
+  background: url(Images/DocTopLeft.png);
+}
+
+#docTop {
+	position:absolute;
+  left: 20px;
+  top: 0px;
+  height: 25px;
+  right: 26px;
+  background: url(Images/DocTop.png);
+  background-repeat: repeat-x;
+  /*z-index: 10;*/
+}
+
+#docTopRight {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  height: 55px;
+  width: 26px;
+  background: url(Images/DocTopRight.png);
+}
+
+#docLeft {
+	position:absolute;
+  top: 55px;
+  left: 0px;
+  bottom: 31px;
+  width: 20px;
+  background: url(Images/DocLeft.png);
+  background-repeat: repeat-y;
+}
+
+#docRight  {
+	position:absolute;
+  top: 55px;
+  bottom: 31px;
+  right: 0px;
+  width: 26px;
+  background: url(Images/DocRight.png);
+  background-repeat: repeat-y;
+}
+
+#docBottomLeft {
+	position:absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 31px;
+  width: 20px;
+  background: url(Images/DocBottomLeft.png);
+}
+
+#docBottom {
+	position:absolute;
+  bottom: 0px;
+  left: 20px;
+  height: 31px;
+  right: 26px;
+  background: url(Images/DocBottom.png);
+  background-repeat: repeat-x;
+}
+
+#docBottomRight {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  height: 31px;
+  width: 26px;
+  background: url(Images/DocBottomRight.png);
+}
+
+#docBackground {
+  position: absolute;
+  bottom: 31px;
+  left: 20px;
+  right: 26px;
+  top: 25px;
+  background: #fff;
+  z-index: 10;
+}
+
+
+#topBar {
+	position:absolute;
+	top:14px;
+	left:12px;
+	right: 7px;
+	text-align: center;
+	font-size: 10pt;
+	font-weight: bold;
+	z-index: 15;
+}
+
+/*
+#classesLabel { text-align: left; }
+#filesLabel { text-align: center; }
+#methodsLabel { text-align: right; }
+*/
+
+.navLinkActive
+{
+  font-family: Optima;
+  font-weight: bold;
+  font-size: 10pt;
+  color: #fff;
+  cursor: pointer;
+}
+
+.navLink
+{
+  font-family: Optima;
+  font-weight: bold;
+  font-size: 10pt;
+  color: #aaa;
+  cursor: pointer;
+}
+
+
+#parentDiv {
+	position:absolute;
+	top:40px;
+	left: 15px;	
+	bottom: 38px;
+	right: 10px;
+	/*overflow: scroll;*/
+	z-index: 5;
+}
+
+.mainContent {
+/*	border-style:solid; border-color:red; */
+	position:absolute;
+	left:0px;
+	top:0px;
+	right:0px;
+	bottom: 0px;
+	margin: 0px;
+	padding: 0px;
+	overflow: scroll;
+	z-index: 0;
+	/*display:none;*/
+}
+
+#newVersionMessage {
+  position: absolute;
+  z-index: 20;
+  bottom: 40px;
+  left: 25px;
+  right: 50px;
+  text-align: center;
+}
+
+#newVersionMessage span {
+  background: #c99;
+  font-size: 8pt;
+  border: 1px dotted black;
+}
+
+#docoDiv {
+  position:absolute;
+  top:11px;
+  bottom:24px;
+  left: 9px;
+  border: 0px black solid;
+  right: 18px;
+  padding: 2px;
+  overflow: scroll;
+  z-index: 10;
+  /*-apple-dashboard-region: dashboard-region(control rectangle);*/
+  /*cursor: text;*/
+  /*background: #fff;*/
+}
+
+#filter {
+  position: absolute;
+  bottom: 17px;
+  right: 7px;
+  width: 90px;
+  height: 15px;
+  z-index: 20;
+  font-size: 12px;
+}
+
+#loading {
+  position: absolute;
+  bottom: 17px;
+  left: 32px;
+  font-size: 9pt;
+  font-style: italic;
+  color: #ccc;
+  opacity: 0.0;
+}
+
+#resize {
+    position:absolute;
+    right: 9px;
+    bottom: 15px;
+    cursor: se-resize;
+    -apple-dashboard-region: dashboard-region(control rectangle);
+}
+
+#dividerResize {
+  position: absolute;
+  top: 53px;
+  bottom: 62px;
+  border-left: 1px #bbb solid;
+  border-right: 1px #fff solid;
+  width: 1px;
+  cursor: e-resize;
+  -apple-dashboard-region: dashboard-region(control rectangle);  
+  z-index: 10;
+  opacity: 0.3;
+}
+
+.matchedLink {
+  display: block;
+}
+
+.unmatchedLink {
+  display: none;
+}
+
+/* Nav pane styles */
+h1,h2,h3,h4 { margin: 0; color: #039; background: transparent; }
+h1 { font-size: 150%; }
+h2,h3,h4 { margin-top: 1em; }
+
+a { color: #039; text-decoration: none; }
+a:hover { color: #000; }
+
+#parentDiv br { display: none;}
+#parentDiv a { display: block; white-space: nowrap; }
+#parentDiv h1 { display: none; }
+
+/* Back of widget */
+#back {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 600px;
+    height: 193px;
+    padding: 0;
+    display:none;
+    background: url(Images/Back.png);
+    background-repeat: no-repeat;
+    color: #fff;
+    font-weight: bold;
+    font-size: 10pt;
+    font-family: Helvetica Neue;
+    margin: 0;
+} 
+#backText {
+  position: absolute;
+  top: 20px;
+  left: 105px;
+}
+
+#baseURL {
+  position: absolute;
+  left: 80px;
+  width: 300px;
+}
+
+#doneButton {
+  position: absolute;
+  top: 49px;
+  left: 315px;
+}
+
+#bookmarkButton {
+  position: absolute;
+  top: 49px;
+  left: 225px;
+}
+
+#cancelButton {
+  position: absolute;
+  top: 150px;
+  left: 18px;
+}
+
+#bookmarkText {
+  position: absolute;
+  top: 78px;
+  left: 105px;
+}
+
+#bookmarks {
+  position: absolute;
+  left: 80px;
+  width: 300px;
+}
+
+#removeBookmark {
+  position: absolute;
+  top: 105px;
+  left: 165px;
+}
+
+#activateBookmark {
+  position: absolute;
+  top: 105px;
+  left: 305px;
+}
+
+#versionCheckDiv {
+  position: absolute;
+  top: 148px;
+  left: 145px;
+}
+
+
+#precisionis {
+  position: absolute;
+  background: url(Images/precisionis.png);
+  right: 10px;
+  bottom: 17px;
+  width: 150px;
+  height: 73px;
+  cursor: pointer;
+}
+
+
+
+/* APPLE STD STUFF */
+
+.flip {
+    position:absolute;
+    bottom:18px;
+    left:12px;
+    width:13px;
+    height:13px;
+}
+#flip {
+    opacity:0;
+    background:url(file:///System/Library/WidgetResources/ibutton/white_i.png) no-repeat top left;
+    z-index:8000;
+}
+#fliprollie {
+    display:none;
+    opacity:0.25;
+    background:url(file:///System/Library/WidgetResources/ibutton/white_rollie.png) no-repeat top left;
+    z-index:7999;
+}
+
+/* Source hightlighting from api.rubyonrails.com */
+.method {
+  border-top: 1px dotted #888;
+  margin-top: 5px;
+  padding: 3px;
+}
+
+.method .title {
+  font-size: 11pt;
+  font-weight: bold;
+  color: #039;
+}
+
+.dyn-source {
+  /*display: none;*/
+  color: #000;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+.dyn-source .cmt {
+  color: #00F;
+  font-style: italic;
+}
+
+.dyn-source .kw {
+  color: #070;
+  font-weight: bold;
+}

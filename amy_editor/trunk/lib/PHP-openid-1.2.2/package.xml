@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<package version="1.0">
+ <name>Auth_OpenID</name>
+ <summary>PHP OpenID</summary>
+ <description>
+ An implementation of the OpenID single sign-on authentication protocol.
+ </description>
+ <license>LGPL</license>
+ <maintainers>
+  <maintainer>
+   <user>cygnus</user>
+   <name>Jonathan Daugherty</name>
+   <email>cygnus@janrain.com</email>
+   <role>lead</role>
+  </maintainer>
+  
+  <maintainer>
+   <user>jhoyt</user>
+   <name>Josh Hoyt</name>
+   <email>josh@janrain.com</email>
+   <role>lead</role>
+  </maintainer>
+  </maintainers>
+ <release>
+  <version>1.2.2</version>
+  <date>2007-03-23</date>
+  <state>stable</state>
+  <notes>
+  <![CDATA[
+  Wed Mar 21 16:58:47 PDT 2007  cygnus@janrain.com
+  * Apply Simon Willison's fix to the plain fetcher POST handling
+
+Wed Mar 14 16:26:23 PDT 2007  cygnus@janrain.com
+  * Fix include_path in example server server.php
+
+Wed Mar 14 16:19:05 PDT 2007  cygnus@janrain.com
+  * Fix include_path in example server setup.php
+
+Mon Mar 12 11:30:39 PDT 2007  cygnus@janrain.com
+  * Unify php.net links
+
+Mon Mar 12 11:27:26 PDT 2007  cygnus@janrain.com
+  * Remove redundant detect.php text because it needs to be first
+
+Mon Mar 12 11:23:11 PDT 2007  cygnus@janrain.com
+  * Update PHP versions in README
+
+Mon Mar 12 11:23:04 PDT 2007  cygnus@janrain.com
+  * Add note to README for using detect script
+
+Mon Mar 12 11:33:10 PDT 2007  cygnus@cprogrammer.org
+  * Make it very clear what the result is
+
+Mon Mar 12 11:31:06 PDT 2007  cygnus@cprogrammer.org
+  * Whitespace
+
+Mon Mar 12 11:30:56 PDT 2007  cygnus@cprogrammer.org
+  * Say CURL isn't required
+
+Mon Mar 12 11:30:42 PDT 2007  cygnus@cprogrammer.org
+  * Remove comment
+
+Mon Mar 12 11:30:34 PDT 2007  cygnus@cprogrammer.org
+  * Include yadis code and complain if it isn't found
+
+Mon Mar 12 11:30:05 PDT 2007  cygnus@cprogrammer.org
+  * Mention absence of open_basedir
+
+Mon Mar 12 11:29:54 PDT 2007  cygnus@cprogrammer.org
+  * Boldify web_user
+
+Mon Mar 12 11:29:46 PDT 2007  cygnus@cprogrammer.org
+  * Mention file store
+
+Mon Mar 12 11:29:35 PDT 2007  cygnus@cprogrammer.org
+  * Boldify text
+
+Mon Mar 12 11:29:26 PDT 2007  cygnus@cprogrammer.org
+  * Typo fix
+
+Mon Mar 12 10:31:01 PDT 2007  cygnus@janrain.com
+  * README tweak
+
+Mon Mar 12 10:30:44 PDT 2007  cygnus@janrain.com
+  * Update README with CONTRIBUTING section
+
+Mon Mar 12 10:14:11 PDT 2007  cygnus@janrain.com
+  * Only try to include one file in inclusion test
+
+Mon Mar 12 10:07:52 PDT 2007  cygnus@janrain.com
+  * Remove HTML tags from format-agnostic output
+
+Fri Feb 16 02:18:49 PST 2007  atrus@atrus.org
+  * Improve HTML parser effeciency and tolerence
+
+Wed Feb  7 16:12:19 PST 2007  cygnus@janrain.com
+  * Add note about open_basedir
+
+Tue Jan 16 09:45:46 PST 2007  cygnus@janrain.com
+  * Fix example consumer on Windows
+
+Mon Jan 15 13:13:59 PST 2007  cygnus@janrain.com
+  * BigMath no longer triggers error on no math support
+
+Fri Mar 23 10:28:00 PDT 2007  cygnus@janrain.com
+  tagged 1.2.1
+  ]]>
+  </notes>
+  <filelist><dir name="/" baseinstalldir="Auth">
+  <dir name="Auth">
+    <dir name="OpenID">
+      <file name="DatabaseConnection.php" role="php" />
+      <file name="Association.php" role="php" />
+      <file name="BigMath.php" role="php" />
+      <file name="Consumer.php" role="php" />
+      <file name="CryptUtil.php" role="php" />
+      <file name="DiffieHellman.php" role="php" />
+      <file name="Discover.php" role="php" />
+      <file name="DumbStore.php" role="php" />
+      <file name="FileStore.php" role="php" />
+      <file name="HMACSHA1.php" role="php" />
+      <file name="Interface.php" role="php" />
+      <file name="KVForm.php" role="php" />
+      <file name="MySQLStore.php" role="php" />
+      <file name="Parse.php" role="php" />
+      <file name="PostgreSQLStore.php" role="php" />
+      <file name="SQLStore.php" role="php" />
+      <file name="SQLiteStore.php" role="php" />
+      <file name="Server.php" role="php" />
+      <file name="ServerRequest.php" role="php" />
+      <file name="TrustRoot.php" role="php" />
+      <file name="URINorm.php" role="php" />
+    </dir>
+    <file name="OpenID.php" role="php" />
+  </dir>
+  <dir name="Services">
+    <dir name="Yadis">
+      <file name="Misc.php" role="php" />
+      <file name="ParanoidHTTPFetcher.php" role="php" />
+      <file name="HTTPFetcher.php" role="php" />
+      <file name="Manager.php" role="php" />
+      <file name="XRIRes.php" role="php" />
+      <file name="PlainHTTPFetcher.php" role="php" />
+      <file name="ParseHTML.php" role="php" />
+      <file name="XML.php" role="php" />
+      <file name="XRDS.php" role="php" />
+      <file name="XRI.php" role="php" />
+      <file name="Yadis.php" role="php" />
+    </dir>
+  </dir>
+  <dir name="doc" role="doc">
+  </dir>
+  <dir name="examples" role="doc">
+    <dir name="consumer" role="doc">
+      <file name="finish_auth.php" role="doc" />
+      <file name="common.php" role="doc" />
+      <file name="index.php" role="doc" />
+      <file name="try_auth.php" role="doc" />
+    </dir>
+    <dir name="server" role="doc">
+      <dir name="lib" role="doc">
+        <dir name="render" role="doc">
+          <file name="about.php" role="doc" />
+          <file name="login.php" role="doc" />
+          <file name="sites.php" role="doc" />
+          <file name="trust.php" role="doc" />
+        </dir>
+        <file name="actions.php" role="doc" />
+        <file name="common.php" role="doc" />
+        <file name="render.php" role="doc" />
+        <file name="session.php" role="doc" />
+      </dir>
+      <file name="openid-server.css" role="doc" />
+      <file name="index.php" role="doc" />
+      <file name="server.php" role="doc" />
+      <file name="setup.php" role="doc" />
+    </dir>
+    <file name="detect.php" role="doc" />
+    <file name="README" role="doc" />
+  </dir>
+  </dir></filelist>
+ </release>
+ <deps>
+  <dep type="php" rel="ge" version="4.3.0" />
+ </deps>
+</package>
+

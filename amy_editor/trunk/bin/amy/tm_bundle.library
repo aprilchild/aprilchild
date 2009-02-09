@@ -1,0 +1,119 @@
+<?php
+
+	if (!class_exists('TMBundle'))
+	{
+
+	    class TMBundle
+	    {
+	        public static function get_bundle_info($bundle_dir_path)
+	        {
+	            if (!is_dir($bundle_dir_path))
+	            {
+	                throw new Exception("Bundle at `$bundle_dir_path' not found.");
+	            }
+	            $bundle_id = str_replace(' ', '_', strtolower(substr(basename($bundle_dir_path), 0, -9)));
+	            $info_plist_path = $bundle_dir_path . '/info.plist';
+	            if (!file_exists($info_plist_path))
+	            {
+	                throw new Exception("Bundle info.plist file not found at `$info_plist_path'.");
+	            }
+
+	            $dict = self::get_plist($info_plist_path);
+				$dict['author_email'] = str_rot13($dict['contactEmailRot13']);
+				$dict['author_name'] = $dict['contactName'];            
+				$dict['id'] = $bundle_id;
+			
+				unset($dict['contactEmailRot13']);
+				unset($dict['contactName']);
+				unset($dict['deleted']);
+				unset($dict['mainMenu']);
+				unset($dict['ordering']);
+				unset($dict['uuid']);
+	            return $dict;
+	        }
+        
+	        public static function get_languages($bundle_dir_path)
+	        {
+	            $languages = array();
+				$syntaxes_path = $bundle_dir_path.'/Syntaxes/';
+				if (false !== $d_syntaxes = opendir($syntaxes_path))
+				{
+					while (false != $f = readdir($d_syntaxes))
+					{
+						if ('.plist' == substr($f, -6))
+						{
+						    $dict = self::get_plist($syntaxes_path.$f);
+						    $languages[] = $dict;
+						}
+					}
+				}
+	            return $languages;
+	        }
+        
+	        public static function get_plist($plist_path)
+	        {
+				exec('plutil -convert xml1 "'.str_replace('$', '\\$', $plist_path). '"');
+				$plist = @DOMDocument::loadXML(trim(file_get_contents($plist_path)));
+				if (!$plist->documentElement)
+				{
+					return false;
+				}
+				$lst = $plist->documentElement->getElementsByTagName('dict');
+				$dict = self::parse_plist_dict($lst->item(0));
+				return $dict;
+	        }
+        
+	        public static function parse_plist_dict($node)
+	        {
+				$num_nodes = $node->childNodes->length;
+				$dict = array();
+				$last_key = false;
+				for ($i=0; $i<$num_nodes; $i++)
+				{
+	                $child_node = $node->childNodes->item($i);
+	                if (1 != $child_node->nodeType)
+	                {
+	                    continue;
+	                }
+				    switch ($child_node->tagName)
+				    {
+				        case 'key':
+				        {
+	    			        $last_key = $child_node->nodeValue;
+				        };break;
+				        case 'string':
+				        {
+				            $dict[$last_key] = $child_node->nodeValue;
+				        };break;
+				        case 'array':
+				        {
+				            $num_dicts = $child_node->childNodes->length;
+				            $dict[$last_key] = array();
+				            for ($ii=0; $ii<$num_dicts; $ii++)
+				            {
+				                $dict_node = $child_node->childNodes->item($ii);
+				                if (1 == $dict_node->nodeType)
+				                {
+				                    if ('dict' == $dict_node->tagName)
+				                    {
+	    			                    $dict[$last_key][] = self::parse_plist_dict($dict_node);
+				                    }
+				                    else if ('string' == $dict_node->tagName)
+				                    {
+				                        $dict[$last_key][] = $dict_node->nodeValue;
+				                    }
+				                }
+				            }
+				        };break;
+				        case 'dict':
+				        {
+		                    $dict[$last_key] = self::parse_plist_dict($child_node);			            
+				        };break;
+				    }
+				}
+	            return $dict;
+	        }
+
+	    }
+    
+	}

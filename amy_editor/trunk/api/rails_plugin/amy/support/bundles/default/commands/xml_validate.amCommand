@@ -1,0 +1,7 @@
+  name: 'Validate XML'
+  key_activation: '86+shift+ctrl'
+  tab_activation: ''
+  input_type: 'entire_document'
+  input_type_or: 'nothing'
+  output_type: 'show_as_html'
+  script_env: 'php'

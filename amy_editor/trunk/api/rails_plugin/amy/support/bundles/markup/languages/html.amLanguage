@@ -1,0 +1,11 @@
+signature:
+  name: 'HTML'
+  inherits: 
+    - 'markup:default'
+  tabSize: '2'
+
+definition:
+  foldingStartMarkers: '[/^\s*<(div)\b.*>/i, /^\s*<(ul)\b.*>/i]'
+  foldingParityMarkers: '[/^\s*<(div)\b.*>/i, /^\s*<(ul)\b.*>/i]'
+  foldingStopMarkers: '[/^\s*<\/(div)>/i, /^\s*<\/(ul)>/i]'
+

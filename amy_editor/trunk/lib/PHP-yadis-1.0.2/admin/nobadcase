@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+bad=$(./admin/findphp | grep -v XPath | xargs egrep -n "TRUE|FALSE|NULL")
+
+if [ ! -z "$bad" ]
+    then
+    cat <<EOF 1>&2
+These files contain wrongly capitalized constants:
+
+$bad
+
+EOF
+fi

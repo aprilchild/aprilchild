@@ -1,0 +1,5 @@
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8"${TM_XHTML}>
+	<title>${1:${AMY_FILENAME/((.+)\..*)?/(?2:$2:Page Title)/}}</title>
+	$0
+</head>

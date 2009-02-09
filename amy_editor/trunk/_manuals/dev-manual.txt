@@ -1,0 +1,53 @@
+Amy Editor - Developers Guide
+=============================
+
+Preface
+-------
+Amy Editor is the online source code and text editor. It's implemented using the text-editing control of the http://www.april-child.com/fry/[Fry Framework] in a pure JavaScript fashion running inside a browser. Amy was initially strongly inspired by popular http://macromates.com[TextMate] created by Allan Odgaard. Big number of features (working with text, bundles) are very closely based on TextMate, therefore if you're already familiar with these, chances are you will get to know Amy pretty quickly. This guide attempts to lead you through the process of enhancing core Amy functionality based mainly around the bundles framework.
+
+For enhancing the editor, a knowledge of programming is not necessarily required, although some experience in the field will always help.
+
+Embedded Amy
+------------
+This is actually the easiest API possible.
+
+
+Bundles
+-------
+
+
+Projects
+--------
+
+
+Internal structures
+-------------------
+
+Amy Editor MVC architecture
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Models
+^^^^^^
+
+Projects storage:
+
+stored in client.model.projects = [];
+
+Single project structure: {info:PROJECT_INFO, treeRootItem:ROOT_ITEM_OF_TREE_WIDGET_MODEL};
+
+PROJECT_INFO properties:
+........................
+	.url - full project url including scheme (eg. http://www.april-child.com/amy/projects/playground.php)
+	.ticket - valid authentication ticket
+	.protocolVersion - version of the Projects protocol (currently 1)
+	.openedResources[] - array of opened resources
+		array item structure: {resource:ITEM_OF_TREE_WIDGET_MODEL, editor:AC_CHAP_COMPONENT_OBJECT}
+	.name - name of the project
+	.authenticationScheme - readonly|anyone|external_login_page|external_login_handler|facebook|openid
+	.authenticationParams - additional authentication params returned by remote project (such additional field required for logging in etc.)
+
+ROOT_ITEM_OF_TREE_WIDGET_MODEL
+..............................
+	.path - full resource path, starts with /
+	.type - project|
+	.properties.project - LINK to PROJECT_INFO

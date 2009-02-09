@@ -1,0 +1,3 @@
+  name: "map(&:sym_proc)"
+  key_activation: ''
+  tab_activation: 'mp'

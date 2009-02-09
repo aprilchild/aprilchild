@@ -1,0 +1,7 @@
+name: 'Run'
+key_activation: '71+shift+ctrl'
+tab_activation: ''
+input_type: 'selected_text'
+input_type_or: 'document'
+output_type: 'show_as_html'
+script_env: 'ruby'

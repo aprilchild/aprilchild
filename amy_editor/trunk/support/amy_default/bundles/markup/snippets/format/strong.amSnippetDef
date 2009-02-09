@@ -1,0 +1,1 @@
+${0:${AMY_SELECTED_TEXT/\A<strong>(.*)<\/strong>\z|.*/(?1:$1:<strong>$0<\/strong>)/m}}

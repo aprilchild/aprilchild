@@ -1,0 +1,28 @@
+signature:
+  name: 'Python'
+  inherits: 
+    - 'default:default'
+  tabSize: '4'
+
+definition:
+	singleQuoteStringMarker: "'"
+	singleQuoteStringMarkerException: '\\'
+	doubleQuoteStringMarker: '"'
+	doubleQuoteStringMarkerException: '\\'
+	foldingStartMarkers: '[/^\s*def|class/i]'
+	foldingParityMarkers: '[/do|(^\s*if)|(^\s*def)|(^\s*class)/i]'
+	foldingStopMarkers: '[/^\s{0,1}$/i]'
+	singleRowCommentStartMarkers: "['#']"
+	multiRowCommentStartMarker: '"""'
+	multiRowCommentEndMarker: '"""'
+	
+	chunkRules:
+    - '[/(([^\w]|^)(elif|else|except|finally|for|if|try|while|with)([^\w]|$))/i, 3, ac.chap.CHUNK_KEYWORD]'
+    - '[/(([^\w]|^)(@[\w]*|break|continue|pass|raise|return|yield|and|in|is|not|or|as|assert|del|exec|print)([^\w]|$))/i, 3, ac.chap.CHUNK_KEYWORD_CUSTOM]'
+    - '[/((def[ ]{1,})([\w]{1,}))/i, 3, ac.chap.CHUNK_FUNCTION_NAME]'
+    - '[/(([^\w]|^)(__import__|all|abs|any|apply|callable|chr|cmp|coerce|compile|delattr|dir|divmod|eval|execfile|filter|getattr|globals|hasattr|hash|hex|id|input|intern|isinstance|issubclass|iter|len|locals|map|max|min|oct|ord|pow|range|raw_input|reduce|reload|repr|round|setattr|sorted|sum|unichr|vars|zip|basestring|bool|buffer|classmethod|complex|dict|enumerate|file|float|frozenset|int|list|long|object|open|property|reversed|set|slice|staticmethod|str|super|tuple|type|unicode|xrange)([^\w]|$))/i, 3, ac.chap.CHUNK_LIBRARY]'
+    - '[/(([^\w]|^)((__(all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__)|(import|from|                        abs|add|and|call|cmp|coerce|complex|contains|del|delattr|delete|delitem|delslice|div|divmod|enter|eq|exit|float|floordiv|ge|get|getattr|getattribute|getitem|getslice|gt|hash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|int|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|long|lshift|lt|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|radd|rand|rdiv|rdivmod|repr|rfloordiv|rlshift|rmod|rmul|ror|rpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|setslice|str|sub|truediv|unicode|xor))([^\w]|$))/i, 3, ac.chap.CHUNK_LIBRARY_CUSTOM]'
+
+	wordDelimiter: '/[\w\d]/'
+	indentIgnoreMarker: '/[\t \s]/'
+	stringInterpolation: "['(#\{[^\}]*\})', 1]"

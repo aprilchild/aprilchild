@@ -1,0 +1,5 @@
+module ${1:ModuleName}
+	module_function
+	
+	$0
+end

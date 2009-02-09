@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://ns.adobe.com/air/application/1.0.M4" 
+  appId="com.april-child.dev.AmyEditor" version="1.0">
+   <name>Amy Editor</name>
+   <description>Collaborative editor for web developers.</description>
+   <copyright>Copyright (c)2007 Petr Krontorád, All rights reserved.</copyright>
+  <rootContent systemChrome="standard" transparent="false" width="1000" height="700">AmyEditor.html</rootContent>
+	<icon>
+		<image16x16>mm/i/icon-16.png</image16x16>
+    <image32x32>mm/i/icon-32.png</image32x32>
+    <image48x48>mm/i/icon-48.png</image48x48>
+    <image128x128>mm/i/icon-128.png</image128x128>		
+	</icon>
+</application>

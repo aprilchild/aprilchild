@@ -1,0 +1,7 @@
+  name: 'Tooltippie'
+  key_activation: '83+shift+ctrl'
+  tab_activation: ''
+  input_type: 'selected_text'
+  input_type_or: 'word'
+  output_type: 'show_as_tooltip'
+  script_env: 'php'

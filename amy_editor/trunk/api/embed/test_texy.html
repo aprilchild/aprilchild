@@ -1,0 +1,100 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Testing eAmy (embedded Amy Editor) with Texy support</title>
+		<style type="text/css">
+			body
+			{
+				background:#f8f8f8;
+				font-family:'Lucida Grande', 'Tahoma', Arial, sans-serif;
+				font-size:85%;
+			}
+			td
+			{
+				font-size:85%;
+				padding:4px;
+			}
+		</style>
+	</head>
+	<body id="test_eamy">
+		
+	
+		<h1 id="">This is the test page for embedded Amy and Texy</h1>
+		
+		<p>
+			Simply create a textarea matching your design in size and location and mark it by special amy attribute. Then load Amy using &lt;script ... tag with desired bundle and theme.
+		</p>
+		
+		
+		<form method="post" action="test_eamy_submit_handler.php">
+			<table>
+				<tbody>
+					<tr>
+						<td>Summary</td>
+						<td><input type="text" name="summary" value="..." /></td>
+					</tr>
+					<tr>
+						<td valign="top">Source code</td>
+						<td>
+							<!-- here goes the trick .. -->
+							<textarea name="code" rows="48" cols="110" -amy-enabled="true">
+Texy! je sexy!
+===========
+
+[* download.cs.gif >]:download
+
+Texy je program, díky kterému můžete snadno, bez odborných znalostí, psát texty na webové stránky. Používají ho tisíce spokojených uživatelů.
+
+--> "Více o Texy":[co je texy]
+
+
+Co všechno umí?
+---------------
+
+- vytvářet odkazy, odrážky, tabulky,...
+- vkládat do textu obrázky
+- zná českou typografii
+- a navíc je **zdarma!** (Texy je [svobodný software] pod "licencí GPL":licence)
+
+a pro odborníky:
+
+- generuje vždy validní HTML nebo XHTML kód
+- plně podporuje CSS((Kaskádové styly)) a UTF-8
+
+--------
+
+Novinky
+=======
+
+Převodník Texy! syntaxe do LaTeXu
+------------
+
+31. 7. 2007 .[date]
+
+Jednoduchý "nástroj pro převod":http://jaybee.frih.net/software/prevodnik-texy!---latex čisté Texy! syntaxe do LaTeXu vytvořil Jay Bee: *"Tento převodník jsem vytvořil a používal jen proto, že jsem líný a přeci jen je mě bližší Texy syntaxe než LaTeX syntaxe. Pro psaní jednoduše formátovaných dokumentů je ideální. Napsal jsem svou bakalářku v Texy a pak jsem ji díky tomuhle převodníku nechal vygenerovat do PDF"*
+
+a tak dal..
+
+
+
+
+</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>
+							<input type="submit" value="Save file" /> 
+							<a href="test_eamy.html">Cancel</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		
+		<!-- now call the eAmy loader -->
+<!--		<script type="text/javascript" src="http://www.april-child.com/amy/api/embed/amy.php?theme=VibrantInk&amp;bundle=texy"></script> -->
+		<script type="text/javascript" src="amy.php?theme=VibrantInk&amp;bundle=texy"></script>
+		
+	</body>
+</html>

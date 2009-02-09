@@ -1,0 +1,6 @@
+#ifndef _${1:${TM_FILENAME/([. ])|./(?1:_:\u$0)/g}}_
+#define _$1_
+
+$0
+
+#endif /* _$1_ */

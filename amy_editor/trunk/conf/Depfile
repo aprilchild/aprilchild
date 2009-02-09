@@ -1,0 +1,12 @@
+<?php
+    $conf['base'] = array
+    (
+        'amy' => array
+        (
+            'tm_bundles_dir' => dirname(__FILE__).'/../_tm_bundles/Bundles/',
+            'amy_support_dir' => dirname(__FILE__).'/../support/'
+        )
+    );
+    
+    
+?>

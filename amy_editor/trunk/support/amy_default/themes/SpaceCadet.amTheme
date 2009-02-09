@@ -1,0 +1,23 @@
+signature:
+  name: 'Space Cadet'
+  author: 'Adapted SpaceCadet theme of TextMate. Originally created by Alex Ross.'
+
+definition:
+  cssId: 'space-cadet'
+  background: '#0d0d0d'
+  textColor: '#dde6cf'
+  caretColor: '#7f0b5e'
+  caretRowStyleActive: '#222222'
+  selectionStyle: '#40062f'
+  TOKEN_MULTIROW_COMMENT: 'color:#473c3c'
+  TOKEN_SINGLEROW_COMMENT: 'color:#473c3c'
+  TOKEN_SINGLE_QUOTED: 'color:#805a6e'
+  TOKEN_DOUBLE_QUOTED: 'color:#805a6e'
+  CHUNK_KEYWORD: 'color:#6d7c58'
+  CHUNK_NUMBER: 'color:#be9a5d'
+  CHUNK_OPERATOR: 'color:#5a6380;'
+  CHUNK_PARENTHESIS: 'color:#81a85a'
+  CHUNK_KEYWORD_CUSTOM: 'color:#864c63'
+  CHUNK_FUNCTION_NAME: 'color:#81a85a;font-weight:bold'
+  CHUNK_LIBRARY: 'color:#89325b'
+  CHUNK_LIBRARY_CUSTOM: 'color:#c3cfbe'

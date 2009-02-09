@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<package version="1.0">
+ <name>Services_Yadis</name>
+ <summary>PHP Yadis</summary>
+ <description>
+ An implementation of the Yadis service discovery protocol
+ </description>
+ <license>LGPL</license>
+ <maintainers>
+  <maintainer>
+   <user>cygnus</user>
+   <name>Jonathan Daugherty</name>
+   <email>cygnus@janrain.com</email>
+   <role>lead</role>
+  </maintainer>
+  </maintainers>
+ <release>
+  <version>1.0.2</version>
+  <date>2006-08-07</date>
+  <state>stable</state>
+  <notes>
+  Fri Aug  4 13:56:20 PDT 2006  cygnus@janrain.com
+  * Improved handling when XML support is absent
+
+    M ./Services/Yadis/XML.php -4 +1
+    M ./Services/Yadis/XRDS.php -1 +1
+    M ./Services/Yadis/Yadis.php -1 +1
+
+Fri Aug  4 13:40:12 PDT 2006  cygnus@janrain.com
+  * Added stale flag to manager
+
+    M ./Services/Yadis/Manager.php -2 +5
+
+Fri Aug  4 13:24:51 PDT 2006  cygnus@janrain.com
+  * Removed unnecessary reference
+
+    M ./Services/Yadis/XML.php -1 +1
+
+Fri Aug  4 13:24:30 PDT 2006  cygnus@janrain.com
+  * Silenced XRDS XML parsing warnings
+
+    M ./Services/Yadis/Yadis.php -1 +1
+
+Fri Jun 23 09:58:44 PDT 2006  cygnus@janrain.com
+  tagged 1.0.1
+  </notes>
+  <filelist><dir name="/" baseinstalldir="Auth">
+  <dir name="Services">
+    <dir name="Yadis">
+      <file name="ParanoidHTTPFetcher.php" role="php" />
+      <file name="Yadis.php" role="php" />
+      <file name="ParseHTML.php" role="php" />
+      <file name="HTTPFetcher.php" role="php" />
+      <file name="PlainHTTPFetcher.php" role="php" />
+      <file name="XRDS.php" role="php" />
+      <file name="XML.php" role="php" />
+      <file name="Manager.php" role="php" />
+    </dir>
+  </dir>
+  <dir name="doc" role="doc">
+    <file name="MPL-1.1.txt" role="doc" />
+    <dir name="media" role="doc">
+      <file name="banner.css" role="doc" />
+      <file name="stylesheet.css" role="doc" />
+    </dir>
+    <dir name="Yadis" role="doc">
+      <file name="tutorial_Yadis.pkg.html" role="doc" />
+      <file name="Services_Yadis_Discovery.html" role="doc" />
+      <file name="Services_Yadis_Manager.html" role="doc" />
+      <file name="Services_Yadis_PHPSession.html" role="doc" />
+      <file name="_Yadis_Manager_php.html" role="doc" />
+      <file name="Services_Yadis_dom.html" role="doc" />
+      <file name="Services_Yadis_domxml.html" role="doc" />
+      <file name="Services_Yadis_XMLParser.html" role="doc" />
+      <file name="_Yadis_XML_php.html" role="doc" />
+      <file name="Services_Yadis_Service.html" role="doc" />
+      <file name="Services_Yadis_XRDS.html" role="doc" />
+      <file name="_Yadis_XRDS_php.html" role="doc" />
+      <file name="Services_Yadis_Yadis.html" role="doc" />
+      <file name="_Yadis_Yadis_php.html" role="doc" />
+    </dir>
+    <file name="elementindex_Yadis.html" role="doc" />
+    <file name="elementindex.html" role="doc" />
+    <file name="index.html" role="doc" />
+    <file name="packages.html" role="doc" />
+    <file name="li_Yadis.html" role="doc" />
+    <file name="classtrees_Yadis.html" role="doc" />
+    <file name="errors.html" role="doc" />
+  </dir>
+  </dir></filelist>
+ </release>
+ <deps>
+  <dep type="php" rel="ge" version="4.3.0" />
+ </deps>
+</package>
+

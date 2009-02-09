@@ -1,0 +1,6 @@
+if (${1:condition}) {
+	${2:# code...}
+} else {
+	${3:# code...}
+}
+$0

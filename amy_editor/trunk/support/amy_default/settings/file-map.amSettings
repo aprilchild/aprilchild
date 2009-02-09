@@ -1,0 +1,18 @@
+signature:
+  name: 'File extensions to default bundles mapping'
+  author: 'Petr Krontorád, April-Child.com'
+
+file:
+  mappings: 
+    - '.txt,.tx,.log,.gac,.sql,.wfs,.conf,.|default|Amy_default|default'
+    - '.js,.as,.css|javascript|javascript_default|LAZY'
+    - '.rb,.yaml,.yml,.rxml,.rjs|rails|rails_default|Cobalt'
+    - '.xml,.xsl,.xsd,.xslt,.schema|markup|markup_default|LAZY'
+    - '.htm,.html,.xhtml|markup|markup_html|LAZY'
+    - '.rhtml|markup|markup_html|Concept'
+    - '.php,.php3,.php4,.php5,.phps|php|php_default|VibrantInk'
+    - '.texy|texy|texy_default|Cobalt'
+    - '.java|java|java_default|LAZY'
+    - '.c,.cpp,.h,.cc|c|c_default|VibrantInk'
+    - '.py,.rpy,.pyw,.cpy|python|python_default|Cobalt'
+    - '.cs|c|c_csharp|LAZY'

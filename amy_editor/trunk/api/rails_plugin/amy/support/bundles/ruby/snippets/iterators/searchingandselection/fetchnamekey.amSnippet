@@ -1,0 +1,3 @@
+  name: "fetch(name) { |key| .. }"
+  key_activation: ''
+  tab_activation: 'fet'

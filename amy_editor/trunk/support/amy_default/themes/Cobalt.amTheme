@@ -1,0 +1,23 @@
+signature:
+  name: 'Cobalt'
+  author: 'Created by Jacob Rus.  Based on ‘Slate’ by Wilson Miner'
+
+definition:
+  cssId: 'black'
+  background: '#072240'
+  textColor: '#DFEFFF'
+  caretColor: 'lime'
+  caretRowStyleActive: '#041629'
+  selectionStyle: '#86553b'
+  TOKEN_MULTIROW_COMMENT: 'color:#0084FF;font-style:italic'
+  TOKEN_SINGLEROW_COMMENT: 'color:#0084FF;font-style:italic'
+  TOKEN_SINGLE_QUOTED: 'color:#00DF00'
+  TOKEN_DOUBLE_QUOTED: 'color:#00DF00'
+  CHUNK_KEYWORD: 'color:#FF9D00'
+  CHUNK_NUMBER: 'color:#FF5B8C'
+  CHUNK_OPERATOR: 'color:#FF9D00;'
+  CHUNK_PARENTHESIS: 'color:#FFF177'
+  CHUNK_KEYWORD_CUSTOM: 'color:#54FFB8'
+  CHUNK_FUNCTION_NAME: 'color:#FFE000'
+  CHUNK_LIBRARY: 'color:#71E5B6'
+  CHUNK_LIBRARY_CUSTOM: 'color:#FF78E5'

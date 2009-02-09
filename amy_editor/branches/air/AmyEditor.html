@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		
+		<meta name="Author" content="All: Petr Krontorad, April-Child.com" />
+		<meta name="Copyright" content="Petr Krontorad, April-Child.com (http://www.april-child.com)" />
+	
+		<title>Amy - collaborative web text editor for developers</title>
+
+		<link href="client/fry/mm/style/ac.ui.css" rel="stylesheet" type="text/css" />
+		<link href="client/fry/mm/style/theme/apple/theme-apple.css" rel="stylesheet" type="text/css" />
+		<link href="mm/style/amy.css" rel="stylesheet" type="text/css" />
+		
+        <script type="text/javascript">
+
+			function apollo_init()
+			{
+				
+			}
+
+			// reserving `amy` namespace
+			var amy = {};
+			// client application configuration for Fry Library
+        	var client =
+        	{
+        		conf:
+        		{
+					locale:'en',
+        			progid:'amy-1.0b-apollo',
+        			fry:
+        			{
+        				backendURL:'http://amy.imac/amy-backend.php',
+						theme:'apple'
+					}
+        		},
+        		
+        		onload:function()
+        		{
+				}
+        		
+        	};
+
+        </script>
+        <script type="text/javascript" src="client/fry/ac.fry.apollo.js"></script>
+
+        <script type="text/javascript" loader="true" src="client/fry/ac.fry.js"></script>
+
+        <script type="text/javascript" src="client/fry/ac.fry.data.js"></script>
+        <script type="text/javascript" src="client/fry/ac.fry.xml.js"></script>
+        <script type="text/javascript" src="client/fry/ac.fry.ui.js"></script>
+        <script type="text/javascript" src="client/fry/ac.fry.ui.support.js"></script>
+        <script type="text/javascript" src="client/fry/ac.fry.ui.widget.js"></script>
+        <script type="text/javascript" src="client/fry/ac.fry.mvc.js"></script>
+        <script type="text/javascript" src="client/fry/ac.fry.data.calendar.js"></script>
+        <script type="text/javascript" src="client/fry/ac.fry.ui.form.js"></script>
+
+        <script type="text/javascript" src="client/fry/widget/ac.tabpane.js"></script>
+        <script type="text/javascript" src="client/fry/widget/ac.menu.js"></script>
+        <script type="text/javascript" src="client/fry/widget/ac.searchbox.js"></script>
+        <script type="text/javascript" src="client/fry/widget/ac.tree.js"></script>
+        <script type="text/javascript" src="client/fry/widget/ac.window.js"></script>
+
+        <script type="text/javascript" src="client/fry/chap/ac.chap.js"></script>
+        <script type="text/javascript" src="client/fry/chap/ac.chap.view.js"></script>
+        <script type="text/javascript" src="client/fry/chap/ac.chap.settings.js"></script>
+
+        <script type="text/javascript" src="client/locale.js"></script>
+        <script type="text/javascript" src="client/helper.js"></script>
+        <script type="text/javascript" src="client/model.js"></script>
+        <script type="text/javascript" src="client/view.js"></script>
+        <script type="text/javascript" src="client/controller.js"></script>
+
+
+
+		<style type="text/css">
+			.acw-chap pre, .acw-chap pre span,  span.acw-char-check, .acw-chap .selection-area div
+			{
+				font:11px 'Courier', monospaced;
+			}
+		</style>
+
+	</head>
+	<body onload="apollo_init()">
+	
+		<div id="splash">
+			<div class="c">
+				<div>
+					<h1>Amy - collaborative web text editor for developers</h1>
+				</div>
+				<em>Loading, please wait...</em>
+			</div>
+		</div>
+	</body>
+</html>

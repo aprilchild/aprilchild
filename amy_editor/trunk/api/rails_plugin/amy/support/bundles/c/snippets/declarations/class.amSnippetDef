@@ -1,0 +1,9 @@
+class ${1:name}
+{
+public:
+	${1/(\w+).*/$1/} (${2:arguments});
+	virtual ~${1/(\w+).*/$1/} ();
+
+private:
+	${0:/* data */}
+};

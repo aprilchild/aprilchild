@@ -1,0 +1,1 @@
+has_many :${1:objects}${2:, :class_name => "${3:ClassName}", :foreign_key => "${4:${1}_id}"}

@@ -1,0 +1,3 @@
+  name: "defined(…)"
+  key_activation: ''
+  tab_activation: 'def?'

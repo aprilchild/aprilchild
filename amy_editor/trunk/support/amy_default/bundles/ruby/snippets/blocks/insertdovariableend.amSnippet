@@ -1,0 +1,3 @@
+  name: "Insert do |variable| … end"
+  key_activation: ''
+  tab_activation: 'do'

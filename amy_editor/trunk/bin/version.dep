@@ -1,0 +1,23 @@
+<?php
+class Task_version extends DEPTask
+{
+    private $major_version = 1;
+    private $minor_version = 0;
+ 
+    public static function get_author()
+    {
+        return 'Petr Krontorád, April-Child.com';
+    }
+    
+    public static function get_comment($short)
+    {
+        return 'Prints out current Dep version.';
+    }
+    
+    public function run()
+    {
+        $this->write("You are running DEP version ".$this->major_version.'.'.$this->minor_version);
+        cli_end();
+    }
+}
+?>

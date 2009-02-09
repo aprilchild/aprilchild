@@ -1,0 +1,22 @@
+signature:
+  name: 'Slush & Poppies'
+  author: 'Based on original Slush & Poppies theme of TextMate'
+
+definition:
+  cssId: 'slush-poppies'
+  background: '#f1f1f1'
+  caretColor: '#000'
+  caretRowStyleActive: '#E6E6ED'
+  selectionStyle: '#b2b0ff'
+  TOKEN_MULTIROW_COMMENT: 'color:#888'
+  TOKEN_SINGLEROW_COMMENT: 'color:#888'
+  TOKEN_SINGLE_QUOTED: 'color:#a00'
+  TOKEN_DOUBLE_QUOTED: 'color:#a00'
+  CHUNK_KEYWORD: 'color:#00a'
+  CHUNK_NUMBER: 'color:teal'
+  CHUNK_OPERATOR: 'color:#3D5DAA;'
+  CHUNK_PARENTHESIS: 'font-weight:bold'
+  CHUNK_KEYWORD_CUSTOM: 'color:#880'
+  CHUNK_FUNCTION_NAME: 'color:#622'
+  CHUNK_LIBRARY: 'color:#08f'
+  CHUNK_LIBRARY_CUSTOM: 'color:#CC581D'

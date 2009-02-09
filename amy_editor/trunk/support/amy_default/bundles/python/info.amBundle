@@ -1,0 +1,8 @@
+signature:
+  name: 'Python'
+  author: 'Alexander John Ross <alex.j.ross@gmail.com>'
+  url: ''
+  version: '1.0'
+  dependencies: 
+    - 'default'
+  note: 'Support for the <a href="http://www.python.org/">Python</a> programming language.'

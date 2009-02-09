@@ -1,0 +1,3 @@
+  name: "times { |n| .. }"
+  key_activation: ''
+  tab_activation: 'tim'

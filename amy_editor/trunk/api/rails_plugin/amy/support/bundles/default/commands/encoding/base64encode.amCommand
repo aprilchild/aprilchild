@@ -1,0 +1,7 @@
+  name: 'base64 encode'
+  key_activation: '69+shift+ctrl'
+  tab_activation: ''
+  input_type: 'entire_document'
+  input_type_or: 'nothing'
+  output_type: 'create_new_document'
+  script_env: 'php'

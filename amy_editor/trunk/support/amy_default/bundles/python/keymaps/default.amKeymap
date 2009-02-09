@@ -1,0 +1,19 @@
+signature:
+  name: 'Default keymap'
+  author: 'Petr Krontorád, April-Child.com'
+  inherits: 
+    - 'default'
+
+definition: |
+  # enter
+  KEY: -13
+  	custom(action:'SmartIndent', split_line:true, indent_tab_when_starts:'class module def if else unless rescue ensure while do __class__')
+
+  # meta + enter
+  KEY: -13+meta
+  	custom(action:'SmartIndent', split_line:false, indent_tab_when_starts:'class module def if else unless rescue ensure while do __class__')
+
+  # '
+  KEY: 39
+  custom(action:'AutoComplete', use_selection:true, text:'\\'')
+

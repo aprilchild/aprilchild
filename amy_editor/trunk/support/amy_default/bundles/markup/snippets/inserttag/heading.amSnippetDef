@@ -1,0 +1,1 @@
+<h1 id="${1/[[:alpha:]]+|( )/(?1:_:\L$0)/g}">${1:$AMY_SELECTED_TEXT}</h1>

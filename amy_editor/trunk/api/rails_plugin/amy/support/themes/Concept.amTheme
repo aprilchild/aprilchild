@@ -1,0 +1,23 @@
+signature:
+  name: 'Concept™'
+  author: 'Dalsvaag.net'
+
+definition:
+  cssId: ''
+  background: '#041f25'
+  textColor: '#f2fff5'
+  caretColor: '#93fe00'
+  caretRowStyleActive: '#330a01'
+  selectionStyle: '#1a1a1a'
+  TOKEN_MULTIROW_COMMENT: 'background-color:#9b9b9b;color:#fff'
+  TOKEN_SINGLEROW_COMMENT: 'color:#cb334a'
+  TOKEN_SINGLE_QUOTED: 'color:#64cbb3'
+  TOKEN_DOUBLE_QUOTED: 'color:#64cbb3'
+  CHUNK_KEYWORD: 'color:#fd7e2b'
+  CHUNK_NUMBER: 'color:#14a7cc'
+  CHUNK_OPERATOR: 'color:#f14515;'
+  CHUNK_PARENTHESIS: 'color:#cacc32'
+  CHUNK_KEYWORD_CUSTOM: 'color:#4190a5;text-decoration:underline'
+  CHUNK_FUNCTION_NAME: 'color:#fff'
+  CHUNK_LIBRARY: 'color:#8afef4'
+  CHUNK_LIBRARY_CUSTOM: 'color:#c73b31'

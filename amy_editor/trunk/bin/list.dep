@@ -1,0 +1,96 @@
+<?php
+class Task_list extends DEPTask
+{
+    public static function get_author()
+    {
+        return 'Petr Krontorád, April-Child.com';
+    }
+    
+    public static function get_comment($short)
+    {
+        return 'Lists all tasks available at the moment. Optionally returns only tasks associated with given namespace received as the first parameter eg. `dep list mine\'.';
+    }
+    
+    public function run()
+    {
+        $namespace = strtolower(trim($this->pars[0]));
+        $base_path = dirname(__FILE__).'/';
+        if ( '' != $namespace )
+        {
+            try
+            {
+                $paths = self::safely_parse_taskname_to_path($namespace);
+                $base_path = $paths['base_path'].$paths['rel_path'];
+            }
+            catch(Exception $e)
+            {
+                $this->fail($e);
+            }
+        }
+        if (!is_dir($base_path))
+        {
+            $this->fail("There are no tasks associated with given namespace `$namespace'");
+        }
+        else
+        {
+            $list = $this->scan($namespace, $base_path);
+            usort($list, array('Task_list', 'sorter'));
+            $last_namespace = '';
+            foreach ($list as $entry)
+            {
+                if ($last_namespace != $entry['namespace'])
+                {
+                    cli_out("\n namespace - ".$entry['namespace']);
+                    cli_out(str_repeat('=', 14+strlen($entry['namespace'])));
+                    $last_namespace = $entry['namespace'];
+                }
+                cli_out('- '.$entry['name'].str_repeat(" ", 25-strlen($entry['name']))."# ".$entry['comment']);
+            }
+        }
+    }
+    
+    public static function sorter($a, $b)
+    {
+        if ( $a['namespace'] == $b['namespace'] )
+        {
+            return $a['name'] > $b['name'] ? 1 : -1;
+        }
+        return $a['namespace'] > $b['namespace'] ? 1 : -1;
+    }
+    
+    private function scan($namespace, $base_path)
+    {
+        $list = array();
+        if (false === $d = opendir($base_path))
+        {
+            $this->fail("Filesystem reading error or unsufficient permissions for listing `$base_path'.");
+        }
+        while (false != $f = readdir($d))
+        {
+            if (0 == strncmp($f, '.', 1))
+            {
+                continue;
+            }
+            if (is_dir($base_path.'/'.$f))
+            {
+                $new_namespace = '' == $namespace ? $f : $namespace.':'.$f;
+                $list = array_merge($list, $this->scan($new_namespace, $base_path.'/'.$f));
+            }
+            if ('.dep' == substr($f, -4))
+            {
+                $task_name = substr($f,0,-4);
+                $class_name = 'Task_' . ('' != $namespace ? (str_replace(':', '_', $namespace) . '_') : '') . $task_name;
+                include_once $base_path.'/'.$f;
+                $entry = array('valid'=>false, 'author'=>'', 'comment'=>'', 'namespace'=>$namespace, 'name'=>$task_name);
+                if (class_exists($class_name))
+                {
+                    eval("\$entry['author'] = $class_name::get_author(); \$entry['comment'] = $class_name::get_comment(true);");
+                    $entry['valid'] = true;
+                    $list[] = $entry;
+                }
+            }
+        }
+        return $list;
+    }
+}
+?>

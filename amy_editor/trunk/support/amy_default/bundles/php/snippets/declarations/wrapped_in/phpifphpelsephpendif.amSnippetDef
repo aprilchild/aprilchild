@@ -1,0 +1,5 @@
+<?php if (${1:condition}): ?>
+	$2
+<?php else: ?>
+	$0
+<?php endif ?>

@@ -1,0 +1,86 @@
+<html>
+
+<head>
+
+<!-- The style sheet should be kept in a separate file; it contains the design for the widget -->
+  <style type="text/css">
+	  @import "RDoc.css";
+	</style>
+
+	<script type="text/javascript" src="flip.js" charset='utf-8' />
+  <script type='text/javascript' src='RDoc.js' charset='utf-8'/>
+  <script type="text/javascript" src="genericButton.js" charset='utf-8' />
+
+</head>
+
+<body onload="setup();">
+  <div id="front" onmousemove='mousemove(event);' onmouseout='mouseexit(event);'>
+    <div id='dividerResize' onmousedown='dividerResizeMouseDown(event)' style="left: 186px;"></div>
+    <div id="leftPane" style="width: 188px;">
+      <!-- Background stuff -->
+      <div id="navTopLeft"></div>
+      <div id="navTop"></div>
+      <div id="navTopRight"></div>
+      <div id="navLeft"></div>
+      <div id="navRight"></div>
+      <div id="navMiddle"></div>
+      <div id="navBottomLeft"></div>
+      <div id="navBottom"></div>
+      <div id="navBottomRight"></div>
+      
+      <!-- Other bits -->
+      <div id="topBar">
+      	<span onclick="getNavPane('classes', baseURL + 'fr_class_index.html');" id="classesLabel" class="navLinkActive">Classes</span>&nbsp;&nbsp;
+      	<span onclick="getNavPane('files', baseURL + 'fr_file_index.html');" id="filesLabel" class="navLink">Files</span>&nbsp;&nbsp;
+      	<span onclick="getNavPane('methods', baseURL + 'fr_method_index.html');" id="methodsLabel" class="navLink">Methods</span>
+      </div>
+
+      <div id="parentDiv">
+        <div id="files" class="mainContent"></div>
+        <div id="classes" class="mainContent" style="display:none;"></div>
+        <div id="methods" class="mainContent" style="display:none;"></div>
+      </div>
+      <input type="search" id="filter" placeholder="Filter Results" onkeypress="filterKeyHandler(event);"></input>
+
+      <div class='flip' id='flip' onclick='showBack(event);' onmouseover='enterflip(event);' onmouseout='exitflip(event)';></div>
+      <div class='flip' id='fliprollie'></div>
+      <div id='loading'>Loading...</div>
+      
+    </div>
+    <div id="rightPane" style="left: 188px;">
+      <!-- Background stuff -->
+      <div id="docTopLeft"></div>
+      <div id="docTop"></div>
+      <div id="docTopRight"></div>
+      <div id="docLeft"></div>
+      <div id="docRight"></div>
+      <div id="docBottomLeft"></div>
+      <div id="docBottom"></div>
+      <div id="docBottomRight"></div>
+      <div id="docBackground"></div>
+
+      <!-- Other bits -->
+      <div id="docoDiv"></div>	
+
+      <img id='resize' src='/System/Library/WidgetResources/resize.png' onmousedown='resizeMouseDown(event);'/>
+      <div id='newVersionMessage' style='display: none;'><span>&nbsp;<a href="javascript: if(window.widget) widget.openURL('http://widgets.precisionis.com.au/');">A new version of this widget is available!</a>&nbsp;</span></div>
+      
+    </div>
+	</div>
+
+  <div id="back">
+    <div id="backText">RDoc URL:&nbsp;&nbsp;&nbsp;<input id="baseURL" type="text"></div>
+    <div id="doneButton" onclick="saveURL(); hideBack();"></div>
+    <div id="bookmarkButton" onclick="addBookmark();"></div>
+    <div id="cancelButton" onclick="hideBack();"></div>
+    <div id="bookmarkText">Bookmarks:&nbsp;<select id="bookmarks"></select></div>
+    <div id="removeBookmark" onclick="removeBookmark();"></div>
+    <div id="activateBookmark" onclick="activateBookmark();"></div>
+    <div id="versionCheckDiv"><input type="checkbox" id="versionCheck" onclick="versionCheckboxHandler();"/>&nbsp;Auto-check for new versions of this widget?</div>
+
+    <div id="precisionis" onclick="if(window.widget) widget.openURL('http://widgets.precisionis.com.au/');">
+  </div>
+  
+</body>
+
+</html>

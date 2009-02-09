@@ -1,0 +1,9 @@
+Amy Editor - Rails plugin
+=========================
+
+You should have Fry Framework Rails plugin installed.
+You are also strongly encouraged to install the `output_compression' plugin available at svn://code.jeremyevans.net/rails/plugins/output_compression.
+
+Amy Editor, Fry and the Rails plugin was created by Petr Krontorád (http://www.april-child.com/).
+
+

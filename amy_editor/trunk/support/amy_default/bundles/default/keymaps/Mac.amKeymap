@@ -1,0 +1,113 @@
+signature:
+  name: 'Macintosh keymap'
+  author: 'Petr Krontorád, April-Child.com'
+
+definition: |
+  # home
+  KEY: -36
+  	caret(move:'doc_start')
+  KEY: -36+shift
+  	caret(move:'doc_start')
+  	selection(add:true)
+
+  # end
+  KEY: -35
+  	caret(move:'doc_end')
+  KEY: -35+shift
+  	caret(move:'doc_end')
+  	selection(add:true)
+
+  # meta + page_down
+  KEY: -34+meta
+  	caret(move:'page_down')
+  KEY: -34+meta+shift
+  	caret(move:'page_down')
+  	selection(add:true)
+
+  # meta + page_up
+  KEY: -33+meta
+  	caret(move:'page_up')
+  KEY: -33+meta+shift
+  	caret(move:'page_down')
+  	selection(add:true)
+
+
+  # meta + c
+  KEY: 99+meta
+  	clipboard(copy:true)
+
+  # meta + x
+  KEY: 120+meta
+  	clipboard(cut:true)
+
+  # meta + z
+  KEY: 122+meta
+  	undo()
+
+  # meta + shift + z
+  KEY: 90+meta+shift
+  	redo()
+
+  # meta + a
+  KEY: 97+meta
+  	selection(all:true)
+
+  # ctrl + a
+  KEY: 97+ctrl
+  	selection(all:true)
+
+  # F2
+  KEY: -113
+    custom(action:'GoToBookmark', direction:1)
+
+  # F2 shift
+  KEY: -113+shift
+    custom(action:'GoToBookmark', direction:-1)
+
+  # F2 + meta
+  KEY: -113+meta
+    custom(action:'ToggleBookmark')
+
+  # [ + meta
+  KEY: 91+meta
+    custom(action:'Indent', direction:'left')
+
+  # ] + meta
+  KEY: 93+meta
+    custom(action:'Indent', direction:'right')
+
+  # / + meta
+  KEY: 47+meta
+    custom(action:'Comment')
+
+  # + + meta
+  KEY: 43+meta
+    custom(action:'RuntimeOption', key:'font.size', value:'bigger')
+
+  # - + meta
+  KEY: 45+meta
+    custom(action:'RuntimeOption', key:'font.size', value:'smaller')
+
+  # e + meta
+  KEY: 101+meta
+    custom(action:'SetSearchKeyword')
+
+  # g + meta
+  KEY: 103+meta
+    custom(action:'SearchKeyword', direction:'down')
+
+  # g + shift + meta
+  KEY: 71+shift+meta
+    custom(action:'SearchKeyword', direction:'up')
+
+  # f + ctrl
+  KEY: 102+ctrl
+  custom(action:'SearchInteractive')
+
+  # s + ctrl + shift
+  KEY: 83+ctrl+shift
+  custom(action:'SearchInteractive')
+
+  # f + meta
+  KEY: 102+meta
+  custom(action:'SearchInteractive')

@@ -1,0 +1,3 @@
+<body id="${1:${AMY_FILENAME/(.*)\..*/\L$1/}}"${2: onload="$3"}>
+	$0
+</body>

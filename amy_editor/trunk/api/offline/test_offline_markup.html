@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Testing eAmy.Offline (embedded Amy Editor)</title>
+		<style type="text/css">
+			body
+			{
+				background:#f8f8f8;
+				font-family:'Lucida Grande', 'Tahoma', Arial, sans-serif;
+				font-size:85%;
+			}
+			td
+			{
+				font-size:85%;
+				padding:4px;
+			}
+		</style>
+		<!-- loading eAmy.Offline core -->
+		<script type="text/javascript" src="eamy/eamy.js"></script>
+		<!-- loading appropriate bundle -->
+		<script type="text/javascript" src="eamy/bundle_markup.js"></script>
+		
+	</head>
+	<body id="test_eamy_offline">
+		
+	
+		<h1 id="">This is the test page for embedded Amy.Offline</h1>
+		
+		<p>
+			Simply create a textarea matching your design in size and location and mark it by special amy attribute. All bundle snippets will be working, as well as key shortcuts (such as Esc for word-completion, (Shift+CTRL+)F2 for bookmarking and so on)
+		</p>
+		
+		<a href="http://www.april-child.com/amy/">Amy Website</a> | <a href="http://www.april-child.com/amy/website/manual">Amy Editor Manual</a>
+		
+		<form method="post" action="your_test_eamy_submit_handler|php|py|rb|whatever">
+			<table>
+				<tbody>
+					<tr>
+						<td>File name</td>
+						<td><input type="text" name="filename" value=".py" /></td>
+					</tr>
+					<tr>
+						<td valign="top">Source code</td>
+						<td>
+							<!-- change the size to whatever you want, you can use rows|cols="" attributes or style it .. -->
+							<textarea name="code" rows="28" cols="90" -amy-enabled="true">
+
+<div id="name">
+	<link rel="stylesheet" href="/css/master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</div>
+
+</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>
+							<input type="submit" value="Save file" /> or 
+							<a href="test_offline.html">Cancel</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+	</body>
+</html>

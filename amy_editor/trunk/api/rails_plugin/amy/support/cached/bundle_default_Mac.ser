@@ -1,0 +1,234 @@
+a:2:{s:4:"time";i:1199380361;s:6:"bundle";a:7:{s:4:"info";a:1:{s:9:"signature";a:6:{s:4:"name";s:10:"Amy Editor";s:6:"author";s:32:"Petr Krontorád, April-Child.com";s:3:"url";s:26:"http://www.april-child.com";s:7:"version";s:3:"1.0";s:12:"dependencies";a:0:{}s:4:"note";s:35:"This is the Amy Editor main bundle.";}}s:6:"keymap";s:2634:"
+	# default
+	KEY: 0
+		insert(character:true)
+
+	# arrow left
+	KEY: -37
+		caret(move:'left')
+	KEY: -37+shift
+		caret(move:'left')
+		selection(add:true)
+	KEY: -37+ctrl
+		caret(move:'prev_word')
+	KEY: -37+alt
+		caret(move:'prev_word')
+	KEY: -37+ctrl+shift
+		caret(move:'prev_word')
+		selection(add:true)
+	KEY: -37+alt+shift
+		caret(move:'prev_word')
+		selection(add:true)
+	KEY: -37+meta
+		caret(move:'row_start')
+	KEY: -37+meta+shift
+		caret(move:'row_start')
+		selection(add:true)
+
+	# arrow right
+	KEY: -39
+		caret(move:'right')
+	KEY: -39+shift
+		caret(move:'right')
+		selection(add:true)
+	KEY: -39+ctrl
+		caret(move:'next_word')
+	KEY: -39+alt
+		caret(move:'next_word')
+	KEY: -39+ctrl+shift
+		caret(move:'next_word')
+		selection(add:true)
+	KEY: -39+alt+shift
+		caret(move:'next_word')
+		selection(add:true)
+	KEY: -39+meta
+		caret(move:'row_end')
+	KEY: -39+meta+shift
+		caret(move:'row_end')
+		selection(add:true)
+
+	# arrow up
+	KEY: -38
+		caret(move:'up')
+	KEY: -38+shift
+		caret(move:'up')
+		selection(add:true)
+
+	# arrow down
+	KEY: -40
+		caret(move:'down')
+	KEY: -40+shift
+		caret(move:'down')
+		selection(add:true)
+		
+	# enter
+	KEY: -13
+		insert(row:true)
+
+	# delete
+	KEY: -8
+		delete(character:true)
+
+	# backspace
+	KEY: -46
+		delete(character:false)
+
+  # delete line ctrl+shift+k
+  KEY: 75+ctrl+shift
+    delete(row:true)
+
+	# escape
+	KEY: -27
+		custom(action:'WordComplete', direction:true)
+	KEY: -27+shift
+		custom(action:'WordComplete', direction:false)
+
+	# tab
+	KEY: -9
+		custom(action:'SnippetComplete')
+		
+	# auto-completes
+	# {
+	KEY: 123
+	custom(action:'AutoComplete', use_selection:true, text:'}')
+
+	# '
+	KEY: 39
+	custom(action:'AutoComplete', use_selection:true, text:'\\'')
+	
+	# "
+	KEY: 34
+	custom(action:'AutoComplete', use_selection:true, text:'\"')
+	
+	# [
+	KEY: 91
+	custom(action:'AutoComplete', use_selection:true, text:']')
+	
+	# (
+	KEY: 40
+	custom(action:'AutoComplete', use_selection:true, text:')')
+	
+
+
+	# home
+	KEY: -36
+		caret(move:'doc_start')
+	KEY: -36+shift
+		caret(move:'doc_start')
+		selection(add:true)
+
+	# end
+	KEY: -35
+		caret(move:'doc_end')
+	KEY: -35+shift
+		caret(move:'doc_end')
+		selection(add:true)
+
+	# meta + c
+	KEY: 99+meta
+		clipboard(copy:true)
+
+	# meta + x
+	KEY: 120+meta
+		clipboard(cut:true)
+
+	# meta + z
+	KEY: 122+meta
+		undo()
+
+	# meta + shift + z
+	KEY: 122+meta+shift
+		redo()
+
+	# meta + a
+	KEY: 97+meta
+		selection(all:true)
+
+	# ctrl + a
+	KEY: 97+ctrl
+		selection(all:true)
+		
+  # F2
+  KEY: -113
+    custom(action:'GoToBookmark', direction:1)
+
+  # F2 shift
+  KEY: -113+shift
+    custom(action:'GoToBookmark', direction:-1)
+
+  # F2 + meta
+  KEY: -113+meta
+    custom(action:'ToggleBookmark')
+";s:9:"languages";a:1:{i:0;a:3:{s:9:"signature";a:3:{s:4:"name";s:10:"Plain Text";s:6:"author";s:32:"Petr Krontorád, April-Child.com";s:7:"tabSize";s:1:"4";}s:10:"definition";a:7:{s:10:"chunkRules";a:3:{i:0;s:66:"[/(([^\w]|^)(\d{1,}[\d\.Ee]*)([^w]|$))/i, 3, ac.chap.CHUNK_NUMBER]";i:1;s:69:"[/(\+|\-|\*|\/|\=|\!|\^|\%|\||\&|\<|\>)/i, 0, ac.chap.CHUNK_OPERATOR]";i:2;s:54:"[/(\(|\)|\[|\]|\{|\})/i, 0, ac.chap.CHUNK_PARENTHESIS]";}s:23:"singleQuoteStringMarker";s:0:"";s:32:"singleQuoteStringMarkerException";s:0:"";s:23:"doubleQuoteStringMarker";s:0:"";s:32:"doubleQuoteStringMarkerException";s:0:"";s:13:"wordDelimiter";s:10:"/[\w\.\d]/";s:18:"indentIgnoreMarker";s:6:"/[\.]/";}s:2:"id";s:7:"default";}}s:8:"snippets";a:5:{i:0;a:6:{s:4:"name";s:9:"char code";s:14:"key_activation";s:13:"65+shift+ctrl";s:14:"tab_activation";s:0:"";s:4:"code";s:25:"kurva prace jedna mizerna";s:8:"filename";s:8:"charcode";s:4:"path";s:0:"";}i:1;a:6:{s:4:"name";s:4:"Date";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"date";s:4:"code";s:41:"`/local/javascript
+output = new Date();
+`";s:8:"filename";s:4:"date";s:4:"path";s:0:"";}i:2;a:6:{s:4:"name";s:14:"Document stats";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"stat";s:4:"code";s:121:"`/local/javascript
+output = 'Num rows: ?, num characters: ?'.embed(component.getNumRows(), component.getText().length);
+`";s:8:"filename";s:13:"documentstats";s:4:"path";s:0:"";}i:3;a:6:{s:4:"name";s:13:"Google Prompt";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"ga";s:4:"code";s:155:"`/remote/post
+action = 'run';
+params.bundle = 'default';
+params.script = 'google_search';
+params.query = prompt('Enter a phrase to be found on Google:');
+`";s:8:"filename";s:12:"googleprompt";s:4:"path";s:0:"";}i:4;a:6:{s:4:"name";s:13:"Google search";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"goog";s:4:"code";s:123:"`/remote/post
+action = 'run';
+params.bundle = 'default';
+params.script = 'google_search';
+params.query = '$$CHAP_WORD-2';
+`";s:8:"filename";s:12:"googlesearch";s:4:"path";s:0:"";}}s:8:"commands";a:8:{i:0;a:4:{s:4:"name";s:8:"Encoding";s:8:"filename";s:8:"encoding";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:1;a:10:{s:4:"name";s:13:"base64 decode";s:14:"key_activation";s:13:"68+shift+ctrl";s:14:"tab_activation";s:0:"";s:10:"input_type";s:15:"entire_document";s:13:"input_type_or";s:7:"nothing";s:11:"output_type";s:19:"create_new_document";s:10:"script_env";s:3:"php";s:4:"code";s:149:"<?php
+function run_command($controller, $text, $params)
+{
+    $controller->import('default', 'text');
+    $controller->ok(base64_decode($text));
+}
+?>";s:8:"filename";s:12:"base64decode";s:4:"path";s:9:"/encoding";}i:2;a:10:{s:4:"name";s:13:"base64 encode";s:14:"key_activation";s:13:"69+shift+ctrl";s:14:"tab_activation";s:0:"";s:10:"input_type";s:15:"entire_document";s:13:"input_type_or";s:7:"nothing";s:11:"output_type";s:19:"create_new_document";s:10:"script_env";s:3:"php";s:4:"code";s:149:"<?php
+function run_command($controller, $text, $params)
+{
+    $controller->import('default', 'text');
+    $controller->ok(base64_encode($text));
+}
+?>";s:8:"filename";s:12:"base64encode";s:4:"path";s:9:"/encoding";}i:3;a:10:{s:4:"name";s:16:"Google Search TT";s:14:"key_activation";s:13:"71+shift+ctrl";s:14:"tab_activation";s:0:"";s:10:"input_type";s:13:"selected_text";s:13:"input_type_or";s:4:"word";s:11:"output_type";s:15:"show_as_tooltip";s:10:"script_env";s:3:"php";s:4:"code";s:488:"<?php
+	
+	
+	function run_command($controller, $text = '', $params = array())
+	{
+	    $output = array();
+	    $results = Google::search($text);
+        foreach ( $results as $result )
+        {
+            $output[] = '<h4 style="font-size:12px;margin:0;margin-top:1px;padding:2px;border-top:1px solid #aa0">'.$result['title'].'</h4>'. "<a target='external' href=".$result['url'].">".$result['url']."</a>".CR.$result['note'];
+        }
+	    $controller->ok(implode(CR.CR, $output));
+	}
+
+
+?>";s:8:"filename";s:13:"google_search";s:4:"path";s:0:"";}i:4;a:10:{s:4:"name";s:12:"Reverse text";s:14:"key_activation";s:13:"82+shift+ctrl";s:14:"tab_activation";s:0:"";s:10:"input_type";s:13:"selected_text";s:13:"input_type_or";s:4:"word";s:11:"output_type";s:14:"insert_as_text";s:10:"script_env";s:3:"php";s:4:"code";s:100:"<?php
+
+function run_command($controller, $text, $params)
+{
+    $controller->ok(strrev($text));
+}
+
+?>";s:8:"filename";s:11:"reversetext";s:4:"path";s:0:"";}i:5;a:10:{s:4:"name";s:13:"Tag generator";s:14:"key_activation";s:13:"84+shift+ctrl";s:14:"tab_activation";s:0:"";s:10:"input_type";s:4:"none";s:13:"input_type_or";s:7:"nothing";s:11:"output_type";s:17:"insert_as_snippet";s:10:"script_env";s:3:"php";s:4:"code";s:106:"<?php
+
+function run_command($controller, $text, $params)
+{
+    $controller->ok('def ${1:ahoj}($0)');
+}
+
+?>";s:8:"filename";s:12:"taggenerator";s:4:"path";s:0:"";}i:6;a:10:{s:4:"name";s:10:"Tooltippie";s:14:"key_activation";s:13:"83+shift+ctrl";s:14:"tab_activation";s:0:"";s:10:"input_type";s:13:"selected_text";s:13:"input_type_or";s:4:"word";s:11:"output_type";s:15:"show_as_tooltip";s:10:"script_env";s:3:"php";s:4:"code";s:92:"<?php
+
+function run_command($controller, $text, $params)
+{
+    $controller->ok($text);
+}
+
+?>";s:8:"filename";s:10:"tooltippie";s:4:"path";s:0:"";}i:7;a:10:{s:4:"name";s:12:"Validate XML";s:14:"key_activation";s:13:"86+shift+ctrl";s:14:"tab_activation";s:0:"";s:10:"input_type";s:15:"entire_document";s:13:"input_type_or";s:7:"nothing";s:11:"output_type";s:12:"show_as_html";s:10:"script_env";s:3:"php";s:4:"code";s:202:"<?php
+	
+	
+	function run_command($controller, $text = '', $params = array())
+	{
+	    $controller->import('default', 'xml');
+	    $controller->ok('<pre>'.validate_and_display_xml($text).'</pre>');
+	}
+
+
+?>";s:8:"filename";s:12:"xml_validate";s:4:"path";s:0:"";}}s:9:"templates";a:0:{}s:2:"id";s:7:"default";}}

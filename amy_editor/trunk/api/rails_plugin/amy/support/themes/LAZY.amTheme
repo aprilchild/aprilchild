@@ -1,0 +1,23 @@
+signature:
+  name: 'Lazy'
+  author: 'Adapted LAZY theme of TextMate.'
+
+definition:
+  cssId: 'lazy'
+  background: '#fff'
+  textColor: '#000'
+  caretColor: '#000'
+  caretRowStyleActive: '#F3FFCA'
+  selectionStyle: '#DBFF85'
+  TOKEN_MULTIROW_COMMENT: 'color:#8D868F'
+  TOKEN_SINGLEROW_COMMENT: 'color:#8D868F'
+  TOKEN_SINGLE_QUOTED: 'color:#109F00'
+  TOKEN_DOUBLE_QUOTED: 'color:#109F00'
+  CHUNK_KEYWORD: 'color:#FF7600'
+  CHUNK_NUMBER: 'color:#3857B9'
+  CHUNK_OPERATOR: 'color:#FF7600;'
+  CHUNK_PARENTHESIS: 'color:#7500C0'
+  CHUNK_KEYWORD_CUSTOM: 'color:#A90000'
+  CHUNK_FUNCTION_NAME: 'color:#7500C0;font-weight:bold'
+  CHUNK_LIBRARY: 'color:#7C8FAB'
+  CHUNK_LIBRARY_CUSTOM: 'color:#3D4459'

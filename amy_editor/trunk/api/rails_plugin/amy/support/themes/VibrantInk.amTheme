@@ -1,0 +1,23 @@
+signature:
+  name: 'Vibrant Ink'
+  author: 'Justin Palmer, AlternateIdea'
+
+definition:
+  cssId: ''
+  background: '#000'
+  textColor: '#fff'
+  caretColor: '#fff'
+  caretRowStyleActive: '#323300'
+  selectionStyle: '#4d5f54'
+  TOKEN_MULTIROW_COMMENT: 'color:#792db7'
+  TOKEN_SINGLEROW_COMMENT: 'color:#792db7'
+  TOKEN_SINGLE_QUOTED: 'color:#62fe00'
+  TOKEN_DOUBLE_QUOTED: 'color:#62fe00'
+  CHUNK_KEYWORD: 'color:#fd6a0a'
+  CHUNK_NUMBER: 'color:#c9ff31'
+  CHUNK_OPERATOR: 'color:#359899;'
+  CHUNK_PARENTHESIS: 'font-weight:bold;color:#989966'
+  CHUNK_KEYWORD_CUSTOM: 'color:#48b3cc'
+  CHUNK_FUNCTION_NAME: 'color:#fccd00'
+  CHUNK_LIBRARY: 'color:#dae93c'
+  CHUNK_LIBRARY_CUSTOM: 'color:#989966'

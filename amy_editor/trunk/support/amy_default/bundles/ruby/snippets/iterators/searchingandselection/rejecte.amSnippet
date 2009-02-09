@@ -1,0 +1,3 @@
+  name: "reject { |e| .. }"
+  key_activation: ''
+  tab_activation: 'rej'

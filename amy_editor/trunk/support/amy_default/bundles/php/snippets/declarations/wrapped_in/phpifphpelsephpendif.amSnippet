@@ -1,0 +1,3 @@
+  name: "<?php if (…) ?> … <?php else ?> … <?php endif ?>"
+  key_activation: ''
+  tab_activation: 'ifelse'

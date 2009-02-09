@@ -1,0 +1,322 @@
+Amy Editor - User Manual
+========================
+
+Preface
+-------
+Amy Editor is the online source code and text editor. It's implemented using the text-editing control of the http://www.april-child.com/fry/[Fry Framework] in pure JavaScript fashion running inside a browser. Amy was initially strongly inspired by popular http://macromates.com[TextMate] created by Allan Odgaard. Big number of features (working with text, bundles) are very closely based on TextMate, therefore if you're already familiar with these, chances are you will get to know Amy pretty quickly. There are however some fundamental differences, especially considering the fact, the editor runs in web environment.
+
+Happy coding everyone :-),
+
+Petr Krontorád, author.
+
+Known issues
+------------
+As mentioned in the preface, *editor runs in your browser*. There's no need for any special plug-in, just JavaScript support enabled. Everything is accomplished using dynamic scripting. Due browser diversity, it's very difficult to maintain full functionality for all popular browsers.
+
+In fact, there are currently only two browsers fully capable of running Amy at 100%. Firefox and Safari - arguably two best browser implementations so far. Since Firefox (or any Gecko based browser - Camino, Seamonkey, ...) is available on any platform (and usually loved by web developers) this shouldn't be such an issue. As for Macs, it works perfectly in Safari, the Apple browser flagship (Safari is in fact the best suitable browser at the moment). Windows users with Internet Explorer are somehow limited to the latest 7.0 version of their browser, which has some unfortunate quirks in event handling preventing 100% support.
+
+Speaking of Opera - it would be perfectly capable of running Amy, if only its zillions of key shortcuts were disabled (at least the single-key ones).
+
+
+Working with documents
+----------------------
+Documents (sometimes referenced as resources, because there are plans for the future) are organized into projects. You may open and edit multiple documents at once using tabbed panes. Documents are organized into projects.
+
+Projects
+~~~~~~~~
+image:images/open-project_before.png[Before opening a project]Projects represents hierarchical structure of documents and folders. Projects are identified using unique URL address. Amy Editor can open any project available at any URL and it can have any number of projects opened at the same time. They are visible in the left accordion pane of the editor. In order to start working with documents, you must know a project URL. Project URL is a simple HTTP address, pretty much the same as an address of a website. image:images/open-project_dialog_1.png[Open project dialog] Once you type the project URL into the "Open project..." dialog field, the address is checked and displays project information together with the "Open project" button for opening. The checking is done on-the-fly as you type the address. Now, some projects requires additional parameters to be specified (such as username, password etc.). If this is the case for the project you're about to open, you will be prompted to fill these parameters as well. Once properly filled, you hit the "Open project" button and project opens. image:images/open-project_dialog_2.png[Open project dialog, before opening]You will see classical tree-based view of the project hierarchy. image:images/open-project_file_listing.png[Listing the project structure]Clicking on any document will cause loading and subsequently opening the document in the editor.image:images/open-project_file_open.png[File opened]
+
+There are basically two types of projects. Default projects and projects anyone can define for their own purposes. Appart from URL, projects may require additional parameters, and can be marked for read-only or read/write. You will always be notified, before opening project, what parameters and editing type the project is. 
+
+Default set of projects
+^^^^^^^^^^^^^^^^^^^^^^^
+Default projects include support for well-known protocols such as FTP, WebDAV and Blog API. In practice this means, in Amy you can access and modify any documents on any FTP, WebDAV server where you have access to. Directly. There is an experimental version of SFTP (FTP over SSH) access too. Blog APIs even allow you use Amy Editor as your editor of blogposts on your blog. For those of you, who just want to try Amy for the first time, without knowing anything about projects, there's always possibility of opening default publicly shared project called Playground.
+
+Custom projects
+^^^^^^^^^^^^^^^
+There might be (and probably are) reasons why you cannot live with default projects. Either you don't want to access documents via FTP, WebDAV, or you want to limit access more precisely. Or you just use something else. For those of you, there's an API and libraries in various server-side languages (PHP, Ruby on Rails) that you may implement and create your own project at specific URL. With its own hierarchy, document contents, access rights etc. Details of implementation are more deeply covered in http://www.april-child.com/amy/developers[For Developers] section of the Amy Editor website.
+
+Finding project
+^^^^^^^^^^^^^^^
+Amy projects can be found in the project listing section of the Amy Editor website.
+
+Collaboration
+~~~~~~~~~~~~~
+Amy Editor includes support for real-time collaboration on a document over internet. You simply invite a person to collaborate on a document you opened and after receiving an invitation code, the person opens the same document with current state. You'll immediatelly see his/her changes as she sees yours. There is no limit on number of collaborators on one document, as well as there's no limit on number of opened collaboration sessions. It's pretty much possible to work on multiple documents with other people, acting sometimes as invitor, sometimes as invitee.
+
+
+Navigation / Overview
+---------------------
+Appart from common methods of text navigating (using keys such as PageUp/Down, Home, ...), there are basically four common ways easing navigation throughout the text.
+
+Foldings
+~~~~~~~~
+Foldings allows collapsing and/or expanding blocks of text logically belonging together. If given language supports such separation (most do), you can use foldings to collapse the text you're not working on at the moment to save space and increase readibility of your code. Editor will automatically find these blocks for you (as defined in specific language grammar).
+image:images/navigation_foldings_expanded.png[Expanded code block]
+You may collapse the block by click on either the opening or closing arrow icon. Hovering over gray three-dotted icon will display, what's hidden.
+image:images/navigation_foldings_collapsed.png[Collapsed code block]
+
+Bookmarks
+~~~~~~~~~
+Many times you'd like to move few pages back or forth, changing something and then return back. In this case, bookmarking comes handy. By simply pressing `Command+F2` (Mac), `Ctrl+F2` (Windows) or clicking right to line numbers on the left sidebar (gutter) you create new bookmark on that line. You may create unlimited number of bookmarks for a single document.
+image:images/navigation_bookmark.png[Bookmarked lines]
+Now, if you are somewhere else in the document and you want to return to the next bookmark, simply press `F2` and your scrolling and caret (cursor) position will change to the bookmarked line. If you have more than one bookmark defined, pressing `F2` repeatedly will cause cycling through all of them. If you want to go to the nearest previous bookmark, press `Shift+F2` (and again you can do it more than once for multiple bookmarks).
+
+Last changes
+~~~~~~~~~~~~
+Amy Editor uses very clever technique for storing changes to document. It allows such features as unlimited undo/redo, as well as collaboration running in transaction over the internet. One usefull side-effect is the "last changes" sidebar. It is located in the right sidebar and shows last changes to the document. It visually reflect position in document as well as time of the change - all changes fade away in time causing most recent ones to be more bright. If you collaborate on a document with someone else, the sidebar changes splits so you can visually see the changes the other person made. Not only you can see the changes, you can actually click on the colored bar and Amy will change your scrolling and caret position so you can see it without search.
+image:images/navigation_last_changes.png[Latest changes are more visible than older ones]
+This feature is a subject to change in next releases.
+
+Split views
+~~~~~~~~~~~
+Even though last changes and bookmarks may usually help, sometimes you just want two or possibly more views on one document. This is where split view are priceless feature. Amy Editor allows for more than usual two views allowing splitting your document into unlimited (actually limited by screen size) separated views for easier editation. It's not that uncommon to work on two, three places of document at once. Another view is simply activated by clicking on the first left icon of the status bar. Only one view is active at the moment, and this is the view to be split when clicking.
+image:images/navigation_split_views_1.png[Working with views]
+If you want to close the view, use left icon on its split bar. Split bar can be dragged to change connectect views sizes. You can alternative close the view by dragging split bar outside of the document area (same as throwing away Photoshop guides).
+image:images/navigation_split_views_2.png[More than 2 views]
+
+
+Working with text
+-----------------
+Amy Editor tries to support most -if not all- of common behavior of text editation found in the simpliest text editing controls around (imagine textarea field in your browser, Notepad, TextEdit etc.). It won't be discussed here since it's commonly known. Let's focus on more advanced features making your life as writer hopefully easier.
+
+Auto-paired characters
+~~~~~~~~~~~~~~~~~~~~~~
+When working with source code of most programming languages, you often type characters belonging in pairs. In C-like syntax, you rarely write opening brace ({) without the closing one (}). The same goes for parenthesis, single and double quotes and so on. Depending on chosen language definition (defined in bundles, we'll get to that later) Amy tries to save you time in writing the pair closing character for you. Just type `{` and Amy will write enclosing } while leaving cursor in its original position (that is between the curly braces). If you don't wish closing character to be appended, you can immediatelly remove it using forward delete key.
+
+Although usually helpful, auto-pairing goes another step toward usefulness in allowing automatical enclosing of selected text. Imagine long text that should be in fact enclosed by double quotes. Just select it and press `"`. Amy will enclose selected text in double quotes. This of course works for any character pair.
+image:images/working-text_auto_pairs.png[How to use selection for auto-pairing]
+
+Extended newlines
+~~~~~~~~~~~~~~~~~
+There are two useful key shortcuts for creating new line. Usually you must first move caret to the end of line and press `ENTER` to create new line. This is fine when you writing a line for the first time. However, when editing current line, say third word out of 10-word sentence, there's better way of creating new line. Press `Command+ENTER` (Mac), `Ctrl+ENTER` (Windows) and new line will be created moving caret to it. No need to go to the line end.
+
+Second useful shortcut is `Shift+Command+ENTER` (`Shift+Ctrl+ENTER` respectively). When using language which lines (commands) are required to end by special character, it will be inserted for you and new line created. This applies for all C-based languages (C#, C++, JavaScript, PHP, ...). In this case pressing the key combination when on the line will insert (;) at the end of that line and insert new line moving caret to it.
+image:images/working-text_newline.png[Enhanced newline]
+
+Word completion
+~~~~~~~~~~~~~~~
+Word completion is simple yet powerful technique for faster and mainly safer code writing. It's used for completing words already existing in the text. It takes characters before caret and tries to find first word beginning with the same characters. It looks both ways, that is lookup is performed upon words before and after actual caret position. First occurence wins and complete word is offered. Word complete is activated using `Esc` key. If first word doesn't match your intended one, you can press `Esc` repeatedly and another word starting with your character sequence is offered. Words closer to caret are returned first, words at bigger distance (in both ways) come later. If you pressed `Esc` more times than desired (it could happen to anyone:), you can press `Shift+Esc` to reverse words offer.
+image:images/working-text_word_completion.png[Word completion in action]
+
+This feature is very easy to use and its usefulness best shows itself for repeated entering of variable, function, methods and class names. Using first couple of letters and word completion assures no place for mistyped errors anymore.
+
+Indentation, smart indentation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Probably all programming languages use some kind of indentation formatting scheme. It's usually not required, although exceptions exist (Python, YAML) where proper indentation rules are enforced. Amy tries to ease the task of formatting your code by smart indentation. It varies from language to language, indentation is (as many other rules) defined in the language grammar contained in a bundle.
+
+If you need to manually adjust indentation of a block of text, you can use `Command+]` (`Ctrl+]`) for indenting to the right, and `Command+[` (`Ctrl+[`) for indenting to the left. If you have lines selected, the selection will move all. If you don't, the indentation applies to the active line (where caret is). In the latter case, caret doesn't have to be on the left (beginning of the line).
+
+Editing modes
+~~~~~~~~~~~~~
+There are currently two editing modes for writing text. Insert (the default) and overwrite. As the names suggest insert mode inserts new character before cursor, while overwrite mode overwrite character the cursor is at. You can switch between the modes by clicking on the status bar INSERT|OVERWRITE meter.
+
+
+Bundles
+-------
+Bundles are the core of Amy Editor where most of the settings and functionality is defined. Due their separation from actual code, it's possible to alter behavior of many parts of the editing. And usually with only a little bit of tweaking. Bundles are created to accommodate settings for each type of editing you may want. First logical distinction is of course separation by various programming languages. Each bundle can inherit from existing one, meaning you do don't have to repeat definition over and over again in each bundle. Bundles currently contain: keymaps, languages, snippets and commands definitions. While keymaps and languages are more advanced topic (covered in Developers section), commands and especially snippets are explained in more detail in the following chapters of this document.
+
+Activation
+~~~~~~~~~~
+There are two types of activation snippet and/or command. Key activation - that is pressing a key combination, and Tab activation executed when pressing `Tab` key after a sequence of characters. Tab activation is the most common case for snippets, while commands usually prefers hot keys.
+
+Editing
+~~~~~~~
+Amy Editor includes rather powerfull and convenient *Bundle editor*. You may access it via top menu `Bundles -> Show Bundle Editor...`. It lists all currently available bundles together with their definitions. If you are a registered user, you may add your own set of bundle settings (such as new snippets).
+
+Getting more bundles
+~~~~~~~~~~~~~~~~~~~~
+Bundles can be easily created by third-party developers (or you for that matter). There's a repository on Amy website with list of all available snippets approved to work with Amy Editor. If you are a registered user, you may install any of them and start using it.
+
+
+Snippets
+--------
+Snippets are pieces of prepared and often used text that is inserted into edited document. They may include things as empty function stub, default HTML page, class declaration and so on. This default behavior acts as code templates, you may know from other editors. But, this is not, by any means, an extent of snippets at all. Snippets are way more capable than that. Please, read on.
+
+Working with snippets
+~~~~~~~~~~~~~~~~~~~~~
+When snippet is inserted, caret may change its position. It is called - going on the first tabstop. Snippets may have up to 9 such positions defined and you can use them by hitting `TAB` key for moving into the next one. It can often happen, that after moving to the next position, you will see newly selected text. This is the default content of a snippet tabstop (placeholder) and you may decide to either delete it (as you would normally delete selected text), or edit it with your content. After being satisfied with yout input, you can press `TAB` and you will be redirected to another tabstop, again with possible edit and so on. This is a very convenient way of working with snippets or code templates if you want.
+
+If you are interested in more detailed explanation, please continue reading, otherwise skip to the next chapter. Following text is mainly for superusers and developers wishing to define custom snippets for themselves.
+
+Plain text
+~~~~~~~~~~
+The simpliest code snippet is just a plain text of unlimited size with no functionality at all that is inserted into document. It repesents a code template and you should be already aware of the concept. Plain and simple.
+
+Variables
+~~~~~~~~~
+Amy Editor defines several variables that are filled with values that can be used when snippet insertion is activated. They include such information as current caret line, column, contents of selection, word occurency relative to caret and other. You can use this information in your snippet code by following syntax: `$CHAP_VARNAME`. Let's see the most common variables (for full listing see the Developer section):
+
+`$CHAP_CLIPBOARD_TEXT` - contains text in clipboard.
+
+`$CHAP_SELECTED_TEXT` - contains selected text.
+
+`$CHAP_NEXT_WORD` - contains word right after caret.
+
+`$CHAP_PREV_WORD` - contains word before caret.
+
+`$CHAP_WORD[+-][n]` - contains n-th word before (-) or after (+) caret. For example when using `$CHAP_WORD-3`, we will obtain third word before caret, using `$CHAP_WORD+2` results in second word after caret being returned.
+
+You can use variant with two dollar string in which case the value will be properly enclosed. This is useful mainly for code interpolating in the following section.
+
+Interpolated local/server code
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+You may include pieces of programming code in your snippet text, that will be executed upon insertion and returning value will be actually used as a part of snippet contents (therefore inserted into document as well). They are enclosed in ` - a backstick character. There are two types of code that might get executed. Local and server codes. Local code is a piece of JavaScript, server code performs action on server side (by calling external remote method, that must exists and is not included in the snippet code). Let's see some examples of this (please note, you can insert as many interpolated codes into snippet defition as you want):
+
+Local code:
+-----------------------------------
+Hello, today is `/local/javascript
+	// this is a regular JavaScript code, you can do whatever you want, jus make sure you fill the "output" variable with some result.
+	output = new Date();
+`.
+-----------------------------------
+
+Server code (please note the escape of variables - by prepending $ the variable value is properly escaped):
+-----------------------------------
+Reversed string is: `/remote/post
+	action = 'reverse_string';
+	params.str = '$$CHAP_PREV_WORD';
+`.
+-----------------------------------
+Preceding example takes word before caret, sends it to the reverse_string remote method (which is executed on a server), waits for returned reversed string and includes it into the snippet text (after `Reversed string is: `). This newly created snippet text is then inserted into the document.
+
+We just scratch the surface, but you can already see how vivid the snippet platform already is - by adding dynamic scripting, the sky is the limit :-). And we are not finished with snippets yet.
+
+Tabstops
+~~~~~~~~
+Normally, after inserting a snippet, the caret would be positionated at the end of the inserted text. This is usually not what we want. That's where the tabstops come to place. You can define  places, where, after pressing `TAB`, caret goes (therefore the *tabstops* name). Each tabstop is defined using $N notation, where N represents number from 0 to 9 and also defines its sequence order. The sequence is important, since you can press `TAB` up to 9 times, each press causing caret to move to another tabstop. Last tabstop is always $0, to mark first position, use $1 (second is the $2 mark, $3 third and so on). Imagine following example:
+
+-----------------------------------
+$0Hello, after inserting go here: $1 then follow here $2 and then return back to the beginning.
+-----------------------------------
+
+In the previous example, snippet is inserted with text: Hello, after inserting go here: | then follow here  and then return back to the beginning. Caret is at position marked by *|*. Now you may write some text, by pressing tab you move to position marked by $2, write some more and finally after pressing `TAB` you will be redirected to the beginning of the originally inserted snippet piece.
+
+Final note: if no tabstop is defined, $0 is automatically included at the end of the snippet code (and so is the caret after inserting).
+
+Placeholders
+~~~~~~~~~~~~
+Placeholders are extended versions of tabstops. Instead empty space, you can defined predefined content in place of placeholder, that is going to be selected (thus easily rewritable) when moving across inserted snippet using `TAB`. Common notation is $\{N:default value}, where N stands for tabstop number and default value is some predefined text.
+
+-----------------------------------
+class ${1:ClassName}
+	def ${2:method_name}
+		$0
+	end
+end
+-----------------------------------
+
+
+Placeholders can be nested, best example of nested placeholders can be seen as:
+-----------------------------------
+<div${1: id="${2:some_id}"}>
+	$0
+</div>
+-----------------------------------
+
+Mirrors
+~~~~~~~
+Sometimes it's handy if we could write some text that would be mirrored on other place. For example writing opening and closing tag at once. This is a job for mirroring. You set up tabstop to be mirrored on other place and once you edit its content, it is automatically mirrored on the other location too.
+
+-----------------------------------
+<{${1:tag_name}}>
+	$0
+</{$1}>
+-----------------------------------
+
+Transformations
+~~~~~~~~~~~~~~~
+Transformation, as the name suggest, performs transformation on placeholder values and/or Amy variables and is mostly used with code interpolation. See following examples for more:
+
+-----------------------------------
+${CHAP_SELECTED_TEXT/a/A/g}  - this transformation will perform regular expression replace of input text. In this case all lower *a* will become upper ones (*A*).
+${CHAP_WORD-2|.toUpperCase()}  - this will insert a second word before caret transformed using native String function toUpperCase()
+${CHAP_WORD-2|test}  - this will invoke method snippetTransform_test(str, component) on a snippet object. We must declare the method somehow prior first usage. This is generally the most powerful transformation since we acquire component object meaning have access to whole text-editing component and its API. 
+-----------------------------------
+
+Commands
+--------
+Commands are subroutines performing virtually anything beyond scope of snippets and text editor in general. They are the most powerful ways of extending editor capabilities, adding many useful functionality without interfering with the text-editing code. They take set of input parameters and returns an output. They are activated using key shortcut or tab trigger.
+
+Command input
+~~~~~~~~~~~~~
+Commands can take two kinds of parameters depending on state of editing at the moment of activating. You can specify either no parameters, whole document or selected text. If no selection is made, you may optionally specify active character, word or line as an input parameters.
+
+Command output
+~~~~~~~~~~~~~~
+When input is gathered, it is bypassed to remote execution handler on server when some code performs an action. The result of the action is then returned back to editor as an output parameter of certain type. You can select from following types of your output:
+
+Discard
+^^^^^^^
+Nothing is being done. You usually just want to execute external server code and don't want any result.
+
+Replace selected text
+^^^^^^^^^^^^^^^^^^^^^
+If your input parameter was a selection, the resulting output will replace currently selected text in the editor.
+
+Replace document
+^^^^^^^^^^^^^^^^
+Replaces current document content with a result of your external code.
+
+Insert as text
+^^^^^^^^^^^^^^
+Result is simply pasted into document at active caret position.
+
+Insert as snippet
+^^^^^^^^^^^^^^^^^
+Output is being transformed into fully functional snippet that is inserted at active caret position. This is probably the strongest and coolest feature so far. Imagine dynamic snippeting based on current state of your source code. Refactoring taken into another level.
+
+Show as HTML
+^^^^^^^^^^^^
+Output, formatted as an HTML document is shown in the popup window. There are special link types that can access active document (such as going at specific line and others).
+
+Show as tooltip
+^^^^^^^^^^^^^^^
+Resulting output is displayed as a tooltip below caret. Tooltip text can be HTML formatted.
+
+Create new document
+^^^^^^^^^^^^^^^^^^^
+Creates new untitled document in the editor. Document content is the resulting output code.
+
+Server scripts
+~~~~~~~~~~~~~~
+The fact Amy is running as a web application limits number of tasks remote execution handlers' code can perform (as compared to say shell scripting). You can only use, what server backend allows you. On the other hand, you can easily transform it as your advantage, since there are things in web environment, that are difficult to mimic via local shell. Amy server execution is not limited to one backend type, using remote proxies one can easily access backend capabilities of Ruby on Rails, Python, Java containers, .NET framework and so on. More on this topic can be found in Developers section of Amy website.
+
+
+
+Themes
+------
+Amy Editor contains easy language for creating new themes. The editor supplies with about a dozen of predefined themes already, and it's not terribly difficult to add new ones. As many other definition, themes are stored using YAML format in the following manner:
+
+-----------------------------------
+signature:
+  name: 'Black'
+  author: 'Petr Krontorád, April-Child.com'
+
+definition:
+  cssId: 'black'
+  background: '#111'
+  textColor: '#fff'
+  caretColor: '#fff'
+  caretRowStyleActive: '#444'
+  selectionStyle: '#283a76'
+  TOKEN_MULTIROW_COMMENT: 'color:#888'
+  TOKEN_SINGLEROW_COMMENT: 'color:#888'
+  TOKEN_SINGLE_QUOTED: 'color:#8399D3'
+  TOKEN_DOUBLE_QUOTED: 'color:#8399D3'
+  CHUNK_KEYWORD: 'color:#66f'
+  CHUNK_NUMBER: 'color:#ff0'
+  CHUNK_OPERATOR: 'color:#7FC7EC;'
+  CHUNK_PARENTHESIS: 'font-weight:bold'
+  CHUNK_KEYWORD_CUSTOM: 'color:#C9C900'
+  CHUNK_FUNCTION_NAME: 'color:#DD3D2A'
+  CHUNK_LIBRARY: 'color:#08f'
+  CHUNK_LIBRARY_CUSTOM: 'color:#CC581D'
+-----------------------------------
+
+As you can see, after signature section you are simply required to fill styles (in a way CSS styles work) for each different type of editing token, caret, text color etc. The definition example is self-explaining, there's not much to add.
+
+
+What is not covered in this manual
+----------------------------------
+There are other things to be mentioned, but they usually require either poweruser or developer knowledge and as such, they are covered in Developers section of Amy website. Just for curiosity, here's a quick list: Keymaps, Language definitions, eAmy (embedded Amy service API), more on Snippets and Commands, Custom projects API and probably more.

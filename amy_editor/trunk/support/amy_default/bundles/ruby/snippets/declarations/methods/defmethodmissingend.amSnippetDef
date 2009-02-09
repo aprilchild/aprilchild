@@ -1,0 +1,3 @@
+def method_missing(meth, *args, &blk)
+	$0
+end

@@ -1,0 +1,18 @@
+signature:
+  name: 'Markup'
+  inherits: 
+    - 'default:default'
+  tabSize: '4'
+
+definition:
+  foldingStartMarkers: '[]'
+  foldingParityMarkers: '[]'
+  foldingStopMarkers: '[]'
+  singleRowCommentStartMarkers: "[]"
+  multiRowCommentStartMarker: '<!--'
+  multiRowCommentEndMarker: '-->'
+
+  chunkRules:
+    - "[/((<|<\\/)([\w-_\\:]*)([ >]))/i, 3, ac.chap.CHUNK_KEYWORD]"
+    - '[/(([ \t])([\w-_\:]*)(=$))/i, 3, ac.chap.CHUNK_KEYWORD_CUSTOM]'
+    - '[/(([^\w]|^)(!DOCTYPE)([^\w]|$))/i, 3, ac.chap.CHUNK_LIBRARY]'

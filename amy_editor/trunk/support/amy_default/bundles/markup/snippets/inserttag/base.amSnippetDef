@@ -1,0 +1,1 @@
+<base href="$1"${2: target="$3"}${TM_XHTML}>

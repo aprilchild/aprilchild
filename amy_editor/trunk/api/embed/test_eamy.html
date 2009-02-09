@@ -1,0 +1,99 @@
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>Testing eAmy (embedded Amy Editor)</title>
+		<style type="text/css">
+			body
+			{
+				background:#f8f8f8;
+				font-family:'Lucida Grande', 'Tahoma', Arial, sans-serif;
+				font-size:85%;
+			}
+			td
+			{
+				font-size:85%;
+				padding:4px;
+			}
+		</style>
+	</head>
+	<body id="test_eamy">
+		
+	
+		<h1 id="">This is the test page for embedded Amy</h1>
+		
+		<p>
+			Simply create a textarea matching your design in size and location and mark it by special amy attribute. Then load Amy using &lt;script ... tag with desired bundle and theme. Just read the source of this page for more.
+		</p>
+		
+		
+		<form method="post" action="test_eamy_submit_handler.php">
+			<table>
+				<tbody>
+					<tr>
+						<td>File name</td>
+						<td><input type="text" name="filename" value=".js" /></td>
+					</tr>
+					<tr>
+						<td valign="top">Source code</td>
+						<td>
+							<!-- here goes the trick .. -->
+							<textarea name="code" rows="28" cols="90" -amy-enabled="true">
+# This code is inserted into textarea as usual.
+# You don't really need to start rewriting your backend at all!
+
+class Admin::HomeController < Admin::BaseController
+
+  before_filter :authorize, :except => :login
+
+  layout 'admin/root'
+
+  def index
+    #flash[:notice]
+  end
+
+
+  def login
+    session[:user_id] = nil
+    if request.post?
+      user = Www::User.authenticate(params[:name], params[:password])
+      if user
+        session[:user_id] = user.id
+        flash[:notice] = "Welcome to the administration <strong>#{user.name}</strong>."
+        redirect_to(:action => 'index')
+      else
+        flash[:notice] = "Invalid user/password combination"
+      end
+    end
+  end
+
+  def logout
+    if request.post?
+      session[:user_id] = nil
+      redirect_to(:action => 'index')
+    end
+  end
+end
+</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>
+							<input type="submit" value="Save file" /> 
+							<a href="test_eamy.html">Cancel</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		
+		<!-- now call the eAmy loader -->
+		<!--
+			 theme: any from Amy Editor (black, cobalt, concept, lazy, monokai, slushandpoppies, spacecadet, twilight, vibrantink)
+			 bundle: c, java, javascript, markup, php, ruby, texy
+			 language: optional if bundle defines more than one language. eg. bundle=javascript&language=fry
+		 -->
+		<script type="text/javascript" src="http://www.april-child.com/amy/api/embed/amy.php?theme=Concept&amp;bundle=ruby"></script>
+		
+	</body>
+</html>

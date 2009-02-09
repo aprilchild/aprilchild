@@ -1,0 +1,3 @@
+  name: "find_all { |e| .. }"
+  key_activation: ''
+  tab_activation: 'fina'

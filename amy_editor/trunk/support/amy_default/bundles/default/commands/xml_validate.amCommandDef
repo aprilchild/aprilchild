@@ -1,0 +1,11 @@
+<?php
+	
+	
+	function run_command($controller, $text = '', $params = array())
+	{
+	    $controller->import('default', 'xml');
+	    $controller->ok('<pre>'.validate_and_display_xml($text).'</pre>');
+	}
+
+
+?>

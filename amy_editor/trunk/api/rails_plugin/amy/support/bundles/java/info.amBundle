@@ -1,0 +1,8 @@
+signature:
+  name: 'Java'
+  author: 'Brian Lalor <blalor@bravo5.org>'
+  url: ''
+  version: '1.0'
+  dependencies: 
+    - 'default'
+  note: 'Support for <a href="http://java.sun.com/">Java</a> and Ant build files.'

@@ -1,0 +1,23 @@
+signature:
+  name: 'Java Properties'
+  inherits: 
+    - 'default:default'
+  tabSize: '2'
+
+definition:
+  singleQuoteStringMarker: "'"
+  singleQuoteStringMarkerException: '\\'
+  doubleQuoteStringMarker: '"'
+  doubleQuoteStringMarkerException: '\\'
+  foldingStartMarkers: '[]'
+  foldingParityMarkers: '[]'
+  foldingStopMarkers: '[]'
+  singleRowCommentStartMarkers: "['#']"
+  multiRowCommentStartMarker: '/*'
+  multiRowCommentEndMarker: '*/'
+
+  chunkRules:
+    -
+
+  wordDelimiter: '/[\w\d]/'
+  indentIgnoreMarker: '/[\t \s]/'

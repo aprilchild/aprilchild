@@ -1,0 +1,396 @@
+a:2:{s:4:"time";i:1199380361;s:6:"bundle";a:7:{s:4:"info";a:1:{s:9:"signature";a:7:{s:4:"name";s:13:"Ruby on Rails";s:6:"author";s:37:"Duane Johnson <canadaduane@gmail.com>";s:3:"url";s:0:"";s:7:"version";s:3:"1.0";s:12:"dependencies";a:1:{i:0;s:4:"ruby";}s:18:"snippets_inherited";a:1:{i:0;s:4:"ruby";}s:4:"note";s:184:"<a href="http://www.rubyonrails.com/">Ruby on Rails</a> is a full-stack framework for developing database-backed web applications, in Ruby, according to the Model-View-Control pattern.";}}s:6:"keymap";s:3257:"
+	# default
+	KEY: 0
+		insert(character:true)
+
+	# arrow left
+	KEY: -37
+		caret(move:'left')
+	KEY: -37+shift
+		caret(move:'left')
+		selection(add:true)
+	KEY: -37+ctrl
+		caret(move:'prev_word')
+	KEY: -37+alt
+		caret(move:'prev_word')
+	KEY: -37+ctrl+shift
+		caret(move:'prev_word')
+		selection(add:true)
+	KEY: -37+alt+shift
+		caret(move:'prev_word')
+		selection(add:true)
+	KEY: -37+meta
+		caret(move:'row_start')
+	KEY: -37+meta+shift
+		caret(move:'row_start')
+		selection(add:true)
+
+	# arrow right
+	KEY: -39
+		caret(move:'right')
+	KEY: -39+shift
+		caret(move:'right')
+		selection(add:true)
+	KEY: -39+ctrl
+		caret(move:'next_word')
+	KEY: -39+alt
+		caret(move:'next_word')
+	KEY: -39+ctrl+shift
+		caret(move:'next_word')
+		selection(add:true)
+	KEY: -39+alt+shift
+		caret(move:'next_word')
+		selection(add:true)
+	KEY: -39+meta
+		caret(move:'row_end')
+	KEY: -39+meta+shift
+		caret(move:'row_end')
+		selection(add:true)
+
+	# arrow up
+	KEY: -38
+		caret(move:'up')
+	KEY: -38+shift
+		caret(move:'up')
+		selection(add:true)
+
+	# arrow down
+	KEY: -40
+		caret(move:'down')
+	KEY: -40+shift
+		caret(move:'down')
+		selection(add:true)
+		
+	# enter
+	KEY: -13
+		insert(row:true)
+
+	# delete
+	KEY: -8
+		delete(character:true)
+
+	# backspace
+	KEY: -46
+		delete(character:false)
+
+  # delete line ctrl+shift+k
+  KEY: 75+ctrl+shift
+    delete(row:true)
+
+	# escape
+	KEY: -27
+		custom(action:'WordComplete', direction:true)
+	KEY: -27+shift
+		custom(action:'WordComplete', direction:false)
+
+	# tab
+	KEY: -9
+		custom(action:'SnippetComplete')
+		
+	# auto-completes
+	# {
+	KEY: 123
+	custom(action:'AutoComplete', use_selection:true, text:'}')
+
+	# '
+	KEY: 39
+	custom(action:'AutoComplete', use_selection:true, text:'\\'')
+	
+	# "
+	KEY: 34
+	custom(action:'AutoComplete', use_selection:true, text:'\"')
+	
+	# [
+	KEY: 91
+	custom(action:'AutoComplete', use_selection:true, text:']')
+	
+	# (
+	KEY: 40
+	custom(action:'AutoComplete', use_selection:true, text:')')
+	
+
+
+	# home
+	KEY: -36
+		caret(move:'doc_start')
+	KEY: -36+shift
+		caret(move:'doc_start')
+		selection(add:true)
+
+	# end
+	KEY: -35
+		caret(move:'doc_end')
+	KEY: -35+shift
+		caret(move:'doc_end')
+		selection(add:true)
+
+	# meta + c
+	KEY: 99+meta
+		clipboard(copy:true)
+
+	# meta + x
+	KEY: 120+meta
+		clipboard(cut:true)
+
+	# meta + z
+	KEY: 122+meta
+		undo()
+
+	# meta + shift + z
+	KEY: 122+meta+shift
+		redo()
+
+	# meta + a
+	KEY: 97+meta
+		selection(all:true)
+
+	# ctrl + a
+	KEY: 97+ctrl
+		selection(all:true)
+		
+  # F2
+  KEY: -113
+    custom(action:'GoToBookmark', direction:1)
+
+  # F2 shift
+  KEY: -113+shift
+    custom(action:'GoToBookmark', direction:-1)
+
+  # F2 + meta
+  KEY: -113+meta
+    custom(action:'ToggleBookmark')
+
+
+	# enter
+  KEY: -13
+  	custom(action:'SmartIndent', split_line:true, indent_tab_when_starts:'class module def if else unless rescue ensure while do')
+
+  # meta + enter
+  KEY: -13+meta
+  	custom(action:'SmartIndent', split_line:false, indent_tab_when_starts:'class module def if else unless rescue ensure while do')
+
+  # d
+  KEY: 100
+  	custom(action:'SmartUnindent', match_from:'start', starts_with:'class module def if else unless rescue ensure while do', ends_with:'end end end end end end end end end end')
+
+  # e
+  KEY: 101
+  	custom(action:'SmartUnindent', match_from:'start', starts_with:'if', ends_with:'else')
+
+
+
+";s:9:"languages";a:2:{i:0;a:3:{s:9:"signature";a:4:{s:4:"name";s:13:"Ruby on Rails";s:6:"author";s:32:"Petr Krontorád, April-Child.com";s:7:"tabSize";s:1:"2";s:8:"inherits";a:1:{i:0;s:12:"ruby:default";}}s:10:"definition";a:11:{s:10:"chunkRules";a:9:{i:0;s:66:"[/(([^\w]|^)(\d{1,}[\d\.Ee]*)([^w]|$))/i, 3, ac.chap.CHUNK_NUMBER]";i:1;s:69:"[/(\+|\-|\*|\/|\=|\!|\^|\%|\||\&|\<|\>)/i, 0, ac.chap.CHUNK_OPERATOR]";i:2;s:54:"[/(\(|\)|\[|\]|\{|\})/i, 0, ac.chap.CHUNK_PARENTHESIS]";i:3;s:161:"[/(([^\w]|^)(BEGIN|begin|case|class|def|do|else|elsif|END|end|ensure|for|if|in|module|rescue|then|unless|until|when|while)([^\w]|$))/i, 3, ac.chap.CHUNK_KEYWORD]";i:4;s:143:"[/(([^\w]|^)(@[\w]*|and|not|or|alias|alias_method|break|next|redo|retry|return|super|undef|yield)([^\w]|$))/i, 3, ac.chap.CHUNK_KEYWORD_CUSTOM]";i:5;s:61:"[/((def[ ]{1,})([\w]{1,}))/i, 3, ac.chap.CHUNK_FUNCTION_NAME]";i:6;s:108:"[/(([^\w]|^)(Test|Unit|TestCase|TestSuite|File|nil|to_s|to_a|require)([^\w]|$))/i, 3, ac.chap.CHUNK_LIBRARY]";i:7;s:80:"[/(([^\w]|^)(new|dirname|__FILE__)([^\w]|$))/i, 3, ac.chap.CHUNK_LIBRARY_CUSTOM]";i:8;s:378:"[/(([^\w]|^)(ApplicationController|ActionController|Base|layout|before_filter|session|flash|render|respond_to|format|ApplicationHelper|ActiveRecord|Migration|find|validates_presence_of|validates_inclusion_of|validates_numericality_of|validates_format_of|validates_confirmation_of|has_many|has_one|has_and_belongs_to_many|belongs_to|errors)([^\w]|$))/i, 3, ac.chap.CHUNK_LIBRARY]";}s:23:"singleQuoteStringMarker";s:1:"'";s:32:"singleQuoteStringMarkerException";s:2:"\\";s:23:"doubleQuoteStringMarker";s:1:""";s:32:"doubleQuoteStringMarkerException";s:2:"\\";s:13:"wordDelimiter";s:8:"/[\w\d]/";s:18:"indentIgnoreMarker";s:9:"/[\t \s]/";s:19:"foldingStartMarkers";s:23:"[/^\s*def/i, /^\s*if/i]";s:20:"foldingParityMarkers";s:42:"[/do|(^\s*if)|(^\s*def)/i, /do|(^\s*if)/i]";s:18:"foldingStopMarkers";s:24:"[/^\s*end/i, /^\s*end/i]";s:28:"singleRowCommentStartMarkers";s:5:"['#']";}s:2:"id";s:7:"default";}i:1;a:3:{s:9:"signature";a:4:{s:4:"name";s:12:"HTML (Rails)";s:6:"author";s:32:"Petr Krontorád, April-Child.com";s:7:"tabSize";s:1:"2";s:8:"inherits";a:1:{i:0;s:11:"markup:html";}}s:10:"definition";a:13:{s:10:"chunkRules";a:13:{i:0;s:66:"[/(([^\w]|^)(\d{1,}[\d\.Ee]*)([^w]|$))/i, 3, ac.chap.CHUNK_NUMBER]";i:1;s:69:"[/(\+|\-|\*|\/|\=|\!|\^|\%|\||\&|\<|\>)/i, 0, ac.chap.CHUNK_OPERATOR]";i:2;s:54:"[/(\(|\)|\[|\]|\{|\})/i, 0, ac.chap.CHUNK_PARENTHESIS]";i:3;s:57:"[/((<|<\/)([\w-_\:]*)([ >]))/i, 3, ac.chap.CHUNK_KEYWORD]";i:4;s:62:"[/(([ \t])([\w-_\:]*)(=$))/i, 3, ac.chap.CHUNK_KEYWORD_CUSTOM]";i:5;s:61:"[/(([^\w]|^)(!DOCTYPE)([^\w]|$))/i, 3, ac.chap.CHUNK_LIBRARY]";i:6;s:66:"[/(([^\w]|^)(\d{1,}[\d\.Ee]*)([^w]|$))/i, 3, ac.chap.CHUNK_NUMBER]";i:7;s:69:"[/(\+|\-|\*|\/|\=|\!|\^|\%|\||\&|\<|\>)/i, 0, ac.chap.CHUNK_OPERATOR]";i:8;s:54:"[/(\(|\)|\[|\]|\{|\})/i, 0, ac.chap.CHUNK_PARENTHESIS]";i:9;s:57:"[/((<|<\/)([\w-_\:]*)([ >]))/i, 3, ac.chap.CHUNK_KEYWORD]";i:10;s:62:"[/(([ \t])([\w-_\:]*)(=$))/i, 3, ac.chap.CHUNK_KEYWORD_CUSTOM]";i:11;s:61:"[/(([^\w]|^)(!DOCTYPE)([^\w]|$))/i, 3, ac.chap.CHUNK_LIBRARY]";i:12;b:0;}s:23:"singleQuoteStringMarker";s:1:"'";s:32:"singleQuoteStringMarkerException";s:2:"\\";s:23:"doubleQuoteStringMarker";s:1:""";s:32:"doubleQuoteStringMarkerException";s:2:"\\";s:13:"wordDelimiter";s:8:"/[\w\d]/";s:18:"indentIgnoreMarker";s:9:"/[\t \s]/";s:19:"foldingStartMarkers";s:39:"[/^\s*<(div)\b.*>/i, /^\s*<(ul)\b.*>/i]";s:20:"foldingParityMarkers";s:39:"[/^\s*<(div)\b.*>/i, /^\s*<(ul)\b.*>/i]";s:18:"foldingStopMarkers";s:35:"[/^\s*<\/(div)>/i, /^\s*<\/(ul)>/i]";s:28:"singleRowCommentStartMarkers";s:5:"['#']";s:26:"multiRowCommentStartMarker";s:2:"/*";s:24:"multiRowCommentEndMarker";s:2:"*/";}s:2:"id";s:4:"html";}}s:8:"snippets";a:226:{i:0;a:5:{s:4:"name";s:6:"Blocks";s:8:"filename";s:6:"blocks";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";s:12:"is_inherited";s:1:"1";}i:1;a:7:{s:4:"name";s:28:"Insert do |variable| … end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"do";s:4:"code";s:162:"do${1/(^(?<var>\s*[a-z_][a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1: |)/}${1:variable}${1/(^(?<var>\s*[a-z_][a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:|)/}
+	$0
+end";s:8:"filename";s:19:"insertdovariableend";s:4:"path";s:7:"/blocks";s:12:"is_inherited";s:1:"1";}i:2;a:7:{s:4:"name";s:25:"Insert { |variable| … }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:1:"{";s:4:"code";s:178:"{ ${1/(^(?<var>\s*[a-z_][a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:|)/}${1:variable}${1/(^(?<var>\s*[a-z_][a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:| )/}${2:$AMY_SELECTED_TEXT} ";s:8:"filename";s:14:"insertvariable";s:4:"path";s:7:"/blocks";s:12:"is_inherited";s:1:"1";}i:3;a:7:{s:4:"name";s:20:"lambda { |args| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"lam";s:4:"code";s:181:"lambda { ${1/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:|)/}${1:args}${1/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:| )/}$0 }";s:8:"filename";s:10:"lambdaargs";s:4:"path";s:7:"/blocks";s:12:"is_inherited";s:1:"1";}i:4;a:5:{s:4:"name";s:12:"Declarations";s:8:"filename";s:12:"declarations";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";s:12:"is_inherited";s:1:"1";}i:5;a:7:{s:4:"name";s:23:"application_code { .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"app";s:4:"code";s:37:"if __FILE__ == \$PROGRAM_NAME
+	$0
+end";s:8:"filename";s:15:"applicationcode";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:6;a:7:{s:4:"name";s:24:"begin … rescue … end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"begin";s:4:"code";s:254:"${AMY_SELECTED_TEXT/([\t ]*).*/$1/m}begin
+	${3:${AMY_SELECTED_TEXT/(\A.*)|(.+)|\n\z/(?1:$0:(?2:\t$0))/g}}
+${AMY_SELECTED_TEXT/([\t ]*).*/$1/m}rescue ${1:Exception} => ${2:e}
+${AMY_SELECTED_TEXT/([\t ]*).*/$1/m}	$0
+${AMY_SELECTED_TEXT/([\t ]*).*/$1/m}end
+";s:8:"filename";s:14:"beginrescueend";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:7;a:7:{s:4:"name";s:12:"case … end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"case";s:4:"code";s:44:"case ${1:object}
+when ${2:condition}
+	$0
+end";s:8:"filename";s:7:"caseend";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:8;a:5:{s:4:"name";s:19:"Classes and Modules";s:8:"filename";s:17:"classesandmodules";s:13:"is_collection";s:1:"1";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:9;a:7:{s:4:"name";s:37:"class BlankSlate .. initialize .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"cla";s:4:"code";s:329:"class ${1:BlankSlate}
+	instance_methods.each { |meth| undef_method(meth) unless meth =~ /\A__/ }
+	
+	def initialize${2/(^.*?\S.*)|.*/(?1:\()/}${2:args}${2/(^.*?\S.*)|.*/(?1:\))/}
+		@${3:delegate} = ${4:delegate_object}
+		
+		$0
+	end
+	
+	def method_missing(meth, *args, &block)
+		@${3:delegate}.send(meth, *args, &block)
+	end
+	
+	
+end";s:8:"filename";s:28:"classblankslateinitializeend";s:4:"path";s:31:"/declarations/classesandmodules";s:12:"is_inherited";s:1:"1";}i:10;a:7:{s:4:"name";s:45:"class .. < DelegateClass .. initialize .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"cla-";s:4:"code";s:176:"class ${1:ClassName} < DelegateClass(${2:ParentClass})
+	def initialize${3/(^.*?\S.*)|.*/(?1:\()/}${3:args}${3/(^.*?\S.*)|.*/(?1:\))/}
+		super(${4:del_obj})
+		
+		$0
+	end
+	
+	
+end";s:8:"filename";s:31:"classdelegateclassinitializeend";s:4:"path";s:31:"/declarations/classesandmodules";s:12:"is_inherited";s:1:"1";}i:11;a:7:{s:4:"name";s:12:"class .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"cla";s:4:"code";s:28:"class ${1:ClassName}
+	$0
+end";s:8:"filename";s:8:"classend";s:4:"path";s:31:"/declarations/classesandmodules";s:12:"is_inherited";s:1:"1";}i:12;a:7:{s:4:"name";s:26:"class .. initialize .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"cla";s:4:"code";s:117:"class ${1:ClassName}
+	def initialize${2/(^.*?\S.*)|.*/(?1:\()/}${2:args}${2/(^.*?\S.*)|.*/(?1:\))/}
+		$0
+	end
+	
+	
+end";s:8:"filename";s:18:"classinitializeend";s:4:"path";s:31:"/declarations/classesandmodules";s:12:"is_inherited";s:1:"1";}i:13;a:7:{s:4:"name";s:31:"ClassName = Struct .. do .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"cla";s:4:"code";s:88:"${1:ClassName} = Struct.new(:${2:attr_names}) do
+	def ${3:method_name}
+		$0
+	end
+	
+	
+end";s:8:"filename";s:20:"classnamestructdoend";s:4:"path";s:31:"/declarations/classesandmodules";s:12:"is_inherited";s:1:"1";}i:14;a:7:{s:4:"name";s:43:"class .. < ParentClass .. initialize .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"cla";s:4:"code";s:136:"class ${1:ClassName} < ${2:ParentClass}
+	def initialize${3/(^.*?\S.*)|.*/(?1:\()/}${3:args}${3/(^.*?\S.*)|.*/(?1:\))/}
+		$0
+	end
+	
+	
+end";s:8:"filename";s:29:"classparentclassinitializeend";s:4:"path";s:31:"/declarations/classesandmodules";s:12:"is_inherited";s:1:"1";}i:15;a:7:{s:4:"name";s:20:"class << self .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"cla";s:4:"code";s:26:"class << ${1:self}
+	$0
+end";s:8:"filename";s:12:"classselfend";s:4:"path";s:31:"/declarations/classesandmodules";s:12:"is_inherited";s:1:"1";}i:16;a:7:{s:4:"name";s:29:"module .. ClassMethods .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"mod";s:4:"code";s:208:"module ${1:ModuleName}
+	module ClassMethods
+		$0
+	end
+	
+	module InstanceMethods
+		
+	end
+	
+	def self.included(receiver)
+		receiver.extend         ClassMethods
+		receiver.send :include, InstanceMethods
+	end
+end";s:8:"filename";s:21:"moduleclassmethodsend";s:4:"path";s:31:"/declarations/classesandmodules";s:12:"is_inherited";s:1:"1";}i:17;a:7:{s:4:"name";s:13:"module .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"mod";s:4:"code";s:30:"module ${1:ModuleName}
+	$0
+end";s:8:"filename";s:9:"moduleend";s:4:"path";s:31:"/declarations/classesandmodules";s:12:"is_inherited";s:1:"1";}i:18;a:7:{s:4:"name";s:32:"module .. module_function .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"mod";s:4:"code";s:49:"module ${1:ModuleName}
+	module_function
+	
+	$0
+end";s:8:"filename";s:23:"modulemodulefunctionend";s:4:"path";s:31:"/declarations/classesandmodules";s:12:"is_inherited";s:1:"1";}i:19;a:7:{s:4:"name";s:11:"def … end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"def";s:4:"code";s:28:"def ${1:method_name}
+	$0
+end";s:8:"filename";s:6:"defend";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:20;a:7:{s:4:"name";s:9:"elsif ...";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"elsif";s:4:"code";s:24:"elsif ${1:condition}
+	$0";s:8:"filename";s:5:"elsif";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:21;a:7:{s:4:"name";s:7:"__END__";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"end";s:4:"code";s:8:"__END__
+";s:8:"filename";s:3:"end";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:22;a:7:{s:4:"name";s:19:"if … else … end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"ife";s:4:"code";s:34:"if ${1:condition}
+	$2
+else
+	$3
+end";s:8:"filename";s:9:"ifelseend";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:23;a:7:{s:4:"name";s:10:"if … end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"if";s:4:"code";s:25:"if ${1:condition}
+	$0
+end";s:8:"filename";s:5:"ifend";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:24;a:5:{s:4:"name";s:7:"Methods";s:8:"filename";s:7:"methods";s:13:"is_collection";s:1:"1";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:25;a:7:{s:4:"name";s:15:"alias_method ..";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"am";s:4:"code";s:43:"alias_method :${1:new_name}, :${0:old_name}";s:8:"filename";s:11:"aliasmethod";s:4:"path";s:21:"/declarations/methods";s:12:"is_inherited";s:1:"1";}i:26;a:7:{s:4:"name";s:16:"attr_accessor ..";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"rw";s:4:"code";s:30:"attr_accessor :${0:attr_names}";s:8:"filename";s:12:"attraccessor";s:4:"path";s:21:"/declarations/methods";s:12:"is_inherited";s:1:"1";}i:27;a:7:{s:4:"name";s:14:"attr_reader ..";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:1:"r";s:4:"code";s:28:"attr_reader :${0:attr_names}";s:8:"filename";s:10:"attrreader";s:4:"path";s:21:"/declarations/methods";s:12:"is_inherited";s:1:"1";}i:28;a:7:{s:4:"name";s:14:"attr_writer ..";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:1:"w";s:4:"code";s:28:"attr_writer :${0:attr_names}";s:8:"filename";s:10:"attrwriter";s:4:"path";s:21:"/declarations/methods";s:12:"is_inherited";s:1:"1";}i:29;a:7:{s:4:"name";s:16:"def_delegator ..";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"defd";s:4:"code";s:60:"def_delegator :${1:@del_obj}, :${2:del_meth}, :${3:new_name}";s:8:"filename";s:12:"defdelegator";s:4:"path";s:21:"/declarations/methods";s:12:"is_inherited";s:1:"1";}i:30;a:7:{s:4:"name";s:17:"def_delegators ..";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"defds";s:4:"code";s:48:"def_delegators :${1:@del_obj}, :${0:del_methods}";s:8:"filename";s:13:"defdelegators";s:4:"path";s:21:"/declarations/methods";s:12:"is_inherited";s:1:"1";}i:31;a:7:{s:4:"name";s:25:"def method_missing .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"defmm";s:4:"code";s:45:"def method_missing(meth, *args, &blk)
+	$0
+end";s:8:"filename";s:19:"defmethodmissingend";s:4:"path";s:21:"/declarations/methods";s:12:"is_inherited";s:1:"1";}i:32;a:7:{s:4:"name";s:15:"def self .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"defs";s:4:"code";s:39:"def self.${1:class_method_name}
+	$0
+end";s:8:"filename";s:10:"defselfend";s:4:"path";s:21:"/declarations/methods";s:12:"is_inherited";s:1:"1";}i:33;a:7:{s:4:"name";s:18:"extend Forwardable";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"Forw-";s:4:"code";s:18:"extend Forwardable";s:8:"filename";s:17:"extendforwardable";s:4:"path";s:21:"/declarations/methods";s:12:"is_inherited";s:1:"1";}i:34;a:7:{s:4:"name";s:21:"include Comparable ..";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"Comp";s:4:"code";s:42:"include Comparable
+
+def <=>(other)
+	$0
+end";s:8:"filename";s:17:"includecomparable";s:4:"path";s:21:"/declarations/methods";s:12:"is_inherited";s:1:"1";}i:35;a:7:{s:4:"name";s:21:"include Enumerable ..";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"Enum";s:4:"code";s:44:"include Enumerable
+
+def each(&block)
+	$0
+end";s:8:"filename";s:17:"includeenumerable";s:4:"path";s:21:"/declarations/methods";s:12:"is_inherited";s:1:"1";}i:36;a:7:{s:4:"name";s:14:"unless … end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"unless";s:4:"code";s:29:"unless ${1:condition}
+	$0
+end";s:8:"filename";s:9:"unlessend";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:37;a:7:{s:4:"name";s:13:"until ... end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"until";s:4:"code";s:28:"until ${1:condition}
+	$0
+end";s:8:"filename";s:8:"untilend";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:38;a:7:{s:4:"name";s:10:"usage_if()";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"usai";s:4:"code";s:67:"if ARGV.$1
+	abort "Usage:  #{\$PROGRAM_NAME} ${2:ARGS_GO_HERE}"
+end";s:8:"filename";s:7:"usageif";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:39;a:7:{s:4:"name";s:14:"usage_unless()";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"usau";s:4:"code";s:71:"unless ARGV.$1
+	abort "Usage:  #{\$PROGRAM_NAME} ${2:ARGS_GO_HERE}"
+end";s:8:"filename";s:11:"usageunless";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:40;a:7:{s:4:"name";s:24:"#!/usr/bin/env ruby -wKU";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"rb";s:4:"code";s:25:"#!/usr/bin/env ruby -wKU
+";s:8:"filename";s:16:"usrbinenvrubywku";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:41;a:7:{s:4:"name";s:8:"when …";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"when";s:4:"code";s:23:"when ${1:condition}
+	$0";s:8:"filename";s:4:"when";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:42;a:7:{s:4:"name";s:13:"while ... end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"while";s:4:"code";s:28:"while ${1:condition}
+	$0
+end";s:8:"filename";s:8:"whileend";s:4:"path";s:13:"/declarations";s:12:"is_inherited";s:1:"1";}i:43;a:5:{s:4:"name";s:6:"Hashes";s:8:"filename";s:6:"hashes";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";s:12:"is_inherited";s:1:"1";}i:44;a:7:{s:4:"name";s:39:"Hash.new { |hash, key| hash[key] = .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"Hash";s:4:"code";s:59:"Hash.new { |${1:hash}, ${2:key}| ${1:hash}[${2:key}] = $0 }";s:8:"filename";s:21:"hashnewhashkeyhashkey";s:4:"path";s:7:"/hashes";s:12:"is_inherited";s:1:"1";}i:45;a:7:{s:4:"name";s:29:"Hash Pair — :key => "value"";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:1:":";s:4:"code";s:37:":${1:key} => ${2:"${3:value}"}${4:, }";s:8:"filename";s:16:"hashpairkeyvalue";s:4:"path";s:7:"/hashes";s:12:"is_inherited";s:1:"1";}i:46;a:7:{s:4:"name";s:19:"Hash Pointer — =>";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:0:"";s:4:"code";s:4:" => ";s:8:"filename";s:11:"hashpointer";s:4:"path";s:7:"/hashes";s:12:"is_inherited";s:1:"1";}i:47;a:5:{s:4:"name";s:6:"Idioms";s:8:"filename";s:6:"idioms";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";s:12:"is_inherited";s:1:"1";}i:48;a:7:{s:4:"name";s:17:"class_from_name()";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"clafn";s:4:"code";s:64:"split("::").inject(Object) { |par, const| par.const_get(const) }";s:8:"filename";s:13:"classfromname";s:4:"path";s:7:"/idioms";s:12:"is_inherited";s:1:"1";}i:49;a:7:{s:4:"name";s:13:"deep_copy(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"deec";s:4:"code";s:44:"Marshal.load(Marshal.dump(${0:obj_to_copy}))";s:8:"filename";s:8:"deepcopy";s:4:"path";s:7:"/idioms";s:12:"is_inherited";s:1:"1";}i:50;a:7:{s:4:"name";s:20:"path_from_here( .. )";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"patfh";s:4:"code";s:58:"File.join(File.dirname(__FILE__), *%w[${1:rel path here}])";s:8:"filename";s:12:"pathfromhere";s:4:"path";s:7:"/idioms";s:12:"is_inherited";s:1:"1";}i:51;a:7:{s:4:"name";s:17:"singleton_class()";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"sinc";s:4:"code";s:23:"class << self; self end";s:8:"filename";s:14:"singletonclass";s:4:"path";s:7:"/idioms";s:12:"is_inherited";s:1:"1";}i:52;a:5:{s:4:"name";s:9:"Iterators";s:8:"filename";s:9:"iterators";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";s:12:"is_inherited";s:1:"1";}i:53;a:5:{s:4:"name";s:6:"Arrays";s:8:"filename";s:6:"arrays";s:13:"is_collection";s:1:"1";s:4:"path";s:10:"/iterators";s:12:"is_inherited";s:1:"1";}i:54;a:7:{s:4:"name";s:24:"Array.new(10) { |i| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"Array";s:4:"code";s:190:"Array.new(${1:10}) { ${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:|)/}${2:i}${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:| )/}$0 }";s:8:"filename";s:11:"arraynew10i";s:4:"path";s:17:"/iterators/arrays";s:12:"is_inherited";s:1:"1";}i:55;a:7:{s:4:"name";s:20:"delete_if { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"deli";s:4:"code";s:25:"delete_if { |${1:e}| $0 }";s:8:"filename";s:9:"deleteife";s:4:"path";s:17:"/iterators/arrays";s:12:"is_inherited";s:1:"1";}i:56;a:7:{s:4:"name";s:22:"fill(range) { |i| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"fil";s:4:"code";s:188:"fill(${1:range}) { ${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:|)/}${2:i}${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:| )/}$0 }";s:8:"filename";s:10:"fillrangei";s:4:"path";s:17:"/iterators/arrays";s:12:"is_inherited";s:1:"1";}i:57;a:7:{s:4:"name";s:14:"flatten_once()";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"flao";s:4:"code";s:63:"inject(Array.new) { |${1:arr}, ${2:a}| ${1:arr}.push(*${2:a}) }";s:8:"filename";s:11:"flattenonce";s:4:"path";s:17:"/iterators/arrays";s:12:"is_inherited";s:1:"1";}i:58;a:7:{s:4:"name";s:23:"zip(enums) { |row| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"zip";s:4:"code";s:33:"zip(${1:enums}) { |${2:row}| $0 }";s:8:"filename";s:11:"zipenumsrow";s:4:"path";s:17:"/iterators/arrays";s:12:"is_inherited";s:1:"1";}i:59;a:5:{s:4:"name";s:8:"Counting";s:8:"filename";s:8:"counting";s:13:"is_collection";s:1:"1";s:4:"path";s:10:"/iterators";s:12:"is_inherited";s:1:"1";}i:60;a:7:{s:4:"name";s:20:"downto(0) { |n| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"dow";s:4:"code";s:186:"downto(${1:0}) { ${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:|)/}${2:n}${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:| )/}$0 }";s:8:"filename";s:8:"downto0n";s:4:"path";s:19:"/iterators/counting";s:12:"is_inherited";s:1:"1";}i:61;a:7:{s:4:"name";s:11:"loop { .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"loo";s:4:"code";s:11:"loop { $0 }";s:8:"filename";s:4:"loop";s:4:"path";s:19:"/iterators/counting";s:12:"is_inherited";s:1:"1";}i:62;a:7:{s:4:"name";s:18:"step(2) { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"ste";s:4:"code";s:184:"step(${1:2}) { ${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:|)/}${2:n}${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:| )/}$0 }";s:8:"filename";s:6:"step2e";s:4:"path";s:19:"/iterators/counting";s:12:"is_inherited";s:1:"1";}i:63;a:7:{s:4:"name";s:16:"times { |n| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"tim";s:4:"code";s:177:"times { ${1/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:|)/}${1:n}${1/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:| )/}$0 }";s:8:"filename";s:6:"timesn";s:4:"path";s:19:"/iterators/counting";s:12:"is_inherited";s:1:"1";}i:64;a:7:{s:4:"name";s:24:"upto(1.0/0.0) { |n| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"upt";s:4:"code";s:190:"upto(${1:1.0/0.0}) { ${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:|)/}${2:n}${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:| )/}$0 }";s:8:"filename";s:9:"upto1000n";s:4:"path";s:19:"/iterators/counting";s:12:"is_inherited";s:1:"1";}i:65;a:5:{s:4:"name";s:12:"Each Element";s:8:"filename";s:11:"eachelement";s:13:"is_collection";s:1:"1";s:4:"path";s:10:"/iterators";s:12:"is_inherited";s:1:"1";}i:66;a:7:{s:4:"name";s:23:"each_byte { |byte| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"eab";s:4:"code";s:28:"each_byte { |${1:byte}| $0 }";s:8:"filename";s:12:"eachbytebyte";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:67;a:7:{s:4:"name";s:22:"each_char { |chr| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"eac-";s:4:"code";s:27:"each_char { |${1:chr}| $0 }";s:8:"filename";s:11:"eachcharchr";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:68;a:7:{s:4:"name";s:28:"each_cons(..) { |group| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"eac-";s:4:"code";s:37:"each_cons(${1:2}) { |${2:group}| $0 }";s:8:"filename";s:13:"eachconsgroup";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:69;a:7:{s:4:"name";s:15:"each { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"ea";s:4:"code";s:20:"each { |${1:e}| $0 }";s:8:"filename";s:5:"eache";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:70;a:7:{s:4:"name";s:21:"each_index { |i| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"eai";s:4:"code";s:26:"each_index { |${1:i}| $0 }";s:8:"filename";s:10:"eachindexi";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:71;a:7:{s:4:"name";s:21:"each_key { |key| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"eak";s:4:"code";s:26:"each_key { |${1:key}| $0 }";s:8:"filename";s:10:"eachkeykey";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:72;a:7:{s:4:"name";s:23:"each_line { |line| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"eal";s:4:"code";s:30:"each_line$1 { |${2:line}| $0 }";s:8:"filename";s:12:"eachlineline";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:73;a:7:{s:4:"name";s:28:"each_pair { |name, val| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"eap";s:4:"code";s:38:"each_pair { |${1:name}, ${2:val}| $0 }";s:8:"filename";s:15:"eachpairnameval";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:74;a:7:{s:4:"name";s:29:"each_slice(..) { |group| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"eas-";s:4:"code";s:38:"each_slice(${1:2}) { |${2:group}| $0 }";s:8:"filename";s:14:"eachslicegroup";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:75;a:7:{s:4:"name";s:23:"each_value { |val| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"eav";s:4:"code";s:28:"each_value { |${1:val}| $0 }";s:8:"filename";s:12:"eachvalueval";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:76;a:7:{s:4:"name";s:29:"each_with_index { |e, i| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"eawi";s:4:"code";s:39:"each_with_index { |${1:e}, ${2:i}| $0 }";s:8:"filename";s:15:"eachwithindexei";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:77;a:7:{s:4:"name";s:30:"inject(init) { |mem, var| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"inj";s:4:"code";s:63:"inject${1/.+/(/}${1:init}${1/.+/)/} { |${2:mem}, ${3:var}| $0 }";s:8:"filename";s:16:"injectinitmemvar";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:78;a:7:{s:4:"name";s:14:"map { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"map";s:4:"code";s:19:"map { |${1:e}| $0 }";s:8:"filename";s:4:"mape";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:79;a:7:{s:4:"name";s:28:"map_with_index { |e, i| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"mapwi-";s:4:"code";s:43:"enum_with_index.map { |${1:e}, ${2:i}| $0 }";s:8:"filename";s:14:"mapwithindexei";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:80;a:7:{s:4:"name";s:23:"reverse_each { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"reve";s:4:"code";s:28:"reverse_each { |${1:e}| $0 }";s:8:"filename";s:12:"reverseeache";s:4:"path";s:22:"/iterators/eachelement";s:12:"is_inherited";s:1:"1";}i:81;a:5:{s:4:"name";s:5:"Files";s:8:"filename";s:5:"files";s:13:"is_collection";s:1:"1";s:4:"path";s:10:"/iterators";s:12:"is_inherited";s:1:"1";}i:82;a:7:{s:4:"name";s:10:"option(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"opt";s:4:"code";s:145:"opts.on( "-${1:o}", "--${2:long-option-name}"${3/^\s*$|(.*\S.*)/(?1:, )/}${3:String},
+         "${4:Option description.}" ) do |${6:opt}|
+	$0
+end";s:8:"filename";s:6:"option";s:4:"path";s:16:"/iterators/files";s:12:"is_inherited";s:1:"1";}i:83;a:7:{s:4:"name";s:19:"option_parse { .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"optp";s:4:"code";s:436:"require "optparse"
+
+options = {${1::default => "args"}}
+
+ARGV.options do |opts|
+	opts.banner = "Usage:  #{File.basename(\$PROGRAM_NAME)} [OPTIONS]${2/^\s*$|(.*\S.*)/(?1: )/}${2:OTHER_ARGS}"
+	
+	opts.separator ""
+	opts.separator "Specific Options:"
+	
+	$0
+	
+	opts.separator "Common Options:"
+	
+	opts.on( "-h", "--help",
+	         "Show this message." ) do
+		puts opts
+		exit
+	end
+	
+	begin
+		opts.parse!
+	rescue
+		puts opts
+		exit
+	end
+end
+";s:8:"filename";s:11:"optionparse";s:4:"path";s:16:"/iterators/files";s:12:"is_inherited";s:1:"1";}i:84;a:7:{s:4:"name";s:18:"unix_filter { .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"uni";s:4:"code";s:39:"ARGF.each_line$1 do |${2:line}|
+	$0
+end";s:8:"filename";s:10:"unixfilter";s:4:"path";s:16:"/iterators/files";s:12:"is_inherited";s:1:"1";}i:85;a:5:{s:4:"name";s:8:"Ordering";s:8:"filename";s:8:"ordering";s:13:"is_collection";s:1:"1";s:4:"path";s:10:"/iterators";s:12:"is_inherited";s:1:"1";}i:86;a:7:{s:4:"name";s:11:"randomize()";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"ran";s:4:"code";s:16:"sort_by { rand }";s:8:"filename";s:9:"randomize";s:4:"path";s:19:"/iterators/ordering";s:12:"is_inherited";s:1:"1";}i:87;a:7:{s:4:"name";s:18:"sort { |a, b| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"sor";s:4:"code";s:18:"sort { |a, b| $0 }";s:8:"filename";s:6:"sortab";s:4:"path";s:19:"/iterators/ordering";s:12:"is_inherited";s:1:"1";}i:88;a:7:{s:4:"name";s:18:"sort_by { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"sorb";s:4:"code";s:23:"sort_by { |${1:e}| $0 }";s:8:"filename";s:7:"sortbye";s:4:"path";s:19:"/iterators/ordering";s:12:"is_inherited";s:1:"1";}i:89;a:5:{s:4:"name";s:23:"Searching and Selection";s:8:"filename";s:21:"searchingandselection";s:13:"is_collection";s:1:"1";s:4:"path";s:10:"/iterators";s:12:"is_inherited";s:1:"1";}i:90;a:7:{s:4:"name";s:15:"all? { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"all";s:4:"code";s:20:"all? { |${1:e}| $0 }";s:8:"filename";s:4:"alle";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:91;a:7:{s:4:"name";s:15:"any? { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"any";s:4:"code";s:20:"any? { |${1:e}| $0 }";s:8:"filename";s:4:"anye";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:92;a:7:{s:4:"name";s:19:"classify { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"cl";s:4:"code";s:24:"classify { |${1:e}| $0 }";s:8:"filename";s:9:"classifye";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:93;a:7:{s:4:"name";s:18:"collect { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"col";s:4:"code";s:23:"collect { |${1:e}| $0 }";s:8:"filename";s:8:"collecte";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:94;a:7:{s:4:"name";s:17:"detect { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"det";s:4:"code";s:22:"detect { |${1:e}| $0 }";s:8:"filename";s:7:"detecte";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:95;a:7:{s:4:"name";s:24:"fetch(name) { |key| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"fet";s:4:"code";s:190:"fetch(${1:name}) { ${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:|)/}${2:key}${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:| )/}$0 }";s:8:"filename";s:12:"fetchnamekey";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:96;a:7:{s:4:"name";s:19:"find_all { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"fina";s:4:"code";s:24:"find_all { |${1:e}| $0 }";s:8:"filename";s:8:"findalle";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:97;a:7:{s:4:"name";s:15:"find { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"fin";s:4:"code";s:20:"find { |${1:e}| $0 }";s:8:"filename";s:5:"finde";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:98;a:7:{s:4:"name";s:30:"grep(/pattern/) { |match| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"gre";s:4:"code";s:45:"grep(${1:/${2:pattern}/}) { |${3:match}| $0 }";s:8:"filename";s:16:"greppatternmatch";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:99;a:7:{s:4:"name";s:17:"max { |a, b| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"max";s:4:"code";s:17:"max { |a, b| $0 }";s:8:"filename";s:5:"maxab";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:100;a:7:{s:4:"name";s:17:"min { |a, b| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"min";s:4:"code";s:17:"min { |a, b| $0 }";s:8:"filename";s:5:"minab";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:101;a:7:{s:4:"name";s:20:"partition { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"par";s:4:"code";s:25:"partition { |${1:e}| $0 }";s:8:"filename";s:10:"partitione";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:102;a:7:{s:4:"name";s:17:"reject { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rej";s:4:"code";s:22:"reject { |${1:e}| $0 }";s:8:"filename";s:7:"rejecte";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:103;a:7:{s:4:"name";s:17:"select { |e| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"sel";s:4:"code";s:22:"select { |${1:e}| $0 }";s:8:"filename";s:7:"selecte";s:4:"path";s:32:"/iterators/searchingandselection";s:12:"is_inherited";s:1:"1";}i:104;a:5:{s:4:"name";s:7:"Strings";s:8:"filename";s:7:"strings";s:13:"is_collection";s:1:"1";s:4:"path";s:10:"/iterators";s:12:"is_inherited";s:1:"1";}i:105;a:7:{s:4:"name";s:25:"gsub(/../) { |match| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"gsu";s:4:"code";s:196:"gsub(/${1:pattern}/) { ${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:|)/}${2:match}${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:| )/}$0 }";s:8:"filename";s:9:"gsubmatch";s:4:"path";s:18:"/iterators/strings";s:12:"is_inherited";s:1:"1";}i:106;a:7:{s:4:"name";s:25:"scan(/../) { |match| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"sca";s:4:"code";s:40:"scan(/${1:pattern}/) { |${2:match}| $0 }";s:8:"filename";s:9:"scanmatch";s:4:"path";s:18:"/iterators/strings";s:12:"is_inherited";s:1:"1";}i:107;a:7:{s:4:"name";s:24:"sub(/../) { |match| .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"sub";s:4:"code";s:195:"sub(/${1:pattern}/) { ${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:|)/}${2:match}${2/(^(?<var>\s*(?:\*|\*?[a-z_])[a-zA-Z0-9_]*\s*)(,\g<var>)*,?\s*$)|.*/(?1:| )/}$0 }";s:8:"filename";s:8:"submatch";s:4:"path";s:18:"/iterators/strings";s:12:"is_inherited";s:1:"1";}i:108;a:5:{s:4:"name";s:4:"RDoc";s:8:"filename";s:4:"rdoc";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";s:12:"is_inherited";s:1:"1";}i:109;a:5:{s:4:"name";s:6:"Format";s:8:"filename";s:6:"format";s:13:"is_collection";s:1:"1";s:4:"path";s:5:"/rdoc";s:12:"is_inherited";s:1:"1";}i:110;a:7:{s:4:"name";s:9:"New Block";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"=b";s:4:"code";s:62:"`[[ $AMY_LINE_INDEX != 0 ]] && echo; echo`=begin rdoc
+	$0
+=end";s:8:"filename";s:8:"newblock";s:4:"path";s:5:"/rdoc";s:12:"is_inherited";s:1:"1";}i:111;a:7:{s:4:"name";s:8:":yields:";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:1:"y";s:4:"code";s:24:" :yields: ${0:arguments}";s:8:"filename";s:6:"yields";s:4:"path";s:5:"/rdoc";s:12:"is_inherited";s:1:"1";}i:112;a:5:{s:4:"name";s:13:"Serialization";s:8:"filename";s:13:"serialization";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";s:12:"is_inherited";s:1:"1";}i:113;a:7:{s:4:"name";s:22:"Marshal.dump(.., file)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"Md";s:4:"code";s:95:"File.open(${1:"${2:path/to/file}.dump"}, "w") { |${3:file}| Marshal.dump(${4:obj}, ${3:file}) }";s:8:"filename";s:15:"marshaldumpfile";s:4:"path";s:14:"/serialization";s:12:"is_inherited";s:1:"1";}i:114;a:7:{s:4:"name";s:17:"Marshal.load(obj)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"Ml";s:4:"code";s:80:"File.open(${1:"${2:path/to/file}.dump"}) { |${3:file}| Marshal.load(${3:file}) }";s:8:"filename";s:14:"marshalloadobj";s:4:"path";s:14:"/serialization";s:12:"is_inherited";s:1:"1";}i:115;a:7:{s:4:"name";s:16:"PStore.new( .. )";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"Pn-";s:4:"code";s:40:"PStore.new(${1:"${2:file_name.pstore}"})";s:8:"filename";s:9:"pstorenew";s:4:"path";s:14:"/serialization";s:12:"is_inherited";s:1:"1";}i:116;a:7:{s:4:"name";s:24:"transaction( .. ) { .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"tra";s:4:"code";s:81:"transaction${1/(^.*?\S.*)|.*/(?1:\()/}${1:true}${1/(^.*?\S.*)|.*/(?1:\))/} { $0 }";s:8:"filename";s:11:"transaction";s:4:"path";s:14:"/serialization";s:12:"is_inherited";s:1:"1";}i:117;a:7:{s:4:"name";s:19:"YAML.dump(.., file)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"Yd-";s:4:"code";s:92:"File.open(${1:"${2:path/to/file}.yaml"}, "w") { |${3:file}| YAML.dump(${4:obj}, ${3:file}) }";s:8:"filename";s:12:"yamldumpfile";s:4:"path";s:14:"/serialization";s:12:"is_inherited";s:1:"1";}i:118;a:7:{s:4:"name";s:15:"YAML.load(file)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"Yl-";s:4:"code";s:77:"File.open(${1:"${2:path/to/file}.yaml"}) { |${3:file}| YAML.load(${3:file}) }";s:8:"filename";s:12:"yamlloadfile";s:4:"path";s:14:"/serialization";s:12:"is_inherited";s:1:"1";}i:119;a:5:{s:4:"name";s:5:"Tests";s:8:"filename";s:5:"tests";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";s:12:"is_inherited";s:1:"1";}i:120;a:7:{s:4:"name";s:10:"assert(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"as";s:4:"code";s:80:"assert`snippet_paren.rb`${1:test}, "${0:Failure message.}"`snippet_paren.rb end`";s:8:"filename";s:6:"assert";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:121;a:7:{s:4:"name";s:16:"assert_equal(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"ase";s:4:"code";s:78:"assert_equal`snippet_paren.rb`${1:expected}, ${0:actual}`snippet_paren.rb end`";s:8:"filename";s:11:"assertequal";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:122;a:7:{s:4:"name";s:19:"assert_in_delta(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"asid";s:4:"code";s:108:"assert_in_delta`snippet_paren.rb`${1:expected_float}, ${2:actual_float}, ${0:2 ** -20}`snippet_paren.rb end`";s:8:"filename";s:13:"assertindelta";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:123;a:7:{s:4:"name";s:22:"assert_instance_of(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"asio";s:4:"code";s:98:"assert_instance_of`snippet_paren.rb`${1:ExpectedClass}, ${0:actual_instance}`snippet_paren.rb end`";s:8:"filename";s:16:"assertinstanceof";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:124;a:7:{s:4:"name";s:18:"assert_kind_of(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"asko";s:4:"code";s:93:"assert_kind_of`snippet_paren.rb`${1:ExpectedKind}, ${0:actual_instance}`snippet_paren.rb end`";s:8:"filename";s:12:"assertkindof";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:125;a:7:{s:4:"name";s:16:"assert_match(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"asm";s:4:"code";s:95:"assert_match`snippet_paren.rb`/${1:expected_pattern}/, ${0:actual_string}`snippet_paren.rb end`";s:8:"filename";s:11:"assertmatch";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:126;a:7:{s:4:"name";s:14:"assert_nil(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"asn";s:4:"code";s:63:"assert_nil`snippet_paren.rb`${0:instance}`snippet_paren.rb end`";s:8:"filename";s:9:"assertnil";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:127;a:7:{s:4:"name";s:19:"assert_no_match(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"asnm";s:4:"code";s:100:"assert_no_match`snippet_paren.rb`/${1:unexpected_pattern}/, ${0:actual_string}`snippet_paren.rb end`";s:8:"filename";s:13:"assertnomatch";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:128;a:7:{s:4:"name";s:20:"assert_not_equal(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"asne";s:4:"code";s:84:"assert_not_equal`snippet_paren.rb`${1:unexpected}, ${0:actual}`snippet_paren.rb end`";s:8:"filename";s:14:"assertnotequal";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:129;a:7:{s:4:"name";s:32:"assert_nothing_raised(..) { .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"asnr";s:4:"code";s:44:"assert_nothing_raised(${1:Exception}) { $0 }";s:8:"filename";s:19:"assertnothingraised";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:130;a:7:{s:4:"name";s:28:"assert_nothing_thrown { .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"asnt";s:4:"code";s:28:"assert_nothing_thrown { $0 }";s:8:"filename";s:19:"assertnothingthrown";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:131;a:7:{s:4:"name";s:18:"assert_not_nil(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"asnn";s:4:"code";s:67:"assert_not_nil`snippet_paren.rb`${0:instance}`snippet_paren.rb end`";s:8:"filename";s:12:"assertnotnil";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:132;a:7:{s:4:"name";s:19:"assert_not_same(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"asns";s:4:"code";s:83:"assert_not_same`snippet_paren.rb`${1:unexpected}, ${0:actual}`snippet_paren.rb end`";s:8:"filename";s:13:"assertnotsame";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:133;a:7:{s:4:"name";s:19:"assert_operator(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"aso";s:4:"code";s:92:"assert_operator`snippet_paren.rb`${1:left}, :${2:operator}, ${0:right}`snippet_paren.rb end`";s:8:"filename";s:14:"assertoperator";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:134;a:7:{s:4:"name";s:23:"assert_raise(..) { .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"asr";s:4:"code";s:35:"assert_raise(${1:Exception}) { $0 }";s:8:"filename";s:11:"assertraise";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:135;a:7:{s:4:"name";s:21:"assert_respond_to(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"asrt";s:4:"code";s:82:"assert_respond_to`snippet_paren.rb`${1:object}, :${0:method}`snippet_paren.rb end`";s:8:"filename";s:15:"assertrespondto";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:136;a:7:{s:4:"name";s:15:"assert_same(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"ass";s:4:"code";s:77:"assert_same`snippet_paren.rb`${1:expected}, ${0:actual}`snippet_paren.rb end`";s:8:"filename";s:10:"assertsame";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:137;a:7:{s:4:"name";s:15:"assert_send(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"ass";s:4:"code";s:90:"assert_send`snippet_paren.rb`[${1:object}, :${2:message}, ${0:args}]`snippet_paren.rb end`";s:8:"filename";s:10:"assertsend";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:138;a:7:{s:4:"name";s:24:"assert_throws(..) { .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"ast";s:4:"code";s:36:"assert_throws(:${1:expected}) { $0 }";s:8:"filename";s:12:"assertthrows";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:139;a:7:{s:4:"name";s:24:"Benchmark.bmbm do .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"bm-";s:4:"code";s:56:"TESTS = ${1:10_000}
+Benchmark.bmbm do |results|
+  $0
+end";s:8:"filename";s:18:"benchmarkbmbmdoend";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:140;a:7:{s:4:"name";s:38:"class .. < Test::Unit::TestCase .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"tc";s:4:"code";s:159:"require "test/unit"
+
+require "${1:library_file_name}"
+
+class Test${2:${1/([\w&&[^_]]+)|./\u$1/g}} < Test::Unit::TestCase
+	def test_${3:case_name}
+		$0
+	end
+end";s:8:"filename";s:24:"classtestunittestcaseend";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:141;a:7:{s:4:"name";s:16:"def test_ .. end";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"deft";s:4:"code";s:31:"def test_${1:case_name}
+	$0
+end";s:8:"filename";s:10:"deftestend";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:142;a:7:{s:4:"name";s:9:"flunk(..)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"fl";s:4:"code";s:68:"flunk`snippet_paren.rb`"${0:Failure message.}"`snippet_paren.rb end`";s:8:"filename";s:5:"flunk";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:143;a:7:{s:4:"name";s:25:"results.report(..) { .. }";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rep";s:4:"code";s:51:"results.report("${1:name}:") { TESTS.times { $0 } }";s:8:"filename";s:13:"resultsreport";s:4:"path";s:6:"/tests";s:12:"is_inherited";s:1:"1";}i:144;a:4:{s:4:"name";s:11:"Controllers";s:8:"filename";s:11:"controllers";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:145;a:6:{s:4:"name";s:10:"flash[…]";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"flash";s:4:"code";s:54:"flash[:${1:notice}] = "${2:Successfully created...}"$0";s:8:"filename";s:5:"flash";s:4:"path";s:12:"/controllers";}i:146;a:6:{s:4:"name";s:20:"redirect_to (action)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rea";s:4:"code";s:35:"redirect_to :action => "${1:index}"";s:8:"filename";s:16:"redirecttoaction";s:4:"path";s:12:"/controllers";}i:147;a:6:{s:4:"name";s:24:"redirect_to (action, id)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"reai";s:4:"code";s:53:"redirect_to :action => "${1:show}", :id => ${0:@item}";s:8:"filename";s:18:"redirecttoactionid";s:4:"path";s:12:"/controllers";}i:148;a:6:{s:4:"name";s:24:"redirect_to (controller)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rec";s:4:"code";s:39:"redirect_to :controller => "${1:items}"";s:8:"filename";s:20:"redirecttocontroller";s:4:"path";s:12:"/controllers";}i:149;a:6:{s:4:"name";s:32:"redirect_to (controller, action)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"reca";s:4:"code";s:63:"redirect_to :controller => "${1:items}", :action => "${2:list}"";s:8:"filename";s:26:"redirecttocontrolleraction";s:4:"path";s:12:"/controllers";}i:150;a:6:{s:4:"name";s:36:"redirect_to (controller, action, id)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"recai";s:4:"code";s:82:"redirect_to :controller => "${1:items}", :action => "${2:show}", :id => ${0:@item}";s:8:"filename";s:28:"redirecttocontrolleractionid";s:4:"path";s:12:"/controllers";}i:151;a:6:{s:4:"name";s:15:"render (action)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"ra";s:4:"code";s:31:"render :action => "${1:action}"";s:8:"filename";s:12:"renderaction";s:4:"path";s:12:"/controllers";}i:152;a:6:{s:4:"name";s:23:"render (action, layout)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"ral";s:4:"code";s:61:"render :action => "${1:action}", :layout => "${2:layoutname}"";s:8:"filename";s:18:"renderactionlayout";s:4:"path";s:12:"/controllers";}i:153;a:6:{s:4:"name";s:25:"render_component (action)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"rcea";s:4:"code";s:40:"render_component :action => "${1:index}"";s:8:"filename";s:21:"rendercomponentaction";s:4:"path";s:12:"/controllers";}i:154;a:6:{s:4:"name";s:29:"render_component (controller)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"rcec";s:4:"code";s:44:"render_component :controller => "${1:items}"";s:8:"filename";s:25:"rendercomponentcontroller";s:4:"path";s:12:"/controllers";}i:155;a:6:{s:4:"name";s:37:"render_component (controller, action)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"rceca";s:4:"code";s:69:"render_component :controller => "${1:items}", :action => "${2:index}"";s:8:"filename";s:31:"rendercomponentcontrolleraction";s:4:"path";s:12:"/controllers";}i:156;a:6:{s:4:"name";s:13:"render (file)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"rf";s:4:"code";s:31:"render :file => "${1:filepath}"";s:8:"filename";s:10:"renderfile";s:4:"path";s:12:"/controllers";}i:157;a:6:{s:4:"name";s:28:"render (file, use_full_path)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rfu";s:4:"code";s:61:"render :file => "${1:filepath}", :use_full_path => ${2:false}";s:8:"filename";s:21:"renderfileusefullpath";s:4:"path";s:12:"/controllers";}i:158;a:6:{s:4:"name";s:15:"render (inline)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"ri";s:4:"code";s:39:"render :inline => "${1:<%= 'hello' %>}"";s:8:"filename";s:12:"renderinline";s:4:"path";s:12:"/controllers";}i:159;a:6:{s:4:"name";s:23:"render (inline, locals)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"ril";s:4:"code";s:84:"render :inline => "${1:<%= 'hello' %>}", :locals => { ${2::name} => "${3:value}"$4 }";s:8:"filename";s:18:"renderinlinelocals";s:4:"path";s:12:"/controllers";}i:160;a:6:{s:4:"name";s:21:"render (inline, type)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rit";s:4:"code";s:60:"render :inline => "${1:<%= 'hello' %>}", :type => ${2::rxml}";s:8:"filename";s:16:"renderinlinetype";s:4:"path";s:12:"/controllers";}i:161;a:6:{s:4:"name";s:15:"render (layout)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"rl";s:4:"code";s:35:"render :layout => "${1:layoutname}"";s:8:"filename";s:12:"renderlayout";s:4:"path";s:12:"/controllers";}i:162;a:6:{s:4:"name";s:16:"render (nothing)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"rn";s:4:"code";s:28:"render :nothing => ${1:true}";s:8:"filename";s:13:"rendernothing";s:4:"path";s:12:"/controllers";}i:163;a:6:{s:4:"name";s:24:"render (nothing, status)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rns";s:4:"code";s:49:"render :nothing => ${1:true}, :status => ${2:401}";s:8:"filename";s:19:"rendernothingstatus";s:4:"path";s:12:"/controllers";}i:164;a:6:{s:4:"name";s:16:"render (partial)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"rp";s:4:"code";s:30:"render :partial => "${1:item}"";s:8:"filename";s:13:"renderpartial";s:4:"path";s:12:"/controllers";}i:165;a:6:{s:4:"name";s:28:"render (partial, collection)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rpc";s:4:"code";s:57:"render :partial => "${1:item}", :collection => ${2:items}";s:8:"filename";s:23:"renderpartialcollection";s:4:"path";s:12:"/controllers";}i:166;a:6:{s:4:"name";s:24:"render (partial, locals)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rpl";s:4:"code";s:75:"render :partial => "${1:item}", :locals => { :${2:name} => "${3:value}"$4 }";s:8:"filename";s:19:"renderpartiallocals";s:4:"path";s:12:"/controllers";}i:167;a:6:{s:4:"name";s:24:"render (partial, object)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rpo";s:4:"code";s:54:"render :partial => "${1:item}", :object => ${2:object}";s:8:"filename";s:19:"renderpartialobject";s:4:"path";s:12:"/controllers";}i:168;a:6:{s:4:"name";s:24:"render (partial, status)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rps";s:4:"code";s:51:"render :partial => "${1:item}", :status => ${2:500}";s:8:"filename";s:19:"renderpartialstatus";s:4:"path";s:12:"/controllers";}i:169;a:6:{s:4:"name";s:13:"render (text)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"rt";s:4:"code";s:40:"render :text => "${1:text to render...}"";s:8:"filename";s:10:"rendertext";s:4:"path";s:12:"/controllers";}i:170;a:6:{s:4:"name";s:21:"render (text, layout)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rtl";s:4:"code";s:70:"render :text => "${1:text to render...}", :layout => "${2:layoutname}"";s:8:"filename";s:16:"rendertextlayout";s:4:"path";s:12:"/controllers";}i:171;a:6:{s:4:"name";s:29:"render (text, layout => true)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"rtlt";s:4:"code";s:62:"render :text => "${1:text to render...}", :layout => ${2:true}";s:8:"filename";s:20:"rendertextlayouttrue";s:4:"path";s:12:"/controllers";}i:172;a:6:{s:4:"name";s:21:"render (text, status)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rts";s:4:"code";s:61:"render :text => "${1:text to render...}", :status => ${2:401}";s:8:"filename";s:16:"rendertextstatus";s:4:"path";s:12:"/controllers";}i:173;a:6:{s:4:"name";s:19:"verify — redirect";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"verify";s:4:"code";s:100:"verify :only => [:$1], :session => :user, :params => :id, :redirect_to => {:action => '${2:index}'}
+";s:8:"filename";s:14:"verifyredirect";s:4:"path";s:12:"/controllers";}i:174;a:6:{s:4:"name";s:17:"verify — render";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:6:"verify";s:4:"code";s:95:"verify :only => [:$1], :method => :post, :render => {:status => 500, :text => "use HTTP-POST"}
+";s:8:"filename";s:12:"verifyrender";s:4:"path";s:12:"/controllers";}i:175;a:4:{s:4:"name";s:8:"Database";s:8:"filename";s:8:"database";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:176;a:4:{s:4:"name";s:13:"ERb Templates";s:8:"filename";s:12:"erbtemplates";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:177;a:6:{s:4:"name";s:8:"form_tag";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"ft";s:4:"code";s:40:"<%= form_tag :action => "${1:update}" %>";s:8:"filename";s:7:"formtag";s:4:"path";s:13:"/erbtemplates";}i:178;a:6:{s:4:"name";s:16:"link_to (action)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"lia";s:4:"code";s:59:"<%= link_to "${1:link text...}", :action => "${2:index}" %>";s:8:"filename";s:12:"linktoaction";s:4:"path";s:13:"/erbtemplates";}i:179;a:6:{s:4:"name";s:20:"link_to (action, id)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"liai";s:4:"code";s:77:"<%= link_to "${1:link text...}", :action => "${2:edit}", :id => ${3:@item} %>";s:8:"filename";s:14:"linktoactionid";s:4:"path";s:13:"/erbtemplates";}i:180;a:6:{s:4:"name";s:20:"link_to (controller)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"lic";s:4:"code";s:63:"<%= link_to "${1:link text...}", :controller => "${2:items}" %>";s:8:"filename";s:16:"linktocontroller";s:4:"path";s:13:"/erbtemplates";}i:181;a:6:{s:4:"name";s:28:"link_to (controller, action)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"lica";s:4:"code";s:88:"<%= link_to "${1:link text...}", :controller => "${2:items}", :action => "${3:index}" %>";s:8:"filename";s:22:"linktocontrolleraction";s:4:"path";s:13:"/erbtemplates";}i:182;a:6:{s:4:"name";s:32:"link_to (controller, action, id)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"licai";s:4:"code";s:106:"<%= link_to "${1:link text...}", :controller => "${2:items}", :action => "${3:edit}", :id => ${4:@item} %>";s:8:"filename";s:24:"linktocontrolleractionid";s:4:"path";s:13:"/erbtemplates";}i:183;a:6:{s:4:"name";s:15:"map(&:sym_proc)";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"mp";s:4:"code";s:14:"map(&:${1:id})";s:8:"filename";s:10:"mapsymproc";s:4:"path";s:13:"/erbtemplates";}i:184;a:4:{s:4:"name";s:5:"Go To";s:8:"filename";s:4:"goto";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:185;a:4:{s:4:"name";s:6:"Logger";s:8:"filename";s:6:"logger";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:186;a:6:{s:4:"name";s:12:"logger.debug";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"log";s:4:"code";s:29:"logger.debug "${1:message}"$0";s:8:"filename";s:11:"loggerdebug";s:4:"path";s:7:"/logger";}i:187;a:6:{s:4:"name";s:12:"logger.error";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"log";s:4:"code";s:29:"logger.error "${1:message}"$0";s:8:"filename";s:11:"loggererror";s:4:"path";s:7:"/logger";}i:188;a:6:{s:4:"name";s:12:"logger.fatal";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"log";s:4:"code";s:29:"logger.fatal "${1:message}"$0";s:8:"filename";s:11:"loggerfatal";s:4:"path";s:7:"/logger";}i:189;a:6:{s:4:"name";s:11:"logger.info";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"log";s:4:"code";s:28:"logger.info "${1:message}"$0";s:8:"filename";s:10:"loggerinfo";s:4:"path";s:7:"/logger";}i:190;a:6:{s:4:"name";s:11:"logger.warn";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"log";s:4:"code";s:28:"logger.warn "${1:message}"$0";s:8:"filename";s:10:"loggerwarn";s:4:"path";s:7:"/logger";}i:191;a:6:{s:4:"name";s:26:"RAILS_DEFAULT_LOGGER.debug";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"rdb";s:4:"code";s:43:"RAILS_DEFAULT_LOGGER.debug "${1:message}"$0";s:8:"filename";s:23:"railsdefaultloggerdebug";s:4:"path";s:7:"/logger";}i:192;a:4:{s:4:"name";s:10:"Migrations";s:8:"filename";s:10:"migrations";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:193;a:4:{s:4:"name";s:7:"Columns";s:8:"filename";s:7:"columns";s:13:"is_collection";s:1:"1";s:4:"path";s:11:"/migrations";}i:194;a:6:{s:4:"name";s:10:"Add Column";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"mcol";s:4:"code";s:50:"add_column :${1:table}, :${2:column}, :${3:string}";s:8:"filename";s:9:"addcolumn";s:4:"path";s:19:"/migrations/columns";}i:195;a:6:{s:4:"name";s:22:"Create Several Columns";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"mccc";s:4:"code";s:41:"t.column :${1:title}, :${2:string}
+mccc$0";s:8:"filename";s:20:"createseveralcolumns";s:4:"path";s:19:"/migrations/columns";}i:196;a:6:{s:4:"name";s:19:"Remove / Add Column";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"mcol";s:4:"code";s:85:"remove_column :${1:table}, :${2:column}${3: [press tab twice to generate add_column]}";s:8:"filename";s:15:"removeaddcolumn";s:4:"path";s:19:"/migrations/columns";}i:197;a:6:{s:4:"name";s:13:"Remove Column";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"mcol";s:4:"code";s:39:"remove_column :${1:table}, :${2:column}";s:8:"filename";s:12:"removecolumn";s:4:"path";s:19:"/migrations/columns";}i:198;a:6:{s:4:"name";s:13:"Rename Column";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"mcol";s:4:"code";s:44:"rename_column :${1:column}, :${2:new_column}";s:8:"filename";s:12:"renamecolumn";s:4:"path";s:19:"/migrations/columns";}i:199;a:4:{s:4:"name";s:13:"Generate Code";s:8:"filename";s:12:"generatecode";s:13:"is_collection";s:1:"1";s:4:"path";s:11:"/migrations";}i:200;a:4:{s:4:"name";s:7:"Indexes";s:8:"filename";s:7:"indexes";s:13:"is_collection";s:1:"1";s:4:"path";s:11:"/migrations";}i:201;a:4:{s:4:"name";s:6:"Tables";s:8:"filename";s:6:"tables";s:13:"is_collection";s:1:"1";s:4:"path";s:11:"/migrations";}i:202;a:6:{s:4:"name";s:22:"Create Column in Table";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"mcol";s:4:"code";s:36:"t.column :${1:title}, :${2:string}$0";s:8:"filename";s:19:"createcolumnintable";s:4:"path";s:18:"/migrations/tables";}i:203;a:6:{s:4:"name";s:12:"Create Table";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"mtab";s:4:"code";s:42:"create_table :${1:table} do |t|
+    $0
+end";s:8:"filename";s:11:"createtable";s:4:"path";s:18:"/migrations/tables";}i:204;a:6:{s:4:"name";s:19:"Drop / Create Table";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"mtab";s:4:"code";s:70:"drop_table :${1:table}${2: [press tab twice to generate create_table]}";s:8:"filename";s:15:"dropcreatetable";s:4:"path";s:18:"/migrations/tables";}i:205;a:6:{s:4:"name";s:10:"Drop Table";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"mtab";s:4:"code";s:25:"drop_table :${1:table}
+$0";s:8:"filename";s:9:"droptable";s:4:"path";s:18:"/migrations/tables";}i:206;a:6:{s:4:"name";s:12:"Rename Table";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"mtab";s:4:"code";s:42:"rename_table :${1:table}, :${2:new_name}$0";s:8:"filename";s:11:"renametable";s:4:"path";s:18:"/migrations/tables";}i:207;a:4:{s:4:"name";s:6:"Models";s:8:"filename";s:6:"models";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:208;a:6:{s:4:"name";s:10:"belongs_to";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"bt";s:4:"code";s:93:"belongs_to :${1:object}${2:, :class_name => "${3:ClassName}", :foreign_key => "${4:${1}_id}"}";s:8:"filename";s:9:"belongsto";s:4:"path";s:7:"/models";}i:209;a:6:{s:4:"name";s:23:"has_and_belongs_to_many";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:5:"habtm";s:4:"code";s:107:"has_and_belongs_to_many :${1:object}${2:, :join_table => "${3:table_name}", :foreign_key => "${4:${1}_id}"}";s:8:"filename";s:19:"hasandbelongstomany";s:4:"path";s:7:"/models";}i:210;a:6:{s:4:"name";s:8:"has_many";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"hm";s:4:"code";s:92:"has_many :${1:objects}${2:, :class_name => "${3:ClassName}", :foreign_key => "${4:${1}_id}"}";s:8:"filename";s:7:"hasmany";s:4:"path";s:7:"/models";}i:211;a:6:{s:4:"name";s:7:"has_one";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"ho";s:4:"code";s:90:"has_one :${1:object}${2:, :class_name => "${3:ClassName}", :foreign_key => "${4:${1}_id}"}";s:8:"filename";s:6:"hasone";s:4:"path";s:7:"/models";}i:212;a:6:{s:4:"name";s:20:"validates_associated";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"va";s:4:"code";s:62:"validates_associated :${1:attribute}${2:, :on => :${3:create}}";s:8:"filename";s:19:"validatesassociated";s:4:"path";s:7:"/models";}i:213;a:6:{s:4:"name";s:23:"validates_associated if";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"vaif";s:4:"code";s:105:"validates_associated :${1:attribute}${2:, :on => :${3:create}, :if => proc { |obj| ${5:obj.condition?} }}";s:8:"filename";s:21:"validatesassociatedif";s:4:"path";s:7:"/models";}i:214;a:6:{s:4:"name";s:25:"validates_confirmation_of";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"vc";s:4:"code";s:113:"validates_confirmation_of :${1:attribute}${2:, :on => :${3:create}, :message => "${4:should match confirmation}"}";s:8:"filename";s:23:"validatesconfirmationof";s:4:"path";s:7:"/models";}i:215;a:6:{s:4:"name";s:28:"validates_confirmation_of if";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"vcif";s:4:"code";s:156:"validates_confirmation_of :${1:attribute}${2:, :on => :${3:create}, :message => "${4:should match confirmation}", :if => proc { |obj| ${5:obj.condition?} }}";s:8:"filename";s:25:"validatesconfirmationofif";s:4:"path";s:7:"/models";}i:216;a:6:{s:4:"name";s:22:"validates_exclusion_of";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"ve";s:4:"code";s:123:"validates_exclusion_of :${1:attribute}${2:, :in => ${3:enumerable}, :on => :${4:create}, :message => "${5:is not allowed}"}";s:8:"filename";s:20:"validatesexclusionof";s:4:"path";s:7:"/models";}i:217;a:6:{s:4:"name";s:25:"validates_exclusion_of if";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"veif";s:4:"code";s:166:"validates_exclusion_of :${1:attribute}${2:, :in => ${3:enumerable}, :on => :${4:create}, :message => "${5:is not allowed}", :if => proc { |obj| ${6:obj.condition?} }}";s:8:"filename";s:22:"validatesexclusionofif";s:4:"path";s:7:"/models";}i:218;a:6:{s:4:"name";s:19:"validates_length_of";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"vl";s:4:"code";s:120:"validates_length_of :${1:attribute}, :within => ${2:3..20}${3:, :on => :${4:create}, :message => "${5:must be present}"}";s:8:"filename";s:17:"validateslengthof";s:4:"path";s:7:"/models";}i:219;a:6:{s:4:"name";s:21:"validates_presence_of";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"vp";s:4:"code";s:98:"validates_presence_of :${1:attribute}${2:, :on => :${3:create}, :message => "${4:can't be blank}"}";s:8:"filename";s:19:"validatespresenceof";s:4:"path";s:7:"/models";}i:220;a:6:{s:4:"name";s:24:"validates_presence_of if";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"vpif";s:4:"code";s:142:"validates_presence_of :${1:attribute}${2:, :on => :${3:create}, :message => "${4:can't be blank}"}, :if => proc { |obj| ${5:obj.condition?} }}";s:8:"filename";s:21:"validatespresenceofif";s:4:"path";s:7:"/models";}i:221;a:6:{s:4:"name";s:23:"validates_uniqueness_of";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:2:"vu";s:4:"code";s:100:"validates_uniqueness_of :${1:attribute}${2:, :on => :${3:create}, :message => "${4:must be unique}"}";s:8:"filename";s:21:"validatesuniquenessof";s:4:"path";s:7:"/models";}i:222;a:6:{s:4:"name";s:26:"validates_uniqueness_of if";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"vuif";s:4:"code";s:143:"validates_uniqueness_of :${1:attribute}${2:, :on => :${3:create}, :message => "${4:must be unique}", :if => proc { |obj| ${6:obj.condition?} }}";s:8:"filename";s:23:"validatesuniquenessofif";s:4:"path";s:7:"/models";}i:223;a:4:{s:4:"name";s:10:"Unit Tests";s:8:"filename";s:9:"unittests";s:13:"is_collection";s:1:"1";s:4:"path";s:0:"";}i:224;a:6:{s:4:"name";s:20:"assert_redirected_to";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:3:"art";s:4:"code";s:44:"assert_redirected_to :action => "${1:index}"";s:8:"filename";s:18:"assertredirectedto";s:4:"path";s:10:"/unittests";}i:225;a:6:{s:4:"name";s:15:"assert_response";s:14:"key_activation";s:0:"";s:14:"tab_activation";s:4:"asre";s:4:"code";s:29:"assert_response :${1:success}";s:8:"filename";s:14:"assertresponse";s:4:"path";s:10:"/unittests";}}s:8:"commands";a:0:{}s:9:"templates";a:6:{i:0;a:3:{s:8:"filename";s:24:"$AMY{name}_controller.rb";s:4:"name";s:16:"Rails controller";s:7:"content";s:144:"# 
+#	Created on $AMY{date_created} by $AMY{user_nickname} 
+#
+
+class $AMY{camelize:name}Controller < ActionController::Base
+  def index
+  end
+end";}i:1;a:3:{s:8:"filename";s:29:"$AMY{name}_controller_test.rb";s:4:"name";s:21:"Rails controller test";s:7:"content";s:587:"# 
+#	Created on $AMY{date_created} by $AMY{user_nickname} 
+#
+
+require File.dirname(__FILE__) + '/../test_helper'
+require '$AMY{name}_controller'
+
+# Re-raise errors caught by the controller.
+class $AMY{camelize:name}Controller; def rescue_action(e) raise e end; end
+
+class $AMY{camelize:name}ControllerTest < Test::Unit::TestCase
+  def setup
+    @controller = $AMY{camelize:name}Controller.new
+    @request    = ActionController::TestRequest.new
+    @response   = ActionController::TestResponse.new
+  end
+
+  # Replace this with your real tests.
+  def test_truth
+    assert true
+  end
+end
+";}i:2;a:3:{s:8:"filename";s:20:"$AMY{name}_helper.rb";s:4:"name";s:12:"Rails helper";s:7:"content";s:98:"# 
+#	Created on $AMY{date_created} by $AMY{user_nickname} 
+#
+
+module $AMY{camelize:name}Helper
+end";}i:3;a:3:{s:8:"filename";s:17:"001_$AMY{name}.rb";s:4:"name";s:16:"Migration script";s:7:"content";s:161:"# 
+#	Created on $AMY{date_created} by $AMY{user_nickname} 
+#
+
+class $AMY{camelize:name} < ActiveRecord::Migration
+  def self.up
+  end
+
+  def self.down
+  end
+end
+";}i:4;a:3:{s:8:"filename";s:13:"$AMY{name}.rb";s:4:"name";s:11:"Rails model";s:7:"content";s:112:"# 
+#	Created on $AMY{date_created} by $AMY{user_nickname} 
+#
+
+class $AMY{camelize:name} < ActiveRecord::Base
+end";}i:5;a:3:{s:8:"filename";s:16:"$AMY{name}.rhtml";s:4:"name";s:19:"Rails view template";s:7:"content";s:42:"<div>
+	$AMY{name}.rhtml view source
+</div>";}}s:2:"id";s:5:"rails";}}

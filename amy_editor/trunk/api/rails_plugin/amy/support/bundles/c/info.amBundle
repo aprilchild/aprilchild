@@ -1,0 +1,8 @@
+signature:
+  name: 'C'
+  author: 'Allan Odgaard <throw-away-1@macromates.com>'
+  url: ''
+  version: '1.0'
+  dependencies: 
+    - 'default'
+  note: 'Support for the venerable <a href="http://en.wikipedia.org/wiki/C_%28programming_language%29">C programming language</a> and for the leaner C++. The bundle has completion (using ⌥⎋) for the standard C functions and, in C++, STL algorithms.'
